@@ -1,8 +1,7 @@
 {
   "name": "react-codesandboxer",
-  "version": "0.0.0",
-  "description":
-    "A simple react component to help easily deploy an example to codesandbox",
+  "version": "0.0.1",
+  "description": "A simple react component to help easily deploy an example to codesandbox",
   "main": "dist/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -10,7 +9,10 @@
     "prepublish": "yarn build",
     "dev": "babel src --watch -d dist"
   },
-  "keywords": ["codesandbox", "react"],
+  "keywords": [
+    "codesandbox",
+    "react"
+  ],
   "author": "Ben Conolly",
   "license": "MIT",
   "devDependencies": {
@@ -32,6 +34,8 @@
   "dependencies": {
     "codesandbox": "^1.1.14"
   },
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "source": "src/index.js"
 }
