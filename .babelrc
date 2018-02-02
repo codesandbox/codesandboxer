@@ -1,0 +1,9 @@
+{
+  "presets": ["env", "react", "flow"],
+  "plugins": [
+    "transform-class-properties",
+    "transform-object-rest-spread",
+    "syntax-dynamic-import"
+  ],
+  "ignore": ["__mocks__", "__tests__", "__fixtures__", "node_modules"]
+}
