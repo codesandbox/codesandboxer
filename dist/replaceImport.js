@@ -11,4 +11,4 @@ function replaceImport(code, oldSource, newSource) {
   } else {
     return code;
   }
-};
+}

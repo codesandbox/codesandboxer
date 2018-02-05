@@ -7,9 +7,9 @@ Object.defineProperty(exports, "__esModule", {
 var _constants = require("./constants");
 
 var getAllImports = function getAllImports(code) {
-  return code.match(new RegExp(_constants.importPattern, "g")).map(function (mpt) {
+  var imports = code.match(new RegExp(_constants.importPattern, "g"));
+  if (imports) return imports.map(function (mpt) {
     return new RegExp(_constants.importPattern).exec(mpt);
-  });
+  });else return [];
 };
-
 exports.default = getAllImports;

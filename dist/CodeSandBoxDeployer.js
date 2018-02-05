@@ -10,9 +10,9 @@ var _react = require("react");
 
 var _react2 = _interopRequireDefault(_react);
 
-var _CSBTransformer = require("./CSBTransformer");
+var _getCSBData = require("./getCSBData");
 
-var _CSBTransformer2 = _interopRequireDefault(_CSBTransformer);
+var _getCSBData2 = _interopRequireDefault(_getCSBData);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -50,13 +50,13 @@ var CodeSandboxDeployer = function (_Component) {
 
       e.preventDefault();
       // this is always a promise, accepts example as a promise. accept pkgJSON as a promise
-      (0, _CSBTransformer2.default)(example, pkgJSON, config).then(function (_ref2) {
-        var params = _ref2.params,
-            data = _ref2.data;
+      (0, _getCSBData2.default)(example, pkgJSON, config).then(function (_ref2) {
+        var parameters = _ref2.parameters,
+            files = _ref2.files;
 
-        _this.setState({ parameters: params }, function () {
-          if (!skipDeploy) _this.form.submit();
-          if (afterDeploy) afterDeploy({ params: params, data: data });
+        _this.setState({ parameters: parameters }, function () {
+          if (!skipDeploy && _this.form) _this.form.submit();
+          if (afterDeploy) afterDeploy({ parameters: parameters, files: files });
         });
       }).catch(function (error) {
         if (afterDeploy) afterDeploy({ error: error });
@@ -74,10 +74,9 @@ var CodeSandboxDeployer = function (_Component) {
           example = _props.example,
           pkgJSON = _props.pkgJSON,
           config = _props.config,
-          Button = _props.Button,
           afterDeploy = _props.afterDeploy,
           children = _props.children,
-          rest = _objectWithoutProperties(_props, ["skipDeploy", "example", "pkgJSON", "config", "Button", "afterDeploy", "children"]);
+          rest = _objectWithoutProperties(_props, ["skipDeploy", "example", "pkgJSON", "config", "afterDeploy", "children"]);
 
       return _react2.default.createElement(
         "span",
@@ -107,4 +106,11 @@ var CodeSandboxDeployer = function (_Component) {
   return CodeSandboxDeployer;
 }(_react.Component);
 
+CodeSandboxDeployer.defaultProps = {
+  children: _react2.default.createElement(
+    "button",
+    { type: "submit" },
+    "Deploy to CodeSandbox"
+  )
+};
 exports.default = CodeSandboxDeployer;

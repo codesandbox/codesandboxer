@@ -1,7 +1,8 @@
+// @flow
 import { getParameters } from "codesandbox/lib/api/define";
-import { importPattern, baseFiles } from "./constants";
-import replaceImport from "./replaceImport";
-import getAllImports from "./getAllImports";
+import { baseFiles } from "./constants";
+import type { Config, Package, Files } from "./types";
+import parseFile from "./parseFile";
 
 const newpkgJSON = dependencies => `{
   "name": "simple-example",
@@ -10,21 +11,6 @@ const newpkgJSON = dependencies => `{
   "main": "index.js",
   "dependencies": ${JSON.stringify(dependencies)}
 }`;
-
-const addDep = (pkgJSON, name, deps) => {
-  // We are deliberately putting depencies as the last assigned as we will care
-  // most about the versions of depencies over other types
-  const dependencies = Object.assign(
-    {},
-    pkgJSON.peerDependencies,
-    pkgJSON.devDependencies,
-    pkgJSON.dependencies
-  );
-
-  for (let dependency in dependencies) {
-    if (name.includes(dependency)) deps[dependency] = dependencies[dependency];
-  }
-};
 
 const ensureReact = deps => {
   if (!deps.react && !deps["react-dom"]) {
@@ -39,44 +25,44 @@ const ensureReact = deps => {
 
 const getCSBData = async (
   example: Promise<string> | string,
-  pkgJSON: Promise<string> | string,
-  { originLocation = "", startingDeps = {}, providedFiles = {} } = {}
-) => {
+  pkgJSON: Promise<Package> | Package,
+  config: Config = {}
+): Promise<{
+  files: Files,
+  dependencies: { [string]: string, react: string, "react-dom": string },
+  parameters: string
+}> => {
+  let { originLocation = "", startingDeps = {}, providedFiles = {} } = config;
   let exampleCode = typeof example === "string" ? example : await example;
   let pkgJSONCode = typeof pkgJSON === "string" ? pkgJSON : await pkgJSON;
 
-  const deps = Object.assign({}, startingDeps, {
-    [pkgJSON.name]: pkgJSON.version
-  });
-  const imports = getAllImports(exampleCode);
+  let { deps, file } = await parseFile(example, pkgJSONCode, config);
 
-  for (let mpt of imports) {
-    let [complete, source] = mpt;
-    // We check if the import we are examining is a relative or an absolute path
-    if (/^\./.test(source) && originLocation === source) {
-      exampleCode = replaceImport(exampleCode, source, pkgJSON.name);
-      // onInternalImports(exampleCode, source, config)
-    } else {
-      // onExternalImports(exampleCode, source, config)
-      addDep(pkgJSON, source, deps);
-    }
-    // onAllImports(exampleCode, source, config)
-  }
-  ensureReact(deps);
+  let dependencies = {
+    ...startingDeps,
+    deps,
+    [pkgJSONCode.name]: pkgJSONCode.version
+  };
+
+  ensureReact(dependencies);
 
   const files = Object.assign(
     {},
     baseFiles,
     {
-      "example.js": { content: exampleCode },
-      "package.json": { content: newpkgJSON(deps) }
+      "example.js": { content: file },
+      "package.json": { content: newpkgJSON(dependencies) }
     },
     providedFiles
   );
 
-  const data = { parameters: getParameters({ files }) };
+  const parameters = getParameters({ files });
 
-  return Promise.resolve({ files, params: getParameters({ files }) });
+  return {
+    files,
+    dependencies,
+    parameters
+  };
 };
 
 export default getCSBData;

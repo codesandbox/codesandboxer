@@ -1,20 +1,40 @@
-import React, { Component } from "react";
-import CSB2Transformer from "./getCSBData";
+// @flow
+import React, { Component, type Node } from "react";
+import getCSBData from "./getCSBData";
+import type { Package, Config, Files } from "./types";
 
 const codesandboxURL = "https://codesandbox.io/api/v1/sandboxes/define";
 
-export default class CodeSandboxDeployer extends Component<{}, {}> {
-  state = { parameters: "" };
+type Props = {
+  example: Promise<string> | string,
+  pkgJSON: Promise<Package> | Package,
+  config: Config,
+  skipDeploy: boolean,
+  children?: Node,
+  afterDeploy: ({ parameters: string, files: Files } | { error: any }) => mixed
+};
 
-  deployToCSB = e => {
+type State = {
+  parameters: string
+};
+
+export default class CodeSandboxDeployer extends Component<Props, State> {
+  form: HTMLFormElement | null;
+
+  state = { parameters: "" };
+  static defaultProps = {
+    children: <button type="submit">Deploy to CodeSandbox</button>
+  };
+
+  deployToCSB = (e: MouseEvent) => {
     const { example, pkgJSON, config, skipDeploy, afterDeploy } = this.props;
     e.preventDefault();
     // this is always a promise, accepts example as a promise. accept pkgJSON as a promise
-    CSB2Transformer(example, pkgJSON, config)
-      .then(({ params, data }) => {
-        this.setState({ parameters: params }, () => {
-          if (!skipDeploy) this.form.submit();
-          if (afterDeploy) afterDeploy({ params, data });
+    getCSBData(example, pkgJSON, config)
+      .then(({ parameters, files }) => {
+        this.setState({ parameters }, () => {
+          if (!skipDeploy && this.form) this.form.submit();
+          if (afterDeploy) afterDeploy({ parameters, files });
         });
       })
       .catch(error => {
@@ -28,7 +48,6 @@ export default class CodeSandboxDeployer extends Component<{}, {}> {
       example,
       pkgJSON,
       config,
-      Button,
       afterDeploy,
       children,
       ...rest

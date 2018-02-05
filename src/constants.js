@@ -1,5 +1,6 @@
+// @flow
 export const importPattern = `import [^"']+ from ["']([^"']+)["']`;
-let a = "a";
+
 export const baseFiles = {
   "index.html": {
     content: '<div id="root"></div>'
@@ -23,3 +24,7 @@ document.getElementById('root')
 );`
   }
 };
+
+// import {
+//   foo
+// } from 'asdf'
