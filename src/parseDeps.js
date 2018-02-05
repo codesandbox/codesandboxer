@@ -26,7 +26,7 @@ const parseDeps = (
   deps: { [string]: string },
   internalImports: Array<?Import>
 } => {
-  let { originLocation = "", startingDeps = {}, providedFiles = {} } = config;
+  let { startingDeps = {}, providedFiles = {} } = config;
   let exampleCode = example;
   let dependencies = {};
   let internalImports = [];

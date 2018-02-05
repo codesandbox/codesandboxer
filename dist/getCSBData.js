@@ -39,13 +39,13 @@ var getCSBData = function () {
   var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(example, pkgJSON) {
     var config = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
 
-    var _config$originLocatio, originLocation, _config$startingDeps, startingDeps, _config$providedFiles, providedFiles, exampleCode, pkgJSONCode, _ref2, deps, file, dependencies, files, parameters;
+    var _config$startingDeps, startingDeps, _config$providedFiles, providedFiles, exampleCode, pkgJSONCode, _ref2, deps, file, dependencies, files, parameters;
 
     return regeneratorRuntime.wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
-            _config$originLocatio = config.originLocation, originLocation = _config$originLocatio === undefined ? "" : _config$originLocatio, _config$startingDeps = config.startingDeps, startingDeps = _config$startingDeps === undefined ? {} : _config$startingDeps, _config$providedFiles = config.providedFiles, providedFiles = _config$providedFiles === undefined ? {} : _config$providedFiles;
+            _config$startingDeps = config.startingDeps, startingDeps = _config$startingDeps === undefined ? {} : _config$startingDeps, _config$providedFiles = config.providedFiles, providedFiles = _config$providedFiles === undefined ? {} : _config$providedFiles;
 
             if (!(typeof example === "string")) {
               _context.next = 5;
@@ -85,15 +85,13 @@ var getCSBData = function () {
           case 16:
             pkgJSONCode = _context.t1;
             _context.next = 19;
-            return (0, _parseFile2.default)(example, pkgJSONCode, config);
+            return (0, _parseFile2.default)(exampleCode, pkgJSONCode, config);
 
           case 19:
             _ref2 = _context.sent;
             deps = _ref2.deps;
             file = _ref2.file;
-            dependencies = _extends({}, startingDeps, _defineProperty({
-              deps: deps
-            }, pkgJSONCode.name, pkgJSONCode.version));
+            dependencies = _extends({}, startingDeps, deps, _defineProperty({}, pkgJSONCode.name, pkgJSONCode.version));
 
 
             ensureReact(dependencies);

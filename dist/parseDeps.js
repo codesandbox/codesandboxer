@@ -24,9 +24,7 @@ var addDep = function addDep(pkgJSON, name, deps) {
 
 var parseDeps = function parseDeps(example, pkgJSON, imports) {
   var config = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : {};
-  var _config$originLocatio = config.originLocation,
-      originLocation = _config$originLocatio === undefined ? "" : _config$originLocatio,
-      _config$startingDeps = config.startingDeps,
+  var _config$startingDeps = config.startingDeps,
       startingDeps = _config$startingDeps === undefined ? {} : _config$startingDeps,
       _config$providedFiles = config.providedFiles,
       providedFiles = _config$providedFiles === undefined ? {} : _config$providedFiles;

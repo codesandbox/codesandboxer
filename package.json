@@ -1,22 +1,19 @@
 {
   "name": "react-codesandboxer",
   "version": "0.0.1",
-  "description": "A simple react component to help easily deploy an example to codesandbox",
+  "description":
+    "A simple react component to help easily deploy an example to codesandbox",
   "main": "dist/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "yarn jest",
     "build": "babel src -d dist",
     "prepublish": "yarn build",
     "dev": "babel src --watch -d dist"
   },
-  "keywords": [
-    "codesandbox",
-    "react"
-  ],
+  "keywords": ["codesandbox", "react"],
   "author": "Ben Conolly",
   "license": "MIT",
   "devDependencies": {
-    "ava": "^0.25.0",
     "babel-cli": "^6.26.0",
     "babel-plugin-syntax-dynamic-import": "^6.18.0",
     "babel-plugin-transform-class-properties": "^6.24.1",
@@ -25,6 +22,7 @@
     "babel-preset-flow": "^6.23.0",
     "babel-preset-react": "^6.24.1",
     "flow-bin": "^0.64.0",
+    "jest": "^22.1.4",
     "react": "16.2.0"
   },
   "peerDependencies": {
@@ -34,8 +32,9 @@
   "dependencies": {
     "codesandbox": "^1.1.14"
   },
-  "files": [
-    "dist"
-  ],
-  "source": "src/index.js"
+  "files": ["dist"],
+  "source": "src/index.js",
+  "ava": {
+    "files": ["**/*.test.js"]
+  }
 }

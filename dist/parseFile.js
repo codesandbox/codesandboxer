@@ -28,13 +28,13 @@ var ParseFile = function () {
   var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(file, pkgJSON) {
     var config = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
 
-    var _config$originLocatio, originLocation, _config$startingDeps, startingDeps, _config$providedFiles, providedFiles, fileCode, pkgJSONContent, imports, _parseDeps, deps, exampleCode, internalImports;
+    var _config$startingDeps, startingDeps, _config$providedFiles, providedFiles, fileCode, pkgJSONContent, imports, _parseDeps, deps, exampleCode, internalImports;
 
     return regeneratorRuntime.wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
-            _config$originLocatio = config.originLocation, originLocation = _config$originLocatio === undefined ? "" : _config$originLocatio, _config$startingDeps = config.startingDeps, startingDeps = _config$startingDeps === undefined ? {} : _config$startingDeps, _config$providedFiles = config.providedFiles, providedFiles = _config$providedFiles === undefined ? {} : _config$providedFiles;
+            _config$startingDeps = config.startingDeps, startingDeps = _config$startingDeps === undefined ? {} : _config$startingDeps, _config$providedFiles = config.providedFiles, providedFiles = _config$providedFiles === undefined ? {} : _config$providedFiles;
 
             if (!(typeof file === "string")) {
               _context.next = 5;
@@ -73,20 +73,13 @@ var ParseFile = function () {
 
           case 16:
             pkgJSONContent = _context.t1;
-
-
-            // We immediately replace references to the source with references to the package.
-            // This should likely be moved to the consumer to do. Need to find a helpful
-            // way to help the consumer do this
-            fileCode = (0, _replaceImport2.default)(fileCode, originLocation, pkgJSONContent);
-
             imports = (0, _getAllImports2.default)(fileCode);
             // instead of handling imports up here, we should just pass back the unsafe imports we found
 
             _parseDeps = (0, _parseDeps3.default)(fileCode, pkgJSONContent, imports, config), deps = _parseDeps.deps, exampleCode = _parseDeps.exampleCode, internalImports = _parseDeps.internalImports;
             return _context.abrupt("return", Promise.resolve({ file: exampleCode, deps: deps, internalImports: internalImports }));
 
-          case 21:
+          case 20:
           case "end":
             return _context.stop();
         }

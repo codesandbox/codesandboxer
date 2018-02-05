@@ -32,15 +32,15 @@ const getCSBData = async (
   dependencies: { [string]: string, react: string, "react-dom": string },
   parameters: string
 }> => {
-  let { originLocation = "", startingDeps = {}, providedFiles = {} } = config;
+  let { startingDeps = {}, providedFiles = {} } = config;
   let exampleCode = typeof example === "string" ? example : await example;
   let pkgJSONCode = typeof pkgJSON === "string" ? pkgJSON : await pkgJSON;
 
-  let { deps, file } = await parseFile(example, pkgJSONCode, config);
+  let { deps, file } = await parseFile(exampleCode, pkgJSONCode, config);
 
   let dependencies = {
     ...startingDeps,
-    deps,
+    ...deps,
     [pkgJSONCode.name]: pkgJSONCode.version
   };
 

@@ -15,14 +15,9 @@ const ParseFile = async (
   deps: { [string]: string },
   internalImports: Array<?Import>
 }> => {
-  let { originLocation = "", startingDeps = {}, providedFiles = {} } = config;
+  let { startingDeps = {}, providedFiles = {} } = config;
   let fileCode = typeof file === "string" ? file : await file;
   let pkgJSONContent = typeof pkgJSON === "string" ? pkgJSON : await pkgJSON;
-
-  // We immediately replace references to the source with references to the package.
-  // This should likely be moved to the consumer to do. Need to find a helpful
-  // way to help the consumer do this
-  fileCode = replaceImport(fileCode, originLocation, pkgJSONContent);
 
   const imports = getAllImports(fileCode);
   // instead of handling imports up here, we should just pass back the unsafe imports we found
