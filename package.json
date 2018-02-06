@@ -1,6 +1,6 @@
 {
   "name": "react-codesandboxer",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "A simple react component to help easily deploy an example to codesandbox",
   "main": "dist/index.js",
   "scripts": {
