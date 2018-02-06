@@ -1,45 +1,48 @@
 // @flow
-import replaceImport from "./replaceImport";
-import type { Package, Config, Import } from "./types";
-const addDep = (pkgJSON, name, deps) => {
-  // We are deliberately putting depencies as the last assigned as we will care
-  // most about the versions of depencies over other types
-  const dependencies = Object.assign(
-    {},
-    pkgJSON.peerDependencies,
-    pkgJSON.devDependencies,
-    pkgJSON.dependencies
-  );
+import type { Package, Import } from "./types";
+
+const getDeps = (pkgJSON, name) => {
+  let deps = {};
+  // We are deliberately putting dependencies as the last assigned as we will care
+  // most about the versions of dependencies over other types
+  const dependencies = {
+    ...pkgJSON.peerDependencies,
+    ...pkgJSON.devDependencies,
+    ...pkgJSON.dependencies
+  };
 
   for (let dependency in dependencies) {
-    if (name.includes(dependency)) deps[dependency] = dependencies[dependency];
+    if (name.includes(dependency)) {
+      deps[dependency] = dependencies[dependency];
+    }
   }
+  return deps;
 };
 
 const parseDeps = (
-  example: string,
   pkgJSON: Package,
-  imports: Import,
-  config: Config = {}
+  imports: Import
 ): {
-  exampleCode: string,
   deps: { [string]: string },
   internalImports: Array<?Import>
 } => {
-  let { startingDeps = {}, providedFiles = {} } = config;
-  let exampleCode = example;
   let dependencies = {};
   let internalImports = [];
   // This is a common pattern of going over mpt of imports. Have not found a neat function extraction for it.
   for (let mpt of imports) {
-    let [complete, source] = mpt;
-    if (/^\./.test(source)) {
+    let [complete, name] = mpt;
+    if (/^\./.test(name)) {
       internalImports.push(mpt);
     } else {
-      addDep(pkgJSON, source, dependencies);
+      let foundDeps = getDeps(pkgJSON, name);
+      if (Object.keys(foundDeps).length < 1) {
+        dependencies[name] = "latest";
+      } else {
+        dependencies = { ...dependencies, ...foundDeps };
+      }
     }
   }
-  return { deps: dependencies, exampleCode, internalImports };
+  return { deps: dependencies, internalImports };
 };
 
 export default parseDeps;

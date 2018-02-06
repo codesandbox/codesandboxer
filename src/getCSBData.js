@@ -33,10 +33,10 @@ const getCSBData = async (
   parameters: string
 }> => {
   let { startingDeps = {}, providedFiles = {} } = config;
-  let exampleCode = typeof example === "string" ? example : await example;
-  let pkgJSONCode = typeof pkgJSON === "string" ? pkgJSON : await pkgJSON;
+  let exampleCode = await Promise.resolve(example);
+  let pkgJSONCode = await Promise.resolve(pkgJSON);
 
-  let { deps, file } = await parseFile(exampleCode, pkgJSONCode, config);
+  let { deps, file } = await parseFile(exampleCode, pkgJSONCode);
 
   let dependencies = {
     ...startingDeps,
@@ -46,15 +46,12 @@ const getCSBData = async (
 
   ensureReact(dependencies);
 
-  const files = Object.assign(
-    {},
-    baseFiles,
-    {
-      "example.js": { content: file },
-      "package.json": { content: newpkgJSON(dependencies) }
-    },
-    providedFiles
-  );
+  const files = {
+    ...baseFiles,
+    "example.js": { content: file },
+    "package.json": { content: newpkgJSON(dependencies) },
+    ...providedFiles
+  };
 
   const parameters = getParameters({ files });
 

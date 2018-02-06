@@ -46,48 +46,20 @@ var getCSBData = function () {
         switch (_context.prev = _context.next) {
           case 0:
             _config$startingDeps = config.startingDeps, startingDeps = _config$startingDeps === undefined ? {} : _config$startingDeps, _config$providedFiles = config.providedFiles, providedFiles = _config$providedFiles === undefined ? {} : _config$providedFiles;
+            _context.next = 3;
+            return Promise.resolve(example);
 
-            if (!(typeof example === "string")) {
-              _context.next = 5;
-              break;
-            }
+          case 3:
+            exampleCode = _context.sent;
+            _context.next = 6;
+            return Promise.resolve(pkgJSON);
 
-            _context.t0 = example;
-            _context.next = 8;
-            break;
+          case 6:
+            pkgJSONCode = _context.sent;
+            _context.next = 9;
+            return (0, _parseFile2.default)(exampleCode, pkgJSONCode);
 
-          case 5:
-            _context.next = 7;
-            return example;
-
-          case 7:
-            _context.t0 = _context.sent;
-
-          case 8:
-            exampleCode = _context.t0;
-
-            if (!(typeof pkgJSON === "string")) {
-              _context.next = 13;
-              break;
-            }
-
-            _context.t1 = pkgJSON;
-            _context.next = 16;
-            break;
-
-          case 13:
-            _context.next = 15;
-            return pkgJSON;
-
-          case 15:
-            _context.t1 = _context.sent;
-
-          case 16:
-            pkgJSONCode = _context.t1;
-            _context.next = 19;
-            return (0, _parseFile2.default)(exampleCode, pkgJSONCode, config);
-
-          case 19:
+          case 9:
             _ref2 = _context.sent;
             deps = _ref2.deps;
             file = _ref2.file;
@@ -96,7 +68,7 @@ var getCSBData = function () {
 
             ensureReact(dependencies);
 
-            files = Object.assign({}, _constants.baseFiles, {
+            files = _extends({}, _constants.baseFiles, {
               "example.js": { content: file },
               "package.json": { content: newpkgJSON(dependencies) }
             }, providedFiles);
@@ -107,7 +79,7 @@ var getCSBData = function () {
               parameters: parameters
             });
 
-          case 27:
+          case 17:
           case "end":
             return _context.stop();
         }

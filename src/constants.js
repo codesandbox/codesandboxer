@@ -24,7 +24,3 @@ document.getElementById('root')
 );`
   }
 };
-
-// import {
-//   foo
-// } from 'asdf'
