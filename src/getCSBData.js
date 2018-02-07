@@ -26,22 +26,22 @@ const ensureReact = deps => {
 const getCSBData = async (
   example: Promise<string> | string,
   pkgJSON: Promise<Package> | Package,
-  config: Config = {}
+  config: Promise<Config> | Config = {}
 ): Promise<{
   files: Files,
   dependencies: { [string]: string, react: string, "react-dom": string },
   parameters: string
 }> => {
-  let { startingDeps = {}, providedFiles = {} } = config;
+  let { providedDeps = {}, providedFiles = {} } = await Promise.resolve(config);
   let exampleCode = await Promise.resolve(example);
   let pkgJSONCode = await Promise.resolve(pkgJSON);
 
   let { deps, file } = await parseFile(exampleCode, pkgJSONCode);
 
   let dependencies = {
-    ...startingDeps,
     ...deps,
-    [pkgJSONCode.name]: pkgJSONCode.version
+    [pkgJSONCode.name]: pkgJSONCode.version,
+    ...providedDeps
   };
 
   ensureReact(dependencies);

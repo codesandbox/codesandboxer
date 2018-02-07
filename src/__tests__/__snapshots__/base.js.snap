@@ -145,6 +145,19 @@ Array [
 ]
 `;
 
+exports[`getAllImports() using regex pattern 1`] = `
+Array [
+  Array [
+    "import a from './c/somewhere'",
+    "./c/somewhere",
+  ],
+  Array [
+    "import b from './c/anywhere'",
+    "./c/anywhere",
+  ],
+]
+`;
+
 exports[`getCSBData() adding extra file 1`] = `
 Object {
   "dependencies": Object {
@@ -235,11 +248,11 @@ document.getElementById('root')
   \\"version\\": \\"0.0.0\\",
   \\"description\\": \\"A simple example deployed to CodeSandbox\\",
   \\"main\\": \\"index.js\\",
-  \\"dependencies\\": {\\"d\\":\\"1.1.0\\",\\"b\\":\\"v1.0.0\\",\\"not-a-real-name\\":\\"0.0.1\\",\\"react\\":\\"latest\\",\\"react-dom\\":\\"latest\\"}
+  \\"dependencies\\": {\\"b\\":\\"v1.0.0\\",\\"not-a-real-name\\":\\"0.0.1\\",\\"d\\":\\"1.1.0\\",\\"react\\":\\"latest\\",\\"react-dom\\":\\"latest\\"}
 }",
     },
   },
-  "parameters": "N4IgZglgNgpgziAXKCA7AJjAHgOgBYAuAtlEqAMYD2qBMNSIAPOhAG4AEE6AvADogAnSpQL8AfIwD0LVmJABfADQg0mXACsEyEFRp0CDSQCojvVO3YAVPBDjsAwpUwBlAIYYARpSzs8rux4wdOyuAK4ElESuBBDkrlBQAJ7sAOZ0MALRMOjsoXBoKSHsVJRQ7BGlOGZmFta2qemZEQLs6JTw7Kgi7GClUJQA7uwCMFDRbDCcRAAOlAIEATCJ1DkEeJRwk2vRwzBgGXTkW3gwNexETqGww8IEiiEYIXZwoeR49yInLSNjMayTEBmcwW51cyTArmg5Uo7H6rnQVVQZwAkmB2MtQiERuxsNMMhBDgVWhAwJByFcCMldARXOQCOwAAJdVhoZLUcoDCAEWgCMxGSRmQGzebsABKMFp9LAQiI7AA5CNJXKANyCoEi8WSgAiAHkALI9GXyxV0gC0bSIKrVwvpAFEsK4ZtdpZF5ThJNhHdNYFakahNXTdXqcCMMBkABRmRj2r3XSRiRRmNrkoj6HBpAi22CpmgAIUSyPQ4YVtzlAEozGXlQplJ6nTAcJoyDpqLR6IgVOr6a5Da65R4VVMbcVe7K5e7yHKayBprSANauNKNuDUZvU_QMYBnfioR2nJDsfj5eumuve_eJ8yHkD_AT5aj8RDXgAMOFfz_4l4s_EwcHIAggaYYgfA9-AAQXYY9zxxB161aGBvUoRJsmhBwnBgNxPG8T9txAKI0Efa9VGwZccKvH8ELoTBUHIAk4EIrcQHQR9-AARhwdiPxARMQA8Fib04t8cJALoCFNVxTUVKBTV3VN-PfDjhJNUQkH4X54BUnjlPNSJ-PUuAVPkMx5AUeR5CAA",
+  "parameters": "N4IgZglgNgpgziAXKCA7AJjAHgOgBYAuAtlEqAMYD2qBMNSIAPOhAG4AEE6AvADogAnSpQL8AfIwD0LVmJABfADQg0mXACsEyEFRp0CDSQCojvVO3YAVPBDjsAwpUwBlAIYYARpSzs8rux4wdOyuAK4ElESuBBDkrlBQAJ7sAOZ0MALRMOjsoXBoKSHsVJRQ7BGlOGZmFta2qemZEQLs6JTw7Kgi7GClUJQA7uwCMFDRbDCcRAAOlAIEATCJ1DkEeJRwk2vRwzBgGXTkW3gwNexETqGww8IEiiEYIXZwoeR49yInLSNjMayTEBmcwW51cyTArmg5Uo7H6rnQVVQZwAkmB2MtQiERuxsNMMhBDgVWhAwJByFcCMldARXOQCOwAAJdVhoZLUcoDCAEWgCMxGSRmQGzebsABKMFp9LAQiI7AA5CNJXKANyCoEi8WSgAiAHkALI9GXyxV0gC0bSIKrVwvpAFEsK4ZtdpZF5ThJNhHdNYFakahNXTdXqcCMMBkABRmRj2r3XSRiRRmNrkoj6HBpAi22CpmgAIUSyPQ4YVtzlAEozGXlQplJ6nTAcJoyDpqLR6IgVOr6a5Da65R4VVMbcVe7K5e7yHKayBprSANauNKNuDUZvU_QMYBnfioR2nJDsfj5eumuve_eJ8yHkD_AT5aj8RDXgAMOFfz_4l4s_EwcHIAggaYYgfA9-AAQXYY9zxxB161aGBvUoRJsmhBwnBgNxPG8T9txAKI0Efa9VGwZccKvH8ELoTBUHIAk4EIrcQA8R9-FYABGN83xwkAugIU1XFNRUoFNXdUxYkB3xwNjuPQcSOI4j8QETQQJTpcTfngUQlP4E0-ItdSsjgLT5DMeQFHkeQgA",
 }
 `;
 
@@ -378,6 +391,22 @@ Object {
 }
 `;
 
+exports[`parseDeps() using regex pattern 1`] = `
+Object {
+  "deps": Object {},
+  "internalImports": Array [
+    Array [
+      "import a from './c/somewhere'",
+      "./c/somewhere",
+    ],
+    Array [
+      "import b from './c/anywhere'",
+      "./c/anywhere",
+    ],
+  ],
+}
+`;
+
 exports[`replaceImport() dev and peer deps 1`] = `"import {a} from 't' import s from 'z' import y from 'x'"`;
 
 exports[`replaceImport() multiline imports 1`] = `
@@ -403,3 +432,7 @@ exports[`replaceImport() two spread imports multiline 1`] = `
   b
 } from 'c'"
 `;
+
+exports[`replaceImport() using regex pattern 1`] = `"import a from 'zzz' import b from 'zzz'"`;
+
+exports[`replaceImports() replace imports 1`] = `"import a from 'z' import c from 'arg'"`;

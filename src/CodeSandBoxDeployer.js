@@ -54,24 +54,19 @@ export default class CodeSandboxDeployer extends Component<Props, State> {
     } = this.props;
 
     return (
-      <span>
-        <form
-          onSubmit={this.deployToCSB}
-          action="https://codesandbox.io/api/v1/sandboxes/define"
-          method="POST"
-          target="_blank"
-          ref={r => {
-            this.form = r;
-          }}
-        >
-          <input
-            type="hidden"
-            name="parameters"
-            value={this.state.parameters}
-          />
-          {children}
-        </form>
-      </span>
+      <form
+        style={{ display: "inline-block" }}
+        onSubmit={this.deployToCSB}
+        action="https://codesandbox.io/api/v1/sandboxes/define"
+        method="POST"
+        target="_blank"
+        ref={r => {
+          this.form = r;
+        }}
+      >
+        <input type="hidden" name="parameters" value={this.state.parameters} />
+        {children}
+      </form>
     );
   }
 }

@@ -49,6 +49,15 @@ Object.defineProperty(exports, "replaceImport", {
   }
 });
 
+var _replaceImports = require("./replaceImports");
+
+Object.defineProperty(exports, "replaceImports", {
+  enumerable: true,
+  get: function get() {
+    return _interopRequireDefault(_replaceImports).default;
+  }
+});
+
 var _CodeSandBoxDeployer = require("./CodeSandBoxDeployer");
 
 Object.defineProperty(exports, "default", {

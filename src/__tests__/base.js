@@ -2,6 +2,7 @@ import cases from "jest-in-case";
 import {
   getAllImports,
   replaceImport,
+  replaceImports,
   parseDeps,
   parseFile,
   getCSBData
@@ -32,6 +33,12 @@ import c from 'd'`
   {
     name: "relativeImport",
     code: `import {a} from './c'`
+  },
+  {
+    name: "using regex pattern",
+    code: `import a from './c/somewhere' import b from './c/anywhere'`,
+    old: "./c/*",
+    new: "c/"
   }
 ];
 
@@ -46,11 +53,26 @@ cases(
 
 cases(
   "replaceImport()",
-  ({ code }) => {
-    let newCode = replaceImport(code, "b", "zzz");
+  ({ code, old = "b", newImp = "zzz" }) => {
+    let newCode = replaceImport(code, old, newImp);
     expect(newCode).toMatchSnapshot();
   },
   codeImportTests
+);
+
+cases(
+  "replaceImports()",
+  ({ files, replaces }) => {
+    let code = replaceImports(files, replaces);
+    expect(code).toMatchSnapshot();
+  },
+  [
+    {
+      name: "replace imports",
+      files: `import a from 'b' import c from 'd'`,
+      replaces: [["b", "z"], ["d", "arg"]]
+    }
+  ]
 );
 
 const fakePKGJSON = {
@@ -115,7 +137,7 @@ cases(
       name: "adding new dependency",
       file: `import a from 'b'; import c from './c'`,
       pkgJSON: fakePKGJSON,
-      config: { startingDeps: { d: "1.1.0" } }
+      config: { providedDeps: { d: "1.1.0" } }
     },
     {
       name: "adding extra file",
