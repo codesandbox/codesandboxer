@@ -28,6 +28,7 @@
     "flow-bin": "^0.64.0",
     "jest": "^22.1.4",
     "jest-in-case": "^1.0.2",
+    "prettier": "^1.10.2",
     "react": "16.2.0"
   },
   "peerDependencies": {

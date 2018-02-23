@@ -2,10 +2,10 @@
 export const importPattern = `import [^"']+ from ["']([^"']+)["']`;
 
 export const baseFiles = {
-  "index.html": {
-    content: '<div id="root"></div>'
+  'index.html': {
+    content: '<div id="root"></div>',
   },
-  "index.js": {
+  'index.js': {
     content: `/**
   This CodeSandbox has been automatically generated using a cool tool.
 
@@ -21,6 +21,6 @@ import Example from './example';
 ReactDOM.render(
 <Example />,
 document.getElementById('root')
-);`
-  }
+);`,
+  },
 };

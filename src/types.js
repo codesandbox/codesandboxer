@@ -6,30 +6,30 @@ export type Config = {
     path: string,
     accountName: string,
     repoSlug: string,
-    revision: string
+    revision: string,
   },
   // some github config blob, don't know what we need here yet
-  gh: {}
+  gh: {},
 };
 
 export type Files = {
   [string]: {
-    content: string
-  }
+    content: string,
+  },
 };
 
 export type Package = {
   name: string,
   version: string,
   depencies: {
-    [string]: string
+    [string]: string,
   },
   devDependencies: {
-    [string]: string
+    [string]: string,
   },
   peerDependencies: {
-    [string]: string
-  }
+    [string]: string,
+  },
 };
 
 export type Import = [string, string];

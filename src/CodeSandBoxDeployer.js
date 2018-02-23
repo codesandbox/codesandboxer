@@ -1,9 +1,9 @@
 // @flow
-import React, { Component, type Node } from "react";
-import getCSBData from "./getCSBData";
-import type { Package, Config, Files } from "./types";
+import React, { Component, type Node } from 'react';
+import getCSBData from './getCSBData';
+import type { Package, Config, Files } from './types';
 
-const codesandboxURL = "https://codesandbox.io/api/v1/sandboxes/define";
+const codesandboxURL = 'https://codesandbox.io/api/v1/sandboxes/define';
 
 type Props = {
   example: Promise<string> | string,
@@ -11,19 +11,19 @@ type Props = {
   config: Config,
   skipDeploy: boolean,
   children?: Node,
-  afterDeploy: ({ parameters: string, files: Files } | { error: any }) => mixed
+  afterDeploy: ({ parameters: string, files: Files } | { error: any }) => mixed,
 };
 
 type State = {
-  parameters: string
+  parameters: string,
 };
 
 export default class CodeSandboxDeployer extends Component<Props, State> {
   form: HTMLFormElement | null;
 
-  state = { parameters: "" };
+  state = { parameters: '' };
   static defaultProps = {
-    children: <button type="submit">Deploy to CodeSandbox</button>
+    children: <button type="submit">Deploy to CodeSandbox</button>,
   };
 
   deployToCSB = (e: MouseEvent) => {
@@ -55,7 +55,7 @@ export default class CodeSandboxDeployer extends Component<Props, State> {
 
     return (
       <form
-        style={{ display: "inline-block" }}
+        style={{ display: 'inline-block' }}
         onSubmit={this.deployToCSB}
         action="https://codesandbox.io/api/v1/sandboxes/define"
         method="POST"

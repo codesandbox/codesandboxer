@@ -1,5 +1,5 @@
 // @flow
-import type { Package, Import } from "./types";
+import type { Package, Import } from './types';
 
 const getDeps = (pkgJSON, name) => {
   let deps = {};
@@ -8,7 +8,7 @@ const getDeps = (pkgJSON, name) => {
   const dependencies = {
     ...pkgJSON.peerDependencies,
     ...pkgJSON.devDependencies,
-    ...pkgJSON.dependencies
+    ...pkgJSON.dependencies,
   };
 
   for (let dependency in dependencies) {
@@ -21,10 +21,10 @@ const getDeps = (pkgJSON, name) => {
 
 const parseDeps = (
   pkgJSON: Package,
-  imports: Import
+  imports: Import,
 ): {
   deps: { [string]: string },
-  internalImports: Array<?Import>
+  internalImports: Array<?Import>,
 } => {
   let dependencies = {};
   let internalImports = [];
@@ -36,7 +36,7 @@ const parseDeps = (
     } else {
       let foundDeps = getDeps(pkgJSON, name);
       if (Object.keys(foundDeps).length < 1) {
-        dependencies[name] = "latest";
+        dependencies[name] = 'latest';
       } else {
         dependencies = { ...dependencies, ...foundDeps };
       }

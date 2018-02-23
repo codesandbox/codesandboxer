@@ -1,8 +1,8 @@
 // @flow
-import { getParameters } from "codesandbox/lib/api/define";
-import { baseFiles } from "./constants";
-import type { Config, Package, Files } from "./types";
-import parseFile from "./parseFile";
+import { getParameters } from 'codesandbox/lib/api/define';
+import { baseFiles } from './constants';
+import type { Config, Package, Files } from './types';
+import parseFile from './parseFile';
 
 const newpkgJSON = dependencies => `{
   "name": "simple-example",
@@ -13,24 +13,24 @@ const newpkgJSON = dependencies => `{
 }`;
 
 const ensureReact = deps => {
-  if (!deps.react && !deps["react-dom"]) {
-    deps.react = "latest";
-    deps["react-dom"] = "latest";
+  if (!deps.react && !deps['react-dom']) {
+    deps.react = 'latest';
+    deps['react-dom'] = 'latest';
   } else if (!deps.react) {
-    deps.react = deps["react-dom"];
-  } else if (!deps["react-dom"]) {
-    deps["react-dom"] = deps.react;
+    deps.react = deps['react-dom'];
+  } else if (!deps['react-dom']) {
+    deps['react-dom'] = deps.react;
   }
 };
 
 const getCSBData = async (
   example: Promise<string> | string,
   pkgJSON: Promise<Package> | Package,
-  config: Promise<Config> | Config = {}
+  config: Promise<Config> | Config = {},
 ): Promise<{
   files: Files,
-  dependencies: { [string]: string, react: string, "react-dom": string },
-  parameters: string
+  dependencies: { [string]: string, react: string, 'react-dom': string },
+  parameters: string,
 }> => {
   let { providedDeps = {}, providedFiles = {} } = await Promise.resolve(config);
   let exampleCode = await Promise.resolve(example);
@@ -41,16 +41,16 @@ const getCSBData = async (
   let dependencies = {
     ...deps,
     [pkgJSONCode.name]: pkgJSONCode.version,
-    ...providedDeps
+    ...providedDeps,
   };
 
   ensureReact(dependencies);
 
   const files = {
     ...baseFiles,
-    "example.js": { content: file },
-    "package.json": { content: newpkgJSON(dependencies) },
-    ...providedFiles
+    'example.js': { content: file },
+    'package.json': { content: newpkgJSON(dependencies) },
+    ...providedFiles,
   };
 
   const parameters = getParameters({ files });
@@ -58,7 +58,7 @@ const getCSBData = async (
   return {
     files,
     dependencies,
-    parameters
+    parameters,
   };
 };
 
