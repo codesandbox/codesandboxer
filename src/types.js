@@ -1,21 +1,25 @@
 export type Config = {
   startingDeps?: { [string]: string },
   providedFiles?: { [string]: string },
-  // This is all the info you need to make request to the BB servers
-  bb: {
-    path: string,
-    accountName: string,
-    repoSlug: string,
-    revision: string,
-  },
-  // some github config blob, don't know what we need here yet
-  gh: {},
+};
+
+export type FetchConfig = {
+  account: string,
+  repository: string,
+  branch?: string,
+  host: 'bitbucket' | 'github',
 };
 
 export type Files = {
   [string]: {
     content: string,
   },
+};
+
+export type ParsedFile = {
+  file: string,
+  deps: { [string]: string },
+  internalImports: Array<Import>,
 };
 
 export type Package = {

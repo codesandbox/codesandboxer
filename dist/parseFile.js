@@ -1,26 +1,26 @@
-"use strict";
+'use strict';
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _regenerator = require("babel-runtime/regenerator");
+var _regenerator = require('babel-runtime/regenerator');
 
 var _regenerator2 = _interopRequireDefault(_regenerator);
 
-var _promise = require("babel-runtime/core-js/promise");
+var _promise = require('babel-runtime/core-js/promise');
 
 var _promise2 = _interopRequireDefault(_promise);
 
-var _asyncToGenerator2 = require("babel-runtime/helpers/asyncToGenerator");
+var _asyncToGenerator2 = require('babel-runtime/helpers/asyncToGenerator');
 
 var _asyncToGenerator3 = _interopRequireDefault(_asyncToGenerator2);
 
-var _getAllImports = require("./getAllImports");
+var _getAllImports = require('./getAllImports');
 
 var _getAllImports2 = _interopRequireDefault(_getAllImports);
 
-var _parseDeps2 = require("./parseDeps");
+var _parseDeps2 = require('./parseDeps');
 
 var _parseDeps3 = _interopRequireDefault(_parseDeps2);
 
@@ -46,10 +46,10 @@ var parseFile = function () {
             pkgJSONContent = _context.sent;
             imports = (0, _getAllImports2.default)(fileCode);
             _parseDeps = (0, _parseDeps3.default)(pkgJSONContent, imports), deps = _parseDeps.deps, internalImports = _parseDeps.internalImports;
-            return _context.abrupt("return", _promise2.default.resolve({ file: fileCode, deps: deps, internalImports: internalImports }));
+            return _context.abrupt('return', _promise2.default.resolve({ file: fileCode, deps: deps, internalImports: internalImports }));
 
           case 9:
-          case "end":
+          case 'end':
             return _context.stop();
         }
       }

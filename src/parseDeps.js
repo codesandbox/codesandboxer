@@ -24,7 +24,7 @@ const parseDeps = (
   imports: Import,
 ): {
   deps: { [string]: string },
-  internalImports: Array<?Import>,
+  internalImports: Array<Import>,
 } => {
   let dependencies = {};
   let internalImports = [];

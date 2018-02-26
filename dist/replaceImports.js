@@ -1,14 +1,14 @@
-"use strict";
+'use strict';
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _slicedToArray2 = require("babel-runtime/helpers/slicedToArray");
+var _slicedToArray2 = require('babel-runtime/helpers/slicedToArray');
 
 var _slicedToArray3 = _interopRequireDefault(_slicedToArray2);
 
-var _getIterator2 = require("babel-runtime/core-js/get-iterator");
+var _getIterator2 = require('babel-runtime/core-js/get-iterator');
 
 var _getIterator3 = _interopRequireDefault(_getIterator2);
 
@@ -46,7 +46,7 @@ exports.default = function (code, oldAndNew) {
   return newCode;
 };
 
-var _replaceImport = require("./replaceImport");
+var _replaceImport = require('./replaceImport');
 
 var _replaceImport2 = _interopRequireDefault(_replaceImport);
 

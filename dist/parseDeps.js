@@ -1,22 +1,22 @@
-"use strict";
+'use strict';
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _keys = require("babel-runtime/core-js/object/keys");
+var _keys = require('babel-runtime/core-js/object/keys');
 
 var _keys2 = _interopRequireDefault(_keys);
 
-var _slicedToArray2 = require("babel-runtime/helpers/slicedToArray");
+var _slicedToArray2 = require('babel-runtime/helpers/slicedToArray');
 
 var _slicedToArray3 = _interopRequireDefault(_slicedToArray2);
 
-var _getIterator2 = require("babel-runtime/core-js/get-iterator");
+var _getIterator2 = require('babel-runtime/core-js/get-iterator');
 
 var _getIterator3 = _interopRequireDefault(_getIterator2);
 
-var _extends2 = require("babel-runtime/helpers/extends");
+var _extends2 = require('babel-runtime/helpers/extends');
 
 var _extends3 = _interopRequireDefault(_extends2);
 
@@ -58,7 +58,7 @@ var parseDeps = function parseDeps(pkgJSON, imports) {
       } else {
         var foundDeps = getDeps(pkgJSON, name);
         if ((0, _keys2.default)(foundDeps).length < 1) {
-          dependencies[name] = "latest";
+          dependencies[name] = 'latest';
         } else {
           dependencies = (0, _extends3.default)({}, dependencies, foundDeps);
         }

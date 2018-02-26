@@ -1,56 +1,56 @@
-"use strict";
+'use strict';
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _regenerator = require("babel-runtime/regenerator");
+var _regenerator = require('babel-runtime/regenerator');
 
 var _regenerator2 = _interopRequireDefault(_regenerator);
 
-var _defineProperty2 = require("babel-runtime/helpers/defineProperty");
+var _defineProperty2 = require('babel-runtime/helpers/defineProperty');
 
 var _defineProperty3 = _interopRequireDefault(_defineProperty2);
 
-var _extends3 = require("babel-runtime/helpers/extends");
+var _extends3 = require('babel-runtime/helpers/extends');
 
 var _extends4 = _interopRequireDefault(_extends3);
 
-var _promise = require("babel-runtime/core-js/promise");
+var _promise = require('babel-runtime/core-js/promise');
 
 var _promise2 = _interopRequireDefault(_promise);
 
-var _asyncToGenerator2 = require("babel-runtime/helpers/asyncToGenerator");
+var _asyncToGenerator2 = require('babel-runtime/helpers/asyncToGenerator');
 
 var _asyncToGenerator3 = _interopRequireDefault(_asyncToGenerator2);
 
-var _stringify = require("babel-runtime/core-js/json/stringify");
+var _stringify = require('babel-runtime/core-js/json/stringify');
 
 var _stringify2 = _interopRequireDefault(_stringify);
 
-var _define = require("codesandbox/lib/api/define");
+var _define = require('codesandbox/lib/api/define');
 
-var _constants = require("./constants");
+var _constants = require('./constants');
 
-var _parseFile = require("./parseFile");
+var _parseFile = require('./parseFile');
 
 var _parseFile2 = _interopRequireDefault(_parseFile);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var newpkgJSON = function newpkgJSON(dependencies) {
-  return "{\n  \"name\": \"simple-example\",\n  \"version\": \"0.0.0\",\n  \"description\": \"A simple example deployed to CodeSandbox\",\n  \"main\": \"index.js\",\n  \"dependencies\": " + (0, _stringify2.default)(dependencies) + "\n}";
+  return '{\n  "name": "simple-example",\n  "version": "0.0.0",\n  "description": "A simple example deployed to CodeSandbox",\n  "main": "index.js",\n  "dependencies": ' + (0, _stringify2.default)(dependencies) + '\n}';
 };
 
 
 var ensureReact = function ensureReact(deps) {
-  if (!deps.react && !deps["react-dom"]) {
-    deps.react = "latest";
-    deps["react-dom"] = "latest";
+  if (!deps.react && !deps['react-dom']) {
+    deps.react = 'latest';
+    deps['react-dom'] = 'latest';
   } else if (!deps.react) {
-    deps.react = deps["react-dom"];
-  } else if (!deps["react-dom"]) {
-    deps["react-dom"] = deps.react;
+    deps.react = deps['react-dom'];
+  } else if (!deps['react-dom']) {
+    deps['react-dom'] = deps.react;
   }
 };
 
@@ -96,18 +96,18 @@ var getCSBData = function () {
             ensureReact(dependencies);
 
             files = (0, _extends4.default)({}, _constants.baseFiles, {
-              "example.js": { content: file },
-              "package.json": { content: newpkgJSON(dependencies) }
+              'example.js': { content: file },
+              'package.json': { content: newpkgJSON(dependencies) }
             }, providedFiles);
             parameters = (0, _define.getParameters)({ files: files });
-            return _context.abrupt("return", {
+            return _context.abrupt('return', {
               files: files,
               dependencies: dependencies,
               parameters: parameters
             });
 
           case 23:
-          case "end":
+          case 'end':
             return _context.stop();
         }
       }

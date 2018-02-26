@@ -1,16 +1,12 @@
 // @flow
 import getAllImports from './getAllImports';
 import parseDeps from './parseDeps';
-import type { Import, Package } from './types';
+import type { Import, Package, ParsedFile } from './types';
 
 const parseFile = async (
   file: Promise<string> | string,
   pkgJSON: Promise<Package> | Package,
-): Promise<{
-  file: string,
-  deps: { [string]: string },
-  internalImports: Array<?Import>,
-}> => {
+): Promise<ParsedFile> => {
   let fileCode = await Promise.resolve(file);
   let pkgJSONContent = await Promise.resolve(pkgJSON);
 
