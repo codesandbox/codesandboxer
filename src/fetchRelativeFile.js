@@ -107,8 +107,9 @@ export default async function handleFileFetch(
     let file = await fetchFileContents(url, newPath, { isImage, pkg });
     return {
       ...file,
+      absolutePath: newPath,
+      newPath: `./${newPath}`,
       image: isImage,
-      name: newPath,
       replacementKey: [source, `./${newPath}`],
     };
   } catch (e) {
@@ -117,3 +118,7 @@ export default async function handleFileFetch(
     throw new Error(e);
   }
 }
+
+const replaceMentKeys = {
+  '../src': '@atlaskit/button',
+};
