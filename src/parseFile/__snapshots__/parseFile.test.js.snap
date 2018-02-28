@@ -1,0 +1,141 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ParseFile() simple parse 1`] = `
+Object {
+  "deps": Object {
+    "b": "v1.0.0",
+  },
+  "file": "import a from 'b'; import c from './c'",
+  "internalImports": Array [
+    "./c",
+  ],
+}
+`;
+
+exports[`ParseFile() simple parse file promise 1`] = `
+Object {
+  "deps": Object {
+    "b": "v1.0.0",
+  },
+  "file": "import a from 'b'; import c from './c'",
+  "internalImports": Array [
+    "./c",
+  ],
+}
+`;
+
+exports[`ParseFile() simple parse pkgJSON promise 1`] = `
+Object {
+  "deps": Object {
+    "b": "v1.0.0",
+  },
+  "file": "import a from 'b'; import c from './c'",
+  "internalImports": Array [
+    "./c",
+  ],
+}
+`;
+
+exports[`parseDeps() dev and peer deps 1`] = `
+Object {
+  "deps": Object {
+    "t": "latest",
+    "x": "v1.0.0",
+    "z": "v1.0.0",
+  },
+  "internalImports": Array [],
+}
+`;
+
+exports[`parseDeps() multiline imports 1`] = `
+Object {
+  "deps": Object {
+    "b": "v1.0.0",
+    "d": "latest",
+  },
+  "internalImports": Array [],
+}
+`;
+
+exports[`parseDeps() no spaces 1`] = `
+Object {
+  "deps": Object {
+    "b": "v1.0.0",
+  },
+  "internalImports": Array [],
+}
+`;
+
+exports[`parseDeps() relativeImport 1`] = `
+Object {
+  "deps": Object {},
+  "internalImports": Array [
+    Array [
+      "import {a} from './c'",
+      "./c",
+    ],
+  ],
+}
+`;
+
+exports[`parseDeps() simple import 1`] = `
+Object {
+  "deps": Object {
+    "b": "v1.0.0",
+  },
+  "internalImports": Array [],
+}
+`;
+
+exports[`parseDeps() spread import 1`] = `
+Object {
+  "deps": Object {
+    "b": "v1.0.0",
+  },
+  "internalImports": Array [],
+}
+`;
+
+exports[`parseDeps() two imports 1`] = `
+Object {
+  "deps": Object {
+    "b": "v1.0.0",
+    "d": "latest",
+  },
+  "internalImports": Array [],
+}
+`;
+
+exports[`parseDeps() two spread imports 1`] = `
+Object {
+  "deps": Object {
+    "c": "latest",
+  },
+  "internalImports": Array [],
+}
+`;
+
+exports[`parseDeps() two spread imports multiline 1`] = `
+Object {
+  "deps": Object {
+    "c": "latest",
+  },
+  "internalImports": Array [],
+}
+`;
+
+exports[`parseDeps() using regex pattern 1`] = `
+Object {
+  "deps": Object {},
+  "internalImports": Array [
+    Array [
+      "import a from './c/somewhere'",
+      "./c/somewhere",
+    ],
+    Array [
+      "import b from './c/anywhere'",
+      "./c/anywhere",
+    ],
+  ],
+}
+`;

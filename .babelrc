@@ -6,5 +6,5 @@
     "transform-runtime",
     "syntax-dynamic-import"
   ],
-  "ignore": ["node_modules"]
+  "ignore": ["node_modules", "**/*.test.js"]
 }

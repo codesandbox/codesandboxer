@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`replaceImports() replace imports 1`] = `"import a from 'z' import c from 'arg'"`;

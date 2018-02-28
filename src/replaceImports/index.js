@@ -1,5 +1,5 @@
 // @flow
-import replaceImport from './replaceImport';
+import replaceImport from '../utils/replaceImport';
 
 export default function(code: string, oldAndNew: Array<[string, string]>) {
   let newCode = code;

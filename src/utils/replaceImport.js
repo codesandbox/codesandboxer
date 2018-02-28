@@ -1,4 +1,5 @@
 // @flow
+
 export default function replaceImport(
   code: string,
   oldSource: string,

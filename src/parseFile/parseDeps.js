@@ -1,5 +1,5 @@
 // @flow
-import type { Package, Import } from './types';
+import type { Package, Import } from '../types';
 
 const getDeps = (pkgJSON, name) => {
   let deps = {};
@@ -21,7 +21,7 @@ const getDeps = (pkgJSON, name) => {
 
 const parseDeps = (
   pkgJSON: Package,
-  imports: Import,
+  imports: Array<Import>,
 ): {
   deps: { [string]: string },
   internalImports: Array<Import>,
