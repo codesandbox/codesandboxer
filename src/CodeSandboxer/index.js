@@ -67,9 +67,10 @@ export default class CodeSandboxDeployer extends Component<Props, State> {
     } = this.props;
     e.preventDefault();
 
+    this.setState({ isLoading: true });
     fetchFiles(this.props)
       .then(({ parameters, files }) => {
-        this.setState({ parameters }, () => {
+        this.setState({ parameters, isLoading: false }, () => {
           if (!skipDeploy && this.form) this.form.submit();
           if (afterDeploy) afterDeploy({ parameters, files });
         });
