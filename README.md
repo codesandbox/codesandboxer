@@ -1,88 +1,90 @@
 # CodeSandboxer
 
-A quick drop-in react component that allows you to deploy an example react component to CodeSandbox, along
-with several helper methods that may help assemble an example for deploy.
+====
+A documentation update is currently underway. Below is the simplest use-case for the deployer at this time.
+====
 
 ```js
-import CodeSandboxer, { getAllImports, replaceImport, getCSBData } from 'CodeSandboxer';
+import React, { Component } from 'react';
+import CodeSandboxer from 'react-codesandboxer';
+
+export default () => (
+  <CodeSandboxer
+    examplePath="examples/file.js"
+    gitInfo={{
+      account: 'noviny',
+      repository: 'react-codesandboxer',
+      host: 'github',
+    }}
+  />
+);
 ```
 
-## CodeSandboxer Component
+## What does this actually do?
+
+With the minimal options provided, the sandboxer can fetch the file contents from github, as well as the relevant imports of that file (both internal and external)
+
+## Quick gotchas
+
+1. If the example file does not exist at the source, the deploy will fail. You can get around this by passing in the file's contents directly as the prop `example`.
+2. We follow relative imports in the example, so the example still works when uploaded. The fewer files your example depends upon, the faster it will be. (we will only ever fetch a file once, even if multiple things depend upon it)
+
+## A slightly more complicated example:
 
 ```js
-const exampleComponent = `import React, { Component } from 'react';
-import Select from 'react-select';
-
-export default class App extends Component {
-  state = {
-    selectedOption: '',
-  }
-  handleChange = (selectedOption) => {
-    this.setState({ selectedOption });
-    console.log(\`Selected: \${selectedOption.label}\`);
-  }
-  render() {
-  	const { selectedOption } = this.state;
-  	const value = selectedOption && selectedOption.value;
-
-    return (
-      <Select
-        name="form-field-name"
-        value={value}
-        onChange={this.handleChange}
-        options={[
-          { value: 'one', label: 'One' },
-          { value: 'two', label: 'Two' },
-        ]}
-      />
-    );
-  }
-}
-`
-
-<CodeSandboxDeployer
-  Button={<button>Click Here!</button>}
-  example={exampleComponent}
-  pkgJSON={/* file contents of the pkgJSON */}
-  config={{
-      originLocation: '../src',
-      startingDeps: { 'some-dependency': '^1.5.0' },
-      providedFiles: {/* file data properly configured and ready to go */}
+<CodeSandboxer
+  examplePath="deeply/nested/thing/some-example.js"
+  pkgJSON={pkgJSON}
+  gitInfo={{
+    account: 'atlassian',
+    repository: 'atlaskit-mk-2',
+    branch: 'master',
+    host: 'bitbucket',
   }}
-/>
+  importReplacements={[['src', pkgJSON.name]]}
+  dependencies={{
+    '@atlaskit/css-reset': 'latest',
+    [pkgJSON.name]: pkgJSON.version,
+  }}
+  extraFiles={{ 'index.js': 'abcde....' }}
+  afterDeploy={console.log}
+>
+  {deployButton({ isDisabled: false })}
+</CodeSandboxer>
 ```
 
-The CodeSandboxer collects the imports from an example, and uses the `package.json` to find the correct version your example was running, or falls back to the latest version of that component if it does not know them.
+This shows off some more advanced usage:
 
-The `originLocation` config option can be used if you are importing from a `src` directory for a local component.
+* We are providing the pkgJSON as an object, so it does not need to be fetched (this also accepts a promise that resolves to a pkgJSON)
+* We are specifying a branch to pull files from (also accepts git hashes)
+* We are replacing src files with a reference to the package, so the package's own internals are pulled from npm (this is a nice optimisation in component docs)
+* We have a collection of dependencies we always include
+* We are providing our own index, allowing us to add the `css-reset` to it. We can also pass in extra files
+* We are logging after a deploy
+* We have provided a custom button component
 
-Clicking the button will open your example in CodeSandbox in a new tab.
+## Other helper methods
 
-*NOTE* - the CodeSandboxer will not understand how to transform relative paths in your example, nor provide files for them. Using the helper methods provided, you can get additional files that you need, however CodeSandboxer will work best with flatter examples
+### parseFile(file pkgJSON)
 
-## getCSBData()
-
-`getCSBData` is the underlying function that assembles the data. it takes in an example, a pkgJSON and a config object, and returns a promise containing:
+Takes in the example code, and returns an object of the following:
 
 ```js
 {
-  params: 'asdfasdfasdfasdfasdf...',
-  files: {},
+  file: string,
+  deps: { [string]: string },
+  internalImports: Array<string>,
 }
 ```
 
-The `param` are a string representation of the data, which can be sumbitted to codesandbox's endpoint.
+`file` is the passed in file, or the value of a passed in argument.
+`deps` are the dependencies of the file, using the value in the pkgJSON dependency, or 'latest' if the version is not found.
+`internalImports` are an array of the strings of the relative path of the internal imports, to allow you to know where the code reaches into the file structure.
 
-The `files` are the json version of the data transmitted in params, if you want to inspect the transformation before submitting it.
+### replaceImports(example, [[../src, 'external-package'], [../src/\*, 'external-package/lib/']])
 
-## getAllImports()
+This function replaces an array of array of imports, with the first string in the array being the current import, and the second being the replacement.
 
-Takes in the example code, and return an array containing all the imports. Each import is represented by an array showing the full import statement, and then the 'source' of the import, where it is coming from.
+If you pass in a path ending in a \*, it will replace all that match the start of the pattern with the new pattern.
 
-## replaceImport
-
-```js
-replaceImport(example, '../src', 'external-package');
-```
-
-Replaces where a file is being imported from, to help flatten structures.
+NOTE: the importReplacements prop takes in absolute paths (relative to the git root directory) not the relative paths in examples. This is so we can transform these paths in all files that we encounter.

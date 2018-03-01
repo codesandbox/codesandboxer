@@ -1,19 +1,16 @@
 {
   "name": "react-codesandboxer",
   "version": "0.2.1",
-  "description": "A simple react component to help easily deploy an example to codesandbox",
+  "description":
+    "A simple react component to help easily deploy an example to codesandbox",
   "main": "dist/index.js",
   "scripts": {
     "test": "yarn jest",
-    "build": "babel src -d dist --ignore __tests__/",
-    "prepublish": "yarn build",
+    "build": "babel src -d dist --ignore  **/*.test.js",
+    "prepublishOnly": "yarn test && yarn flow && yarn build",
     "dev": "yarn build --watch"
   },
-  "keywords": [
-    "codesandbox",
-    "react",
-    "react-component"
-  ],
+  "keywords": ["codesandbox", "react", "react-component"],
   "author": "Ben Conolly",
   "license": "MIT",
   "devDependencies": {
@@ -28,21 +25,21 @@
     "flow-bin": "^0.64.0",
     "jest": "^22.1.4",
     "jest-in-case": "^1.0.2",
-    "react": "16.2.0"
+    "prettier": "^1.10.2",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0"
   },
   "peerDependencies": {
     "react": "^0.14.9 || ^15.3.0 || ^16.0.0-rc || ^16.0",
     "react-dom": "^0.14.9 || ^15.3.0 || ^16.0.0-rc || ^16.0"
   },
   "dependencies": {
-    "codesandbox": "^1.1.14"
+    "codesandbox": "^1.1.14",
+    "react-node-resolver": "^1.0.1"
   },
-  "files": [
-    "dist"
-  ],
+  "files": ["dist", "README.md"],
   "repository": {
     "type": "git",
     "url": "https://github.com/Noviny/react-codesandboxer.git"
-  },
-  "source": "src/index.js"
+  }
 }

@@ -5,6 +5,9 @@ logs
 # Dependency directory
 node_modules
 
+# dist
+dist
+
 # Other
 .DS_Store
 .env
