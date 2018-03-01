@@ -1,8 +1,7 @@
 {
   "name": "react-codesandboxer",
-  "version": "0.2.1",
-  "description":
-    "A simple react component to help easily deploy an example to codesandbox",
+  "version": "0.3.0",
+  "description": "A simple react component to help easily deploy an example to codesandbox",
   "main": "dist/index.js",
   "scripts": {
     "test": "yarn jest",
@@ -10,7 +9,11 @@
     "prepublishOnly": "yarn test && yarn flow && yarn build",
     "dev": "yarn build --watch"
   },
-  "keywords": ["codesandbox", "react", "react-component"],
+  "keywords": [
+    "codesandbox",
+    "react",
+    "react-component"
+  ],
   "author": "Ben Conolly",
   "license": "MIT",
   "devDependencies": {
@@ -37,7 +40,10 @@
     "codesandbox": "^1.1.14",
     "react-node-resolver": "^1.0.1"
   },
-  "files": ["dist", "README.md"],
+  "files": [
+    "dist",
+    "README.md"
+  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/Noviny/react-codesandboxer.git"
