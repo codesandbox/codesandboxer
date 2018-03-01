@@ -2,11 +2,18 @@
 import React, { Component, type Node } from 'react';
 import type { Package, Files, FetchConfig } from '../types';
 import fetchFiles from '../fetchFiles';
+import NodeResolver from 'react-node-resolver';
 
 const codesandboxURL = 'https://codesandbox.io/api/v1/sandboxes/define';
 
 type State = {
   parameters: string,
+  isLoading: boolean,
+  error?: {
+    name: string,
+    description?: string,
+    cointent?: string,
+  },
 };
 
 type Props = {
@@ -14,6 +21,7 @@ type Props = {
   examplePath: string,
   /* This is all the information we need to fetch information from github or bitbucket */
   gitInfo: FetchConfig,
+  /* Pass in the example as code to prevent it being fetched */
   example?: string | Promise<string>,
   /* Either take in a package.json object, or a string as the path of the package.json */
   pkgJSON?: Package | string | Promise<Package | string>,
@@ -35,8 +43,9 @@ type Props = {
 
 export default class CodeSandboxDeployer extends Component<Props, State> {
   form: HTMLFormElement | null;
+  button: HTMLElement | null;
 
-  state = { parameters: '' };
+  state = { parameters: '', isLoading: false };
   static defaultProps = {
     children: <button type="submit">Deploy to CodeSandbox</button>,
     dependencies: {},
@@ -58,15 +67,7 @@ export default class CodeSandboxDeployer extends Component<Props, State> {
     } = this.props;
     e.preventDefault();
 
-    fetchFiles(
-      examplePath,
-      pkgJSON,
-      gitInfo,
-      importReplacements,
-      dependencies,
-      providedFiles,
-      example,
-    )
+    fetchFiles(this.props)
       .then(({ parameters, files }) => {
         this.setState({ parameters }, () => {
           if (!skipDeploy && this.form) this.form.submit();
@@ -77,6 +78,9 @@ export default class CodeSandboxDeployer extends Component<Props, State> {
         if (afterDeploy) afterDeploy({ error });
       });
   };
+  componentDidMount() {
+    if (this.button) this.button.addEventListener('click', this.deployToCSB);
+  }
 
   render() {
     return (
@@ -91,7 +95,9 @@ export default class CodeSandboxDeployer extends Component<Props, State> {
         }}
       >
         <input type="hidden" name="parameters" value={this.state.parameters} />
-        {this.props.children}
+        <NodeResolver innerRef={ref => (this.button = ref)}>
+          {this.props.children(this.state)}
+        </NodeResolver>
       </form>
     );
   }

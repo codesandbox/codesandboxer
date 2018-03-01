@@ -2,6 +2,7 @@
 import resolvePath from '../utils/resolvePath';
 import parseFile from '../parseFile';
 import replaceImports from '../replaceImports';
+import absolutesToRelative from '../utils/absolutesToRelative';
 import type {
   Package,
   FetchConfig,
@@ -65,9 +66,15 @@ function fetchImage(url, path): Promise<ParsedFile> {
 }
 
 const fetchJS = (url, path, pkg, importReplacements): Promise<ParsedFile> => {
+  importReplacements.map(m => [absolutesToRelative(path, m[0]), m[1]]);
   return fetch(url)
     .then(a => a.text())
-    .then(content => replaceImports(content, importReplacements))
+    .then(content =>
+      replaceImports(
+        content,
+        importReplacements.map(m => [absolutesToRelative(path, m[0]), m[1]]),
+      ),
+    )
     .then(content => parseFile(content, pkg));
 };
 

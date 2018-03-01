@@ -13,5 +13,10 @@ cases(
       files: `import a from 'b' import c from 'd'`,
       replaces: [['b', 'z'], ['d', 'arg']],
     },
+    {
+      name: 'replace imports based on pattern',
+      files: `import b from 'b'; import c from './d/somewhere'`,
+      replaces: [['b', 'z'], ['./d/*', 'anywhere/']],
+    },
   ],
 );

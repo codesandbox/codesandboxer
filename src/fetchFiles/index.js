@@ -1,8 +1,9 @@
 // @flow
 import fetchRelativeFile from '../fetchRelativeFile';
 import resolvePath from '../utils/resolvePath';
-import resolveFilePath from '../utils/resolveFilePath';
+import resolveFilePath from './resolveFilePath';
 import replaceImports from '../replaceImports';
+import absolutesToRelative from '../utils/absolutesToRelative';
 import parseFile from '../parseFile';
 import type {
   Package,
@@ -13,8 +14,6 @@ import type {
 } from '../types';
 import finaliseCSB from './finaliseCSB';
 import { baseFiles } from '../constants';
-
-let count = 0;
 
 async function ensurePKGJSON(
   maybePkg,
@@ -52,7 +51,13 @@ async function ensureExample(
 ) {
   if (example) {
     let exampleContent = await Promise.resolve(example);
-    let content = replaceImports(exampleContent, importReplacements);
+    let content = replaceImports(
+      exampleContent,
+      importReplacements.map(m => [
+        absolutesToRelative(examplePath, m[0]),
+        m[1],
+      ]),
+    );
     return parseFile(content, pkg);
   } else {
     return fetchRelativeFile(examplePath, pkg, importReplacements, gitInfo);
@@ -67,8 +72,6 @@ async function fetchInternalDependencies(
   gitInfo: FetchConfig,
   importReplacements: Array<Import>,
 ) {
-  count++;
-  if (count > 30) throw new Error('count escape');
   let newFiles = await Promise.all(
     internalImports.map(path =>
       fetchRelativeFile(path, pkg, importReplacements, gitInfo).then(r => ({
@@ -77,6 +80,7 @@ async function fetchInternalDependencies(
       })),
     ),
   );
+
   let moreInternalImports = [];
   for (let f of newFiles) {
     files[resolveFilePath(f.path)] = { content: f.file };
@@ -106,16 +110,24 @@ async function fetchInternalDependencies(
   }
 }
 
-export default async function(
+export default async function({
+  examplePath,
+  pkgJSON,
+  gitInfo,
+  importReplacements,
+  dependencies = {},
+  providedFiles = {},
+  example,
+}: {
   examplePath: string,
-  initialPkg: Package | string | Promise<Package | string> | void,
+  pkgJSON?: Package | string | Promise<Package | string>,
   gitInfo: FetchConfig,
   importReplacements: Array<Import>,
-  dependencies: Dependencies = {},
-  providedFiles: Files = {},
+  dependencies?: Dependencies,
+  providedFiles?: Files,
   example?: string | Promise<string>,
-) {
-  let pkg = await ensurePKGJSON(initialPkg, importReplacements, gitInfo);
+}) {
+  let pkg = await ensurePKGJSON(pkgJSON, importReplacements, gitInfo);
 
   let { file, deps, internalImports } = await ensureExample(
     example,
@@ -143,5 +155,5 @@ export default async function(
     gitInfo,
     importReplacements,
   );
-  return finaliseCSB(final, providedFiles);
+  return finaliseCSB(final, providedFiles, dependencies);
 }

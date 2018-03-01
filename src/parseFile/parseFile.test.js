@@ -49,7 +49,6 @@ cases(
   'ParseFile()',
   async ({ file, pkgJSON }) => {
     let parsedFile = await parseFile(file, pkgJSON);
-    console.log(parsedFile);
     expect(parsedFile).toMatchSnapshot();
   },
   [

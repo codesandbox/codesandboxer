@@ -5,9 +5,16 @@ export default function replaceImport(
   oldSource: string,
   newSource: string,
 ): string {
-  const oldImport = new RegExp(
-    `(import [^"']+ from ["'])${oldSource.replace(/\*$/, `[^"']*`)}(["'])`,
-    'g',
-  );
+  let matchString = '';
+  if (oldSource.match(/\*$/)) {
+    matchString = `(import [^"']+ from ["'])${oldSource.replace(
+      /\*$/,
+      `([^"']*`,
+    )}["'])`;
+  } else {
+    matchString = `(import [^"']+ from ["'])${oldSource}(["'])`;
+  }
+  const oldImport = new RegExp(matchString, 'g');
+
   return code.replace(oldImport, `$1${newSource}$2`);
 }

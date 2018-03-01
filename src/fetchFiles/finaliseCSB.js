@@ -23,9 +23,11 @@ const ensureReact = deps => {
 export default function(
   { files, deps }: { files: Files, deps: Dependencies },
   providedFiles: Files,
+  passedDeps: Dependencies,
 ) {
   let dependencies = {
     ...deps,
+    ...passedDeps,
   };
 
   ensureReact(dependencies);
@@ -35,7 +37,10 @@ export default function(
     'package.json': { content: newpkgJSON(dependencies) },
     ...providedFiles,
   };
-  const parameters = getParameters({ finalFiles });
+  const parameters = getParameters({
+    files: finalFiles,
+    template: 'create-react-app',
+  });
   return {
     files: finalFiles,
     dependencies,

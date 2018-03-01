@@ -1,5 +1,5 @@
 // @flow
-import resolvePath from './resolvePath';
+import resolvePath from '../utils/resolvePath';
 
 export default function resolveFilePath(path: string): string {
   let fileMatch = path.match(/.+\/.+(\..+)$/);
