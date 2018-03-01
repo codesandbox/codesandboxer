@@ -38,7 +38,7 @@ type Props = {
   ) => mixed,
   /* Pass in files separately to fetching them. Useful to go alongisde specific replacements in importReplacements */
   providedFiles?: Files,
-  children?: Node,
+  children: State => Node,
 };
 
 export default class CodeSandboxDeployer extends Component<Props, State> {
@@ -47,7 +47,7 @@ export default class CodeSandboxDeployer extends Component<Props, State> {
 
   state = { parameters: '', isLoading: false };
   static defaultProps = {
-    children: <button type="submit">Deploy to CodeSandbox</button>,
+    children: () => <button type="submit">Deploy to CodeSandbox</button>,
     dependencies: {},
     providedFiles: {},
     importReplacements: [],

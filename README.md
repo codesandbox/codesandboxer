@@ -16,7 +16,9 @@ export default () => (
       repository: 'react-codesandboxer',
       host: 'github',
     }}
-  />
+  >
+    {() => <div>Upload to codesandbox</div>}
+  </CodSandboxer>
 );
 ```
 
@@ -49,7 +51,9 @@ With the minimal options provided, the sandboxer can fetch the file contents fro
   extraFiles={{ 'index.js': 'abcde....' }}
   afterDeploy={console.log}
 >
-  {deployButton({ isDisabled: false })}
+  {({ isLoading }) =>
+    isLoading ? <div>Uploading</div> : <div>Upload to codesandbox</div>
+  }
 </CodeSandboxer>
 ```
 
