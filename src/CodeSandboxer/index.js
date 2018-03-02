@@ -38,7 +38,10 @@ type Props = {
   ) => mixed,
   /* Pass in files separately to fetching them. Useful to go alongisde specific replacements in importReplacements */
   providedFiles?: Files,
+  /* The trigger element */
   children: State => Node,
+  /* Consumers may need access to the wrapper's style */
+  style: Object,
 };
 
 export default class CodeSandboxDeployer extends Component<Props, State> {
@@ -51,6 +54,7 @@ export default class CodeSandboxDeployer extends Component<Props, State> {
     dependencies: {},
     providedFiles: {},
     importReplacements: [],
+    style: { display: 'inline-block' },
   };
 
   deployToCSB = (e: MouseEvent) => {
@@ -82,21 +86,31 @@ export default class CodeSandboxDeployer extends Component<Props, State> {
   componentDidMount() {
     if (this.button) this.button.addEventListener('click', this.deployToCSB);
   }
+  componentWillUnmount() {
+    if (this.button) this.button.removeEventListener('click', this.deployToCSB);
+  }
+
+  getButton = (ref) => {
+    if (!ref) return;
+    this.button = ref;
+  }
+  getForm = (ref) => {
+    if (!ref) return;
+    this.form = ref;
+  }
 
   render() {
     return (
       <form
-        style={{ display: 'inline-block' }}
-        onSubmit={this.deployToCSB}
         action="https://codesandbox.io/api/v1/sandboxes/define"
         method="POST"
+        onSubmit={this.deployToCSB}
+        ref={this.getForm}
+        style={this.props.style}
         target="_blank"
-        ref={r => {
-          this.form = r;
-        }}
       >
         <input type="hidden" name="parameters" value={this.state.parameters} />
-        <NodeResolver innerRef={ref => (this.button = ref)}>
+        <NodeResolver innerRef={this.getButton}>
           {this.props.children(this.state)}
         </NodeResolver>
       </form>
