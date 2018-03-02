@@ -103,53 +103,48 @@ export default class CodeSandboxDeployer extends Component<Props, State> {
 `;
 
 exports[`fetchRelativeFile() should fetch a .json file at the root 1`] = `
-Object {
-  "author": "Ben Conolly",
-  "dependencies": Object {
-    "codesandbox": "^1.1.14",
+"{
+  \\"name\\": \\"react-codesandboxer\\",
+  \\"version\\": \\"0.2.1\\",
+  \\"description\\":
+    \\"A simple react component to help easily deploy an example to codesandbox\\",
+  \\"main\\": \\"dist/index.js\\",
+  \\"scripts\\": {
+    \\"test\\": \\"yarn jest\\",
+    \\"build\\": \\"babel src -d dist --ignore __tests__/\\",
+    \\"prepublishOnly\\": \\"yarn test && yarn flow && yarn build\\",
+    \\"dev\\": \\"yarn build --watch\\"
   },
-  "description": "A simple react component to help easily deploy an example to codesandbox",
-  "devDependencies": Object {
-    "babel-cli": "^6.26.0",
-    "babel-plugin-syntax-dynamic-import": "^6.18.0",
-    "babel-plugin-transform-class-properties": "^6.24.1",
-    "babel-plugin-transform-object-rest-spread": "^6.26.0",
-    "babel-plugin-transform-runtime": "^6.23.0",
-    "babel-preset-env": "^1.6.1",
-    "babel-preset-flow": "^6.23.0",
-    "babel-preset-react": "^6.24.1",
-    "flow-bin": "^0.64.0",
-    "jest": "^22.1.4",
-    "jest-in-case": "^1.0.2",
-    "prettier": "^1.10.2",
-    "react": "16.2.0",
+  \\"keywords\\": [\\"codesandbox\\", \\"react\\", \\"react-component\\"],
+  \\"author\\": \\"Ben Conolly\\",
+  \\"license\\": \\"MIT\\",
+  \\"devDependencies\\": {
+    \\"babel-cli\\": \\"^6.26.0\\",
+    \\"babel-plugin-syntax-dynamic-import\\": \\"^6.18.0\\",
+    \\"babel-plugin-transform-class-properties\\": \\"^6.24.1\\",
+    \\"babel-plugin-transform-object-rest-spread\\": \\"^6.26.0\\",
+    \\"babel-plugin-transform-runtime\\": \\"^6.23.0\\",
+    \\"babel-preset-env\\": \\"^1.6.1\\",
+    \\"babel-preset-flow\\": \\"^6.23.0\\",
+    \\"babel-preset-react\\": \\"^6.24.1\\",
+    \\"flow-bin\\": \\"^0.64.0\\",
+    \\"jest\\": \\"^22.1.4\\",
+    \\"jest-in-case\\": \\"^1.0.2\\",
+    \\"prettier\\": \\"^1.10.2\\",
+    \\"react\\": \\"16.2.0\\"
   },
-  "files": Array [
-    "dist",
-    "README.md",
-  ],
-  "keywords": Array [
-    "codesandbox",
-    "react",
-    "react-component",
-  ],
-  "license": "MIT",
-  "main": "dist/index.js",
-  "name": "react-codesandboxer",
-  "peerDependencies": Object {
-    "react": "^0.14.9 || ^15.3.0 || ^16.0.0-rc || ^16.0",
-    "react-dom": "^0.14.9 || ^15.3.0 || ^16.0.0-rc || ^16.0",
+  \\"peerDependencies\\": {
+    \\"react\\": \\"^0.14.9 || ^15.3.0 || ^16.0.0-rc || ^16.0\\",
+    \\"react-dom\\": \\"^0.14.9 || ^15.3.0 || ^16.0.0-rc || ^16.0\\"
   },
-  "repository": Object {
-    "type": "git",
-    "url": "https://github.com/Noviny/react-codesandboxer.git",
+  \\"dependencies\\": {
+    \\"codesandbox\\": \\"^1.1.14\\"
   },
-  "scripts": Object {
-    "build": "babel src -d dist --ignore __tests__/",
-    "dev": "yarn build --watch",
-    "prepublishOnly": "yarn test && yarn flow && yarn build",
-    "test": "yarn jest",
-  },
-  "version": "0.2.1",
+  \\"files\\": [\\"dist\\", \\"README.md\\"],
+  \\"repository\\": {
+    \\"type\\": \\"git\\",
+    \\"url\\": \\"https://github.com/Noviny/react-codesandboxer.git\\"
+  }
 }
+"
 `;
