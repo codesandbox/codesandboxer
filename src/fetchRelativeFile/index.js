@@ -3,6 +3,7 @@ import resolvePath from '../utils/resolvePath';
 import parseFile from '../parseFile';
 import replaceImports from '../replaceImports';
 import absolutesToRelative from '../utils/absolutesToRelative';
+import getUrl from './getUrl';
 import type {
   Package,
   FetchConfig,
@@ -10,12 +11,6 @@ import type {
   Dependencies,
   Import,
 } from '../types';
-const raw = {
-  github: (path, { account, repository, branch = 'master' }) =>
-    `https://raw.githubusercontent.com/${account}/${repository}/${branch}/${path}`,
-  bitbucket: (path, { account, repository, branch = 'master' }) =>
-    `https://api.bitbucket.org/1.0/repositories/${account}/${repository}/raw/${branch}/${path}`,
-};
 
 /*
 This is modified from the canvas answer here:
@@ -30,21 +25,6 @@ const supportedImageFormats = [
   '.bmp',
   '.tiff',
 ];
-
-const getUrl = (path, { host, ...urlConfig }) => {
-  let getRaw = raw[host];
-  if (typeof getRaw !== 'function')
-    throw new Error(`Could not parse files from ${host}`);
-
-  let url = getRaw(path, urlConfig);
-  let fileType = '';
-  let fileMatch = path.match(/.+\/.+(\..+)$/);
-  if (!fileMatch) {
-    return { fileType: '.js', url: `${url}.js` };
-  } else {
-    return { fileType: fileMatch[1], url };
-  }
-};
 
 function fetchImage(url, path): Promise<ParsedFile> {
   return new Promise((resolve, reject) => {
