@@ -9,6 +9,7 @@ const codesandboxURL = 'https://codesandbox.io/api/v1/sandboxes/define';
 type State = {
   parameters: string,
   isLoading: boolean,
+  deployPromise?: Promise<any>,
   files?: Files,
   error?: {
     name: string,
@@ -34,11 +35,8 @@ type Props = {
   skipDeploy?: boolean,
   ignoreInternalImports?: boolean,
   preload?: boolean,
-  /*
-    NOTE: 0.4 will deprecate afterDeploy, as all information from it is no in the render prop
-    function that can be called once the deploy has occurred, useful if you want to give feedback or test how CSB is working
-  */
-  afterDeploy?: (
+  /* Called once loading has finished, whether it preloaded or not */
+  onLoadComplete?: (
     { parameters: string, files: Files } | { error: any },
   ) => mixed,
   /* Pass in files separately to fetching them. Useful to go alongisde specific replacements in importReplacements */
@@ -48,7 +46,7 @@ type Props = {
     recommended way to respond to the contents of react-codesandboxer, NOT the
     afterDeploy function.
   */
-  children: State => Node,
+  children: (obj: { isLoading: boolean, files?: Files }) => Node,
   /* Consumers may need access to the wrapper's style */
   style: Object,
 };
@@ -57,7 +55,12 @@ export default class CodeSandboxDeployer extends Component<Props, State> {
   form: HTMLFormElement | null;
   button: HTMLElement | null;
 
-  state = { parameters: '', isLoading: false };
+  state = {
+    parameters: '',
+    isLoading: false,
+    deployPromise: undefined,
+    files: undefined,
+  };
   static defaultProps = {
     children: () => <button type="submit">Deploy to CodeSandbox</button>,
     dependencies: {},
@@ -66,37 +69,54 @@ export default class CodeSandboxDeployer extends Component<Props, State> {
     style: { display: 'inline-block' },
   };
 
-  deployToCSB = (e: MouseEvent) => {
-    const {
-      examplePath,
-      pkgJSON,
-      gitInfo,
-      dependencies,
-      skipDeploy,
-      afterDeploy,
-      importReplacements,
-      providedFiles,
-      example,
-    } = this.props;
-    e.preventDefault();
+  loadFiles = () => {
+    let { skipDeploy, onLoadComplete } = this.props;
 
-    this.setState({ isLoading: true });
-    fetchFiles(this.props)
+    this.setState({
+      isLoading: true,
+      deployPromise: fetchFiles(this.props)
+        .then(({ parameters, files }) => {
+          this.setState({ parameters, isLoading: false, files }, () => {
+            if (!skipDeploy && this.form) this.form.submit();
+            if (onLoadComplete) onLoadComplete({ parameters, files });
+          });
+        })
+        .catch(error => {
+          this.setState({ error, isLoading: false });
+          if (onLoadComplete) onLoadComplete({ error });
+        }),
+    });
+    return fetchFiles(this.props)
       .then(({ parameters, files }) => {
         this.setState({ parameters, isLoading: false, files }, () => {
           if (!skipDeploy && this.form) this.form.submit();
-          /* NOTE: 0.4 will deprecate afterDeploy, as all information from it is no in the render prop */
-          if (afterDeploy) afterDeploy({ parameters, files });
+          if (onLoadComplete) onLoadComplete({ parameters, files });
         });
       })
       .catch(error => {
-        /* NOTE: 0.4 will deprecate afterDeploy, as all information from it is no in the render prop */
-        this.setState({ error });
-        if (afterDeploy) afterDeploy({ error });
+        this.setState({ error, isLoading: false });
+        if (onLoadComplete) onLoadComplete({ error });
       });
+  };
+
+  deploy = () => {
+    if (!this.props.skipDeploy && this.form) this.form.submit();
+  };
+
+  deployToCSB = (e: MouseEvent) => {
+    const { preload } = this.props;
+    const { isLoading, parameters, deployPromise } = this.state;
+    e.preventDefault();
+
+    if (preload && deployPromise) {
+      deployPromise.then(() => this.deploy());
+    } else {
+      this.loadFiles().then(() => this.deploy());
+    }
   };
   componentDidMount() {
     if (this.button) this.button.addEventListener('click', this.deployToCSB);
+    if (this.props.preload) this.loadFiles();
   }
   componentWillUnmount() {
     if (this.button) this.button.removeEventListener('click', this.deployToCSB);
@@ -112,6 +132,7 @@ export default class CodeSandboxDeployer extends Component<Props, State> {
   };
 
   render() {
+    const { isLoading, files } = this.state;
     return (
       <form
         action="https://codesandbox.io/api/v1/sandboxes/define"
@@ -123,7 +144,7 @@ export default class CodeSandboxDeployer extends Component<Props, State> {
       >
         <input type="hidden" name="parameters" value={this.state.parameters} />
         <NodeResolver innerRef={this.getButton}>
-          {this.props.children(this.state)}
+          {this.props.children({ isLoading, files })}
         </NodeResolver>
       </form>
     );

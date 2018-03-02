@@ -1,10 +1,12 @@
 // @flow
-import fetchRelativeFile from '../fetchRelativeFile';
 import resolvePath from '../utils/resolvePath';
-import resolveFilePath from './resolveFilePath';
 import replaceImports from '../replaceImports';
-import absolutesToRelative from '../utils/absolutesToRelative';
-import parseFile from '../parseFile';
+
+import resolveFilePath from './resolveFilePath';
+import ensureExample from './ensureExample';
+import ensurePKGJSON from './ensurePkgJSON';
+import fetchInternalDependencies from './fetchInternalDependencies';
+
 import type {
   Package,
   FetchConfig,
@@ -14,101 +16,6 @@ import type {
 } from '../types';
 import finaliseCSB from './finaliseCSB';
 import { baseFiles } from '../constants';
-
-async function ensurePKGJSON(
-  maybePkg,
-  importReplacements,
-  gitInfo,
-): Promise<Package> {
-  let pkg = await Promise.resolve(maybePkg);
-  if (typeof pkg === 'object') {
-    return pkg;
-  } else if (typeof pkg === 'string') {
-    return fetchRelativeFile(
-      pkg,
-      // $FlowFixMe - we know here that this will not be a js file, the only time we NEED a pkg
-      {},
-      importReplacements,
-      gitInfo,
-    ).then(({ file }) => JSON.parse(file));
-  } else if (!pkg) {
-    return fetchRelativeFile(
-      'package.json',
-      // $FlowFixMe - we know here that this will not be a js file, the only time we NEED a pkg
-      {},
-      importReplacements,
-      gitInfo,
-    ).then(({ file }) => JSON.parse(file));
-  } else throw new Error('could not understand passed in package.json');
-}
-
-async function ensureExample(
-  example,
-  importReplacements,
-  pkg,
-  examplePath,
-  gitInfo,
-) {
-  if (example) {
-    let exampleContent = await Promise.resolve(example);
-    let content = replaceImports(
-      exampleContent,
-      importReplacements.map(m => [
-        absolutesToRelative(examplePath, m[0]),
-        m[1],
-      ]),
-    );
-    return parseFile(content, pkg);
-  } else {
-    return fetchRelativeFile(examplePath, pkg, importReplacements, gitInfo);
-  }
-}
-
-async function fetchInternalDependencies(
-  internalImports: Array<string>,
-  files: Files,
-  pkg: Package,
-  deps: { [string]: string },
-  gitInfo: FetchConfig,
-  importReplacements: Array<Import>,
-) {
-  let newFiles = await Promise.all(
-    internalImports.map(path =>
-      fetchRelativeFile(path, pkg, importReplacements, gitInfo).then(r => ({
-        ...r,
-        path: path,
-      })),
-    ),
-  );
-
-  let moreInternalImports = [];
-  for (let f of newFiles) {
-    files[resolveFilePath(f.path)] = { content: f.file };
-    deps = { ...deps, ...f.deps };
-    f.internalImports.forEach(m =>
-      moreInternalImports.push(resolvePath(f.path, m)),
-    );
-  }
-  moreInternalImports = moreInternalImports.filter(
-    mpt => !files[resolveFilePath(mpt)],
-  );
-  if (moreInternalImports.length > 0) {
-    let moreFiles = await fetchInternalDependencies(
-      moreInternalImports,
-      files,
-      pkg,
-      deps,
-      gitInfo,
-      importReplacements,
-    );
-    return {
-      files: { ...files, ...moreFiles.files },
-      deps: { ...deps, ...moreFiles.deps },
-    };
-  } else {
-    return { files, deps };
-  }
-}
 
 export default async function({
   examplePath,
