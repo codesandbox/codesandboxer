@@ -3,6 +3,7 @@ import resolvePath from '../utils/resolvePath';
 import parseFile from '../parseFile';
 import replaceImports from '../replaceImports';
 import absolutesToRelative from '../utils/absolutesToRelative';
+import getUrl from './getUrl';
 import type {
   Package,
   FetchConfig,
@@ -10,17 +11,12 @@ import type {
   Dependencies,
   Import,
 } from '../types';
-const raw = {
-  github: (path, { account, repository, branch = 'master' }) =>
-    `https://raw.githubusercontent.com/${account}/${repository}/${branch}/${path}`,
-  bitbucket: (path, { account, repository, branch = 'master' }) =>
-    `https://api.bitbucket.org/1.0/repositories/${account}/${repository}/raw/${branch}/${path}`,
-};
 
 /*
 This is modified from the canvas answer here:
 https://stackoverflow.com/questions/6150289/how-to-convert-image-into-base64-string-using-javascript
 */
+const supportedFiles = ['.js', '.json'];
 
 const supportedImageFormats = [
   '.png',
@@ -30,21 +26,6 @@ const supportedImageFormats = [
   '.bmp',
   '.tiff',
 ];
-
-const getUrl = (path, { host, ...urlConfig }) => {
-  let getRaw = raw[host];
-  if (typeof getRaw !== 'function')
-    throw new Error(`Could not parse files from ${host}`);
-
-  let url = getRaw(path, urlConfig);
-  let fileType = '';
-  let fileMatch = path.match(/.+\/.+(\..+)$/);
-  if (!fileMatch) {
-    return { fileType: '.js', url: `${url}.js` };
-  } else {
-    return { fileType: fileMatch[1], url };
-  }
-};
 
 function fetchImage(url, path): Promise<ParsedFile> {
   return new Promise((resolve, reject) => {
@@ -78,13 +59,32 @@ const fetchJS = (url, path, pkg, importReplacements): Promise<ParsedFile> => {
     .then(content => parseFile(content, pkg));
 };
 
+const fetchJSON = (url, path): Promise<ParsedFile> => {
+  return fetch(url)
+    .then(res => res.json())
+    .then(file => ({ file, deps: {}, internalImports: [] }));
+};
+
 let fetchFileContents = (
   url,
   path,
-  { isImage, pkg, importReplacements },
+  { isImage, fileType, pkg, importReplacements },
 ): Promise<ParsedFile> => {
-  if (isImage) return fetchImage(url, path);
-  else return fetchJS(url, path, pkg, importReplacements);
+  switch (fileType) {
+    case '.png':
+    case '.jpeg':
+    case '.jpg':
+    case '.gif':
+    case '.bmp':
+    case '.tiff':
+      return fetchImage(url, path);
+    case '.js':
+      return fetchJS(url, path, pkg, importReplacements);
+    case '.json':
+      return fetchJSON(url, path);
+    default:
+      throw new Error(`unparseable filetype: ${fileType} for file ${path}`);
+  }
 };
 
 type HandleFileFetch = Promise<{
@@ -103,18 +103,11 @@ export default async function fetchRelativeFile(
   // Get the url from the config. For JS files, we will need to add the filetype
   // This method needs to determine the filetype, so we return it.
   let { url, fileType } = getUrl(path, config);
-  let isImage = false;
-  // Currently we handle images, and js files. We error on other file types
-  for (let format of supportedImageFormats) {
-    if (fileType === format) isImage = true;
-  }
-  if (fileType !== '.js' && !isImage)
-    throw new Error(`unparseable filetype: ${fileType}`);
 
   let file = await fetchFileContents(url, path, {
-    isImage,
+    fileType,
     pkg,
     importReplacements,
   });
-  return { ...file, isImage };
+  return { ...file };
 }

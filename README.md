@@ -1,9 +1,5 @@
 # CodeSandboxer
 
-====
-A documentation update is currently underway. Below is the simplest use-case for the deployer at this time.
-====
-
 ```js
 import React, { Component } from 'react';
 import CodeSandboxer from 'react-codesandboxer';
@@ -17,7 +13,7 @@ export default () => (
       host: 'github',
     }}
   >
-    {() => <div>Upload to codesandbox</div>}
+    {() => <button type="submit">Upload to codesandbox</button>}
   </CodSandboxer>
 );
 ```
@@ -30,25 +26,71 @@ With the minimal options provided, the sandboxer can fetch the file contents fro
 
 1. If the example file does not exist at the source, the deploy will fail. You can get around this by passing in the file's contents directly as the prop `example`.
 2. We follow relative imports in the example, so the example still works when uploaded. The fewer files your example depends upon, the faster it will be. (we will only ever fetch a file once, even if multiple things depend upon it)
+3. While it's not enforced, making sure you have a submit button at the top level is important for accessibility.
+
+## Component's Props
+
+### `examplePath: string`
+
+The absolute path to the example within the git file structure
+
+### `gitInfo: FetchConfig`
+
+This is all the information we need to fetch information from github or bitbucket
+
+### `example?: string | Promise<string>`
+
+Pass in the example as code to prevent it being fetched
+
+### `pkgJSON?: Package | string | Promise<Package | string>`
+
+Either take in a package.json object, or a string as the path of the package.json
+
+### `importReplacements: Array<[string, string]>`
+
+Paths in the example that we do not want to be pulled from their relativeLocation
+
+### `dependencies?: { [string]: string }`
+
+Dependencies we always include. Most likely react and react-dom
+
+### `skipDeploy?: boolean`
+
+Do not actually deploy to codesanbox. Used to for testing alongside the return values of the render prop.
+
+### `afterDeploy?: ({ parameters: string, files: Files } | { error: any }) => mixed`
+
+NOTE: 0.4 will deprecate afterDeploy, as all information from it is no in the render prop
+function that can be called once the deploy has occurred, useful if you want to give feedback or test how CSB is working
+
+### `providedFiles?: Files`
+
+Pass in files separately to fetching them. Useful to go alongisde specific replacements in importReplacements
+
+### `children: State => Node`
+
+Render prop that return `isLoading`, `files` and `error`. This is the recommended way to respond to the contents of react-codesandboxer, NOT the afterDeploy function.
 
 ## A slightly more complicated example:
 
 ```js
+import pkgJSON from '../package.json';
+
 <CodeSandboxer
   examplePath="deeply/nested/thing/some-example.js"
   pkgJSON={pkgJSON}
   gitInfo={{
-    account: 'atlassian',
-    repository: 'atlaskit-mk-2',
+    account: 'noviny',
+    repository: 'react-codesandbox',
     branch: 'master',
-    host: 'bitbucket',
+    host: 'github',
   }}
   importReplacements={[['src', pkgJSON.name]]}
   dependencies={{
     '@atlaskit/css-reset': 'latest',
     [pkgJSON.name]: pkgJSON.version,
   }}
-  extraFiles={{ 'index.js': 'abcde....' }}
+  providedFiles={{ 'index.js': content: { 'abcde....' } }}
   afterDeploy={console.log}
 >
   {({ isLoading }) =>

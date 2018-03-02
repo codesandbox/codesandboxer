@@ -9,6 +9,7 @@ const codesandboxURL = 'https://codesandbox.io/api/v1/sandboxes/define';
 type State = {
   parameters: string,
   isLoading: boolean,
+  files?: Files,
   error?: {
     name: string,
     description?: string,
@@ -29,16 +30,24 @@ type Props = {
   importReplacements: Array<[string, string]>,
   /* Dependencies we always include. Most likely react and react-dom */
   dependencies?: { [string]: string },
-  /* Do not actually deploy to codesanbox. Used to for testing alongside afterDeploy */
+  /* Do not actually deploy to codesanbox. Used to for testing alongside the return values of the render prop. */
   skipDeploy?: boolean,
   ignoreInternalImports?: boolean,
-  /* function that can be called once the deploy has occurred, useful if you want to give feedback or test how CSB is working */
+  preload?: boolean,
+  /*
+    NOTE: 0.4 will deprecate afterDeploy, as all information from it is no in the render prop
+    function that can be called once the deploy has occurred, useful if you want to give feedback or test how CSB is working
+  */
   afterDeploy?: (
     { parameters: string, files: Files } | { error: any },
   ) => mixed,
   /* Pass in files separately to fetching them. Useful to go alongisde specific replacements in importReplacements */
   providedFiles?: Files,
-  /* The trigger element */
+  /*
+    Render prop that return `isLoading`and `error`. This is the
+    recommended way to respond to the contents of react-codesandboxer, NOT the
+    afterDeploy function.
+  */
   children: State => Node,
   /* Consumers may need access to the wrapper's style */
   style: Object,
@@ -74,12 +83,15 @@ export default class CodeSandboxDeployer extends Component<Props, State> {
     this.setState({ isLoading: true });
     fetchFiles(this.props)
       .then(({ parameters, files }) => {
-        this.setState({ parameters, isLoading: false }, () => {
+        this.setState({ parameters, isLoading: false, files }, () => {
           if (!skipDeploy && this.form) this.form.submit();
+          /* NOTE: 0.4 will deprecate afterDeploy, as all information from it is no in the render prop */
           if (afterDeploy) afterDeploy({ parameters, files });
         });
       })
       .catch(error => {
+        /* NOTE: 0.4 will deprecate afterDeploy, as all information from it is no in the render prop */
+        this.setState({ error });
         if (afterDeploy) afterDeploy({ error });
       });
   };
