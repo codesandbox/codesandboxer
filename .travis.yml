@@ -1,5 +1,5 @@
 language: node_js
-install: yarn
+script: yarn test:ci
 cache: yarn
 node_js:
   - "node"
