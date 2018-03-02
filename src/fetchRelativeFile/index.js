@@ -61,7 +61,7 @@ const fetchJS = (url, path, pkg, importReplacements): Promise<ParsedFile> => {
 
 const fetchJSON = (url, path): Promise<ParsedFile> => {
   return fetch(url)
-    .then(res => res.json())
+    .then(res => res.text())
     .then(file => ({ file, deps: {}, internalImports: [] }));
 };
 
