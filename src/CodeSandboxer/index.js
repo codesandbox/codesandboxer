@@ -102,14 +102,14 @@ export default class CodeSandboxDeployer extends Component<Props, State> {
     if (this.button) this.button.removeEventListener('click', this.deployToCSB);
   }
 
-  getButton = (ref) => {
+  getButton = (ref: HTMLElement | null) => {
     if (!ref) return;
     this.button = ref;
-  }
-  getForm = (ref) => {
+  };
+  getForm = (ref: HTMLFormElement | null) => {
     if (!ref) return;
     this.form = ref;
-  }
+  };
 
   render() {
     return (
