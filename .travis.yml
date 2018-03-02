@@ -1,5 +1,7 @@
 language: node_js
-script: yarn test:ci
+script:
+  - yarn test
+  - yarn flow
 cache: yarn
 node_js:
   - "node"
