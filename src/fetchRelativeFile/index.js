@@ -47,9 +47,13 @@ function fetchImage(url, path): Promise<ParsedFile> {
 }
 
 const fetchJS = (url, path, pkg, importReplacements): Promise<ParsedFile> => {
-  importReplacements.map(m => [absolutesToRelative(path, m[0]), m[1]]);
   return fetch(url)
-    .then(a => a.text())
+    .then(res => {
+      if (res.status === 404) {
+        throw new Error('file not found');
+      }
+      return res.text();
+    })
     .then(content =>
       replaceImports(
         content,
@@ -61,8 +65,37 @@ const fetchJS = (url, path, pkg, importReplacements): Promise<ParsedFile> => {
 
 const fetchJSON = (url, path): Promise<ParsedFile> => {
   return fetch(url)
-    .then(res => res.text())
+    .then(res => {
+      if (res.status === 404) {
+        throw new Error('file not found');
+      }
+      return res.text();
+    })
     .then(file => ({ file, deps: {}, internalImports: [] }));
+};
+
+// Imports that are not named may be .js, .json, or /index.js. Node resolves them
+// in that order.
+let fetchProbablyJS = (url, path, pkg, importReplacements) => {
+  return fetchJS(url, path, pkg, importReplacements)
+    .catch(e => {
+      if (e.message === 'file not found') {
+        let newPath = `${path}.json`;
+        let newUrl = url.replace(/.js$/, '/.json');
+        return fetchJS(newUrl, newPath, pkg, importReplacements);
+      } else {
+        throw e;
+      }
+    })
+    .catch(e => {
+      if (e.message === 'file not found') {
+        let newPath = `${path}/index.js`;
+        let newUrl = url.replace(/.js$/, '/index.js');
+        return fetchJS(newUrl, newPath, pkg, importReplacements);
+      } else {
+        throw e;
+      }
+    });
 };
 
 let fetchFileContents = (
@@ -79,7 +112,7 @@ let fetchFileContents = (
     case '.tiff':
       return fetchImage(url, path);
     case '.js':
-      return fetchJS(url, path, pkg, importReplacements);
+      return fetchProbablyJS(url, path, pkg, importReplacements);
     case '.json':
       return fetchJSON(url, path);
     default:
