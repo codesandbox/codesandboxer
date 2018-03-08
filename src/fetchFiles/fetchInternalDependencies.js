@@ -15,10 +15,7 @@ export default async function fetchInternalDependencies(
 ) {
   let newFiles = await Promise.all(
     internalImports.map(path =>
-      fetchRelativeFile(path, pkg, importReplacements, gitInfo).then(r => ({
-        ...r,
-        path: path,
-      })),
+      fetchRelativeFile(path, pkg, importReplacements, gitInfo),
     ),
   );
 

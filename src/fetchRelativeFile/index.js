@@ -43,24 +43,28 @@ function fetchImage(url, path): Promise<ParsedFile> {
       dataURL = canvas.toDataURL();
       resolve(dataURL);
     };
-  }).then(file => ({ file, deps: {}, internalImports: [] }));
+  }).then(file => ({ file, deps: {}, internalImports: [], path }));
 }
 
 const fetchJS = (url, path, pkg, importReplacements): Promise<ParsedFile> => {
-  return fetch(url)
-    .then(res => {
-      if (res.status === 404) {
-        throw new Error('file not found');
-      }
-      return res.text();
-    })
-    .then(content =>
-      replaceImports(
-        content,
-        importReplacements.map(m => [absolutesToRelative(path, m[0]), m[1]]),
-      ),
-    )
-    .then(content => parseFile(content, pkg));
+  return (
+    fetch(url)
+      .then(res => {
+        if (res.status === 404) {
+          throw new Error('file not found');
+        }
+        return res.text();
+      })
+      .then(content =>
+        replaceImports(
+          content,
+          importReplacements.map(m => [absolutesToRelative(path, m[0]), m[1]]),
+        ),
+      )
+      // this is not correct
+      .then(content => parseFile(content, pkg))
+      .then(file => ({ ...file, path }))
+  );
 };
 
 const fetchJSON = (url, path): Promise<ParsedFile> => {
@@ -71,7 +75,7 @@ const fetchJSON = (url, path): Promise<ParsedFile> => {
       }
       return res.text();
     })
-    .then(file => ({ file, deps: {}, internalImports: [] }));
+    .then(file => ({ file, deps: {}, internalImports: [], path }));
 };
 
 // Imports that are not named may be .js, .json, or /index.js. Node resolves them
@@ -120,11 +124,7 @@ let fetchFileContents = (
   }
 };
 
-type HandleFileFetch = Promise<{
-  file: string,
-  deps: Dependencies,
-  internalImports: Array<string>,
-}>;
+type HandleFileFetch = Promise<ParsedFile>;
 
 export default async function fetchRelativeFile(
   path: string,

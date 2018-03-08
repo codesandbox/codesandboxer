@@ -16,6 +16,13 @@ export type ParsedFile = {
   file: string,
   deps: { [string]: string },
   internalImports: Array<string>,
+  path: string,
+};
+
+export type parsedFileFirst = {
+  file: string,
+  deps: { [string]: string },
+  internalImports: Array<string>,
 };
 
 export type Package = {

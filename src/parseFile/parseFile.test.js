@@ -67,6 +67,21 @@ cases(
       file: `import a from 'b'; import c from './c'`,
       pkgJSON: Promise.resolve(fakePKGJSON),
     },
+    {
+      skip: true,
+      // This test is a valid use-case which is not currently handled.
+      name: 'just getting imports',
+      file: `"// @flow
+
+export { default } from './components/Avatar';
+export { default as AvatarGroup } from './components/AvatarGroup';
+export { default as AvatarItem } from './components/AvatarItem';
+export { default as Presence } from './components/Presence';
+export { default as Status } from './components/Status';
+export { default as Skeleton } from './components/Skeleton';
+"`,
+      pkgJSON: fakePKGJSON,
+    },
   ],
 );
 
