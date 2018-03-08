@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.4.1
+
+* Imports of `place` resolving to `place/index.js` were being added to codesandbox as `place.js`. They now get their correct path.
+
 ## v0.4.0
 
 * Added changelog
