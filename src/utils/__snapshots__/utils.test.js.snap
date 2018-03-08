@@ -17,6 +17,33 @@ Array [
 ]
 `;
 
+exports[`getAllImports() import then immediately export 1`] = `
+Array [
+  Array [
+    "export { default } from './abc'",
+    "./abc",
+  ],
+]
+`;
+
+exports[`getAllImports() import then immediately export as value 1`] = `
+Array [
+  Array [
+    "export { default as something } from './abc'",
+    "./abc",
+  ],
+]
+`;
+
+exports[`getAllImports() import then immediately export not default 1`] = `
+Array [
+  Array [
+    "export { urd as something } from './abc'",
+    "./abc",
+  ],
+]
+`;
+
 exports[`getAllImports() multiline imports 1`] = `
 Array [
   Array [

@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.4.2
+
+* Update our import capture function to recognise `export { default } from 'somewhere'` as a valid import.
+* handle multiple spaces and space-types in import capturing and comparing.
+
 ## 0.4.1
 
 * Imports of `place` resolving to `place/index.js` were being added to codesandbox as `place.js`. They now get their correct path.

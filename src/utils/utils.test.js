@@ -37,6 +37,24 @@ import c from 'd'`,
     old: './c/*',
     new: 'c/',
   },
+  {
+    name: 'import then immediately export',
+    code: `export { default } from './abc'`,
+    old: './abc',
+    new: './cde',
+  },
+  {
+    name: 'import then immediately export as value',
+    code: `export { default as something } from './abc'`,
+    old: './abc',
+    new: './cde',
+  },
+  {
+    name: 'import then immediately export not default',
+    code: `export { urd as something } from './abc' } from 'esk'`,
+    old: './abc',
+    new: './cde',
+  },
 ];
 
 cases(
@@ -48,14 +66,6 @@ cases(
   codeImportTests,
 );
 
-/*
-import a from './src'
-
-can be from ./src.js or /src/index.js - we cannot handle this at the moment.
-We assume it is the first case atm
-
-This becomes a true problem when we try to reverse engineer cases
-*/
 cases(
   'resolvePath()',
   ({ basePath, relativePath, returnedPath }) => {

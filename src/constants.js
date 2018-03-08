@@ -1,5 +1,5 @@
 // @flow
-export const importPattern = `import [^"']+ from ["']([^"']+)["']`;
+export const importPattern = `(?:import [^"']+|export {[^}]+}) from ["']([^"']+)["']`;
 
 export const baseFiles = {
   'index.html': {
