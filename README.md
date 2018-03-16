@@ -33,7 +33,9 @@ With the minimal options provided, the sandboxer can fetch the file contents fro
 3. While it's not enforced, making sure you have a button with the type 'sumbit' at the top level is important for accessibility.
 4. You may find console errors from failed fetch requests. Codesandboxer captures and handles these errors, but we cannot stop them appearing in the console. See [minutiae](/MINUTIAE.md) for details on why.
 
-## Component's Props
+## Props we super definitely need
+
+With `gitInfo` and `examplePath`, we can take care of everything else for you, fetching all the example, and then fetching all other imports. Without this, things break.
 
 ### `examplePath: string`
 
@@ -54,6 +56,10 @@ This is all the information we need to fetch information from github or bitbucke
 
 If no branch is provided, you will have your code deployed from master. Host is not defaulted.
 
+## Props You Definitely Probably Want To Provide
+
+While these props aren't necessary to have codesandboxer work, you will almost always want to configure these, to make sure the example you get on codesandbox is the same as the example when run in its local context.
+
 ### `children: ({ error, isLoading, isDeploying }) => Node`
 
 Render prop that return `isLoading`, `files` and `error`. This is the recommended way to respond to the contents of react-codesandboxer if you want to change the appearance of the button.
@@ -68,21 +74,29 @@ The contents of the `package.json`. This is used to find the correct versions fo
   * An object that represents the package.json
   * A stringified version of the package.json object.
 
+### `importReplacements?: Array<[string, string]>`
+
+Paths in the example that we do not want to be pulled from their relative location. These should be given as absolute git paths. This is most commonly used if your examples are pulling in something such as `src`, and you want to rely on the npm version of the component in codesandbox.
+
+### `dependencies?: { [string]: string }`
+
+Dependencies to always include, even if they are not found in any file that was passed in. If you are using `importReplacements`, anything that is being added by it should go here as well. We always include react and react-dom for you.
+
+## Cool Props To Add Niceness
+
+These props are less needed, and more to allow different use-cases, or some amount of debugging. You do not need to worry too much about them, but you can get some cool things done using them.
+
 ### `example?: string | Promise<string>`
 
 Pass in the example as code to prevent it being fetched. This can be used when you want to perform any transformation on the example. If you pass in a promise, the returned value of the promise will be used. This can be useful if you are performing your own fetch or similar to get your example's raw contents.
 
+### name: string,
+
+Name for the codesandbox instance. This sets the package name in the uploaded `package.json`, which in turn sets the sandbox name.
+
 ### `preload?: boolean`
 
 Load the files when component mounts, instead of waiting for the button to be clicked.
-
-### `importReplacements?: Array<[string, string]>`
-
-Paths in the example that we do not want to be pulled from their relative location. These should be given as absolute git paths.
-
-### `dependencies?: { [string]: string }`
-
-Dependencies to always include. We always include react and react-dom for you. If you are replacing a relative import with a dependency, you will need to add it here.
 
 ### onLoadComplete?: ({ parameters: string, files: Files } | { error: any }) => mixed,
 
