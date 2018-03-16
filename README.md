@@ -1,4 +1,8 @@
-# CodeSandboxer
+# React-CodeSandboxer
+
+A simple react component that allows you to deploy example code to `Codesandbox`. It can take a `file` content, or fetch an example file from github or bitbucket.
+
+For fetching files, it will add both internal and external imports to the example, allowing you to build complex examples when you need to.
 
 ```js
 import React, { Component } from 'react';
@@ -13,8 +17,8 @@ export default () => (
       host: 'github',
     }}
   >
-    {() => <button type="submit">Upload to codesandbox</button>}
-  </CodSandboxer>
+    {() => <button type="submit">Upload to CodeSandbox</button>}
+  </CodeSandboxer>
 );
 ```
 
@@ -26,50 +30,89 @@ With the minimal options provided, the sandboxer can fetch the file contents fro
 
 1. If the example file does not exist at the source, the deploy will fail. You can get around this by passing in the file's contents directly as the prop `example`.
 2. We follow relative imports in the example, so the example still works when uploaded. The fewer files your example depends upon, the faster it will be. (we will only ever fetch a file once, even if multiple things depend upon it)
-3. While it's not enforced, making sure you have a submit button at the top level is important for accessibility.
+3. While it's not enforced, making sure you have a button with the type 'sumbit' at the top level is important for accessibility.
+4. You may find console errors from failed fetch requests. Codesandboxer captures and handles these errors, but we cannot stop them appearing in the console. See [minutiae](/MINUTIAE.md) for details on why.
 
 ## Component's Props
 
 ### `examplePath: string`
 
-The absolute path to the example within the git file structure
+The absolute path to the example within the git file structure. This is used for fetching the example and other files that exist relative to the example.
 
 ### `gitInfo: FetchConfig`
 
-This is all the information we need to fetch information from github or bitbucket
+This is all the information we need to fetch information from github or bitbucket. The format is:
 
-### `example?: string | Promise<string>`
+```
+{
+  account: string,
+  repository: string,
+  branch?: string,
+  host: 'bitbucket' | 'github',
+}
+```
 
-Pass in the example as code to prevent it being fetched
+If no branch is provided, you will have your code deployed from master. Host is not defaulted.
+
+### `children: ({ error, isLoading, isDeploying }) => Node`
+
+Render prop that return `isLoading`, `files` and `error`. This is the recommended way to respond to the contents of react-codesandboxer if you want to change the appearance of the button.
 
 ### `pkgJSON?: Package | string | Promise<Package | string>`
 
-Either take in a package.json object, or a string as the path of the package.json
+The contents of the `package.json`. This is used to find the correct versions for imported npm packages used in your example and other files pulled in. If no package.json is provided, each package will use `latest` from npm. It has effectively 4 ways to pass in the package.JSON
 
-### `importReplacements: Array<[string, string]>`
+* Pass in the package itself as an object.
+* Pass in a string which is the git path to the package
+* Pass in a promise that resolves to:
+  * An object that represents the package.json
+  * A stringified version of the package.json object.
 
-Paths in the example that we do not want to be pulled from their relativeLocation
+### `example?: string | Promise<string>`
+
+Pass in the example as code to prevent it being fetched. This can be used when you want to perform any transformation on the example. If you pass in a promise, the returned value of the promise will be used. This can be useful if you are performing your own fetch or similar to get your example's raw contents.
+
+### `preload?: boolean`
+
+Load the files when component mounts, instead of waiting for the button to be clicked.
+
+### `importReplacements?: Array<[string, string]>`
+
+Paths in the example that we do not want to be pulled from their relative location. These should be given as absolute git paths.
 
 ### `dependencies?: { [string]: string }`
 
-Dependencies we always include. Most likely react and react-dom
+Dependencies to always include. We always include react and react-dom for you. If you are replacing a relative import with a dependency, you will need to add it here.
 
-### `skipDeploy?: boolean`
+### onLoadComplete?: ({ parameters: string, files: Files } | { error: any }) => mixed,
 
-Do not actually deploy to codesanbox. Used to for testing alongside the return values of the render prop.
+Function called once loading has finished, whether this is from preload or from a button press. It returns an object with the parameters string to submit to CodeSandbox as well as the unprocessed files object. If there is an error, the error will be returned instead.
 
-### `afterDeploy?: ({ parameters: string, files: Files } | { error: any }) => mixed`
+### `afterDeploy?: () => mixed`
 
-NOTE: 0.4 will deprecate afterDeploy, as all information from it is no in the render prop
-function that can be called once the deploy has occurred, useful if you want to give feedback or test how CSB is working
+Function called once the deploy has occurred. It is given no values.
 
 ### `providedFiles?: Files`
 
-Pass in files separately to fetching them. Useful to go alongisde specific replacements in importReplacements
+Pass in files separately to fetching them. Useful to go alongisde specific replacements in importReplacements.
 
-### `children: State => Node`
+The shape of the files object is
 
-Render prop that return `isLoading`, `files` and `error`. This is the recommended way to respond to the contents of react-codesandboxer, NOT the afterDeploy function.
+```
+{
+  fileName: {
+    content: string
+  }
+}
+```
+
+The filename is the absolute path where it will be created on CodeSandbox, and the content is the file's contents as a string.
+
+If a fileName exists in your provided files, it will not be fetched when it is referenced.
+
+### `skipDeploy?: boolean`
+
+Do not actually deploy to CodeSandbox. Used to for testing alongside the return values of the render prop.
 
 ## A slightly more complicated example:
 
@@ -81,7 +124,7 @@ import pkgJSON from '../package.json';
   pkgJSON={pkgJSON}
   gitInfo={{
     account: 'noviny',
-    repository: 'react-codesandbox',
+    repository: 'react-CodeSandbox',
     branch: 'master',
     host: 'github',
   }}
@@ -93,8 +136,14 @@ import pkgJSON from '../package.json';
   providedFiles={{ 'index.js': content: { 'abcde....' } }}
   afterDeploy={console.log}
 >
-  {({ isLoading }) =>
-    isLoading ? <div>Uploading</div> : <div>Upload to codesandbox</div>
+  {({ isLoading, error }) =>
+    isLoading
+      ? <div>Uploading</div>
+      : (
+        <button type="submit"  disabled={!!error}>
+          Upload to CodeSandbox
+        </button>  
+      )
   }
 </CodeSandboxer>
 ```

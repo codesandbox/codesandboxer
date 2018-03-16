@@ -38,6 +38,7 @@ type Props = {
   /* Do not actually deploy to codesanbox. Used to for testing alongside the return values of the render prop. */
   skipDeploy?: boolean,
   ignoreInternalImports?: boolean,
+  /* Load the files when component mounts, instead of waiting for the button to be clicked */
   preload?: boolean,
   /* Called once loading has finished, whether it preloaded or not */
   onLoadComplete?: (

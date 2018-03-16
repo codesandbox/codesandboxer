@@ -1,8 +1,12 @@
-## We need more tests!
+## Things I am working on
 
-[x] Handle fetching js paths that could be a file or a directory, rather than assuming everything is a file
 [ ] More tests, make sure there is better file coverage
-[x] Add a `preload` prop, for people who want to load ahead of time
-[x] Render prop for children passes back loading and error options
 [ ] Be super careful to catch all errors
 [ ] Rewrite readme to focus on use-cases and explaining how to implement them.
+[x] Set default sandbox page to be the `example.js` file.
+[x] Explore other API options learned about from embed docs - nothing else seems important to implement now.
+[x] Explore removing this being a form and form-submission, getting data back instead - still not possible. Wrapped my examples up so I can get help with it.
+[ ] For replacements and file fetching, support `requires` as well as `imports`
+[ ] pull all of the logic around navigating filePaths into its own Package
+[ ] pull the logic around fetching and then deploying files to CSB into its own Package
+[ ] Look into supporting non-`create-react-app` uploads (Having to parse non-js files will need to be a part of this)
