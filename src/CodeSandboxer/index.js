@@ -25,6 +25,8 @@ type State = {
 type Props = {
   /* The absolute path to the example within the git file structure */
   examplePath: string,
+  /* Name for the codesandbox instance */
+  name: string,
   /* This is all the information we need to fetch information from github or bitbucket */
   gitInfo: FetchConfig,
   /* Pass in the example as code to prevent it being fetched */

@@ -25,6 +25,7 @@ export default async function({
   dependencies = {},
   providedFiles = {},
   example,
+  name,
 }: {
   examplePath: string,
   pkgJSON?: Package | string | Promise<Package | string>,
@@ -33,6 +34,7 @@ export default async function({
   dependencies?: Dependencies,
   providedFiles?: Files,
   example?: string | Promise<string>,
+  name?: string,
 }) {
   let pkg = await ensurePKGJSON(pkgJSON, importReplacements, gitInfo);
 
@@ -62,5 +64,5 @@ export default async function({
     gitInfo,
     importReplacements,
   );
-  return finaliseCSB(final, providedFiles, dependencies);
+  return finaliseCSB(final, providedFiles, dependencies, name);
 }

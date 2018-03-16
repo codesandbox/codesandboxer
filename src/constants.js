@@ -1,4 +1,6 @@
 // @flow
+import type { Dependencies } from './types';
+
 export const importPattern = `(?:import [^"']+|export {[^}]+}) from ["']([^"']+)["']`;
 
 export const baseFiles = {
@@ -7,12 +9,12 @@ export const baseFiles = {
   },
   'index.js': {
     content: `/**
-  This CodeSandbox has been automatically generated using a cool tool.
+  This CodeSandbox has been automatically generated using
+  \`react-codesandboxer\`. If you're curious how that happened, you can
+  check out our docs here: https://github.com/noviny/react-codesandboxer
 
-  This generator does not follow relative imports beyond those that reference the
-  module root, and as such, other relative imports may fail to load.
-
-  If you are experiencing difficulty contact @noviny on twitter
+  If you experience any struggles with this sandbox, please raise an issue
+  on github. :)
 */
 import React from 'react';
 import ReactDOM from 'react-dom';
@@ -24,3 +26,18 @@ document.getElementById('root')
 );`,
   },
 };
+
+export const newpkgJSON = (
+  dependencies: Dependencies,
+  name?: string = 'react-codesandboxer-example',
+) => `{
+  "name": "${name}",
+  "version": "0.0.0",
+  "description": "A simple example deployed using react-codesandboxer",
+  "main": "index.js",
+  "dependencies": {
+    ${Object.keys(dependencies)
+      .map(k => `"${k}": "${dependencies[k]}"`)
+      .join(',\n    ')}
+  }
+}`;

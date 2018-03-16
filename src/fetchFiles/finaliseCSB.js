@@ -1,13 +1,7 @@
 // @flow
 import { getParameters } from 'codesandbox/lib/api/define';
 import type { Files, Dependencies, Package } from '../types';
-const newpkgJSON = dependencies => `{
-  "name": "simple-example",
-  "version": "0.0.0",
-  "description": "A simple example deployed to CodeSandbox",
-  "main": "index.js",
-  "dependencies": ${JSON.stringify(dependencies)}
-}`;
+import { newpkgJSON } from '../constants';
 
 const ensureReact = deps => {
   if (!deps.react && !deps['react-dom']) {
@@ -24,6 +18,7 @@ export default function(
   { files, deps }: { files: Files, deps: Dependencies },
   providedFiles: Files,
   passedDeps: Dependencies,
+  name?: string,
 ) {
   let dependencies = {
     ...deps,
@@ -34,7 +29,9 @@ export default function(
 
   const finalFiles = {
     ...files,
-    'package.json': { content: newpkgJSON(dependencies) },
+    'package.json': {
+      content: newpkgJSON(dependencies, name),
+    },
     ...providedFiles,
   };
   const parameters = getParameters({
