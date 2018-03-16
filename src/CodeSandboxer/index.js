@@ -4,7 +4,8 @@ import type { Package, Files, FetchConfig } from '../types';
 import fetchFiles from '../fetchFiles';
 import NodeResolver from 'react-node-resolver';
 
-const codesandboxURL = 'https://codesandbox.io/api/v1/sandboxes/define';
+const codesandboxURL =
+  'https://codesandbox.io/api/v1/sandboxes/define?query=module=/example.js';
 const codesandboxURLJSON =
   'https://codesandbox.io/api/v1/sandboxes/define?json=1';
 
