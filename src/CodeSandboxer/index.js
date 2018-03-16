@@ -67,6 +67,7 @@ export default class CodeSandboxDeployer extends Component<Props, State> {
   };
   static defaultProps = {
     children: () => <button type="submit">Deploy to CodeSandbox</button>,
+    pkgJSON: {},
     dependencies: {},
     providedFiles: {},
     importReplacements: [],
