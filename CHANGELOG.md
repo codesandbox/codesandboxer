@@ -1,5 +1,14 @@
 # Changelog
 
+## 1.0.0
+
+This is not hugely different from 0.4.2, with most changes being to documentation, mostly moving it in to v1. That said, there are some nice quality of life improvements:
+
+* Add `name` prop to set the name value of the sandbox.
+* Example file is now open by default instead of index.
+* Update package.json and index.js templates for clarity
+* Edit pass on the documentation
+
 ## 0.4.2
 
 * Update our import capture function to recognise `export { default } from 'somewhere'` as a valid import.
