@@ -9,6 +9,9 @@ const codesandboxURL =
 const codesandboxURLJSON =
   'https://codesandbox.io/api/v1/sandboxes/define?json=1';
 
+const getSandboxUrl = (id, type = 's') =>
+  `https://codesandbox.io/${type}/${id}?module=/example.js`;
+
 type State = {
   parameters: string,
   isLoading: boolean,
@@ -21,6 +24,20 @@ type State = {
     cointent?: string,
   },
 };
+
+let IFrame = ({ src }) => (
+  <iframe
+    src={src}
+    style={{
+      width: '100%',
+      height: '500px',
+      border: 0,
+      borderRadius: '4px',
+      overflow: 'hidden',
+    }}
+    sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"
+  />
+);
 
 type Props = {
   /* The absolute path to the example within the git file structure */
@@ -77,6 +94,21 @@ export default class CodeSandboxDeployer extends Component<Props, State> {
     style: { display: 'inline-block' },
   };
 
+  IFrame = () =>
+    this.state.embedUrl ? (
+      <iframe
+        src={this.state.embedUrl}
+        style={{
+          width: '100%',
+          height: '500px',
+          border: 0,
+          borderRadius: '4px',
+          overflow: 'hidden',
+        }}
+        sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"
+      />
+    ) : null;
+
   loadFiles = () => {
     let { skipDeploy, onLoadComplete } = this.props;
 
@@ -104,8 +136,31 @@ export default class CodeSandboxDeployer extends Component<Props, State> {
   };
 
   deploy = () => {
-    if (!this.props.skipDeploy && this.form) this.form.submit();
-    if (this.props.afterDeploy) this.props.afterDeploy();
+    let { afterDeploy, skipDeploy } = this.props;
+    let formData = new FormData();
+    formData.append('parameters', this.state.parameters);
+
+    fetch('https://codesandbox.io/api/v1/sandboxes/define?json=1', {
+      method: 'post',
+      body: formData,
+      mode: 'cors',
+    })
+      .then(r => r.json())
+      .then(({ sandbox_id }) => {
+        this.setState({
+          sandboxId: sandbox_id,
+          sandboxUrl: getSandboxUrl(sandbox_id),
+          embedUrl: getSandboxUrl(sandbox_id, 'embed'),
+        });
+        if (!skipDeploy) {
+          window.open(getSandboxUrl(sandbox_id));
+        }
+        if (afterDeploy)
+          afterDeploy(getSandboxUrl(sandbox_id, 'embed'), sandbox_id);
+      });
+
+    // if (!this.props.skipDeploy && this.form) this.form.submit();
+    // if (this.props.afterDeploy) this.props.afterDeploy();
   };
 
   deployToCSB = (e: MouseEvent) => {
@@ -140,7 +195,14 @@ export default class CodeSandboxDeployer extends Component<Props, State> {
   };
 
   render() {
-    const { isLoading, isDeploying, error } = this.state;
+    const {
+      isLoading,
+      isDeploying,
+      error,
+      sandboxId,
+      sandboxUrl,
+      embedUrl,
+    } = this.state;
     return (
       <form
         action={codesandboxURL}
@@ -152,7 +214,15 @@ export default class CodeSandboxDeployer extends Component<Props, State> {
       >
         <input type="hidden" name="parameters" value={this.state.parameters} />
         <NodeResolver innerRef={this.getButton}>
-          {this.props.children({ isLoading, isDeploying, error })}
+          {this.props.children({
+            isLoading,
+            isDeploying,
+            error,
+            sandboxId,
+            sandboxUrl,
+            embedUrl,
+            IFrame: embedUrl && this.IFrame,
+          })}
         </NodeResolver>
       </form>
     );
