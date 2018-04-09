@@ -44,6 +44,6 @@ it('should fetch an example from react-select', () => {
     dependencies: { 'react-select': 'latest' },
   };
   return fetchFiles(getMainObj()).then(res => {
-    expect(res).toMatchSnapshot();
+    expect(res.files).toMatchSnapshot();
   });
 });
