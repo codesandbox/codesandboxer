@@ -1,4 +1,5 @@
 import fetchFiles from './index';
+import isomorphic from 'isomorphic-fetch';
 
 const BBInfo = {
   account: 'atlassian',

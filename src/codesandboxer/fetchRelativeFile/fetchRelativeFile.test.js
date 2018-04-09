@@ -1,6 +1,7 @@
 import cases from 'jest-in-case';
 import fetchRelativeFile from './';
 import getUrl from './getUrl';
+import isomorphic from 'isomorphic-fetch';
 const GHConfig = {
   account: 'noviny',
   repository: 'react-codesandboxer',
