@@ -17,6 +17,5 @@ export default function replaceImport(
   }
   const oldImport = new RegExp(matchString, 'g');
 
-  let c = code.replace(oldImport, `$1${newSource}$2`);
-  return c;
+  return code.replace(oldImport, `$1${newSource}$2`);
 }
