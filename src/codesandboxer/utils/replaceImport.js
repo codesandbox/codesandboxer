@@ -6,6 +6,7 @@ export default function replaceImport(
   newSource: string,
 ): string {
   let matchString = '';
+
   if (oldSource.match(/\*$/)) {
     matchString = `(import [^"']+ from ["'])${oldSource.replace(
       /\*$/,
@@ -16,5 +17,6 @@ export default function replaceImport(
   }
   const oldImport = new RegExp(matchString, 'g');
 
-  return code.replace(oldImport, `$1${newSource}$2`);
+  let c = code.replace(oldImport, `$1${newSource}$2`);
+  return c;
 }

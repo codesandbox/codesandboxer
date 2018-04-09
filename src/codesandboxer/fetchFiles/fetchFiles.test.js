@@ -27,7 +27,7 @@ it('should fetch an example from atlaskit', () => {
     dependencies: { '@atlaskit/avatar': 'latest' },
   };
   return fetchFiles(getMainObj()).then(res => {
-    expect(res).toMatchSnapshot();
+    expect(res.files).toMatchSnapshot();
   });
 });
 it('should fetch an example from react-select', () => {

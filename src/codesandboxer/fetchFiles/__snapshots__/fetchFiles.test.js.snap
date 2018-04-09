@@ -2,16 +2,8 @@
 
 exports[`should fetch an example from atlaskit 1`] = `
 Object {
-  "dependencies": Object {
-    "@atlaskit/avatar": "latest",
-    "@atlaskit/theme": "^2.4.0",
-    "react": "15.6.0 - 16.2.0",
-    "react-dom": "15.6.0 - 16.2.0",
-    "styled-components": "1.4.6 - 3",
-  },
-  "files": Object {
-    "example.js": Object {
-      "content": "// @flow
+  "example.js": Object {
+    "content": "// @flow
 import React from 'react';
 import Avatar from '@atlaskit/avatar';
 import { Block, Gap } from './packages/elements/avatar/examples-util/helpers';
@@ -52,12 +44,12 @@ export default () => (
   </div>
 );
 ",
-    },
-    "index.html": Object {
-      "content": "<div id=\\"root\\"></div>",
-    },
-    "index.js": Object {
-      "content": "/**
+  },
+  "index.html": Object {
+    "content": "<div id=\\"root\\"></div>",
+  },
+  "index.js": Object {
+    "content": "/**
   This CodeSandbox has been automatically generated using
   \`react-codesandboxer\`. If you're curious how that happened, you can
   check out our docs here: https://github.com/noviny/react-codesandboxer
@@ -73,24 +65,24 @@ ReactDOM.render(
 <Example />,
 document.getElementById('root')
 );",
-    },
-    "package.json": Object {
-      "content": "{
+  },
+  "package.json": Object {
+    "content": "{
   \\"name\\": \\"react-codesandboxer-example\\",
   \\"version\\": \\"0.0.0\\",
   \\"description\\": \\"A simple example deployed using react-codesandboxer\\",
   \\"main\\": \\"index.js\\",
   \\"dependencies\\": {
     \\"react\\": \\"15.6.0 - 16.2.0\\",
-    \\"@atlaskit/avatar\\": \\"latest\\",
     \\"styled-components\\": \\"1.4.6 - 3\\",
     \\"@atlaskit/theme\\": \\"^2.4.0\\",
+    \\"@atlaskit/avatar\\": \\"latest\\",
     \\"react-dom\\": \\"15.6.0 - 16.2.0\\"
   }
 }",
-    },
-    "packages/elements/avatar/examples-util/helpers.js": Object {
-      "content": "// @flow
+  },
+  "packages/elements/avatar/examples-util/helpers.js": Object {
+    "content": "// @flow
 import React from 'react';
 import type { Node } from 'react';
 import styled from 'styled-components';
@@ -156,9 +148,7 @@ export const Block = ({
   </Wrapper>
 );
 ",
-    },
   },
-  "parameters": "N4IgZglgNgpgziAXKCA7AJjAHgOgBYAuAtlEqAMYD2qBMNSIAPOhAG4AEE6AvADogAnSpQL8AfIwD0LVmJABfADQg0mXACsEyEFRp0CDSQCojvVO3YAVPBDjsAwpUwBlAIYYARpSzs8rux4wdOyuAK4ElESuBBDkrlBQAJ7sAOZ0MALRMOjsoXBoKWYWAAYCMK7kBAC0VJhw7uheWBnFOOwAkmDsiZShAORl7OShAhC9dniUAO7sBH4Evq4ADkvp6IrdvUPuRUN4MOQA1uy9C70C7OiU5BMZMIi-BARLcIiSkikQc6EeOFREklQlFYaESkjKFWqtXgDSaGTMu06m1C7Gwq1GdHIMBCqGScAIAlCKRSsDsUy-eFmNjs9U83g2S1g_mxmVs2PcnDgcFCMF21FSFJ-bUQAEozEZJGYIEQlpQBAsAErlSrsMBCIjsAbKgh9ADcUplcsV2oAIgB5ACyqvVmohlSqVyIeoNsvl7AAolhXDLYNbIpqcJJsN7GTBnagzErIeaLTgyhgMgAKMyMT0h32SMSKMxXYZEfQ4NIEd2wfM0ABCiXa6ETA2EOrFqBFuoUymDPpgOE0ZB01Fo9EQIHe7AAAmAoNMXUb2FGVWr_VrIeHpa6FgBBVjRVwXecavoj6JQfyHL6SVybgjb5eGt3AdjlidHDYAcWW7Hkfr3gaWFUOrjScBBqW-iAeeW4CEGXodnAVThNAkj7FA6JwOGZhotOmBgGEUALImIrsNwYjsMm5jsMwbBiLsFiMA-1zHPsrgsKgKR8CA9gQAI5CwOIVEWGRG7gewqDejArFYFgR4CGk_DsPkABeon8OJknSSA7CZrx1Gvks6mUaRfH8Re25CSJYkqbyanyYpIASduqnsEsZRwJi1nUFAaAWbpmlkdpXn6XxjACZeFzCfmrHmTJVnhXZnmOfALmsZQYDjh5Mkaf5WlvulBnUUFxmhdZ-YsKERCRRACmsUVEAlTJcXOagWKsR4eSJGlek5T5WXtTlgVGSFpn8HAUQJGVFWDcNUC1U5CX8GA1x5G13mML52U9Xl_VhUpQ3xJNlnldZWDbSNamrdRki0Uc3XURd9HlExLH8M4ACOoTbhZV0BetIQrOUmQNdZcAvW9MkFWJtlSZ5UVKeD9mnQFK0fblfXeRYyyrNu7iNYNQNlPwKMmZtNkRSA-NQ0TMV4xlfH4tEeSsWjQisNklMdXDmU6WzhmCWjv2YwDOOeaD_DE7J-3RRDkWXgQdP8JgXEeegi1U8tXVLV9PMY_9rGA69uNqULIBVTVe1jYb2TVaVllSzLICPoczMnYjnUc07vXcz9mtYyAOvA_rA3exNo0A4HjtLQjat9d96N_V7Pt6wTB1Hbtoum4dId-QZUg3d1UgyHpzZmK2IA_kc_7wEBMBlgQoF9ZB6bwLBMRQAhMBIRkcBdloFB9vohiSKO46TqgK7TrOCy7ra2rXqusyJKs7B3gAck42IfhPi6VNP074oksA5OvO97zUkSyqgIFb7eQyUBOAhwBsURzBsKSjOgzj7e-n6ageBBHnAJ4EJIOYlcwz6gjA1ag-J2AAHVMg_QuNwWSBBd7ZBwDIYouwohSTQFUCISwHgABJgDPy4G_BS8glhYFAcUUBZhdCQPsDYKA6B4wwJ5vAxByD0CoLYOg0i8QIApFQFUL4ldXjsA8MydyZ9QEWCoDfAhwA5Fyg7rQLABB5AyMuLYRkrhEgPHHNgGhpEiJGAXrxTBnwhGjBSIQBRxDX77XIZQ3Y8gzDUIRGfLAM86ELGXrQAiHC944CWLw2R185QKKUbfHAi8ACMAAGeJGjdhzRoFUKyCjHKUBeARIiiYskvBwFZAi3AEF9HMn0dgAB-TUsScCxIAKyV0qQ8Po8ScAAE4yhOhFMk0iFjsG4IUQ_PA3CQSYETPY0hMANgACZekUM0QMoRXgniRGGdEUZRBQg4QgIyRIkyX7TLmQs5xqB3FgPQm6HxDgV4BMPig6EoTxG_mfr0DAx95HsEIVEjuCoGlJM0V4AQmABBVEyMVMR7TZmV00VEyJ4TokKgACyJL6RYVJ1QMnsHaQADiaUQTRUiYBVH2AI2x7A6mxM0T-dA90HjtNiZXHFOBkWwrcUYq5Cwbm-QQQ8rhcAfznIwXZbB1iKWEKmY4xZHKzDDnwQAMQnFMBVEAsAWl5J47xECFgmhEPcpBe9EzaRFM8slNiCAbLmDgbZuz9mHJIftDYABmU5mjyToDmFarZOyYj2qlQpF1brZVaunDcgAEndAoBrOFjOefC75ijEUd25B4H-MBI2MQKOirRgqjx6NVLAM5GK-zpP2gynAuLumaMxVUKYMByWWvYAC-JSzRUrJEBEIgFaCWaNUdUAk7g4BzQEN23IcC4jOSoZyrxYadX3jtgExMwBdjkEYcwug2ZSIMXulu-QDwV2kTXdADdqAHhVOXpgLdFgd0FCqQ8fEoxmJ7vwoRYiuxGCsLgR9YAt7mLVLIpm-6Yhf1RuYvIKQQGChEQeKgHZUBXH-UYAwk9LDYHohA8eph8YIOSBQ9hugX6MMfskERjI-dQFFxLn-NIndqA9l0P2Awg5D0WH4AVfgDx-B2ihCvWkjRvAZCqO2UM_Br3sH4EzW-YwIxIAkyAdpimxO7FlvAcgowlgxGoJx-Ta5RYdlRFBUMlwYCMkoIkbIuR8j_p48fOosJBMCGU6RfgUQ0A6f4KobAndnNsZAJgVYCYGoQHgDp1jfFuPag8yARpOAABsOB4nsCqJShLszEu-YiyAb-v9_5nmRnJ4WWR8SZb8_y4-hoz40DgNFupyL4vJfYM60r8mcvHlPEA_M0WAB66X6vxJa5FyEDpIi1YafFxLjXYlpYyyTUiiH5AKCUCAWgPosgMHU-UWg4LtRVDRgoIAA",
 }
 `;
 
@@ -244,9 +234,9 @@ document.getElementById('root')
   \\"main\\": \\"index.js\\",
   \\"dependencies\\": {
     \\"react\\": \\"15.6.0 - 16.2.0\\",
-    \\"@atlaskit/avatar\\": \\"latest\\",
     \\"styled-components\\": \\"1.4.6 - 3\\",
     \\"@atlaskit/theme\\": \\"^2.4.0\\",
+    \\"@atlaskit/avatar\\": \\"latest\\",
     \\"react-dom\\": \\"15.6.0 - 16.2.0\\"
   }
 }",
@@ -320,6 +310,6 @@ export const Block = ({
 ",
     },
   },
-  "parameters": "N4IgZglgNgpgziAXKCA7AJjAHgOgBYAuAtlEqAMYD2qBMNSIAPOhAG4AEE6AvADogAnSpQL8AfIwD0LVmJABfADQg0mXACsEyEFRp0CDSQCojvVO3YAVPBDjsAwpUwBlAIYYARpSzs8rux4wdOyuAK4ElESuBBDkrlBQAJ7sAOZ0MALRMOjsoXBoKWYWAAYCMK7kBAC0VJhw7uheWBnFOOwAkmDsiZShAORl7OShAhC9dniUAO7sBH4Evq4ADkvp6IrdvUPuRUN4MOQA1uy9C70C7OiU5BMZMIi-BARLcIiSkikQc6EeOFREklQlFYaESkjKFWqtXgDSaGTMu06m1C7Gwq1GdHIMBCqGScAIAlCKRSsDsUy-eFmNjs9U83g2S1g_mxmVs2PcnDgcFCMF21FSFJ-bUQAEozEZJGYIEQlpQBAsAErlSrsMBCIjsAbKgh9ADcUplcsV2oAIgB5ACyqvVmohlSqVyIeoNsvl7AAolhXDLYNbIpqcJJsN7GTBnagzErIeaLTgyhgMgAKMyMT0h32SMSKMxXYZEfQ4NIEd2wfM0ABCiXa6ETA2EOrFqBFuoUymDPpgOE0ZB01Fo9EQIHe7AAAmAoNMXUb2FGVWr_VrIeHpa6FgBBVjRVwXecavoj6JQfyHL6SVybgjb5eGt3AdjlidHDYAcWW7Hkfr3gaWFUOrjScBBqW-iAeeW4CEGXodnAVThNAkj7FA6JwOGZhotOmBgGEUALImIrsNwYjsMm5jsMwbBiLsFiMA-1zHPsrgsKgKR8CA9gQAI5CwOIVEWGRG7gewqDejArFYFgR4CGk_DsPkABeon8OJknSSA7CZrx1Gvks6mUaRfH8Re25CSJYkqbyanyYpIASduqnsEsZRwJi1nUFAaAWbpmlkdpXn6XxjACZeFzCfmrHmTJVnhXZnmOfALmsZQYDjh5Mkaf5WlvulBnUUFxmhdZ-YsKERCRRACmsUVEAlTJcXOagWKsR4eSJGlek5T5WXtTlgVGSFpn8HAUQJGVFWDcNUC1U5CX8GA1x5G13mML52U9Xl_VhUpQ3xJNlnldZWDbSNamrdRki0Uc3XURd9HlExLH8M4ACOoTbhZV0BetIQrOUmQNdZcAvW9MkFWJtlSZ5UVKeD9mnQFK0fblfXeRYyyrNu7iNYNQNlPwKMmZtNkRSA-NQ0TMV4xlfH4tEeSsWjQisNklMdXDmU6WzhmCWjv2YwDOOeaD_DE7J-3RRDkWXgQdP8JgXEeegi1U8tXVLV9PMY_9rGA69uNqULIBVTVe1jYb2TVaVllSzLICPoczMnYjnUc07vXcz9mtYyAOvA_rA3exNo0A4HjtLQjat9d96N_V7Pt6wTB1Hbtoum4dId-QZUg3d1UgyHpzZmK2IA_kc_7wEBMBlgQoF9ZB6bwLBMRQAhMBIRkcBdloFB9vohiSKO46TqgK7TrOCy7ra2rXqusyJKs7B3gAck42IfhPi6VNP074oksA5OvO97zUkSyqgIFb7eQyUBOAhwBsURzBsKSjOgzj7e-n6ageBBHnAJ4EJIOYlcwz6gjA1ag-J2AAHVMg_QuNwWSBBd7ZBwDIYouwohSTQFUCISwHgABJgDPy4G_BS8glhYFAcUUBZhdCQPsDYKA6B4wwJ5vAxByD0CoLYOg0i8QIApFQFUL4ldXjsA8MydyZ9QEWCoDfAhwA5Fyg7rQLABB5AyMuLYRkrhEgPHHNgGhpEiJGAXrxTBnwhGjBSIQBRxDX77XIZQ3Y8gzDUIRGfLAM86ELGXrQAiHC944CWLw2R185QKKUbfHAi8ACMAAGeJGjdhzRoFUKyCjHKUBeARIiiYskvBwFZAi3AEF9HMn0dgAB-TUsScCxIAKyV0qQ8Po8ScAAE4yhOhFMk0iFjsG4IUQ_PA3CQSYETPY0hMANgACZekUM0QMoRXgniRGGdEUZRBQg4QgIyRIkyX7TLmQs5xqB3FgPQm6HxDgV4BMPig6EoTxG_mfr0DAx95HsEIVEjuCoGlJM0V4AQmABBVEyMVMR7TZmV00VEyJ4TokKgACyJL6RYVJ1QMnsHaQADiaUQTRUiYBVH2AI2x7A6mxM0T-dA90HjtNiZXHFOBkWwrcUYq5Cwbm-QQQ8rhcAfznIwXZbB1iKWEKmY4xZHKzDDnwQAMQnFMBVEAsAWl5J47xECFgmhEPcpBe9EzaRFM8slNiCAbLmDgbZuz9mHJIftDYABmU5mjyToDmFarZOyYj2qlQpF1brZVaunDcgAEndAoBrOFjOefC75ijEUd25B4H-MBI2MQKOirRgqjx6NVLAM5GK-zpP2gynAuLumaMxVUKYMByWWvYAC-JSzRUrJEBEIgFaCWaNUdUAk7g4BzQEN23IcC4jOSoZyrxYadX3jtgExMwBdjkEYcwug2ZSIMXulu-QDwV2kTXdADdqAHhVOXpgLdFgd0FCqQ8fEoxmJ7vwoRYiuxGCsLgR9YAt7mLVLIpm-6Yhf1RuYvIKQQGChEQeKgHZUBXH-UYAwk9LDYHohA8eph8YIOSBQ9hugX6MMfskERjI-dQFFxLn-NIndqA9l0P2Awg5D0WH4AVfgDx-B2ihCvWkjRvAZCqO2UM_Br3sH4EzW-YwIxIAkyAdpimxO7FlvAcgowlgxGoJx-Ta5RYdlRFBUMlwYCMkoIkbIuR8j_p48fOosJBMCGU6RfgUQ0A6f4KobAndnNsZAJgVYCYGoQHgDp1jfFuPag8yARpOAABsOB4nsCqJShLszEu-YiyAb-v9_5nmRnJ4WWR8SZb8_y4-hoz40DgNFupyL4vJfYM60r8mcvHlPEA_M0WAB66X6vxJa5FyEDpIi1YafFxLjXYlpYyyTUiiH5AKCUCAWgPosgMHU-UWg4LtRVDRgoIAA",
+  "parameters": "N4IgZglgNgpgziAXKCA7AJjAHgOgBYAuAtlEqAMYD2qBMNSIAPOhAG4AEE6AvADogAnSpQL8AfIwD0LVmJABfADQg0mXACsEyEFRp0CDSQCojvVO3YAVPBDjsAwpUwBlAIYYARpSzs8rux4wdOyuAK4ElESuBBDkrlBQAJ7sAOZ0MALRMOjsoXBoKWYWAAYCMK7kBAC0VJhw7uheWBnFOOwAkmDsiZShAORl7OShAhC9dniUAO7sBH4Evq4ADkvp6IrdvUPuRUN4MOQA1uy9C70C7OiU5BMZMIi-BARLcIiSkikQc6EeOFREklQlFYaESkjKFWqtXgDSaGTMu06m1C7Gwq1GdHIMBCqGScAIAlCKRSsDsUy-eFmNjs9U83g2S1g_mxmVs2PcnDgcFCMF21FSFJ-bUQAEozEZJGYIEQlpQBAsAErlSrsMBCIjsAbKgh9ADcUplcsV2oAIgB5ACyqvVmohlSqVyIeoNsvl7AAolhXDLYNbIpqcJJsN7GTBnagzErIeaLTgyhgMgAKMyMT0h32SMSKMxXYZEfQ4NIEd2wfM0ABCiXa6ETA2EOrFqBFuoUymDPpgOE0ZB01Fo9EQIHe7AAAmAoNMXUb2FGVWr_VrIeHpa6FgBBVjRVwXecavoj6JQfyHL6SVybgjb5eGt3AdjlidHDYAcWW7Hkfr3gaWFUOrjScBBqW-iAeeW4CEGXodnAVThNAkj7FA6JwOGZhotOmBgGEUALImIrsNwYjsMm5jsMwbBiLsFiMA-1zHPsrgsKgKR8CA9gQAI5CwOIVEWGRG7gewqDejArFYFgR4CGk_DsPkABeon8OJknSSA7CZrx1Gvks6mUaRfH8Re25CSJYkqbyanyYpIASduqnsEsZRwJi1nUFAaAWbpmlkdpXn6XxjACZeFzCfmrHmTJVnhXZnmOfALmsZQYDjh5Mkaf5WlvulBnUUFxmhdZ-YsKERCRRACmsUVEAlTJcXOagWKsR4eSJGlek5T5WXtTlgVGSFpn8HAUQJGVFWDcNUC1U5CX8GA1x5G13mML52U9Xl_VhUpQ3xJNlnldZWDbSNamrdRki0Uc3XURd9HlExLH8M4ACOoTbhZV0BetIQrOUmQNdZcAvW9MkFWJtlSZ5UVKeD9mnQFK0fblfXeRYyyrNu7iNYNQNlPwKMmZtNkRSA-NQ0TMV4xlfH4tEeSsWjQisNklMdXDmU6WzhmCWjv2YwDOOeaD_DE7J-3RRDkWXgQdP8JgXEeegi1U8tXVLV9PMY_9rGA69uNqULIBVTVe1jYb2TVaVllSzLICPoczMnYjnUc07vXcz9mtYyAOvA_rA3exNo0A4HjtLQjat9d96N_V7Pt6wTB1Hbtoum4dId-QZUg3d1UgyHpzZmK2IA_kc_7wEBMBlgQoF9ZB6bwLBMRQAhMBIRkcBdloFB9vohiSKO46TqgK7TrOCy7ra2rXqusyJKs7B3gAck42IfhPi6VNP074oksA5OvO97zUkSyqgIFb7eQyUBOAhwBsURzBsKSjOgzj7e-n6ageBBHnAJ4EJIOYlcwz6gjA1ag-J2AAHVMg_QuNwWSBBd7ZBwDIYouwohSTQFUCISwHgABJgDPy4G_BS8glhYFAcUUBZhdCQPsDYKA6B4wwJ5vAxByD0CoLYOg0i8QIApFQFUL4ldXjsA8MydyZ9QEWCoDfAhwA5Fyg7rQLABB5AyMuLYRkrhEgPHHNgGhpEiJGAXrxTBnwhGjBSIQBRxDX77XIZQ3Y8gzDUIRGfLAM86ELGXrQAiHC944CWLw2R185QKKUbfHAi8ACMAAGeJGjdhzRoFUKyCjHKUBeARIiiYskvBwFZAi3AEF9HMn0dgAB-TUsScCxIAKyV0qQ8Po8ScAAE4yhOhFMk0iFjsG4IUQ_PA3CQSYETPY0hMANgACZekUM0QMoRXgniRGGdEUZRBQg4QgIyRIkyX7TLmQs5xqB3FgPQm6HxDgV4BMPig6EoTxG_mfr0DAx95HsEIVEjuCoGlJM0V4AQmABBVEyMVMR7TZmV00VEyJ4TokKgACyJL6RYVJ1QMnsHaQADiaUQTRUiYBVH2AI2x7A6mxM0T-dA90HjtNiZXHFOBkWwrcUYq5Cwbm-QQQ8rhcAfznIwXZbB1iKWEKmY4xZHKzDDnwQAMQnFMBVEAsAWl5J47xECFgmhEPcpBe9EzaRFM8slNiCAbLmDgbZuz9mHJIftDYABmU5mjyToDmFarZOyYj2qlQpF1brZVaunDcgAEndAoBrOFjOefC75ijEUd25B4H-MBI2MQKOirRgqjx6NVLAM5GK-zpP2gynAuLumaMxVUKYMByWWvYAC-JSzRUrJEBEIgFaCWaNUdUAk7g4BzQEN23IcC4jOSoZyrxYadX3jtgExMwBdjkEYcwug2ZSIMXulu-QDwV2kTXdADdqAHhVOXpgLdFgd0FCqQ8fEoxmJ7vwoRYiuxGCsLgR9YAt7mLVLIpm-6Yhf1RuYvIKQQGChEQeKgHZUBXH-UYAwk9LDYHohA8eph8YIOSBQ9hugX6MMfskERjI-dQFFxLn-NIndqA9l0P2Awg5D0WH4AVfgDx-B2ihCvWkjRvAZCqO2UM_Br3sH4EzW-YwIxIAkyAdpimxO7FlvAcgowlgxGoJx-Ta5RYdlRFBUMlwYCMkoIkbIuR8j_p48fOosJBMCGU6RfgUQ0A6f4KobAndnNsZAJgVYCYGoQHgDp1jfFuPag8yARpOAABsOB4nsCqJShLszEu-Yi97Q12Rj6GjPjQOA0W6nIvi8l9gzrMt-e_r_f-gD9j5miwAPXS6V-JVX5M1ePKeMCwVotHloPiDrkXIQOkiMVhp8XEvldiWljLJNSKIfkAoJQIBaA-iyAwdT5RaDgu1FUNGCggA",
 }
 `;

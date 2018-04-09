@@ -16,7 +16,7 @@ const BBConfig = {
   host: 'bitbucket',
 };
 
-describe('fetchRelativeFile()', () => {
+describe.skip('fetchRelativeFile()', () => {
   it('should fetch a .js file in a subdirectory', async () => {
     return fetchRelativeFile(
       'src/CodeSandboxer/index.js',

@@ -1,0 +1,53 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ParseFile() just getting imports 1`] = `
+Object {
+  "deps": Object {},
+  "file": "\\"// @flow
+
+export { default } from './components/Avatar';
+export { default as AvatarGroup } from './components/AvatarGroup';
+export { default as AvatarItem } from './components/AvatarItem';
+export { default as Presence } from './components/Presence';
+export { default as Status } from './components/Status';
+export { default as Skeleton } from './components/Skeleton';
+\\"",
+  "internalImports": Array [],
+}
+`;
+
+exports[`ParseFile() simple parse 1`] = `
+Object {
+  "deps": Object {
+    "b": "v1.0.0",
+  },
+  "file": "import a from 'b'; import c from './c'",
+  "internalImports": Array [
+    "./c",
+  ],
+}
+`;
+
+exports[`ParseFile() simple parse file promise 1`] = `
+Object {
+  "deps": Object {
+    "b": "v1.0.0",
+  },
+  "file": "import a from 'b'; import c from './c'",
+  "internalImports": Array [
+    "./c",
+  ],
+}
+`;
+
+exports[`ParseFile() simple parse pkgJSON promise 1`] = `
+Object {
+  "deps": Object {
+    "b": "v1.0.0",
+  },
+  "file": "import a from 'b'; import c from './c'",
+  "internalImports": Array [
+    "./c",
+  ],
+}
+`;

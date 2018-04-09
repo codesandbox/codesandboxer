@@ -1,5 +1,6 @@
 // @flow
 import type { Package, Import } from '../types';
+import parsePkgName from './parsePkgName';
 
 const getDeps = (pkgJSON, name) => {
   let deps = {};
@@ -34,9 +35,10 @@ const parseDeps = (
     if (/^\./.test(name)) {
       internalImports.push(mpt);
     } else {
-      let foundDeps = getDeps(pkgJSON, name);
-      if (Object.keys(foundDeps).length < 1) {
-        dependencies[name] = 'latest';
+      let parsedName = parsePkgName(name);
+      let foundDeps = getDeps(pkgJSON, parsedName);
+      if (Object.keys(foundDeps).length < 1 && parsedName !== pkgJSON.name) {
+        console.warn(`Could not find dependency version for ${parsedName}`);
       } else {
         dependencies = { ...dependencies, ...foundDeps };
       }
