@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.0.1
+
+Update codesandboxer dependency to resolve bug
+
 ## 2.0.0
 
 Big change here is that, with the release of `codesandboxer`, `react-codesandboxer` is no longer personally carrying the file-fetching and deploying logic. This has been done to make codesandboxer more useful in more contexts, and so it can eventually support non-react sandboxes.

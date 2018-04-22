@@ -6,4 +6,12 @@ export { default as fetchFiles } from './fetchFiles';
 export { default as sendFilesToCSB } from './sendFilesToCSB';
 export { getSandboxUrl } from './constants';
 
-export * from './types';
+export type {
+  GitInfo,
+  Files,
+  ParsedFile,
+  parsedFileFirst,
+  Package,
+  Dependencies,
+  Import,
+} from './types';
