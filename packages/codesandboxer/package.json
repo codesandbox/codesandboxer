@@ -1,6 +1,6 @@
 {
   "name": "codesandboxer",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Fetch files from a git repository and upload them to codesandbox",
   "main": "dist/index.js",
   "author": "Ben Conolly",
@@ -9,5 +9,7 @@
     "codesandbox": "^1.1.14",
     "isomorphic-unfetch": "^2.0.0"
   },
-  "files": ["dist"]
+  "files": [
+    "dist"
+  ]
 }
