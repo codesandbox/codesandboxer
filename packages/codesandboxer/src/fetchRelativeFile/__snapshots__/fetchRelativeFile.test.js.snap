@@ -3,7 +3,7 @@
 exports[`fetchRelativeFile() should fetch a .js file in a subdirectory 1`] = `
 "// @flow
 import React, { Component, type Node } from 'react';
-import type { Package, Files, FetchConfig } from '../types';
+import type { Package, Files, GitInfo } from '../types';
 import fetchFiles from '../fetchFiles';
 
 const codesandboxURL = 'https://codesandbox.io/api/v1/sandboxes/define';
@@ -16,7 +16,7 @@ type Props = {
   /* The absolute path to the example within the git file structure */
   examplePath: string,
   /* This is all the information we need to fetch information from github or bitbucket */
-  gitInfo: FetchConfig,
+  gitInfo: GitInfo,
   example?: string | Promise<string>,
   /* Either take in a package.json object, or a string as the path of the package.json */
   pkgJSON?: Package | string | Promise<Package | string>,
@@ -25,7 +25,7 @@ type Props = {
   /* Dependencies we always include. Most likely react and react-dom */
   dependencies?: { [string]: string },
   /* Do not actually deploy to codesanbox. Used to for testing alongside afterDeploy */
-  skipDeploy?: boolean,
+  skipRedirect?: boolean,
   ignoreInternalImports?: boolean,
   /* function that can be called once the deploy has occurred, useful if you want to give feedback or test how CSB is working */
   afterDeploy?: (
@@ -53,7 +53,7 @@ export default class CodeSandboxDeployer extends Component<Props, State> {
       pkgJSON,
       gitInfo,
       dependencies,
-      skipDeploy,
+      skipRedirect,
       afterDeploy,
       importReplacements,
       providedFiles,
@@ -72,7 +72,7 @@ export default class CodeSandboxDeployer extends Component<Props, State> {
     )
       .then(({ parameters, files }) => {
         this.setState({ parameters }, () => {
-          if (!skipDeploy && this.form) this.form.submit();
+          if (!skipRedirect && this.form) this.form.submit();
           if (afterDeploy) afterDeploy({ parameters, files });
         });
       })
@@ -152,7 +152,7 @@ exports[`fetchRelativeFile() should fetch a .json file at the root 1`] = `
 exports[`fetchRelativeFile() should fetch an index.js file in a named subdirectory 1`] = `
 "// @flow
 import React, { Component, type Node } from 'react';
-import type { Package, Files, FetchConfig } from '../types';
+import type { Package, Files, GitInfo } from '../types';
 import fetchFiles from '../fetchFiles';
 
 const codesandboxURL = 'https://codesandbox.io/api/v1/sandboxes/define';
@@ -165,7 +165,7 @@ type Props = {
   /* The absolute path to the example within the git file structure */
   examplePath: string,
   /* This is all the information we need to fetch information from github or bitbucket */
-  gitInfo: FetchConfig,
+  gitInfo: GitInfo,
   example?: string | Promise<string>,
   /* Either take in a package.json object, or a string as the path of the package.json */
   pkgJSON?: Package | string | Promise<Package | string>,
@@ -174,7 +174,7 @@ type Props = {
   /* Dependencies we always include. Most likely react and react-dom */
   dependencies?: { [string]: string },
   /* Do not actually deploy to codesanbox. Used to for testing alongside afterDeploy */
-  skipDeploy?: boolean,
+  skipRedirect?: boolean,
   ignoreInternalImports?: boolean,
   /* function that can be called once the deploy has occurred, useful if you want to give feedback or test how CSB is working */
   afterDeploy?: (
@@ -202,7 +202,7 @@ export default class CodeSandboxDeployer extends Component<Props, State> {
       pkgJSON,
       gitInfo,
       dependencies,
-      skipDeploy,
+      skipRedirect,
       afterDeploy,
       importReplacements,
       providedFiles,
@@ -221,7 +221,7 @@ export default class CodeSandboxDeployer extends Component<Props, State> {
     )
       .then(({ parameters, files }) => {
         this.setState({ parameters }, () => {
-          if (!skipDeploy && this.form) this.form.submit();
+          if (!skipRedirect && this.form) this.form.submit();
           if (afterDeploy) afterDeploy({ parameters, files });
         });
       })

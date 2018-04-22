@@ -1,5 +1,6 @@
 // @flow
 import { getSandboxUrl } from '../constants';
+import 'isomorphic-unfetch';
 
 async function sendFilesToCSB(parameters: string) {
   let formData = new FormData();

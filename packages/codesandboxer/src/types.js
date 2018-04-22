@@ -1,5 +1,5 @@
 // @flow
-export type FetchConfig = {
+export type GitInfo = {
   account: string,
   repository: string,
   branch?: string,

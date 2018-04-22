@@ -1,5 +1,5 @@
 // @flow
-import type { FetchConfig } from '../types';
+import type { GitInfo } from '../types';
 
 const raw = {
   github: (path, { account, repository, branch = 'master' }) =>
@@ -10,7 +10,7 @@ const raw = {
 
 export default function getUrl(
   path: string,
-  { host, ...urlConfig }: FetchConfig,
+  { host, ...urlConfig }: GitInfo,
 ) {
   let getRaw = raw[host];
   if (typeof getRaw !== 'function')

@@ -7,8 +7,8 @@ import {
   getSandboxUrl,
   type Package,
   type Files,
-  type FetchConfig,
-} from '../codesandboxer';
+  type GitInfo,
+} from 'codesandboxer';
 import NodeResolver from 'react-node-resolver';
 
 type State = {
@@ -32,7 +32,7 @@ type Props = {
   /* Name for the codesandbox instance */
   name?: string,
   /* This is all the information we need to fetch information from github or bitbucket */
-  gitInfo: FetchConfig,
+  gitInfo: GitInfo,
   /* Pass in the example as code to prevent it being fetched */
   example?: string | Promise<string>,
   /* Either take in a package.json object, or a string as the path of the package.json */
@@ -42,7 +42,7 @@ type Props = {
   /* Dependencies we always include. Most likely react and react-dom */
   dependencies?: { [string]: string },
   /* Do not actually deploy to codesanbox. Used to for testing alongside the return values of the render prop. */
-  skipDeploy?: boolean,
+  skipRedirect?: boolean,
   ignoreInternalImports?: boolean,
   /* Load the files when component mounts, instead of waiting for the button to be clicked */
   preload?: boolean,
@@ -50,7 +50,7 @@ type Props = {
   onLoadComplete?: (
     { parameters: string, files: Files } | { error: any },
   ) => mixed,
-  /* Called once a deploy has occurred. This will still be called if skipDeploy is chosen */
+  /* Called once a deploy has occurred. This will still be called if skipRedirect is chosen */
   afterDeploy?: (sandboxUrl: string, sandboxId: string) => mixed,
   /* Pass in files separately to fetching them. Useful to go alongisde specific replacements in importReplacements */
   providedFiles?: Files,
@@ -83,7 +83,7 @@ export default class CodeSandboxDeployer extends Component<Props, State> {
   };
 
   loadFiles = () => {
-    let { skipDeploy, onLoadComplete } = this.props;
+    let { skipRedirect, onLoadComplete } = this.props;
 
     // by assembling a deploy promise, we can save it for later if loadFiles is
     // being called by `preload`, and preload can use it once it is ready.
@@ -109,12 +109,12 @@ export default class CodeSandboxDeployer extends Component<Props, State> {
   };
 
   deploy = () => {
-    let { afterDeploy, skipDeploy } = this.props;
+    let { afterDeploy, skipRedirect } = this.props;
     let { parameters } = this.state;
 
     sendFilesToCSB(parameters).then(({ sandboxId, sandboxUrl }) => {
       this.setState({ sandboxId, sandboxUrl });
-      if (!skipDeploy) {
+      if (!skipRedirect) {
         window.open(sandboxUrl);
       }
       if (afterDeploy)

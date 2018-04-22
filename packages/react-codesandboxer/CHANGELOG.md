@@ -1,5 +1,17 @@
 # Changelog
 
+## 2.0.0
+
+Big change here is that, with the release of `codesandboxer`, `react-codesandboxer` is no longer personally carrying the file-fetching and deploying logic. This has been done to make codesandboxer more useful in more contexts, and so it can eventually support non-react sandboxes.
+
+This also means we are using fetch instead of form submission, which means that we can return you a sandbox ID and url to your rendered child. This means you can choose how to open your sandbox, and makes it easy to open an example in an embed instead of on codesandbox itself.
+
+There's also a small breaking change to handle a bug.
+
+- Breaking: dependencies that cannot be found in the passed in package.json will now no longer be added to the sandbox dependencies at 'latest'. This solves a bug where packages that were reaching into a file would have all those reach-ins added as dependencies.
+- Breaking: `SkipDeploy` has been renamed to `SkipRedirect` to more accurately support its role, and make the embed process naming make sense.
+- Breaking: Most logic has been pushed into `codesandboxer`, a standalone package to allow the complex logic in that to exist outside a single react component.
+
 ## 1.0.0
 
 This is not hugely different from 0.4.2, with most changes being to documentation, mostly moving it in to v1. That said, there are some nice quality of life improvements:

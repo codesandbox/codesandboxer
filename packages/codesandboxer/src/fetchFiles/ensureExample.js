@@ -5,14 +5,14 @@ import replaceImports from '../replaceImports';
 import absolutesToRelative from '../utils/absolutesToRelative';
 import parseFile from '../parseFile';
 
-import type { Import, Package, FetchConfig } from '../types';
+import type { Import, Package, GitInfo } from '../types';
 
 export default async function ensureExample(
   example?: string | Promise<string>,
   importReplacements: Array<Import>,
   pkg: Package,
   examplePath: string,
-  gitInfo: FetchConfig,
+  gitInfo: GitInfo,
 ) {
   if (example) {
     let exampleContent = await Promise.resolve(example);

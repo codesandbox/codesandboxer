@@ -1,11 +1,11 @@
 // @flow
 import fetchRelativeFile from '../fetchRelativeFile';
-import type { Package, Import, FetchConfig } from '../types';
+import type { Package, Import, GitInfo } from '../types';
 
 export default async function ensurePKGJSON(
   maybePkg?: Package | string | Promise<Package | string>,
   importReplacements: Array<Import>,
-  gitInfo: FetchConfig,
+  gitInfo: GitInfo,
 ): Promise<Package> {
   let pkg = await Promise.resolve(maybePkg);
   if (typeof pkg === 'object') {

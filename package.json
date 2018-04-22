@@ -1,13 +1,13 @@
 {
-  "name": "react-codesandboxer",
+  "name": "codesandboxer-repo",
   "version": "1.0.0",
   "description": "A simple react component to help easily deploy an example to codesandbox",
-  "main": "dist/index.js",
   "scripts": {
     "test": "yarn jest",
-    "build": "babel src -d dist --ignore  **/*.test.js",
+    "build": "bolt ws exec -- babel src -d dist --ignore  **/*.test.js",
     "prepublishOnly": "yarn test && yarn flow && yarn build",
-    "dev": "yarn build --watch"
+    "dev:csb": "bolt w codesandboxer exec -- babel src -d dist --ignore  **/*.test.js --watch",
+    "dev:rcsb": "bolt w react-codesandboxer exec -- babel src -d dist --ignore  **/*.test.js --watch"
   },
   "keywords": [
     "codesandbox",
@@ -26,7 +26,6 @@
     "babel-preset-flow": "^6.23.0",
     "babel-preset-react": "^6.24.1",
     "flow-bin": "^0.64.0",
-    "isomorphic-fetch": "^2.2.1",
     "jest": "^22.1.4",
     "jest-in-case": "^1.0.2",
     "prettier": "^1.10.2",
@@ -38,16 +37,15 @@
     "react-dom": "^0.14.9 || ^15.3.0 || ^16.0.0-rc || ^16.0"
   },
   "dependencies": {
+    "bolt": "^0.20.5",
     "codesandbox": "^1.1.14",
+    "isomorphic-unfetch": "^2.0.0",
     "react-node-resolver": "^1.0.1"
   },
-  "files": [
-    "dist",
-    "README.md",
-    "CHANGELOG.md"
-  ],
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/Noviny/react-codesandboxer.git"
+  "repository": "https://github.com/Noviny/react-codesandboxer.git",
+  "bolt": {
+    "workspaces": [
+      "packages/*"
+    ]
   }
 }

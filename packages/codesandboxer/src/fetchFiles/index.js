@@ -9,7 +9,7 @@ import fetchInternalDependencies from './fetchInternalDependencies';
 
 import type {
   Package,
-  FetchConfig,
+  GitInfo,
   Dependencies,
   Import,
   Files,
@@ -29,7 +29,7 @@ export default async function({
 }: {
   examplePath: string,
   pkgJSON?: Package | string | Promise<Package | string>,
-  gitInfo: FetchConfig,
+  gitInfo: GitInfo,
   importReplacements: Array<Import>,
   dependencies?: Dependencies,
   providedFiles?: Files,

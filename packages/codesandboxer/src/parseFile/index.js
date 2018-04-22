@@ -11,6 +11,7 @@ const parseFile = async (
   let pkgJSONContent = await Promise.resolve(pkgJSON);
 
   const imports = getAllImports(fileCode);
+
   let { deps, internalImports } = parseDeps(pkgJSONContent, imports);
 
   return {

@@ -4,9 +4,10 @@ import parseFile from '../parseFile';
 import replaceImports from '../replaceImports';
 import absolutesToRelative from '../utils/absolutesToRelative';
 import getUrl from './getUrl';
+import 'isomorphic-unfetch';
 import type {
   Package,
-  FetchConfig,
+  GitInfo,
   ParsedFile,
   Dependencies,
   Import,
@@ -130,7 +131,7 @@ export default async function fetchRelativeFile(
   path: string,
   pkg: Package,
   importReplacements: Array<[string, string]>,
-  config: FetchConfig,
+  config: GitInfo,
 ): HandleFileFetch {
   // The new path is the file name we will provide to codesandbox
   // Get the url from the config. For JS files, we will need to add the filetype
