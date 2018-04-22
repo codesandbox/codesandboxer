@@ -8,5 +8,6 @@
 [lints]
 
 [options]
+module.name_mapper='codesandboxer' -> '<PROJECT_ROOT>/packages/codesandboxer/src/index.js'
 
 [strict]
