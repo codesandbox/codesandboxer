@@ -13,6 +13,7 @@ import type {
   Dependencies,
   Import,
   Files,
+  Config,
 } from '../types';
 import finaliseCSB from './finaliseCSB';
 import { baseFiles } from '../constants';
@@ -26,6 +27,7 @@ export default async function({
   providedFiles = {},
   example,
   name,
+  allowJSX,
 }: {
   examplePath: string,
   pkgJSON?: Package | string | Promise<Package | string>,
@@ -35,8 +37,10 @@ export default async function({
   providedFiles?: Files,
   example?: string | Promise<string>,
   name?: string,
+  allowJSX?: boolean,
 }) {
-  let pkg = await ensurePKGJSON(pkgJSON, importReplacements, gitInfo);
+  let config = { allowJSX: !!allowJSX };
+  let pkg = await ensurePKGJSON(pkgJSON, importReplacements, gitInfo, config);
 
   let { file, deps, internalImports } = await ensureExample(
     example,
@@ -44,6 +48,7 @@ export default async function({
     pkg,
     examplePath,
     gitInfo,
+    config,
   );
 
   let files = {
@@ -63,6 +68,7 @@ export default async function({
     deps,
     gitInfo,
     importReplacements,
+    config,
   );
   return finaliseCSB(final, providedFiles, dependencies, name);
 }

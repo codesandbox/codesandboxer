@@ -1,11 +1,12 @@
 // @flow
 import fetchRelativeFile from '../fetchRelativeFile';
-import type { Package, Import, GitInfo } from '../types';
+import type { Package, Import, GitInfo, Config } from '../types';
 
 export default async function ensurePKGJSON(
   maybePkg?: Package | string | Promise<Package | string>,
   importReplacements: Array<Import>,
   gitInfo: GitInfo,
+  config: Config,
 ): Promise<Package> {
   let pkg = await Promise.resolve(maybePkg);
   if (typeof pkg === 'object') {
@@ -25,6 +26,7 @@ export default async function ensurePKGJSON(
       {},
       importReplacements,
       gitInfo,
+      config,
     ).then(({ file }) => JSON.parse(file));
   } else throw new Error('could not understand passed in package.json');
 }
