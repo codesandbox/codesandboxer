@@ -95,30 +95,34 @@ const catchBlock = (e, url, path, pkg, importReplacements, extension) => {
     let newPath = `${path}${extension}`;
     let newUrl = url.replace(/.js$/, extension);
     if (extension === '.json') {
-      return fetchJSON(newUrl, newPath)
+      return fetchJSON(newUrl, newPath);
     }
-    return fetchJS(newUrl, newPath, pkg, importReplacements)
+    return fetchJS(newUrl, newPath, pkg, importReplacements);
   } else {
     throw e;
   }
-}
+};
 
 // Imports that are not named may be .js, .json, or /index.js. Node resolves them
 // in that order.
 let fetchProbablyJS = (url, path, pkg, importReplacements, config) => {
   // This first fetch handles .js
   return fetchJS(url, path, pkg, importReplacements)
-    .catch(e => catchBlock(e, url, path,pkg, importReplacements, '.json'))
+    .catch(e => catchBlock(e, url, path, pkg, importReplacements, '.json'))
     .catch(e => {
-      if (config.allowJSX) return catchBlock(e, url, path, pkg, importReplacements, '.jsx')
+      if (config.allowJSX)
+        return catchBlock(e, url, path, pkg, importReplacements, '.jsx');
       else throw e;
     })
     .catch(e => catchBlock(e, url, path, pkg, importReplacements, '/index.js'))
-    .catch(e => catchBlock(e, url, path, pkg, importReplacements, '/index.json'))
+    .catch(e =>
+      catchBlock(e, url, path, pkg, importReplacements, '/index.json'),
+    )
     .catch(e => {
-      if (config.allowJSX) return catchBlock(e, url, path, pkg, importReplacements, '/index.jsx')
+      if (config.allowJSX)
+        return catchBlock(e, url, path, pkg, importReplacements, '/index.jsx');
       else throw e;
-    })
+    });
 };
 
 let fetchFileContents = (
@@ -153,7 +157,7 @@ export default async function fetchRelativeFile(
   pkg: Package,
   importReplacements: Array<[string, string]>,
   gitInfo: GitInfo,
-  config?: Config
+  config?: Config,
 ): HandleFileFetch {
   config = config || {};
   // The new path is the file name we will provide to codesandbox
@@ -161,10 +165,15 @@ export default async function fetchRelativeFile(
   // This method needs to determine the filetype, so we return it.
   let { url, fileType } = getUrl(path, gitInfo);
 
-  let file = await fetchFileContents(url, path, {
-    fileType,
-    pkg,
-    importReplacements,
-  }, config);
+  let file = await fetchFileContents(
+    url,
+    path,
+    {
+      fileType,
+      pkg,
+      importReplacements,
+    },
+    config,
+  );
   return file;
 }

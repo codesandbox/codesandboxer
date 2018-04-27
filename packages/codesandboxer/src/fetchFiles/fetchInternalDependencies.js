@@ -39,6 +39,7 @@ export default async function fetchInternalDependencies(
       deps,
       gitInfo,
       importReplacements,
+      config,
     );
     return {
       files: { ...files, ...moreFiles.files },
