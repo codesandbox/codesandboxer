@@ -1,5 +1,9 @@
 # Changelog
 
+# 2.0.2
+
+Add flag to allow the loading of jsx components.
+
 ## 2.0.1
 
 Update codesandboxer dependency to resolve bug

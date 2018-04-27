@@ -132,6 +132,10 @@ If a fileName exists in your provided files, it will not be fetched when it is r
 
 Do not open the sandbox once the data has been sent. Using this along with the `afterDeploy` prop can allow you to handle what is done with the sandbox, including loading an embed using the ID.
 
+### `allowJSX?: boolean`
+
+Allow codesandboxer to accept jsx files. If this is not set to true, codesandboxer will not check if a jsx file exists when resolving imports.
+
 ## A slightly more complicated example:
 
 ```js
