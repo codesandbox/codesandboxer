@@ -1,11 +1,12 @@
 import cases from 'jest-in-case';
 import fetchRelativeFile from './';
 import getUrl from './getUrl';
-import isomorphic from 'isomorphic-fetch';
+import isomorphic from 'isomorphic-unfetch';
+import pkgJSON from '../../../../package.json';
 const GHConfig = {
   account: 'noviny',
   repository: 'react-codesandboxer',
-  branch: 'ca41dfb340eed67c7f755e0b03939652d1f42cc7',
+  branch: 'db34f2a24ae80b103ba19abb3d38fcde21df7038',
   host: 'github',
 };
 
@@ -16,46 +17,71 @@ const BBConfig = {
   host: 'bitbucket',
 };
 
-describe.skip('fetchRelativeFile()', () => {
-  it('should fetch a .js file in a subdirectory', async () => {
-    return fetchRelativeFile(
-      'src/CodeSandboxer/index.js',
-      {},
-      [],
-      GHConfig,
-    ).then(({ file, deps, internalImports }) => {
-      expect(deps).toMatchObject({ react: 'latest' });
-      expect(internalImports).toEqual(
-        expect.arrayContaining(['../types', '../fetchFiles']),
-      );
-      expect(file).toMatchSnapshot();
-    });
-  });
-  it('should fetch an index.js file in a named subdirectory', async () => {
-    return fetchRelativeFile('src/CodeSandboxer', {}, [], GHConfig).then(
+cases(
+  'fetchRelativeFile()',
+  ({
+    name,
+    pkg = pkgJSON,
+    expectedDeps = {},
+    expectedInternal = [],
+    config,
+    json,
+  }) => {
+    expectedDeps = { react: '^16.2.0', ...expectedDeps };
+    return fetchRelativeFile(name, pkg, [], GHConfig, config).then(
+      // We are not currently testing the file's contents. Maybe we should do this
       ({ file, deps, internalImports }) => {
-        expect(deps).toMatchObject({ react: 'latest' });
-        expect(internalImports).toEqual(
-          expect.arrayContaining(['../types', '../fetchFiles']),
-        );
-        expect(file).toMatchSnapshot();
+        if (!json) {
+          expect(expectedDeps).toEqual(deps);
+          expect(expectedInternal).toEqual(internalImports);
+        } else {
+          expect({}).toEqual(deps);
+          expect([]).toEqual(internalImports);
+          let contents = JSON.parse(file);
+          expect(contents).toEqual(json);
+        }
       },
     );
-  });
-  it('should fetch a .js file at the root');
-  it('should fetch a .png file in a subdirectory');
-  it('should fetch a .png file at the root');
-  it('should fetch a .json file in a subdirectory');
-  it('should fetch a .json file at the root', async () => {
-    return fetchRelativeFile('package.json', {}, [], GHConfig).then(
-      ({ file, deps, internalImports }) => {
-        expect(deps).toMatchObject({});
-        expect(internalImports).toEqual(expect.arrayContaining([]));
-        expect(file).toMatchSnapshot();
-      },
-    );
-  });
-});
+  },
+  [
+    {
+      name: 'fixtures/simple',
+    },
+    {
+      name: 'fixtures/withAbsoluteImport',
+      expectedDeps: { 'react-node-resolver': '^1.0.1' },
+    },
+    {
+      name: 'fixtures/withRelativeImport',
+      expectedInternal: ['./Simple'],
+    },
+    {
+      name: 'fixtures/importResolution/js/A',
+    },
+    {
+      name: 'fixtures/importResolution/json/A',
+      json: { a: 'A.json file' },
+    },
+    {
+      name: 'fixtures/importResolution/jsx/A',
+      config: { allowJSX: true },
+    },
+    {
+      name: 'fixtures/importResolution/fromIndex/js',
+    },
+    {
+      name: 'fixtures/importResolution/fromIndex/js/',
+    },
+    {
+      name: 'fixtures/importResolution/fromIndex/json',
+      json: { a: 'index.json file' },
+    },
+    {
+      name: 'fixtures/importResolution/fromIndex/jsx',
+      config: { allowJSX: true },
+    },
+  ],
+);
 
 cases(
   'getUrl()',

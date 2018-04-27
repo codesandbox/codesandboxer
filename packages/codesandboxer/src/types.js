@@ -41,4 +41,6 @@ export type Package = {
 
 export type Dependencies = { [string]: string };
 
+export type Config = { allowJSX?: boolean }
+
 export type Import = [string, string];

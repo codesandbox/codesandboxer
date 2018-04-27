@@ -63,6 +63,8 @@ type Props = {
   }) => Node,
   /* Consumers may need access to the wrapper's style */
   style: Object,
+  /* allow codesandboxer to accept jsx properties */
+  allowJSX?: boolean,
 };
 
 export default class CodeSandboxDeployer extends Component<Props, State> {

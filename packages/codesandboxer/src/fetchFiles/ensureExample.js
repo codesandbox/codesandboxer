@@ -5,7 +5,7 @@ import replaceImports from '../replaceImports';
 import absolutesToRelative from '../utils/absolutesToRelative';
 import parseFile from '../parseFile';
 
-import type { Import, Package, GitInfo } from '../types';
+import type { Import, Package, GitInfo, Config } from '../types';
 
 export default async function ensureExample(
   example?: string | Promise<string>,
@@ -13,6 +13,7 @@ export default async function ensureExample(
   pkg: Package,
   examplePath: string,
   gitInfo: GitInfo,
+  config: Config,
 ) {
   if (example) {
     let exampleContent = await Promise.resolve(example);
@@ -25,6 +26,12 @@ export default async function ensureExample(
     );
     return parseFile(content, pkg);
   } else {
-    return fetchRelativeFile(examplePath, pkg, importReplacements, gitInfo);
+    return fetchRelativeFile(
+      examplePath,
+      pkg,
+      importReplacements,
+      gitInfo,
+      config,
+    );
   }
 }
