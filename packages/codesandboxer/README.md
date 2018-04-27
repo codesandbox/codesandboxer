@@ -58,10 +58,10 @@ examplePath is always required, and is a path relative to the root of the git re
 
 An object containing the information to make fetch requests from github or bitbucket. There are three mandatory properties and one optional property.
 
-- account: the name of the account the repository is under
-- repository: the repository name
-- host: where your content is hosted, accepts 'bitbucket' or 'github'
-- branch: optionally you can define what branch to pull from (fun fact, also accepts git hashes). Defaults to master if no branch is required.
+* account: the name of the account the repository is under
+* repository: the repository name
+* host: where your content is hosted, accepts 'bitbucket' or 'github'
+* branch: optionally you can define what branch to pull from (fun fact, also accepts git hashes). Defaults to master if no branch is required.
 
 This information is needed to fetch any additional files needed.
 
@@ -111,6 +111,10 @@ If you do not want the example content to be fetched (for example, you have acce
 
 The name for the sandbox once created.
 
+#### allowJSX
+
+A boolean that will check for `.jsx` files when trying to resolve a file, in addition to `.js` and `.json`. This is false by default.
+
 ### sendFilesToCSB()
 
 Accepts the generated `parameters` from the codesandbox API, and posts them for you, returning a promise that resolves to an object that has both the sandbox ID, as well as the base URL to open the sandbox on the example page.
@@ -137,7 +141,7 @@ The internal method we use to replace imports. This takes in a raw file, and an 
 
 If you pass in a path ending in a \*, it will replace all that match the start of the pattern with the new pattern.
 
-### fetchRelativeFile( path, pkg, importReplacements: Array<[string, string]>, gitInfo)
+### fetchRelativeFile( path, pkg, importReplacements: Array<[string, string]>, gitInfo, config)
 
 This function takes in a path to a file relative to the git route, and along with the git information, fetches. It will also replace the imports as provided for javascript files.
 
@@ -151,6 +155,8 @@ It return a promise with a parsed file which is an object that looks like:
   path: // the new path that this file will be added to within codesandbox, and which other files can now use as an importReplacement,
 }
 ```
+
+Currently the shape of the config object should be `{ allowJSX: boolean }`. If the config object is not provided, this defaults to false.
 
 ### getSandboxUrl(id, type)
 
