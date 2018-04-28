@@ -1,5 +1,9 @@
 # Changelog
 
+# 2.0.3
+
+Update of codesandboxer after a bug in jsx component reading.
+
 # 2.0.2
 
 Add flag to allow the loading of jsx components.
