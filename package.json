@@ -4,7 +4,7 @@
   "description": "A simple react component to help easily deploy an example to codesandbox",
   "scripts": {
     "test": "yarn jest",
-    "build": "bolt ws exec -- babel src -d dist --ignore  **/*.test.js",
+    "build": "bolt && bolt ws exec -- babel src -d dist --ignore  **/*.test.js",
     "prepublishOnly": "yarn test && yarn flow && yarn build",
     "dev:csb": "bolt w codesandboxer exec -- babel src -d dist --ignore  **/*.test.js --watch",
     "version:csb": "bolt w codesandboxer exec -- npm version",
