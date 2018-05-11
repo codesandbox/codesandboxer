@@ -10,7 +10,5 @@
     "isomorphic-unfetch": "^2.0.0"
   },
   "repository": "https://github.com/Noviny/react-codesandboxer.git",
-  "files": [
-    "dist"
-  ]
+  "files": ["dist"]
 }

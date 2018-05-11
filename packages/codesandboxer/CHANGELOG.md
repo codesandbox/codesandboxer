@@ -2,7 +2,7 @@
 
 ## 0.2.1
 
-An internal call of `fetchRelativeFile` was not being passed the new 'config' object, and now is.
+An internal call of `fetchRelativeFile` was not being passed the new 'config' object, causing an error in file fetching. It is now being passed the correct object.
 
 ## 0.2.0
 

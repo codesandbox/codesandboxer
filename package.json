@@ -32,7 +32,12 @@
     "jest-in-case": "^1.0.2",
     "prettier": "^1.10.2",
     "react": "^16.2.0",
-    "react-dom": "^16.2.0"
+    "react-dom": "^16.2.0",
+    "typescript": "^2.6.1",
+    "vscode": "^1.1.6",
+    "eslint": "^4.11.0",
+    "@types/node": "^7.0.43",
+    "@types/mocha": "^2.2.42"
   },
   "peerDependencies": {
     "react": "^0.14.9 || ^15.3.0 || ^16.0.0-rc || ^16.0",
@@ -41,7 +46,11 @@
   "dependencies": {
     "bolt": "^0.20.5",
     "codesandbox": "^1.1.14",
+    "form-data": "^2.3.2",
     "isomorphic-unfetch": "^2.0.0",
+    "meow": "^5.0.0",
+    "pkg-dir": "^2.0.0",
+    "pkg-up": "^2.0.0",
     "react-node-resolver": "^1.0.1"
   },
   "repository": "https://github.com/Noviny/react-codesandboxer.git",
