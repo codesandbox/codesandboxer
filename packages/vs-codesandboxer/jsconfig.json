@@ -2,7 +2,7 @@
     "compilerOptions": {
         "module": "commonjs",
         "target": "es6",
-        "checkJs": false,  /* Typecheck .js files. */
+        "checkJs": false,
         "lib": [
             "es6"
         ]
