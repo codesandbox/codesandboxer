@@ -11,6 +11,12 @@ import {
 } from 'codesandboxer';
 import NodeResolver from 'react-node-resolver';
 
+type Error = {
+  name: string,
+  description?: string,
+  content?: string,
+};
+
 type State = {
   parameters: string,
   isLoading: boolean,
@@ -19,11 +25,7 @@ type State = {
   sandboxUrl?: string,
   deployPromise?: Promise<any>,
   files?: Files,
-  error?: {
-    name: string,
-    description?: string,
-    cointent?: string,
-  },
+  error?: Error,
 };
 
 type Props = {
@@ -52,6 +54,8 @@ type Props = {
   ) => mixed,
   /* Called once a deploy has occurred. This will still be called if skipRedirect is chosen */
   afterDeploy?: (sandboxUrl: string, sandboxId: string) => mixed,
+  /* Called once a deploy has occurred. This will still be called if skipRedirect is chosen */
+  afterDeployError?: Error => mixed,
   /* Pass in files separately to fetching them. Useful to go alongisde specific replacements in importReplacements */
   providedFiles?: Files,
   /* Render prop that return `isLoading`and `error`. */
@@ -111,17 +115,32 @@ export default class CodeSandboxDeployer extends Component<Props, State> {
   };
 
   deploy = () => {
-    let { afterDeploy, skipRedirect } = this.props;
+    let { afterDeploy, skipRedirect, afterDeployError } = this.props;
     let { parameters } = this.state;
 
-    sendFilesToCSB(parameters).then(({ sandboxId, sandboxUrl }) => {
-      this.setState({ sandboxId, sandboxUrl });
-      if (!skipRedirect) {
-        window.open(sandboxUrl);
-      }
-      if (afterDeploy)
-        afterDeploy(getSandboxUrl(sandboxId, 'embed'), sandboxId);
-    });
+    sendFilesToCSB(parameters)
+      .then(({ sandboxId, sandboxUrl }) => {
+        this.setState({ sandboxId, sandboxUrl });
+        if (!skipRedirect) {
+          window.open(sandboxUrl);
+        }
+        if (afterDeploy)
+          afterDeploy(getSandboxUrl(sandboxId, 'embed'), sandboxId);
+      })
+      .catch(errors => {
+        if (afterDeployError) {
+          afterDeployError({
+            name: 'error deploying to codesandbox',
+            content: errors,
+          });
+        }
+        this.setState({
+          error: {
+            name: 'error deploying to codesandbox',
+            content: errors,
+          },
+        });
+      });
   };
 
   deployToCSB = (e: MouseEvent) => {

@@ -1,7 +1,8 @@
 {
   "name": "codesandboxer",
-  "version": "0.1.1",
-  "description": "Fetch files from a git repository and upload them to codesandbox",
+  "version": "0.2.1",
+  "description":
+    "Fetch files from a git repository and upload them to codesandbox",
   "main": "dist/index.js",
   "author": "Ben Conolly",
   "license": "MIT",
@@ -9,7 +10,6 @@
     "codesandbox": "^1.1.14",
     "isomorphic-unfetch": "^2.0.0"
   },
-  "files": [
-    "dist"
-  ]
+  "repository": "https://github.com/Noviny/react-codesandboxer.git",
+  "files": ["dist"]
 }
