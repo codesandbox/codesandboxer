@@ -1,0 +1,18 @@
+{
+  "name": "codesandboxer-fs",
+  "version": "0.0.0",
+  "description": "Deploy local files to codesandbox, using an example file as an entry point",
+  "main": "index.js",
+  "author": "Ben Conolly",
+  "license": "MIT",
+  "dependencies": {
+    "codesandboxer": "^0.2.1"
+  },
+  "bin": {
+    "codesandboxer": "cli.js"
+  },
+  "devDependencies": {
+    "react-node-resolver": "^1.0.1"
+  },
+  "repository": "https://github.com/Noviny/react-codesandboxer.git"
+}

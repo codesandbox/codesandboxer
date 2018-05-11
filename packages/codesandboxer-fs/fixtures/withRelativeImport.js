@@ -1,5 +1,5 @@
 import React from 'react';
-import Simple from './simple';
+import Simple from './deeperRelativeImport/withRelativeImport';
 
 export default () => (
   <div>
