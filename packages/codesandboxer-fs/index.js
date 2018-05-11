@@ -185,7 +185,6 @@ async function assembleFiles(filePath, pkgJSONPath, config) {
   });
 
   if (Object.keys(final.files).length > 120) throw { key: 'tooManyModules' };
-  console.log(final.files);
   return finaliseCSB(final);
 }
 
