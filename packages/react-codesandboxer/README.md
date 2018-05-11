@@ -94,9 +94,13 @@ These props are less needed, and more to allow different use-cases, or some amou
 
 Pass in the example as code to prevent it being fetched. This can be used when you want to perform any transformation on the example. If you pass in a promise, the returned value of the promise will be used. This can be useful if you are performing your own fetch or similar to get your example's raw contents.
 
-### name: string,
+### `name: string`
 
 Name for the codesandbox instance. This sets the package name in the uploaded `package.json`, which in turn sets the sandbox name.
+
+### `afterDeployError?: ({ name: string, description?: string, content?: string, }) => mixed`
+
+Function that is called when an error occurs in the deploy process, with details of the error.
 
 ### `preload?: boolean`
 

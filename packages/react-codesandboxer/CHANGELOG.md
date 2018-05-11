@@ -1,10 +1,15 @@
 # Changelog
 
-# 2.0.3
+## 2.1.0
+
+Add new prop `afterDeployError`, to allow responding to errors.
+Add more robust erroring, so people are less lost when something goes wrong.
+
+## 2.0.3
 
 Update of codesandboxer after a bug in jsx component reading.
 
-# 2.0.2
+## 2.0.2
 
 Add flag to allow the loading of jsx components.
 

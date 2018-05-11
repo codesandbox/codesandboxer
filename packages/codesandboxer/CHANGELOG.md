@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.2.2
+
+Use the formData package for deploys instead of the native web formData. This is to allow codesandboxer to be node-compatible.
+
 ## 0.2.1
 
 An internal call of `fetchRelativeFile` was not being passed the new 'config' object, causing an error in file fetching. It is now being passed the correct object.
