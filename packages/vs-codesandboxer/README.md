@@ -1,4 +1,9 @@
-# vs-codesandboxer README
+# vs-codesandboxer
+
+---
+WARNING: This extension is not yet tested, and does not yet have documentation written.
+---
+
 
 This is the README for your extension "vs-codesandboxer". After writing up a brief description, we recommend including the following sections.
 
