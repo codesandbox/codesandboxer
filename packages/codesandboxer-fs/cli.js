@@ -40,6 +40,9 @@ async function CLIStuff(cli) {
       'The allowJSXExtension flag has not yet been implemented',
     );
   }
+  if (cli.flags.list) {
+    return console.error('The list flag has not yet been implemented');
+  }
 
   if (!filePath)
     return console.error(
