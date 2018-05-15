@@ -8,7 +8,8 @@ const path = require('path');
 let cli = meow(
   `
     Usage
-      $ codesandboxer <filePath> ?<pkgJSONPath>
+      $ codesandboxer <filePath>
+      upload the file, and other files within its package, to codesandbox.
 
     Options
       --dry, -d Instead of deploying, display what will be deployed
@@ -33,7 +34,7 @@ let cli = meow(
 );
 
 async function CLIStuff(cli) {
-  let [filePath, pkgJSONPath] = cli.input;
+  let [filePath] = cli.input;
 
   if (cli.flags.allowJSXExtension) {
     return console.error(
@@ -51,10 +52,10 @@ async function CLIStuff(cli) {
 
   try {
     if (cli.flags.dry) {
-      let results = await assembleFiles(filePath, pkgJSONPath);
+      let results = await assembleFiles(filePath);
       console.log(results);
     } else {
-      let results = await assembleFilesAndPost(filePath, pkgJSONPath);
+      let results = await assembleFilesAndPost(filePath);
       console.log(results);
     }
   } catch (e) {
@@ -67,7 +68,7 @@ async function CLIStuff(cli) {
         return console.error(
           `we could not resolve the example file ${filePath}\nWe tried to resolve this at: ${path.resolve(
             process.cwd(),
-            e.filePath,
+            e.relFilePath,
           )}`,
         );
       case 'tooManyModules':

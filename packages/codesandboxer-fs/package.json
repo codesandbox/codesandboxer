@@ -6,6 +6,7 @@
   "author": "Ben Conolly",
   "license": "MIT",
   "dependencies": {
+    "pkg-dir": "^2.0.0",
     "codesandboxer": "^0.2.3"
   },
   "bin": {

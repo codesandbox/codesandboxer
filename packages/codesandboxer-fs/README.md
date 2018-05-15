@@ -33,15 +33,9 @@ The response will look something like
 
 which will be printed to your console.
 
-## Additional options
+`codesandboxer-fs` uses the context of the package the target file is from, bases its available npm dependencies on that file's `package.json`, and will not include files imported from places outside this scope.
 
-By default, `codesandboxer-fs` uses the directory you are running it from to look for the nearest `package.json` up. If you want to upload a file while not in the current directory, you can pass in a path to a package.json file, which will be used to get the external dependencies.
-
-```
-$ codesandboxer <filePath> ?<pkgJSONPath>
-```
-
-### Flags
+## Flags
 
 * `--dry -d` - this flag bundles the files, and prints them to the console, as well as the parameter to be sent to codesandbox.
 

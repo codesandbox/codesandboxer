@@ -9,6 +9,7 @@ const { baseFiles } = require('codesandboxer/dist/constants');
 const fs = require('fs');
 const path = require('path');
 const pkgUp = require('pkg-up');
+const pkgDir = require('pkg-dir');
 
 let count = 1;
 
@@ -26,7 +27,7 @@ const relToAbs = (filePath, resolvedPath) => {
   return resolvedPath.match(r)[0];
 };
 
-async function fetchJS(resolvedPath, pkgJSON, filePath) {
+async function loadJS(resolvedPath, pkgJSON, filePath) {
   let content = fs.readFileSync(resolvedPath, 'utf-8');
   let file = await csb.parseFile(content, pkgJSON);
   return Object.assign({}, file, {
@@ -34,7 +35,7 @@ async function fetchJS(resolvedPath, pkgJSON, filePath) {
   });
 }
 
-async function fetchJSON(resolvedPath, filePath) {
+async function loadJSON(resolvedPath, filePath) {
   let file = fs.readFileSync(resolvedPath, 'utf-8');
   return {
     file,
@@ -44,15 +45,15 @@ async function fetchJSON(resolvedPath, filePath) {
   };
 }
 
-async function fetchImage(resolvedPath, filePath) {
+async function loadImages(resolvedPath, filePath) {
   throw new Error(
     'The fetch image file function has not been written for fs yet',
   );
 }
 
-async function fetchRelativeFile({ filePath, pkgJSON, rootPath }) {
+async function fetchRelativeFile({ filePath, pkgJSON, rootDir }) {
   // This is where it will throw for jsx problems
-  let absPath = path.resolve(rootPath, filePath);
+  let absPath = path.resolve(rootDir, filePath);
   let resolvedPath = require.resolve(absPath);
   let extension = resolvedPath.match(/\.[^\.]+$/);
 
@@ -63,11 +64,11 @@ async function fetchRelativeFile({ filePath, pkgJSON, rootPath }) {
     case '.gif':
     case '.bmp':
     case '.tiff':
-      return fetchImage(url, path);
+      return loadImages(url, path);
     case '.json':
-      return fetchJSON(resolvedPath, filePath);
+      return loadJSON(resolvedPath, filePath);
     case '.js':
-      return fetchJS(resolvedPath, pkgJSON, filePath);
+      return loadJS(resolvedPath, pkgJSON, filePath);
     default:
       throw new Error(
         `unparseable filetype: ${extension[0]} for file ${resolvedPath}`,
@@ -79,13 +80,13 @@ async function fetchInternalDependencies({
   files,
   deps,
   internalImports,
-  rootPath,
+  rootDir,
   pkgJSON,
   priorPaths,
 }) {
   let newFiles = await Promise.all(
     internalImports.map(filePath =>
-      fetchRelativeFile({ filePath: `./${filePath}`, pkgJSON, rootPath }),
+      fetchRelativeFile({ filePath: `./${filePath}`, pkgJSON, rootDir }),
     ),
   );
 
@@ -110,7 +111,7 @@ async function fetchInternalDependencies({
     let moreFiles = await fetchInternalDependencies({
       files,
       deps,
-      rootPath,
+      rootDir,
       internalImports: moreInternalImports,
       pkgJSON,
       priorPaths: priorPaths.concat(internalImports),
@@ -124,42 +125,39 @@ async function fetchInternalDependencies({
   }
 }
 
-async function assembleFiles(filePath, pkgJSONPath, config) {
-  if (!config) config = {};
-  let rootPath = config.rootPath ? config.rootPath : process.cwd();
-
-  if (!filePath.match(/^\.\//) && !filePath.match(/^\//)) {
-    filePath = `./${filePath}`;
-  }
-
-  let pkgJSON = {};
-
-  if (pkgJSONPath) {
-    let fixedPath = path.resolve(rootPath, pkgJSONPath);
-    try {
-      pkgJSON = require(fixedPath);
-    } catch (e) {
-      throw {
-        key: 'noPKGJSON',
-        fixedPath,
-      };
-    }
-  } else {
-    let pkgPath = await pkgUp(process.cwd());
-    pkgJSON = require(pkgPath);
-  }
-
-  let basePath;
+const getAbsFilePath = relFilePath => {
   try {
-    basePath = require.resolve(path.resolve(rootPath, filePath));
+    let firstPathResolve = path.resolve(relFilePath);
+    return require.resolve(firstPathResolve);
   } catch (e) {
+    console.log(e);
     throw {
       key: 'noExampleFile',
-      filePath,
+      relFilePath,
     };
   }
-  let absFilePath = filePath.replace(/^\.\//, '');
-  let exampleContent = fs.readFileSync(basePath, 'utf-8');
+};
+
+const getPkgJSONPath = rootDir => {
+  let fixedPath = `${rootDir}/package.json`;
+  try {
+    return require.resolve(fixedPath);
+  } catch (e) {
+    throw {
+      key: 'noPKGJSON',
+      fixedPath,
+    };
+  }
+};
+
+async function assembleFiles(relFilePath) {
+  let rootDir = await pkgDir(relFilePath);
+  let absFilePath = getAbsFilePath(relFilePath);
+  let pkgJSONPath = getPkgJSONPath(rootDir);
+  let pathRelativeToRoot = path.relative(path.dirname(absFilePath), rootDir);
+
+  let pkgJSON = require(pkgJSONPath);
+  let exampleContent = fs.readFileSync(absFilePath, 'utf-8');
 
   let { file, deps, internalImports } = await csb.parseFile(
     exampleContent,
@@ -170,7 +168,10 @@ async function assembleFiles(filePath, pkgJSONPath, config) {
     'example.js': {
       content: csb.replaceImports(
         file,
-        internalImports.map(m => [m, `./${resolvePath(absFilePath, m)}`]),
+        internalImports.map(m => [
+          m,
+          `./${resolvePath(pathRelativeToRoot, m)}`,
+        ]),
       ),
     },
   });
@@ -178,9 +179,11 @@ async function assembleFiles(filePath, pkgJSONPath, config) {
   let final = await fetchInternalDependencies({
     files,
     deps,
-    rootPath,
+    rootDir,
     pkgJSON,
-    internalImports: internalImports.map(m => resolvePath(absFilePath, m)),
+    internalImports: internalImports.map(m =>
+      resolvePath(pathRelativeToRoot, m),
+    ),
     priorPaths: [],
   });
 
@@ -188,7 +191,7 @@ async function assembleFiles(filePath, pkgJSONPath, config) {
   return finaliseCSB(final);
 }
 
-async function assembleFilesAndPost(filePath, pkgJSON, config) {
+async function assembleFilesAndPost(filePath) {
   let { parameters } = await assembleFiles(filePath, pkgJSON, config);
   let csbInfo = await csb.sendFilesToCSB(parameters);
   return csbInfo;
