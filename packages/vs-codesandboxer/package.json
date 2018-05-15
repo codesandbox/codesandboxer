@@ -8,7 +8,7 @@
         "vscode": "^1.23.0"
     },
     "activationEvents": [
-        "*"
+      "onCommand:extension.codesandboxer"
     ],
     "main": "./extension",
     "repository": "https://github.com/Noviny/react-codesandboxer.git",
