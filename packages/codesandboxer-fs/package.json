@@ -1,13 +1,13 @@
 {
   "name": "codesandboxer-fs",
-  "version": "0.0.3",
+  "version": "0.1.0",
   "description": "Deploy local files to codesandbox, using an example file as an entry point",
   "main": "index.js",
   "author": "Ben Conolly",
   "license": "MIT",
   "dependencies": {
     "pkg-dir": "^2.0.0",
-    "codesandboxer": "^0.2.3"
+    "codesandboxer": "^0.2.4"
   },
   "bin": {
     "codesandboxer": "cli.js"
