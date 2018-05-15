@@ -2,40 +2,39 @@
     "name": "vs-codesandboxer",
     "displayName": "vs-codesandboxer",
     "description": "upload to codesandbox from a single entry file",
-    "version": "0.0.1",
+    "version": "0.0.11",
     "publisher": "noviny",
     "engines": {
         "vscode": "^1.23.0"
     },
-    "categories": [
-        "cli",
-        "codesandbox"
-    ],
     "activationEvents": [
-        "onCommand:extension.codesandboxer"
+        "*"
     ],
     "main": "./extension",
+    "repository": "https://github.com/Noviny/react-codesandboxer.git",
     "contributes": {
         "commands": [
             {
-                "command": "extension.codesandboxer",
+                "command": "extension.vs-codesandboxer",
                 "title": "Deploy to codesandbox"
             }
         ],
         "menus": {
-            "editor/context": [{
-                "when": "resourceLangId == javascript",
-                "command": "extension.codesandboxer"
-          }]
+            "editor/context": [
+                {
+                    "when": "resourceLangId == javascript",
+                    "command": "extension.vs-codesandboxer"
+                }
+            ]
         }
     },
     "scripts": {
-        "postinstall": "node ./node_modules/vscode/bin/install",
         "test": "node ./node_modules/vscode/bin/test"
     },
     "dependencies": {
-      "codesandboxer-fs": "^0.0.0",
-      "pkg-up": "^2.0.0"
+        "codesandboxer-fs": "^0.0.3",
+        "pkg-up": "^2.0.0",
+        "pkg-dir": "^2.0.0"
     },
     "devDependencies": {
         "typescript": "^2.6.1",

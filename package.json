@@ -19,6 +19,8 @@
   "author": "Ben Conolly",
   "license": "MIT",
   "devDependencies": {
+    "@types/mocha": "^2.2.42",
+    "@types/node": "^7.0.43",
     "babel-cli": "^6.26.0",
     "babel-plugin-syntax-dynamic-import": "^6.18.0",
     "babel-plugin-transform-class-properties": "^6.24.1",
@@ -27,6 +29,7 @@
     "babel-preset-env": "^1.6.1",
     "babel-preset-flow": "^6.23.0",
     "babel-preset-react": "^6.24.1",
+    "eslint": "^4.11.0",
     "flow-bin": "^0.64.0",
     "jest": "^22.1.4",
     "jest-in-case": "^1.0.2",
@@ -34,16 +37,14 @@
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "typescript": "^2.6.1",
-    "vscode": "^1.1.6",
-    "eslint": "^4.11.0",
-    "@types/node": "^7.0.43",
-    "@types/mocha": "^2.2.42"
+    "vscode": "^1.1.6"
   },
   "peerDependencies": {
     "react": "^0.14.9 || ^15.3.0 || ^16.0.0-rc || ^16.0",
     "react-dom": "^0.14.9 || ^15.3.0 || ^16.0.0-rc || ^16.0"
   },
   "dependencies": {
+    "babel-runtime": "^6.26.0",
     "bolt": "^0.20.5",
     "codesandbox": "^1.1.14",
     "form-data": "^2.3.2",
