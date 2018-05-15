@@ -192,7 +192,7 @@ async function assembleFiles(relFilePath) {
 }
 
 async function assembleFilesAndPost(filePath) {
-  let { parameters } = await assembleFiles(filePath, pkgJSON, config);
+  let { parameters } = await assembleFiles(filePath);
   let csbInfo = await csb.sendFilesToCSB(parameters);
   return csbInfo;
 }

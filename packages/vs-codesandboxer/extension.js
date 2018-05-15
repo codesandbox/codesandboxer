@@ -7,7 +7,7 @@ const pkgDir = require('pkg-dir');
 
 // this method is called when your extension is activated
 // your extension is activated the very first time the command is executed
-function activate(context) {
+function activate(context) {5
     // The command has been defined in the package.json file
     // Now provide the implementation of the command with  registerCommand
     // The commandId parameter must match the command field in package.json
@@ -15,10 +15,8 @@ function activate(context) {
         // The code you place here will be executed every time your command is executed
         // Display a message box to the user
         let filePath = vscode.window.activeTextEditor.document.fileName
-        let pkgJSONPath = pkgUp.sync(filePath);
-        let rootPath = pkgDir.sync(filePath);
 
-        csb.assembleFilesAndPost(filePath, pkgJSONPath, { rootPath }).then(sandboxInfo => {
+        csb.assembleFilesAndPost(filePath).then(sandboxInfo => {
             vscode.window.showInformationMessage(`[Open file in codesandbox](${sandboxInfo.sandboxUrl})`);
         }).catch(e => {
           console.log('an error was thrown', e)
