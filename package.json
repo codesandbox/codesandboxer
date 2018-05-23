@@ -51,10 +51,11 @@
     "isomorphic-unfetch": "^2.0.0",
     "meow": "^5.0.0",
     "pkg-dir": "^2.0.0",
+    "axios": "^0.18.0",
     "pkg-up": "^2.0.0",
     "react-node-resolver": "^1.0.1"
   },
-  "repository": "https://github.com/Noviny/react-codesandboxer.git",
+  "repository": "https://github.com/Noviny/codesandboxer.git",
   "bolt": {
     "workspaces": [
       "packages/*"

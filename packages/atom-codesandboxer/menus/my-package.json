@@ -1,0 +1,26 @@
+{
+  "context-menu": {
+    "atom-text-editor": [
+      {
+        "label": "Deploy to codesandbox",
+        "command": "codesandboxer:deploy"
+      }
+    ]
+  },
+  "menu": [
+    {
+      "label": "Packages",
+      "submenu": [
+        {
+          "label": "codesandboxer",
+          "submenu": [
+            {
+              "label": "deploy",
+              "command": "codesandboxer:deploy"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
