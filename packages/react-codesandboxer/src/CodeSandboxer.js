@@ -1,15 +1,16 @@
 // @flow
 import React, { Component, type Node } from 'react';
+import NodeResolver from 'react-node-resolver';
 
 import {
   fetchFiles,
   sendFilesToCSB,
   getSandboxUrl,
+  finaliseCSB,
   type Package,
   type Files,
   type GitInfo,
 } from 'codesandboxer';
-import NodeResolver from 'react-node-resolver';
 
 type Error = {
   name: string,
@@ -89,17 +90,27 @@ export default class CodeSandboxDeployer extends Component<Props, State> {
   };
 
   loadFiles = () => {
-    let { skipRedirect, onLoadComplete } = this.props;
+    let { onLoadComplete, providedFiles, dependencies, name } = this.props;
 
     // by assembling a deploy promise, we can save it for later if loadFiles is
     // being called by `preload`, and preload can use it once it is ready.
     // We return deployPromise at the end so that non-preloaded calls can then be
     // resolved
     let deployPromise = fetchFiles(this.props)
-      .then(({ parameters, files }) => {
-        this.setState({ parameters, isLoading: false, files }, () => {
-          if (onLoadComplete) onLoadComplete({ parameters, files });
+      .then(fetchedInfo => {
+        let { parameters } = finaliseCSB(fetchedInfo, {
+          extraFiles: providedFiles,
+          extraDependencies: dependencies,
+          name,
         });
+        this.setState(
+          { parameters, isLoading: false, files: fetchedInfo.files },
+          () => {
+            if (onLoadComplete) {
+              onLoadComplete({ parameters, files: fetchedInfo.files });
+            }
+          },
+        );
       })
       .catch(error => {
         this.setState({ error, isLoading: false });
@@ -124,8 +135,9 @@ export default class CodeSandboxDeployer extends Component<Props, State> {
         if (!skipRedirect) {
           window.open(sandboxUrl);
         }
-        if (afterDeploy)
+        if (afterDeploy) {
           afterDeploy(getSandboxUrl(sandboxId, 'embed'), sandboxId);
+        }
       })
       .catch(errors => {
         if (afterDeployError) {
@@ -144,8 +156,7 @@ export default class CodeSandboxDeployer extends Component<Props, State> {
   };
 
   deployToCSB = (e: MouseEvent) => {
-    const { preload } = this.props;
-    const { isLoading, parameters, deployPromise, isDeploying } = this.state;
+    const { deployPromise, isDeploying } = this.state;
     e.preventDefault();
     if (isDeploying) return null;
     this.setState({ isDeploying: true });

@@ -1,30 +1,32 @@
+// @flow
 const csb = require('codesandboxer');
-
-// All of these need to be exposed in some way
-const resolvePath = require('codesandboxer/dist/utils/resolvePath').default;
-const finaliseCSB = require('codesandboxer/dist/fetchFiles/finaliseCSB')
-  .default;
-const { baseFiles } = require('codesandboxer/dist/constants');
+/*::
+import type { Files, Dependencies } from 'codesandboxer';
+*/
+const { baseFiles } = require('./constants');
 
 const fs = require('fs');
 const path = require('path');
-const pkgUp = require('pkg-up');
 const pkgDir = require('pkg-dir');
 
 let count = 1;
 
 const relToAbs = (filePath, resolvedPath) => {
-  let fp2 = filePath.replace(/^\.\//, '');
-  let hasExtension = fp2.match(/\./);
-  let r;
+  let originFilePath = filePath.replace(/^\.\//, '');
+  let hasExtension = originFilePath.match(/\./);
+  let matcher;
 
   if (hasExtension) {
-    return fp2;
+    return originFilePath;
   } else {
-    r = new RegExp(`${fp2}(.+)`);
+    matcher = new RegExp(`${originFilePath}(.+)`);
   }
-  let match = resolvedPath.match(r);
-  return resolvedPath.match(r)[0];
+  let rp = resolvedPath.match(matcher);
+  if (rp) {
+    return rp[0];
+  } else {
+    throw { key: 'cannotResolvePath', path: resolvedPath };
+  }
 };
 
 async function loadJS(resolvedPath, pkgJSON, filePath) {
@@ -44,18 +46,22 @@ async function loadJSON(resolvedPath, filePath) {
     filePath: relToAbs(filePath, resolvedPath),
   };
 }
-
+/* Remove the disable once image loading has been built */
+/* eslint-disable-next-line no-unused-vars */
 async function loadImages(resolvedPath, filePath) {
   throw new Error(
     'The fetch image file function has not been written for fs yet',
   );
 }
 
-async function fetchRelativeFile({ filePath, pkgJSON, rootDir }) {
+async function loadRelativeFile({ filePath, pkgJSON, rootDir }) {
   // This is where it will throw for jsx problems
   let absPath = path.resolve(rootDir, filePath);
   let resolvedPath = require.resolve(absPath);
   let extension = resolvedPath.match(/\.[^\.]+$/);
+  if (!extension) {
+    throw { key: 'fileNoExtension', path: resolvedPath };
+  }
 
   switch (extension[0]) {
     case '.png':
@@ -64,7 +70,7 @@ async function fetchRelativeFile({ filePath, pkgJSON, rootDir }) {
     case '.gif':
     case '.bmp':
     case '.tiff':
-      return loadImages(url, path);
+      return loadImages(resolvedPath, path);
     case '.json':
       return loadJSON(resolvedPath, filePath);
     case '.js':
@@ -76,7 +82,7 @@ async function fetchRelativeFile({ filePath, pkgJSON, rootDir }) {
   }
 }
 
-async function fetchInternalDependencies({
+async function loadInternalDependencies({
   files,
   deps,
   internalImports,
@@ -85,9 +91,9 @@ async function fetchInternalDependencies({
   priorPaths,
 }) {
   let newFiles = await Promise.all(
-    internalImports.map(filePath =>
-      fetchRelativeFile({ filePath: `./${filePath}`, pkgJSON, rootDir }),
-    ),
+    internalImports.map(filePath => {
+      return loadRelativeFile({ filePath: `./${filePath}`, pkgJSON, rootDir });
+    }),
   );
 
   let moreInternalImports = [];
@@ -96,7 +102,7 @@ async function fetchInternalDependencies({
     deps = Object.assign({}, deps, f.deps);
     f.internalImports.forEach(m =>
       // I think this is wrong
-      moreInternalImports.push(resolvePath(f.filePath, m)),
+      moreInternalImports.push(csb.resolvePath(f.filePath, m)),
     );
   }
 
@@ -108,7 +114,7 @@ async function fetchInternalDependencies({
     mpt => !priorPaths.includes(mpt),
   );
   if (moreInternalImports.length > 0) {
-    let moreFiles = await fetchInternalDependencies({
+    let moreFiles = await loadInternalDependencies({
       files,
       deps,
       rootDir,
@@ -130,7 +136,6 @@ const getAbsFilePath = relFilePath => {
     let firstPathResolve = path.resolve(relFilePath);
     return require.resolve(firstPathResolve);
   } catch (e) {
-    console.log(e);
     throw {
       key: 'noExampleFile',
       relFilePath,
@@ -150,12 +155,21 @@ const getPkgJSONPath = rootDir => {
   }
 };
 
-async function assembleFiles(relFilePath) {
-  let rootDir = await pkgDir(relFilePath);
-  let absFilePath = getAbsFilePath(relFilePath);
-  let pkgJSONPath = getPkgJSONPath(rootDir);
-  let pathRelativeToRoot = path.relative(path.dirname(absFilePath), rootDir);
+/*::
+type Config = {
+  name?: string,
+  extraFiles?: Files,
+  extraDependencies?: Dependencies,
+}
+*/
 
+async function assembleFiles(filePath /*: string */, config /*: ?Config */) {
+  let rootDir = await pkgDir(filePath);
+  let absFilePath = getAbsFilePath(filePath);
+  let pkgJSONPath = getPkgJSONPath(rootDir);
+  let relFilePath = path.relative(rootDir, filePath);
+
+  // $FlowFixMe - we genuinely want dynamic requires here
   let pkgJSON = require(pkgJSONPath);
   let exampleContent = fs.readFileSync(absFilePath, 'utf-8');
 
@@ -168,40 +182,39 @@ async function assembleFiles(relFilePath) {
     'example.js': {
       content: csb.replaceImports(
         file,
-        internalImports.map(m => [
-          m,
-          `./${resolvePath(pathRelativeToRoot, m)}`,
-        ]),
+        internalImports.map(m => [m, `./${csb.resolvePath(relFilePath, m)}`]),
       ),
     },
   });
 
-  let final = await fetchInternalDependencies({
+  let final = await loadInternalDependencies({
     files,
     deps,
     rootDir,
     pkgJSON,
-    internalImports: internalImports.map(m =>
-      resolvePath(pathRelativeToRoot, m),
-    ),
+    internalImports: internalImports.map(m => csb.resolvePath(relFilePath, m)),
     priorPaths: [],
   });
 
   if (Object.keys(final.files).length > 120) throw { key: 'tooManyModules' };
-  return finaliseCSB(final);
+  return csb.finaliseCSB(final, config);
 }
 
-async function assembleFilesAndPost(filePath) {
-  let { parameters } = await assembleFiles(filePath);
+async function assembleFilesAndPost(
+  filePath /*: string */,
+  config /*: Config */,
+) {
+  let { parameters } = await assembleFiles(filePath, config);
   let csbInfo = await csb.sendFilesToCSB(parameters);
   return csbInfo;
 }
 
+/* eslint-disable-next-line */
 module.exports = { assembleFilesAndPost, assembleFiles };
 
 // other stuff we need to handle:
 // loading nonJS files
 //   .jsx
 //   .png +
-// Add .bin
+//   .tsx
 // Check we never reach above our initial scope

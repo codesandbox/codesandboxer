@@ -1,4 +1,5 @@
 import fetchFiles from './index';
+/* eslint-disable-next-line no-unused-vars */
 import isomorphic from 'isomorphic-fetch';
 
 const BBInfo = {
@@ -19,30 +20,11 @@ const getMainObj = (userOpts = {}) => ({
 });
 
 it('should fetch an example from atlaskit', () => {
-  const config = {
-    examplePath: 'packages/elements/avatar/examples/01-basicAvatar.js',
-    pkgJSON: 'packages/elements/avatar/package.json',
-    gitInfo: BBInfo,
-    importReplacements: [['packages/elements/avatar/src', '@atlaskit/avatar']],
-    dependencies: { '@atlaskit/avatar': 'latest' },
-  };
   return fetchFiles(getMainObj()).then(res => {
     expect(res.files).toMatchSnapshot();
   });
 });
 it('should fetch an example from react-select', () => {
-  const GHInfo = {
-    name: 'JedWatson',
-    repository: 'react-select',
-    branch: 'f95a710b9e8a7b6134dd38afcf83f05c0f09f71e',
-    host: 'github',
-  };
-
-  const config = {
-    examplePath: 'docs/home/examples/BasicSingle.js',
-    gitInfo: GHInfo,
-    dependencies: { 'react-select': 'latest' },
-  };
   return fetchFiles(getMainObj()).then(res => {
     expect(res.files).toMatchSnapshot();
   });

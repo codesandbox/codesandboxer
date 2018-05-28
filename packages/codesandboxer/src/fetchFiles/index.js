@@ -2,20 +2,11 @@
 import resolvePath from '../utils/resolvePath';
 import replaceImports from '../replaceImports';
 
-import resolveFilePath from './resolveFilePath';
 import ensureExample from './ensureExample';
 import ensurePKGJSON from './ensurePkgJSON';
 import fetchInternalDependencies from './fetchInternalDependencies';
 
-import type {
-  Package,
-  GitInfo,
-  Dependencies,
-  Import,
-  Files,
-  Config,
-} from '../types';
-import finaliseCSB from './finaliseCSB';
+import type { Package, GitInfo, Dependencies, Import, Files } from '../types';
 import { baseFiles } from '../constants';
 
 export default async function({
@@ -23,10 +14,7 @@ export default async function({
   pkgJSON,
   gitInfo,
   importReplacements,
-  dependencies = {},
-  providedFiles = {},
   example,
-  name,
   allowJSX,
 }: {
   examplePath: string,
@@ -70,5 +58,5 @@ export default async function({
     importReplacements,
     config,
   );
-  return finaliseCSB(final, providedFiles, dependencies, name);
+  return final;
 }

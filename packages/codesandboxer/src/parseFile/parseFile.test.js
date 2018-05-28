@@ -15,17 +15,17 @@ const fakePKGJSON = {
 const codeImportTests = [
   {
     name: 'simple import',
-    code: `import a from 'b'`,
+    code: 'import a from \'b\'',
     deps: { b: 'v1.0.0' },
   },
   {
     name: 'spread import',
-    code: `import { a } from 'b'`,
+    code: 'import { a } from \'b\'',
     deps: { b: 'v1.0.0' },
   },
   {
     name: 'two imports',
-    code: `import a from 'b' import c from 'd'`,
+    code: 'import a from \'b\' import c from \'d\'',
     deps: { b: 'v1.0.0', d: '2.0.0' },
   },
   {
@@ -36,7 +36,7 @@ import c from 'd'`,
   },
   {
     name: 'two spread imports',
-    code: `import { a, b } from 'c'`,
+    code: 'import { a, b } from \'c\'',
     deps: { c: '2.1.0' },
   },
   {
@@ -49,22 +49,22 @@ import c from 'd'`,
   },
   {
     name: 'no spaces',
-    code: `import {a} from 'b'`,
+    code: 'import {a} from \'b\'',
     deps: { b: 'v1.0.0' },
   },
   {
     name: 'dev and peer deps',
-    code: `import {a} from 't' import s from 'z' import y from 'x'`,
+    code: 'import {a} from \'t\' import s from \'z\' import y from \'x\'',
     deps: { t: '^15.7.1', z: 'v1.1.0', x: 'v1.2.0' },
   },
   {
     name: 'relativeImport',
-    code: `import {a} from './c'`,
-    internal: [[`import {a} from './c'`, './c']],
+    code: 'import {a} from \'./c\'',
+    internal: [['import {a} from \'./c\'', './c']],
   },
   {
     name: 'when import cannot be found',
-    code: `import something from 'unfound-dep'`,
+    code: 'import something from \'unfound-dep\'',
     // The pkgJSON main dep is always included
     deps: { d: '2.0.0' },
   },
@@ -80,17 +80,17 @@ cases(
   [
     {
       name: 'simple parse',
-      file: `import a from 'b'; import c from './c'`,
+      file: 'import a from \'b\'; import c from \'./c\'',
       pkgJSON: fakePKGJSON,
     },
     {
       name: 'simple parse file promise',
-      file: Promise.resolve(`import a from 'b'; import c from './c'`),
+      file: Promise.resolve('import a from \'b\'; import c from \'./c\''),
       pkgJSON: fakePKGJSON,
     },
     {
       name: 'simple parse pkgJSON promise',
-      file: `import a from 'b'; import c from './c'`,
+      file: 'import a from \'b\'; import c from \'./c\'',
       pkgJSON: Promise.resolve(fakePKGJSON),
     },
     {

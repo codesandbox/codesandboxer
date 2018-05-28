@@ -10,7 +10,7 @@ export default function replaceImport(
   if (oldSource.match(/\*$/)) {
     matchString = `(import [^"']+ from ["'])${oldSource.replace(
       /\*$/,
-      `([^"']*`,
+      '([^"\']*',
     )}["'])`;
   } else {
     matchString = `(import [^"']+ from ["'])${oldSource}(["'])`;

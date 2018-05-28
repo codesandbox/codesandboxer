@@ -1,6 +1,7 @@
 import cases from 'jest-in-case';
 import fetchRelativeFile from './';
 import getUrl from './getUrl';
+/* eslint-disable-next-line no-unused-vars */
 import isomorphic from 'isomorphic-unfetch';
 import pkgJSON from '../../../../package.json';
 const GHConfig = {
@@ -8,13 +9,6 @@ const GHConfig = {
   repository: 'react-codesandboxer',
   branch: 'db34f2a24ae80b103ba19abb3d38fcde21df7038',
   host: 'github',
-};
-
-const BBConfig = {
-  account: 'atlassian',
-  repository: 'atlaskit-mk-2',
-  branch: '6546190ec6d8e1e47566882177fa941bcb8bf576',
-  host: 'bitbucket',
 };
 
 cases(
@@ -86,7 +80,7 @@ cases(
 cases(
   'getUrl()',
   ({ path, expectedType }) => {
-    const { fileType, url } = getUrl(path, GHConfig);
+    const { fileType } = getUrl(path, GHConfig);
     expect(fileType).toBe(expectedType);
   },
   [

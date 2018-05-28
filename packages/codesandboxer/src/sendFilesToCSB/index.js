@@ -3,7 +3,9 @@ import { getSandboxUrl } from '../constants';
 import 'isomorphic-unfetch';
 import FormData from 'form-data';
 
-async function sendFilesToCSB(parameters: string) {
+async function sendFilesToCSB(
+  parameters: string,
+): Promise<{ sandboxId: string, sandboxUrl: string }> {
   let formData = new FormData();
   formData.append('parameters', parameters);
 

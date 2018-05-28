@@ -26,29 +26,49 @@ You can use this purely to help format your files for codesandbox, or you can re
 
 ## API
 
-The two most important pieces of API are `fetchFiles` which will fetch all files needed for a parsed example, and `sendFilesToCSB`, which takes the output of `fetchFiles` and deploys it to `codesandboxer`.
+### Quick Start
+
+There is an assumed workflow to codesandboxer:
+
+```js
+import {
+  fetchFiles,
+  finaliseCSB,
+  sendFilesToCSB
+} from 'codesandboxer'
+
+/*
+fetchedInfo is an object containing `files`, the internal exports of the target file, and `dependencies`, the external dependencies of all files.
+*/
+let fetchedInfo = await fetchFiles({
+  examplePath: 'fixtures/simple'
+  gitInfo: {
+    host: 'github',
+    account: 'Noviny',
+    repository: 'codesandboxer',
+  }
+})
+
+// This also returns a finalised files and finalised dependencies property, in case you want to inrospect those before sending.
+let finalisedInformation = finaliseCSB(fetchedInfo)
+let csbInfo = await sendFilesToCSB(finalisedInformation.parameters)
+console.log('Our sandbox\'s ID:', csbInfo.sandboxId)
+console.log('Simple sandbox URL:', csbInfo.sandboxUrl)
+```
+
+In addition to these three main functions in the workflow, there are also several helper functions that can be used separately. We are going to look at the three main functions first, then the helper functions.
 
 ### fetchFiles()
 
 `fetchFiles` takes in the necessary information to assemble your files bundle, and returns a promise with with an object that contains:
 
-files: Your files in the format of
+`files`: An object of the files that are to be included in the bundle, with the entry file named as 'example.js'
 
-```
-{
-  fileName: {
-    content: string
-  }
-}
-```
+`dependencies`: An object containing all the external dependencies that will be required from npm to assemble your package.
 
-which is accepted by codesandbox.
+It takes a single argument which is an object, the properties of which are detailed below.
 
-dependencies: All the dependencies that codesandbox will be asked to rely on by your example.
-
-parameters: A hash that can be used to generate the sandbox, and the best data to send to codesandbox's API.
-
-It takes a single argument which is an object with the following properties:
+Note that only the examplePath and gitInfo are required. Everything else can be inferred.
 
 #### `examplePath`: string
 
@@ -81,11 +101,25 @@ If you pass in a path ending in a \*, it will replace all that match the start o
 
 We also expose the logic that replaces imports as `replaceImports()`, in case you want to transform a file before passing it to us.
 
-#### dependencies
+#### example
 
-An object with packages formatted in the same way as the dependencies in a `package.json` which will always be included in a sandbox, even if it is not found within the example's tree.
+If you do not want the example content to be fetched (for example, you have access to the raw code, or want to transform it yourself before analysis), you can pass in the example file as raw here (just a string). You can also pass a promise that resolves to an example's file's contents.
 
-#### providedFiles
+#### allowJSX
+
+A boolean that will check for `.jsx` files when trying to resolve a file, in addition to `.js` and `.json`. This is false by default.
+
+### finaliseCSB(compiledInfo, config)
+
+The FinaliseCSB function is used to generate a parameter hash of the file contents that can be sent to codesandbox using `sendFilesToCSB`
+
+The config object is optional, and can have any of the following properties:
+
+#### name
+
+The name for the sandbox once created.
+
+#### extraFiles
 
 Pass in files separately to fetching them. Useful to go alongisde specific replacements in importReplacements.
 
@@ -103,17 +137,9 @@ The filename is the absolute path where it will be created on CodeSandbox, and t
 
 If a fileName exists in your provided files, it will not be fetched when it is referenced.
 
-#### example
+#### extraDependencies
 
-If you do not want the example content to be fetched (for example, you have access to the raw code, or want to transform it yourself before analysis), you can pass in the example file as raw here (just a string). You can also pass a promise that resolves to an example's file's contents.
-
-#### name
-
-The name for the sandbox once created.
-
-#### allowJSX
-
-A boolean that will check for `.jsx` files when trying to resolve a file, in addition to `.js` and `.json`. This is false by default.
+An object with packages formatted in the same way as the dependencies in a `package.json` which will always be included in a sandbox, even if it is not found within the example's tree.
 
 ### sendFilesToCSB()
 

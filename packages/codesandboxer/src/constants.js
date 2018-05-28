@@ -1,7 +1,8 @@
 // @flow
 import type { Dependencies } from './types';
 
-export const importPattern = `(?:import [^"']+|export {[^}]+}) from ["']([^"']+)["']`;
+export const importPattern =
+  '(?:import [^"\']+|export {[^}]+}) from ["\']([^"\']+)["\']';
 
 export const baseFiles = {
   'index.html': {
@@ -10,18 +11,18 @@ export const baseFiles = {
   'index.js': {
     content: `/**
   This CodeSandbox has been automatically generated using
-  \`react-codesandboxer\`. If you're curious how that happened, you can
-  check out our docs here: https://github.com/noviny/react-codesandboxer
+  \`codesandboxer\`. If you're curious how that happened, you can
+  check out our docs here: https://github.com/noviny/codesandboxer
 
   If you experience any struggles with this sandbox, please raise an issue
   on github. :)
 */
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Example from './example';
+import App from './example';
 
 ReactDOM.render(
-<Example />,
+<App />,
 document.getElementById('root')
 );`,
   },
@@ -29,7 +30,7 @@ document.getElementById('root')
 
 export const newpkgJSON = (
   dependencies: Dependencies,
-  name?: string = 'react-codesandboxer-example',
+  name?: string = 'codesandboxer-example',
 ) => `{
   "name": "${name}",
   "version": "0.0.0",
