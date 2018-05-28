@@ -1,7 +1,7 @@
 // @flow
 import getAllImports from '../utils/getAllImports';
 import parseDeps from './parseDeps';
-import type { Import, Package, parsedFileFirst } from '../types';
+import type { Package, parsedFileFirst } from '../types';
 
 const parseFile = async (
   file: Promise<string> | string,

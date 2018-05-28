@@ -19,19 +19,23 @@ const resolvePath = (basePath: string, relativePath: string): string => {
     // TODO: Discuss what a good 'failcase' behaviour is for paths we can't resolve
     return basePath;
   }
-
+  let val = '';
   switch (rel[0]) {
     case '.':
-      return base
+      val = base
         .slice(0, -1)
         .concat(rel.slice(1))
         .join('/');
+      break;
     case '..':
-      return rp2(base.slice(0, -1), rel);
+      val = rp2(base.slice(0, -1), rel);
+      break;
     default:
       // TODO: Decide if this is correct or terribly wrong
-      return base.concat(rel).join('/');
+      val = base.concat(rel).join('/');
   }
+
+  return val;
 };
 
 export default resolvePath;

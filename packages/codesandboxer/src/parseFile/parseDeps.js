@@ -31,6 +31,8 @@ const parseDeps = (
   let internalImports = [];
   // This is a common pattern of going over mpt of imports. Have not found a neat function extraction for it.
   for (let mpt of imports) {
+    /* We are naming complete for readability, however the variable is not used. */
+    /* eslint-disable-next-line no-unused-vars */
     let [complete, name] = mpt;
     if (/^\./.test(name)) {
       internalImports.push(mpt);

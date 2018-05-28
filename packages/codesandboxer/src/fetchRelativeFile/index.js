@@ -1,5 +1,4 @@
 // @flow
-import resolvePath from '../utils/resolvePath';
 import parseFile from '../parseFile';
 import replaceImports from '../replaceImports';
 import absolutesToRelative from '../utils/absolutesToRelative';
@@ -9,8 +8,6 @@ import type {
   Package,
   GitInfo,
   ParsedFile,
-  Dependencies,
-  Import,
   Config,
 } from '../types';
 
@@ -18,19 +15,8 @@ import type {
 This is modified from the canvas answer here:
 https://stackoverflow.com/questions/6150289/how-to-convert-image-into-base64-string-using-javascript
 */
-const supportedFiles = ['.js', '.jsx', '.json'];
-
-const supportedImageFormats = [
-  '.png',
-  '.jpeg',
-  '.jpg',
-  '.gif',
-  '.bmp',
-  '.tiff',
-];
-
 function fetchImage(url, path): Promise<ParsedFile> {
-  return new Promise((resolve, reject) => {
+  return new Promise((resolve) => {
     var img = new Image();
     img.crossOrigin = 'Anonymous';
     img.src = url;
@@ -111,7 +97,7 @@ let fetchProbablyJS = (url, path, pkg, importReplacements, config) => {
     .catch(e => catchBlock(e, url, path, pkg, importReplacements, '.json'))
     .catch(e => {
       if (config.allowJSX)
-        return catchBlock(e, url, path, pkg, importReplacements, '.jsx');
+        {return catchBlock(e, url, path, pkg, importReplacements, '.jsx');}
       else throw e;
     })
     .catch(e => catchBlock(e, url, path, pkg, importReplacements, '/index.js'))
@@ -120,7 +106,7 @@ let fetchProbablyJS = (url, path, pkg, importReplacements, config) => {
     )
     .catch(e => {
       if (config.allowJSX)
-        return catchBlock(e, url, path, pkg, importReplacements, '/index.jsx');
+        {return catchBlock(e, url, path, pkg, importReplacements, '/index.jsx');}
       else throw e;
     });
 };
@@ -128,7 +114,7 @@ let fetchProbablyJS = (url, path, pkg, importReplacements, config) => {
 let fetchFileContents = (
   url,
   path,
-  { isImage, fileType, pkg, importReplacements },
+  { fileType, pkg, importReplacements },
   config,
 ): Promise<ParsedFile> => {
   switch (fileType) {

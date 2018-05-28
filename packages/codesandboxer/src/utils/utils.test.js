@@ -6,15 +6,15 @@ import absolutesToRelative from './absolutesToRelative';
 import path from 'path';
 
 const codeImportTests = [
-  { name: 'simple import', code: `import a from 'b'` },
-  { name: 'spread import', code: `import { a } from 'b'` },
-  { name: 'two imports', code: `import a from 'b' import c from 'd'` },
+  { name: 'simple import', code: 'import a from \'b\'' },
+  { name: 'spread import', code: 'import { a } from \'b\'' },
+  { name: 'two imports', code: 'import a from \'b\' import c from \'d\'' },
   {
     name: 'multiline imports',
     code: `import a from 'b'
 import c from 'd'`,
   },
-  { name: 'two spread imports', code: `import { a, b } from 'c'` },
+  { name: 'two spread imports', code: 'import { a, b } from \'c\'' },
   {
     name: 'two spread imports multiline',
     code: `import {
@@ -22,36 +22,36 @@ import c from 'd'`,
   b
 } from 'c'`,
   },
-  { name: 'no spaces', code: `import {a} from 'b'` },
+  { name: 'no spaces', code: 'import {a} from \'b\'' },
   {
     name: 'dev and peer deps',
-    code: `import {a} from 't' import s from 'z' import y from 'x'`,
+    code: 'import {a} from \'t\' import s from \'z\' import y from \'x\'',
   },
   {
     name: 'relativeImport',
-    code: `import {a} from './c'`,
+    code: 'import {a} from \'./c\'',
   },
   {
     name: 'using regex pattern',
-    code: `import a from './c/somewhere' import b from './c/anywhere'`,
+    code: 'import a from \'./c/somewhere\' import b from \'./c/anywhere\'',
     old: './c/*',
     new: 'c/',
   },
   {
     name: 'import then immediately export',
-    code: `export { default } from './abc'`,
+    code: 'export { default } from \'./abc\'',
     old: './abc',
     new: './cde',
   },
   {
     name: 'import then immediately export as value',
-    code: `export { default as something } from './abc'`,
+    code: 'export { default as something } from \'./abc\'',
     old: './abc',
     new: './cde',
   },
   {
     name: 'import then immediately export not default',
-    code: `export { urd as something } from './abc' } from 'esk'`,
+    code: 'export { urd as something } from \'./abc\' } from \'esk\'',
     old: './abc',
     new: './cde',
   },
@@ -95,6 +95,8 @@ cases(
       relativePath: './zxy',
       returnedPath: 'a/b/zxy',
     },
+    { basePath: '..', relativePath: '../z', returnedPath: 'z' },
+    { only: true, basePath: '../..', relativePath: './a', returnedPath: '../a' },
   ],
 );
 
