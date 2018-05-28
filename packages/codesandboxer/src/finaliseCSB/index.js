@@ -16,13 +16,17 @@ const ensureReact = deps => {
 
 export default function(
   { files, deps }: { files: Files, deps: Dependencies },
-  providedFiles?: Files,
-  passedDeps?: Dependencies,
-  name?: string,
+  config: ?{
+    extraFiles?: Files,
+    extraDependencies?: Dependencies,
+    name?: string,
+  },
 ) {
+  if (!config) config = {};
+  let { extraFiles, extraDependencies, name } = config;
   let dependencies = {
     ...deps,
-    ...passedDeps,
+    ...extraDependencies,
   };
 
   ensureReact(dependencies);
@@ -32,7 +36,7 @@ export default function(
     'package.json': {
       content: newpkgJSON(dependencies, name),
     },
-    ...providedFiles,
+    ...extraFiles,
   };
   const parameters = getParameters({
     files: finalFiles,

@@ -109,9 +109,11 @@ If you do not want the example content to be fetched (for example, you have acce
 
 A boolean that will check for `.jsx` files when trying to resolve a file, in addition to `.js` and `.json`. This is false by default.
 
-### finaliseCSB(compiledInfo, extraFiles, extraDependencies, name)
+### finaliseCSB(compiledInfo, config)
 
 The FinaliseCSB function is used to generate a parameter hash of the file contents that can be sent to codesandbox using `sendFilesToCSB`
+
+The config object is optional, and can have any of the following properties:
 
 #### name
 
