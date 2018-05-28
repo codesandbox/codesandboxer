@@ -51,35 +51,20 @@ export default () => (
   "index.js": Object {
     "content": "/**
   This CodeSandbox has been automatically generated using
-  \`react-codesandboxer\`. If you're curious how that happened, you can
-  check out our docs here: https://github.com/noviny/react-codesandboxer
+  \`codesandboxer\`. If you're curious how that happened, you can
+  check out our docs here: https://github.com/noviny/codesandboxer
 
   If you experience any struggles with this sandbox, please raise an issue
   on github. :)
 */
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Example from './example';
+import App from './example';
 
 ReactDOM.render(
-<Example />,
+<App />,
 document.getElementById('root')
 );",
-  },
-  "package.json": Object {
-    "content": "{
-  \\"name\\": \\"react-codesandboxer-example\\",
-  \\"version\\": \\"0.0.0\\",
-  \\"description\\": \\"A simple example deployed using react-codesandboxer\\",
-  \\"main\\": \\"index.js\\",
-  \\"dependencies\\": {
-    \\"react\\": \\"15.6.0 - 16.2.0\\",
-    \\"styled-components\\": \\"1.4.6 - 3\\",
-    \\"@atlaskit/theme\\": \\"^2.4.0\\",
-    \\"@atlaskit/avatar\\": \\"latest\\",
-    \\"react-dom\\": \\"15.6.0 - 16.2.0\\"
-  }
-}",
   },
   "packages/elements/avatar/examples-util/helpers.js": Object {
     "content": "// @flow
@@ -203,35 +188,20 @@ export default () => (
   "index.js": Object {
     "content": "/**
   This CodeSandbox has been automatically generated using
-  \`react-codesandboxer\`. If you're curious how that happened, you can
-  check out our docs here: https://github.com/noviny/react-codesandboxer
+  \`codesandboxer\`. If you're curious how that happened, you can
+  check out our docs here: https://github.com/noviny/codesandboxer
 
   If you experience any struggles with this sandbox, please raise an issue
   on github. :)
 */
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Example from './example';
+import App from './example';
 
 ReactDOM.render(
-<Example />,
+<App />,
 document.getElementById('root')
 );",
-  },
-  "package.json": Object {
-    "content": "{
-  \\"name\\": \\"react-codesandboxer-example\\",
-  \\"version\\": \\"0.0.0\\",
-  \\"description\\": \\"A simple example deployed using react-codesandboxer\\",
-  \\"main\\": \\"index.js\\",
-  \\"dependencies\\": {
-    \\"react\\": \\"15.6.0 - 16.2.0\\",
-    \\"styled-components\\": \\"1.4.6 - 3\\",
-    \\"@atlaskit/theme\\": \\"^2.4.0\\",
-    \\"@atlaskit/avatar\\": \\"latest\\",
-    \\"react-dom\\": \\"15.6.0 - 16.2.0\\"
-  }
-}",
   },
   "packages/elements/avatar/examples-util/helpers.js": Object {
     "content": "// @flow
