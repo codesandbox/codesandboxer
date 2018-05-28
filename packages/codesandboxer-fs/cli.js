@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+// @flow
 'use strict';
 
 const meow = require('meow');
@@ -12,9 +13,16 @@ let cli = meow(
       upload the file, and other files within its package, to codesandbox.
 
     Options
-      --dry, -d Instead of deploying, display what will be deployed
-      --allowJSXExtension Parse jsx files as if they were javascript files
-      --list, -l Print out the array of files that are uploaded
+      --dry, -D Instead of deploying, display what will be deployed
+      --name, -n Name your sandbox
+
+      Unimplemented options (coming soon)
+      --allowedExtensions List of extensions that will be treated as if they
+      were javascript files. Most common examples are .jsx or .ts files
+      --files, -f Provide a list of files that will be included even if they do
+      not end up in the graph. Format: fileA.js,fileB.js,fileC.js
+      --dependencies -d A list of dependencies to include, even if they are not
+      mentioned
 
     Examples
       $ codesandboxer some/react/component.js
@@ -23,39 +31,57 @@ let cli = meow(
     flags: {
       dry: {
         type: 'boolean',
-        alias: 'd',
+        alias: 'D',
       },
       list: {
         type: 'boolean',
         alias: 'l',
       },
+      name: {
+        type: 'string',
+        alias: 'n',
+      },
     },
   },
 );
 
-async function CLIStuff(cli) {
-  let [filePath] = cli.input;
+async function CLIStuff(cliData) {
+  let [filePath] = cliData.input;
 
-  if (cli.flags.allowJSXExtension) {
+  if (cliData.flags.allowJSXExtension) {
     return console.error(
       'The allowJSXExtension flag has not yet been implemented',
     );
   }
-  if (cli.flags.list) {
+  if (cliData.flags.list) {
     return console.error('The list flag has not yet been implemented');
   }
+  if (cliData.flags.files) {
+    return console.error(
+      'We have not implemented the files flag yet to allow you to pass in custom files',
+    );
+  }
+  if (cliData.flags.dependencies) {
+    return console.error('We have not implemented the dependencies flag yet.');
+  }
 
-  if (!filePath)
+  if (!filePath) {
     return console.error(
       'No filePath was passed in. Please pass in the path to the file you want to sandbox',
     );
+  }
 
   try {
-    if (cli.flags.dry) {
+    if (cliData.flags.dry) {
       let results = await assembleFiles(filePath);
-      console.log(results);
+      console.log(
+        'dry done, here is a list of the files to be uploaded:\n',
+        Object.keys(results.files).join('\n'),
+      );
     } else {
-      let results = await assembleFilesAndPost(filePath);
+      let results = await assembleFilesAndPost(filePath, {
+        name: cliData.flags.name,
+      });
       console.log(results);
     }
   } catch (e) {
@@ -73,7 +99,7 @@ async function CLIStuff(cli) {
         );
       case 'tooManyModules':
         return console.error(
-          `The number of files this will upload to codesandbox is Too Damn High, and we can't do it, sorry.`,
+          "The number of files this will upload to codesandbox is Too Damn High, and we can't do it, sorry.",
         );
       default:
         return console.error(e);
