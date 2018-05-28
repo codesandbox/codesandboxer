@@ -9,7 +9,7 @@
     "codesandboxer": "^0.2.1",
     "react-node-resolver": "^1.0.1"
   },
-  "repository": "https://github.com/Noviny/react-codesandboxer.git",
+  "repository": "https://github.com/Noviny/codesandboxer.git",
   "files": [
     "dist"
   ]

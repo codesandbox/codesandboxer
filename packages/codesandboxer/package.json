@@ -11,7 +11,7 @@
     "form-data": "^2.3.2",
     "babel-runtime": "^6.26.0"
   },
-  "repository": "https://github.com/Noviny/react-codesandboxer.git",
+  "repository": "https://github.com/Noviny/codesandboxer.git",
   "files": [
     "dist"
   ]
