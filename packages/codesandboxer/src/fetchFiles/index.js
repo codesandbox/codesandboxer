@@ -59,5 +59,4 @@ export default async function({
     config,
   );
   return final;
-  // return finaliseCSB(final, providedFiles, dependencies, name);
 }
