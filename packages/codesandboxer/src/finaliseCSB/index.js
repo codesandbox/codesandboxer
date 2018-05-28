@@ -1,6 +1,6 @@
 // @flow
 import { getParameters } from 'codesandbox/lib/api/define';
-import type { Files, Dependencies, Package } from '../types';
+import type { Files, Dependencies } from '../types';
 import { newpkgJSON } from '../constants';
 
 const ensureReact = deps => {
@@ -16,8 +16,8 @@ const ensureReact = deps => {
 
 export default function(
   { files, deps }: { files: Files, deps: Dependencies },
-  providedFiles: Files,
-  passedDeps: Dependencies,
+  providedFiles?: Files,
+  passedDeps?: Dependencies,
   name?: string,
 ) {
   let dependencies = {
