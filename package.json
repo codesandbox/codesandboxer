@@ -47,6 +47,7 @@
     "react-dom": "^0.14.9 || ^15.3.0 || ^16.0.0-rc || ^16.0"
   },
   "dependencies": {
+    "axios": "^0.18.0",
     "babel-runtime": "^6.26.0",
     "bolt": "^0.20.5",
     "codesandbox": "^1.1.14",
@@ -54,7 +55,6 @@
     "isomorphic-unfetch": "^2.0.0",
     "meow": "^5.0.0",
     "pkg-dir": "^2.0.0",
-    "axios": "^0.18.0",
     "pkg-up": "^2.0.0",
     "react-node-resolver": "^1.0.1"
   },
