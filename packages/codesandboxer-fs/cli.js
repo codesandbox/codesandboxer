@@ -33,13 +33,28 @@ let cli = meow(
         type: 'boolean',
         alias: 'D',
       },
-      list: {
-        type: 'boolean',
-        alias: 'l',
-      },
       name: {
         type: 'string',
         alias: 'n',
+      },
+      allowedExtensions: {
+        type: 'string',
+        description: 'Pass in extensions that can be used in addition to .js',
+        help: 'allowedExtensions is not yet implemented',
+      },
+      files: {
+        alias: 'f',
+        type: 'string',
+        description:
+          'Provide a list of files that will be included even if they do',
+        help: 'files is not yet implemented',
+      },
+      dependencies: {
+        alias: 'd',
+        type: 'string',
+        description:
+          'A list of dependencies to include, even if they are not mentioned in the bundled files',
+        help: 'dependencies is not yet implemented',
       },
     },
   },

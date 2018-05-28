@@ -491,16 +491,16 @@ codesandbox@^1.1.14:
     shortid "^2.2.8"
     update-notifier "^2.2.0"
 
-codesandboxer-fs@^0.1.1:
-  version "0.1.1"
-  resolved "https://registry.yarnpkg.com/codesandboxer-fs/-/codesandboxer-fs-0.1.1.tgz#a8fd8bfd642558bd98d862272c9a7d0247c6af77"
+codesandboxer-fs@^0.2.0:
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/codesandboxer-fs/-/codesandboxer-fs-0.2.0.tgz#53a50f9fc485b2dcaa7513ec0934752623967f46"
   dependencies:
-    codesandboxer "^0.2.4"
+    codesandboxer "^0.3.0"
     pkg-dir "^2.0.0"
 
-codesandboxer@^0.2.4:
-  version "0.2.4"
-  resolved "https://registry.yarnpkg.com/codesandboxer/-/codesandboxer-0.2.4.tgz#9fbd34a359cf8ac20939bec62caac618dfeddb1f"
+codesandboxer@^0.3.0:
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/codesandboxer/-/codesandboxer-0.3.0.tgz#27db0a95276804777ae71dc216e7222c38c46e1c"
   dependencies:
     babel-runtime "^6.26.0"
     codesandbox "^1.1.14"
@@ -760,7 +760,7 @@ eslint-visitor-keys@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/eslint-visitor-keys/-/eslint-visitor-keys-1.0.0.tgz#3f3180fb2e291017716acb4c9d6d5b5c34a6a81d"
 
-eslint@^4.11.0:
+eslint@^4.19.1:
   version "4.19.1"
   resolved "https://registry.yarnpkg.com/eslint/-/eslint-4.19.1.tgz#32d1d653e1d90408854bfb296f076ec7e186a300"
   dependencies:

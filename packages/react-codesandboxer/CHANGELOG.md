@@ -1,5 +1,15 @@
 # Changelog
 
+## 2.1.2
+
+Update codesandboxer version so the changes in 2.1.1 do not break your app
+
+## 2.1.1
+
+Update version of codesandboxer
+This mostly incorporates API changes with codesandboxer that should not impact
+those using react-coesandboxer
+
 ## 2.1.0
 
 Add new prop `afterDeployError`, to allow responding to errors.
@@ -25,9 +35,9 @@ This also means we are using fetch instead of form submission, which means that 
 
 There's also a small breaking change to handle a bug.
 
-- Breaking: dependencies that cannot be found in the passed in package.json will now no longer be added to the sandbox dependencies at 'latest'. This solves a bug where packages that were reaching into a file would have all those reach-ins added as dependencies.
-- Breaking: `SkipDeploy` has been renamed to `SkipRedirect` to more accurately support its role, and make the embed process naming make sense.
-- Breaking: Most logic has been pushed into `codesandboxer`, a standalone package to allow the complex logic in that to exist outside a single react component.
+* Breaking: dependencies that cannot be found in the passed in package.json will now no longer be added to the sandbox dependencies at 'latest'. This solves a bug where packages that were reaching into a file would have all those reach-ins added as dependencies.
+* Breaking: `SkipDeploy` has been renamed to `SkipRedirect` to more accurately support its role, and make the embed process naming make sense.
+* Breaking: Most logic has been pushed into `codesandboxer`, a standalone package to allow the complex logic in that to exist outside a single react component.
 
 ## 1.0.0
 

@@ -39,6 +39,8 @@ which will be printed to your console.
 
 * `--dry -d` - this flag bundles the files, and prints them to the console, as well as the parameter to be sent to codesandbox.
 
+* `--name -n` - this flag names the created sandbox, making the base link more informative when shared.
+
 ## Why use this instead of the codesandbox cli?
 
 The codesandbox CLI is intended to upload an entire create-react-app project, and as such is not designed to cherry-pick a file. Codesandboxer's goal is fundamentally different, in that it wants to focus on a single component, such as an example. Codesandboxer is going to be more useful if you want to share proposed changes to a component within an existing project with someone, while codesandbox will be better for uploading and looking at an entire website.
