@@ -1,0 +1,42 @@
+{
+  "name": "Bitbucket Codesandboxer",
+  "description":
+    "Addon to display a 'Deploy to Codesandbox' button in Bitbucket",
+  "baseUrl": "https://lbatch2.ngrok.io/",
+  "key": "bb-codesandboxer",
+  "vendor": {
+    "name": "Ben Conolly"
+  },
+  "scopes": ["repository", "pullrequest"],
+  "authentication": {
+    "type": "none"
+  },
+  "contexts": ["personal"],
+  "modules": {
+    "webItem": [
+      {
+        "key": "bb-codesandboxer-pullrequest",
+        "tooltip": {
+          "value": "Deploy to Codesandbox"
+        },
+        "name": {
+          "value": "Deploy to Codesandbox"
+        },
+        "url":
+          "/index.html?url={repo_https_url}&pr_id={pullrequest.id}&commit={pullrequest.source.commit.hash}&title={pullrequest.title}",
+        "location": "org.bitbucket.pullrequest.summary.actions"
+      },
+      {
+        "key": "bb-codesandboxer-fileview",
+        "location": "org.bitbucket.source.file.actions",
+        "url": "/index.html?repoOwner={repository.owner.username}&repoSlug={repository.slug}&file={file.path}",
+        "name": {
+          "value": "Deploy to Codesandbox"
+        },
+        "params": {
+          "auiIcon": "aui-iconfont-upload"
+        }
+      }
+    ]
+  }
+}

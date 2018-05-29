@@ -1,0 +1,31 @@
+{
+  "name": "bitbucket-releases-addon",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Bitbucket addon for displaying releases section in PRs",
+  "scripts": {
+    "dev": "webpack-dev-server --mode development",
+    "build": "webpack -p",
+    "deploy": "yarn build && netlify deploy"
+  },
+  "author": "Luke Batchelor",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "babel-polyfill": "^6.26.0",
+    "codesandboxer": "^0.3.0",
+    "copy-webpack-plugin": "^4.5.1",
+    "css-loader": "^0.28.11",
+    "fetch-paginate": "^1.0.2",
+    "mini-css-extract-plugin": "^0.4.0",
+    "path-browserify": "^0.0.0",
+    "query-string": "^6.1.0",
+    "webpack": "^4.9.1",
+    "webpack-cli": "^2.1.4",
+    "webpack-dev-server": "^3.1.4"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.3",
+    "babel-loader": "^7.1.4",
+    "babel-preset-env": "^1.6.1"
+  }
+}
