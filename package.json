@@ -56,7 +56,8 @@
     "meow": "^5.0.0",
     "pkg-dir": "^2.0.0",
     "pkg-up": "^2.0.0",
-    "react-node-resolver": "^1.0.1"
+    "react-node-resolver": "^1.0.1",
+    "resolve": "^1.7.1"
   },
   "repository": "https://github.com/Noviny/codesandboxer.git",
   "bolt": {

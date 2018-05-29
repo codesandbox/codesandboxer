@@ -1,4 +1,4 @@
-const baseFiles = {
+const getBaseFiles = fileName => ({
   'index.html': {
     content: '<div id="root"></div>',
   },
@@ -13,7 +13,7 @@ const baseFiles = {
 */
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Component from './example';
+import Component from './${fileName}';
 
 ReactDOM.render(
   <div>
@@ -24,6 +24,17 @@ ReactDOM.render(
 document.getElementById('root')
 );`,
   },
-};
+});
 
-module.exports = { baseFiles };
+const baseExtensions = [
+  '.png',
+  '.jpeg',
+  '.jpg',
+  '.gif',
+  '.bmp',
+  '.tiff',
+  '.json',
+  '.js',
+];
+
+module.exports = { getBaseFiles, baseExtensions };
