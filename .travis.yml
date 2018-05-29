@@ -3,6 +3,7 @@ script:
   - yarn bolt
   - yarn test
   - yarn flow
+  - yarn lint
 cache: yarn
 node_js:
   - "node"
