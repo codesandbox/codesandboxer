@@ -11,39 +11,24 @@ const pkgDir = require('pkg-dir');
 
 let count = 1;
 
-const relToAbs = (filePath, resolvedPath) => {
-  let originFilePath = filePath.replace(/^\.\//, '');
-  let hasExtension = originFilePath.match(/\./);
-  let matcher;
+const relToRelPkgRoot = (resolvedPath, rootDir) =>
+  path.relative(rootDir, resolvedPath);
 
-  if (hasExtension) {
-    return originFilePath;
-  } else {
-    matcher = new RegExp(`${originFilePath}(.+)`);
-  }
-  let rp = resolvedPath.match(matcher);
-  if (rp) {
-    return rp[0];
-  } else {
-    throw { key: 'cannotResolvePath', path: resolvedPath };
-  }
-};
-
-async function loadJS(resolvedPath, pkgJSON, filePath) {
+async function loadJS(resolvedPath, pkgJSON, rootDir) {
   let content = fs.readFileSync(resolvedPath, 'utf-8');
   let file = await csb.parseFile(content, pkgJSON);
   return Object.assign({}, file, {
-    filePath: relToAbs(filePath, resolvedPath),
+    filePath: relToRelPkgRoot(resolvedPath, rootDir),
   });
 }
 
-async function loadJSON(resolvedPath, filePath) {
+async function loadJSON(resolvedPath, rootDir) {
   let file = fs.readFileSync(resolvedPath, 'utf-8');
   return {
     file,
     deps: {},
     internalImports: [],
-    filePath: relToAbs(filePath, resolvedPath),
+    filePath: relToRelPkgRoot(resolvedPath, rootDir),
   };
 }
 /* Remove the disable once image loading has been built */
@@ -72,9 +57,9 @@ async function loadRelativeFile({ filePath, pkgJSON, rootDir }) {
     case '.tiff':
       return loadImages(resolvedPath, path);
     case '.json':
-      return loadJSON(resolvedPath, filePath);
+      return loadJSON(resolvedPath, rootDir);
     case '.js':
-      return loadJS(resolvedPath, pkgJSON, filePath);
+      return loadJS(resolvedPath, pkgJSON, rootDir);
     default:
       throw new Error(
         `unparseable filetype: ${extension[0]} for file ${resolvedPath}`,

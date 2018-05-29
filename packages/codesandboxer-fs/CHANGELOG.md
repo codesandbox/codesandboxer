@@ -1,12 +1,16 @@
 # Changelog
 
+## 0.2.1
+
+Actually fix bug with path resolution.
+
 ## 0.2.0
 
 Using v0.3 of codesandboxer - API changes that have made fs work much more nicely
 with codesandboxer.
 dry flag is now '--dry, -D' instead of '--dry, -d' (this has been made so -d can be used with dependencies)
 Added '--name' flag, which allows you to name your sandbox
-Fixed a but with path resolution that would lead to trying to access non-existent files
+Fixed a bug with path resolution that would lead to trying to access non-existent files
 
 ## 0.1.0
 
