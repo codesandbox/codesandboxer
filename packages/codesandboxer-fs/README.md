@@ -27,7 +27,7 @@ The response will look something like
 ```json
 {
   sandboxId: "481nzy3v84",
-  sandboxUrl: "https://codesandbox.io/s/481nzy3v84?module=/example.js"
+  sandboxUrl: "https://codesandbox.io/s/481nzy3v84?module=/example"
 }
 ```
 
