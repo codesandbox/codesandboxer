@@ -16,4 +16,5 @@ export type {
   Package,
   Dependencies,
   Import,
+  ImportReplacement,
 } from './types';

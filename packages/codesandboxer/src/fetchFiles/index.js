@@ -6,7 +6,13 @@ import ensureExample from './ensureExample';
 import ensurePKGJSON from './ensurePkgJSON';
 import fetchInternalDependencies from './fetchInternalDependencies';
 
-import type { Package, GitInfo, Dependencies, Import, Files } from '../types';
+import type {
+  Package,
+  GitInfo,
+  Dependencies,
+  Files,
+  ImportReplacement,
+} from '../types';
 import { baseFiles } from '../constants';
 
 export default async function({
@@ -20,7 +26,7 @@ export default async function({
   examplePath: string,
   pkgJSON?: Package | string | Promise<Package | string>,
   gitInfo: GitInfo,
-  importReplacements: Array<Import>,
+  importReplacements: Array<ImportReplacement>,
   dependencies?: Dependencies,
   providedFiles?: Files,
   example?: string | Promise<string>,

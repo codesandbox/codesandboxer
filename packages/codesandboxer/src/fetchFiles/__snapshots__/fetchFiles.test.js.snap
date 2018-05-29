@@ -273,3 +273,140 @@ export const Block = ({
   },
 }
 `;
+
+exports[`should fetch an example from react-select 2`] = `
+Object {
+  "example.js": Object {
+    "content": "// @flow
+import React from 'react';
+import Avatar from '@atlaskit/avatar';
+import { Block, Gap } from './packages/elements/avatar/examples-util/helpers';
+
+export default () => (
+  <div>
+    <Block heading=\\"Circle\\">
+      <Avatar name=\\"xxlarge\\" size=\\"xxlarge\\" />
+      <Gap />
+      <Avatar name=\\"xlarge\\" size=\\"xlarge\\" presence=\\"online\\" />
+      <Gap />
+      <Avatar name=\\"large\\" size=\\"large\\" presence=\\"offline\\" />
+      <Gap />
+      <Avatar name=\\"medium\\" size=\\"medium\\" presence=\\"busy\\" />
+      <Gap />
+      <Avatar name=\\"small\\" size=\\"small\\" presence=\\"focus\\" />
+      <Gap />
+      <Avatar name=\\"xsmall\\" size=\\"xsmall\\" />
+    </Block>
+    <Block heading=\\"Square\\">
+      <Avatar appearance=\\"square\\" name=\\"xxlarge\\" size=\\"xxlarge\\" />
+      <Gap />
+      <Avatar
+        appearance=\\"square\\"
+        name=\\"xlarge\\"
+        size=\\"xlarge\\"
+        status=\\"approved\\"
+      />
+      <Gap />
+      <Avatar appearance=\\"square\\" name=\\"large\\" size=\\"large\\" status=\\"declined\\" />
+      <Gap />
+      <Avatar appearance=\\"square\\" name=\\"medium\\" size=\\"medium\\" status=\\"locked\\" />
+      <Gap />
+      <Avatar appearance=\\"square\\" name=\\"small\\" size=\\"small\\" />
+      <Gap />
+      <Avatar appearance=\\"square\\" name=\\"xsmall\\" size=\\"xsmall\\" />
+    </Block>
+  </div>
+);
+",
+  },
+  "index.html": Object {
+    "content": "<div id=\\"root\\"></div>",
+  },
+  "index.js": Object {
+    "content": "/**
+  This CodeSandbox has been automatically generated using
+  \`codesandboxer\`. If you're curious how that happened, you can
+  check out our docs here: https://github.com/noviny/codesandboxer
+
+  If you experience any struggles with this sandbox, please raise an issue
+  on github. :)
+*/
+import React from 'react';
+import ReactDOM from 'react-dom';
+import App from './example';
+
+ReactDOM.render(
+<App />,
+document.getElementById('root')
+);",
+  },
+  "packages/elements/avatar/examples-util/helpers.js": Object {
+    "content": "// @flow
+import React from 'react';
+import type { Node } from 'react';
+import styled from 'styled-components';
+import { colors, math, gridSize } from '@atlaskit/theme';
+
+const Wrapper = styled.div\`
+  margin-top: \${gridSize}px;
+\`;
+
+const ChildrenWrapper = styled.div\`
+  align-items: baseline;
+  color: \${colors.text};
+  display: flex;
+
+  > * {
+    margin-right: \${gridSize}px;
+  }
+\`;
+
+export const Note = styled.p\`
+  color: \${colors.N100};
+  font-size: \${props => (props.size === 'large' ? '1.15em' : '0.9rem')};
+  margin-top: \${math.divide(gridSize, 2)}px;
+  margin-bottom: \${math.multiply(gridSize, 2)}px;
+\`;
+
+export const Code = styled.code\`
+  background-color: \${colors.R50};
+  border-radius: 0.2em;
+  color: \${colors.R400};
+  font-size: 0.85em;
+  line-height: 1.1;
+  padding: 0.1em 0.4em;
+\`;
+
+export const Gap = styled.span\`
+  margin-right: \${gridSize}px;
+\`;
+// $FlowFixMe
+export const Dot = styled(Gap)\`
+  height: \${math.multiply(gridSize, 3)}px;
+  width: \${math.multiply(gridSize, 3)}px;
+\`;
+export const Heading = styled.div\`
+  color: \${colors.subtleHeading};
+  display: flex;
+  font-size: 0.8rem;
+  font-weight: 500;
+  margin-bottom: 0.5em;
+  text-transform: uppercase;
+\`;
+
+export const Block = ({
+  children,
+  heading,
+}: {
+  children: ?Node,
+  heading?: string,
+}) => (
+  <Wrapper>
+    {heading ? <Heading>{heading}</Heading> : null}
+    <ChildrenWrapper>{children}</ChildrenWrapper>
+  </Wrapper>
+);
+",
+  },
+}
+`;

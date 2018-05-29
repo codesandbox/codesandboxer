@@ -1,5 +1,11 @@
 // @flow
-import type { Files, Package, GitInfo, Import, Config } from '../types';
+import type {
+  Files,
+  Package,
+  GitInfo,
+  ImportReplacement,
+  Config,
+} from '../types';
 
 import fetchRelativeFile from '../fetchRelativeFile';
 import resolveFilePath from './resolveFilePath';
@@ -11,7 +17,7 @@ export default async function fetchInternalDependencies(
   pkg: Package,
   deps: { [string]: string },
   gitInfo: GitInfo,
-  importReplacements: Array<Import>,
+  importReplacements: Array<ImportReplacement>,
   config: Config,
 ) {
   let newFiles = await Promise.all(

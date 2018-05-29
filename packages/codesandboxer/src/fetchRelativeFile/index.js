@@ -9,6 +9,7 @@ import type {
   GitInfo,
   ParsedFile,
   Config,
+  ImportReplacement,
 } from '../types';
 
 /*
@@ -16,7 +17,7 @@ This is modified from the canvas answer here:
 https://stackoverflow.com/questions/6150289/how-to-convert-image-into-base64-string-using-javascript
 */
 function fetchImage(url, path): Promise<ParsedFile> {
-  return new Promise((resolve) => {
+  return new Promise(resolve => {
     var img = new Image();
     img.crossOrigin = 'Anonymous';
     img.src = url;
@@ -96,18 +97,18 @@ let fetchProbablyJS = (url, path, pkg, importReplacements, config) => {
   return fetchJS(url, path, pkg, importReplacements)
     .catch(e => catchBlock(e, url, path, pkg, importReplacements, '.json'))
     .catch(e => {
-      if (config.allowJSX)
-        {return catchBlock(e, url, path, pkg, importReplacements, '.jsx');}
-      else throw e;
+      if (config.allowJSX) {
+        return catchBlock(e, url, path, pkg, importReplacements, '.jsx');
+      } else throw e;
     })
     .catch(e => catchBlock(e, url, path, pkg, importReplacements, '/index.js'))
     .catch(e =>
       catchBlock(e, url, path, pkg, importReplacements, '/index.json'),
     )
     .catch(e => {
-      if (config.allowJSX)
-        {return catchBlock(e, url, path, pkg, importReplacements, '/index.jsx');}
-      else throw e;
+      if (config.allowJSX) {
+        return catchBlock(e, url, path, pkg, importReplacements, '/index.jsx');
+      } else throw e;
     });
 };
 
@@ -141,7 +142,7 @@ type HandleFileFetch = Promise<ParsedFile>;
 export default async function fetchRelativeFile(
   path: string,
   pkg: Package,
-  importReplacements: Array<[string, string]>,
+  importReplacements: Array<ImportReplacement>,
   gitInfo: GitInfo,
   config?: Config,
 ): HandleFileFetch {

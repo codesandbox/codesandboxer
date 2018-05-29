@@ -1,9 +1,6 @@
 // @flow
 import type { Dependencies } from './types';
 
-export const importPattern =
-  '(?:import [^"\']+|export {[^}]+}) from ["\']([^"\']+)["\']';
-
 export const baseFiles = {
   'index.html': {
     content: '<div id="root"></div>',
@@ -49,4 +46,4 @@ export const codesandboxURLJSON =
   'https://codesandbox.io/api/v1/sandboxes/define?json=1';
 
 export const getSandboxUrl = (id: string, type?: string = 's') =>
-  `https://codesandbox.io/${type}/${id}?module=/example.js`;
+  `https://codesandbox.io/${type}/${id}?module=/example`;
