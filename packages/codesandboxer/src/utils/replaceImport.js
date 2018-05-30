@@ -1,21 +1,23 @@
 // @flow
+import getRegexMatchStr from './getRegexMatchStr';
 
 export default function replaceImport(
   code: string,
   oldSource: string,
   newSource: string,
 ): string {
-  let matchString = '';
+  let matchString = oldSource;
 
   if (oldSource.match(/\*$/)) {
-    matchString = `(import [^"']+ from ["'])${oldSource.replace(
-      /\*$/,
-      '([^"\']*',
-    )}["'])`;
+    matchString = `${oldSource.replace(/\*$/, '()([^"\']*')}`;
   } else {
-    matchString = `(import [^"']+ from ["'])${oldSource}(["'])`;
+    matchString = `(${oldSource})(`;
   }
-  const oldImport = new RegExp(matchString, 'g');
 
-  return code.replace(oldImport, `$1${newSource}$2`);
+  let regexMatchStr = getRegexMatchStr(matchString);
+
+  let newRegex = new RegExp(regexMatchStr, 'g');
+  // $1 and $3 capture groups are used for 'require' statements, while $4 and $6
+  // are used for 'import' statements
+  return code.replace(newRegex, `$1$4${newSource}$3$6`);
 }

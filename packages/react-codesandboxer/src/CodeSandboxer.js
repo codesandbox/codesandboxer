@@ -132,7 +132,12 @@ export default class CodeSandboxDeployer extends Component<Props, State> {
 
     sendFilesToCSB(parameters)
       .then(({ sandboxId, sandboxUrl }) => {
-        this.setState({ sandboxId, sandboxUrl });
+        this.setState({
+          sandboxId,
+          sandboxUrl,
+          isDeploying: false,
+          isLoading: false,
+        });
         if (!skipRedirect) {
           window.open(sandboxUrl);
         }

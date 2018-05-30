@@ -1,6 +1,5 @@
 import cases from 'jest-in-case';
 import parseDeps from './parseDeps';
-import parsePkgName from './parsePkgName';
 import parseFile from './';
 import getAllImports from '../utils/getAllImports';
 
@@ -142,20 +141,4 @@ cases(
     expect(parsedImports.deps).toMatchObject(deps);
   },
   codeImportTests,
-);
-
-cases(
-  'parsePkgName()',
-  ({ name, result }) => {
-    let parsedName = parsePkgName(name);
-    expect(parsedName).toBe(result);
-  },
-  [
-    { name: '@space/pkg/something', result: '@space/pkg' },
-    { name: '@space/pkg/something/somewhere/whatever', result: '@space/pkg' },
-    { name: 'pkg/something', result: 'pkg' },
-    { name: 'pkg/something/somewhere/more', result: 'pkg' },
-    { name: '@space/pkg', result: '@space/pkg' },
-    { name: 'pkg', result: 'pkg' },
-  ],
 );

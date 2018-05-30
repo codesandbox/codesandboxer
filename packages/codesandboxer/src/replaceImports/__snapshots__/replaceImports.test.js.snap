@@ -1,5 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`replaceImports() replace imports 1`] = `"import a from 'z' import c from 'arg'"`;
-
-exports[`replaceImports() replace imports based on pattern 1`] = `"import b from 'z'; import c from 'anywhere/somewhere'"`;

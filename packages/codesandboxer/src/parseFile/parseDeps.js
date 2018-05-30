@@ -1,6 +1,5 @@
 // @flow
 import type { Package, Import } from '../types';
-import parsePkgName from './parsePkgName';
 
 const getDeps = (pkgJSON, name) => {
   let deps = {};

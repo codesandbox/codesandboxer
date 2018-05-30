@@ -6,62 +6,70 @@ import absolutesToRelative from './absolutesToRelative';
 import path from 'path';
 
 const codeImportTests = [
-  { name: 'simple import', code: 'import a from \'b\'' },
-  { name: 'spread import', code: 'import { a } from \'b\'' },
-  { name: 'two imports', code: 'import a from \'b\' import c from \'d\'' },
+  { name: 'simple import', code: "import a from 'b'", imports: ['b'] },
+  { name: 'spread import', code: "import { a } from 'b'", imports: ['b'] },
+  {
+    name: 'two imports',
+    code: "import a from 'b' import c from 'd'",
+    imports: ['b', 'd'],
+  },
   {
     name: 'multiline imports',
     code: `import a from 'b'
 import c from 'd'`,
+    imports: ['b', 'd'],
   },
-  { name: 'two spread imports', code: 'import { a, b } from \'c\'' },
+  {
+    name: 'two spread imports',
+    code: "import { a, b } from 'c'",
+    imports: ['c'],
+  },
   {
     name: 'two spread imports multiline',
     code: `import {
   a,
   b
 } from 'c'`,
+    imports: ['c'],
   },
-  { name: 'no spaces', code: 'import {a} from \'b\'' },
+  { name: 'no spaces', code: "import {a} from 'b'", imports: ['b'] },
   {
     name: 'dev and peer deps',
-    code: 'import {a} from \'t\' import s from \'z\' import y from \'x\'',
+    code: "import {a} from 't' import s from 'z' import y from 'x'",
+    imports: ['t', 'z', 'x'],
   },
   {
     name: 'relativeImport',
-    code: 'import {a} from \'./c\'',
+    code: "import {a} from './c'",
+    imports: ['./c'],
   },
   {
     name: 'using regex pattern',
-    code: 'import a from \'./c/somewhere\' import b from \'./c/anywhere\'',
-    old: './c/*',
-    new: 'c/',
+    code: "import a from './c/somewhere' import b from './c/anywhere'",
+    imports: ['./c/somewhere', './c/anywhere'],
   },
   {
     name: 'import then immediately export',
-    code: 'export { default } from \'./abc\'',
-    old: './abc',
-    new: './cde',
+    code: "export { default } from './abc'",
+    imports: ['./abc'],
   },
   {
     name: 'import then immediately export as value',
-    code: 'export { default as something } from \'./abc\'',
-    old: './abc',
-    new: './cde',
+    code: "export { default as something } from './abc'",
+    imports: ['./abc'],
   },
   {
     name: 'import then immediately export not default',
-    code: 'export { urd as something } from \'./abc\' } from \'esk\'',
-    old: './abc',
-    new: './cde',
+    code: "export { urd as something } from './abc' } from 'esk'",
+    imports: ['./abc'],
   },
 ];
 
 cases(
   'getAllImports()',
-  ({ code }) => {
+  ({ code, imports }) => {
     let mpts = getAllImports(code);
-    expect(mpts).toMatchSnapshot();
+    expect(mpts).toMatchObject(imports);
   },
   codeImportTests,
 );
@@ -96,7 +104,11 @@ cases(
       returnedPath: 'a/b/zxy',
     },
     { basePath: '..', relativePath: '../z', returnedPath: 'z' },
-    { only: true, basePath: '../..', relativePath: './a', returnedPath: '../a' },
+    {
+      basePath: '../..',
+      relativePath: './a',
+      returnedPath: '../a',
+    },
   ],
 );
 
