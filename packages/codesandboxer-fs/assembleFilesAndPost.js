@@ -1,4 +1,4 @@
-const csb = require('codesandboxer');
+const { sendFilesToCSB } = require('codesandboxer');
 const assembleFiles = require('./assembleFiles');
 /*::
 import type { Config } from './flow-types'
@@ -9,7 +9,7 @@ async function assembleFilesAndPost(
   config /*: Config */,
 ) {
   let { parameters } = await assembleFiles(filePath, config);
-  let csbInfo = await csb.sendFilesToCSB(parameters);
+  let csbInfo = await sendFilesToCSB(parameters);
   return csbInfo;
 }
 

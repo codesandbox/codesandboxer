@@ -1,5 +1,12 @@
 // @flow
-const csb = require('codesandboxer');
+const {
+  parseFile,
+  replaceImports,
+  resolvePath,
+  resolvePath,
+  finaliseCSB,
+} = require('codesandboxer');
+
 /*::
 import type { Config } from './types';
 */
@@ -58,7 +65,7 @@ async function assembleFiles(filePath /*: string */, config /*: ?Config */) {
   let pkgJSON = require(pkgJSONPath);
   let exampleContent = fs.readFileSync(absFilePath, 'utf-8');
 
-  let { file, deps, internalImports } = await csb.parseFile(
+  let { file, deps, internalImports } = await parseFile(
     exampleContent,
     pkgJSON,
   );
@@ -67,9 +74,9 @@ async function assembleFiles(filePath /*: string */, config /*: ?Config */) {
 
   let files = Object.assign({}, getBaseFiles(newFileLocation), {
     [newFileLocation]: {
-      content: csb.replaceImports(
+      content: replaceImports(
         file,
-        internalImports.map(m => [m, `./${csb.resolvePath(relFilePath, m)}`]),
+        internalImports.map(m => [m, `./${resolvePath(relFilePath, m)}`]),
       ),
     },
   });
@@ -81,13 +88,13 @@ async function assembleFiles(filePath /*: string */, config /*: ?Config */) {
     pkgJSON,
     extensions,
     internalImports: internalImports.map(m =>
-      csb.resolvePath(path.relative(rootDir, filePath), m),
+      resolvePath(path.relative(rootDir, filePath), m),
     ),
     priorPaths: [],
   });
 
   if (Object.keys(final.files).length > 120) throw { key: 'tooManyModules' };
-  return csb.finaliseCSB(final, config);
+  return finaliseCSB(final, config);
 }
 
 module.exports = assembleFiles;
