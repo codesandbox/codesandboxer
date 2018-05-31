@@ -4,8 +4,8 @@ async function getAllFilesInDir(gitInfo, filePath) {
   const { account, repository, branch } = gitInfo;
   const apiUrl = `https://api.github.com/repos/${account}/${repository}/contents/${filePath}?ref=${branch}&access_token=9f21e76018d76e9ced93f181e9f37953a7f37251`;
   const resp = await fetch(apiUrl).then(res => res.json());
-  const files = resp.map(({ path: filePath, type }) => ({
-    path: filePath,
+  const files = resp.map(({ path: file, type }) => ({
+    path: file,
     type
   }));
   return files;
