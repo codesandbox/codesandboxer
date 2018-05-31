@@ -1,15 +1,15 @@
-import 'babel-polyfill';
 import loadingSpinnerStyles from './styles/loading.css'; // eslint-disable-line
 import queryString from 'query-string';
-import * as path from 'path-browserify';
 import * as codesandboxer from 'codesandboxer';
-import * as bitbucket from './bitbucket';
+import * as bitbucket from './utils/bitbucket';
+import * as github from './utils/github';
 
 const qs = queryString.parse(location.search);
 
-if (!qs.file || !qs.repoOwner || !qs.repoSlug) {
-  console.error('Error: expected queryString parameters for file, repoOwner and repoSlug');
+if (!qs.file || !qs.repoOwner || !qs.repoSlug || !qs.host || !qs.commit) {
+  console.error('Error: expected queryString parameters for file, repoOwner, repoSlug, host and commit');
   console.error('queryString: ', qs);
+  throw new Error('Invalid queryString');
 }
 
 const options = {
@@ -17,16 +17,17 @@ const options = {
   gitInfo: {
     account: qs.repoOwner,
     repository: qs.repoSlug,
-    host: 'bitbucket',
-    branch: 'master'
+    host: qs.host,
+    branch: qs.commit
   }
 };
+const provider = qs.host === 'bitbucket' ? bitbucket : github;
 
-bitbucket.gitPkgUp(options.gitInfo, qs.file)
-  .then(packageJsonPath => bitbucket.getFile(options.gitInfo, packageJsonPath))
+provider.gitPkgUp(options.gitInfo, qs.file)
+  .then(packageJsonPath => provider.getFile(options.gitInfo, packageJsonPath))
   .then(pkgJSON => codesandboxer.fetchFiles({ ...options, pkgJSON }))
   .then(files => codesandboxer.finaliseCSB(files))
   .then(({ parameters }) => codesandboxer.sendFilesToCSB(parameters))
   .then(({ sandboxUrl }) => {
-    window.location = sandboxUrl;
+    window.open(sandboxUrl, '_blank', '');
   });

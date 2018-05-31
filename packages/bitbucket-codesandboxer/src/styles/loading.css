@@ -2,7 +2,7 @@
   Styles adapted from: https://codepen.io/MattIn4D/pen/LiKFC
 */
 /* Absolute Center Spinner */
-.loading {
+/* .spinner {
   position: fixed;
   z-index: 999;
   height: 2em;
@@ -13,10 +13,27 @@
   left: 0;
   bottom: 0;
   right: 0;
+} */
+
+/* .spinner {
+  min-width: 10px;
+  min-height: 10px;
+} */
+
+.wrapper {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.text {
+  margin-top: 20px;
 }
 
 /* Transparent Overlay */
-.loading:before {
+.spinner:before {
   content: '';
   display: block;
   position: fixed;
@@ -28,8 +45,8 @@
 }
 
 /* :not(:required) hides these rules from IE9 and below */
-.loading:not(:required) {
-  /* hide "loading..." text */
+.spinner:not(:required) {
+  /* hide "spinner..." text */
   font: 0/0 a;
   color: transparent;
   text-shadow: none;
@@ -37,7 +54,7 @@
   border: 0;
 }
 
-.loading:not(:required):after {
+.spinner:not(:required):after {
   content: '';
   display: block;
   font-size: 10px;

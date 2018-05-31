@@ -51,6 +51,7 @@
     "react-dom": "^0.14.9 || ^15.3.0 || ^16.0.0-rc || ^16.0"
   },
   "dependencies": {
+    "@atlaskit/reduced-ui-pack": "^8.9.2",
     "axios": "^0.18.0",
     "babel-polyfill": "^6.26.0",
     "babel-runtime": "^6.26.0",
@@ -64,12 +65,15 @@
     "isomorphic-unfetch": "^2.0.0",
     "meow": "^5.0.0",
     "mini-css-extract-plugin": "^0.4.0",
+    "p-memoize": "^2.0.0",
     "path-browserify": "^0.0.0",
     "pkg-dir": "^2.0.0",
     "pkg-up": "^2.0.0",
     "react-node-resolver": "^1.0.1",
     "resolve": "^1.7.1",
     "query-string": "^6.1.0",
+    "prop-types": "^15.6.1",
+    "react-select": "2.0.0-beta.6",
     "webpack": "^4.9.1",
     "webpack-cli": "^2.1.4",
     "webpack-dev-server": "^3.1.4"

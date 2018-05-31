@@ -3,9 +3,14 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
-  entry: ['babel-polyfill', './src/index.js'],
+  entry: {
+    'babel-polyfill': 'babel-polyfill',
+    'index': './src/index.js',
+    'select-file': './src/select-file.js'
+  },
   output: {
-    filename: 'bundle.js'
+    publicPath: '/',
+    filename: '[name]/bundle.js'
   },
   module: {
     rules: [
@@ -25,7 +30,13 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       template: './src/index.html',
-      filename: './index.html'
+      filename: './index.html',
+      chunks: ['index']
+    }),
+    new HtmlWebpackPlugin({
+      template: './src/select-file.html',
+      filename: './select-file.html',
+      chunks: ['select-file']
     }),
     new CopyWebpackPlugin([{
       from: 'src/atlassian-connect.json',
