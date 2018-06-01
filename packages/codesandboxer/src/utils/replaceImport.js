@@ -6,7 +6,7 @@ export default function replaceImport(
   oldSource: string,
   newSource: string,
 ): string {
-  let matchString = oldSource;
+  let matchString = '';
 
   if (oldSource.match(/\*$/)) {
     matchString = `${oldSource.replace(/\*$/, '()([^"\']*')}`;
