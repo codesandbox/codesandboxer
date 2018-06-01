@@ -12,7 +12,14 @@ export { default as Presence } from './components/Presence';
 export { default as Status } from './components/Status';
 export { default as Skeleton } from './components/Skeleton';
 \\"",
-  "internalImports": Array [],
+  "internalImports": Array [
+    "./components/Avatar",
+    "./components/AvatarGroup",
+    "./components/AvatarItem",
+    "./components/Presence",
+    "./components/Status",
+    "./components/Skeleton",
+  ],
 }
 `;
 

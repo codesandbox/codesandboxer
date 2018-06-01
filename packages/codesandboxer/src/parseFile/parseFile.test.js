@@ -94,7 +94,6 @@ cases(
   'ParseFile()',
   async ({ file, pkgJSON }) => {
     let parsedFile = await parseFile(file, pkgJSON);
-
     expect(parsedFile).toMatchSnapshot();
   },
   [
@@ -114,8 +113,6 @@ cases(
       pkgJSON: Promise.resolve(fakePKGJSON),
     },
     {
-      skip: true,
-      // This test is a valid use-case which is not currently handled.
       name: 'just getting imports',
       file: `"// @flow
 
