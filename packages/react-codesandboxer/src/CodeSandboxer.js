@@ -42,7 +42,7 @@ type Props = {
   /* Either take in a package.json object, or a string as the path of the package.json */
   pkgJSON?: Package | string | Promise<Package | string>,
   /* paths in the example that we do not want to be pulled from their relativeLocation */
-  importReplacements: Array<ImportReplacement>,
+  importReplacements?: Array<ImportReplacement>,
   /* Dependencies we always include. Most likely react and react-dom */
   dependencies?: { [string]: string },
   /* Do not actually deploy to codesanbox. Used to for testing alongside the return values of the render prop. */
