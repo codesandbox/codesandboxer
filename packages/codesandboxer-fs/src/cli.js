@@ -3,7 +3,8 @@
 'use strict';
 
 const meow = require('meow');
-const { assembleFiles, assembleFilesAndPost } = require('./index');
+const assembleFiles = require('./assembleFiles');
+const assembleFilesAndPost = require('./assembleFilesAndPost');
 const path = require('path');
 
 let cli = meow(
