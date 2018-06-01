@@ -69,6 +69,7 @@ cases(
   'getAllImports()',
   ({ code, imports }) => {
     let mpts = getAllImports(code);
+    // $FlowFixMe matchObject is a fine way to compare arrays
     expect(mpts).toMatchObject(imports);
   },
   codeImportTests,

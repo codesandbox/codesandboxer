@@ -3,7 +3,6 @@ const {
   parseFile,
   replaceImports,
   resolvePath,
-  resolvePath,
   finaliseCSB,
 } = require('codesandboxer');
 
