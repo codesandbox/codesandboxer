@@ -1,0 +1,42 @@
+{
+  "name": "Bitbucket Codesandboxer",
+  "description":
+    "Addon to display a 'Deploy to Codesandbox' button in Bitbucket",
+  "baseUrl": "https://bitbucket-codesandboxer.netlify.com/",
+  "key": "bb-codesandboxer",
+  "vendor": {
+    "name": "Ben Conolly"
+  },
+  "scopes": ["repository", "pullrequest"],
+  "authentication": {
+    "type": "none"
+  },
+  "contexts": ["personal"],
+  "modules": {
+    "webItem": [
+      {
+        "key": "bb-codesandboxer-pullrequest",
+        "name": {
+          "value": "Deploy to Codesandbox"
+        },
+        "url":
+          "/select-file.html?commit={pullrequest.source.commit.hash}&repoOwner={repository.owner.username}&repoSlug={repository.slug}",
+        "location": "org.bitbucket.pullrequest.summary.actions",
+        "params": {
+          "auiIcon": "aui-iconfont-deploy"
+        }
+      },
+      {
+        "key": "bb-codesandboxer-fileview",
+        "location": "org.bitbucket.source.file.actions",
+        "url": "/index.html?repoOwner={repository.owner.username}&repoSlug={repository.slug}&file={file.path}&host=bitbucket&commit={file.commit.hash}",
+        "name": {
+          "value": "Deploy to Codesandbox"
+        },
+        "params": {
+          "auiIcon": "aui-iconfont-deploy"
+        }
+      }
+    ]
+  }
+}
