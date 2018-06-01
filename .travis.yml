@@ -1,8 +1,9 @@
 language: node_js
 script:
-  - yarn bolt
+  - yarn build
   - yarn test
   - yarn flow
+  - yarn lint
 cache: yarn
 node_js:
   - "node"

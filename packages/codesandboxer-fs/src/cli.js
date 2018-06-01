@@ -3,7 +3,8 @@
 'use strict';
 
 const meow = require('meow');
-const { assembleFiles, assembleFilesAndPost } = require('./index');
+const assembleFiles = require('./assembleFiles');
+const assembleFilesAndPost = require('./assembleFilesAndPost');
 const path = require('path');
 
 let cli = meow(
@@ -46,7 +47,7 @@ let cli = meow(
         alias: 'f',
         type: 'string',
         description:
-          'Provide a list of files that will be included even if they do',
+          'Provide a list of files that will be included even if they do not get imported',
         help: 'files is not yet implemented',
       },
       dependencies: {
@@ -62,15 +63,13 @@ let cli = meow(
 
 async function CLIStuff(cliData) {
   let [filePath] = cliData.input;
+  let config = {};
 
-  if (cliData.flags.allowJSXExtension) {
-    return console.error(
-      'The allowJSXExtension flag has not yet been implemented',
-    );
+  if (cliData.flags.name) config.name = cliData.flags.name;
+  if (cliData.flags.allowedExtensions) {
+    config.extensions = cliData.flags.allowedExtensions.split(',');
   }
-  if (cliData.flags.list) {
-    return console.error('The list flag has not yet been implemented');
-  }
+
   if (cliData.flags.files) {
     return console.error(
       'We have not implemented the files flag yet to allow you to pass in custom files',
@@ -88,7 +87,7 @@ async function CLIStuff(cliData) {
 
   try {
     if (cliData.flags.dry) {
-      let results = await assembleFiles(filePath);
+      let results = await assembleFiles(filePath, config);
       console.log(
         'dry done, here is a list of the files to be uploaded:\n',
         Object.keys(results.files).join('\n'),
@@ -96,6 +95,7 @@ async function CLIStuff(cliData) {
     } else {
       let results = await assembleFilesAndPost(filePath, {
         name: cliData.flags.name,
+        ...config,
       });
       console.log(results);
     }

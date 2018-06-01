@@ -10,6 +10,7 @@ import {
   type Package,
   type Files,
   type GitInfo,
+  type ImportReplacement,
 } from 'codesandboxer';
 
 type Error = {
@@ -41,7 +42,7 @@ type Props = {
   /* Either take in a package.json object, or a string as the path of the package.json */
   pkgJSON?: Package | string | Promise<Package | string>,
   /* paths in the example that we do not want to be pulled from their relativeLocation */
-  importReplacements: Array<[string, string]>,
+  importReplacements: Array<ImportReplacement>,
   /* Dependencies we always include. Most likely react and react-dom */
   dependencies?: { [string]: string },
   /* Do not actually deploy to codesanbox. Used to for testing alongside the return values of the render prop. */
@@ -131,7 +132,12 @@ export default class CodeSandboxDeployer extends Component<Props, State> {
 
     sendFilesToCSB(parameters)
       .then(({ sandboxId, sandboxUrl }) => {
-        this.setState({ sandboxId, sandboxUrl });
+        this.setState({
+          sandboxId,
+          sandboxUrl,
+          isDeploying: false,
+          isLoading: false,
+        });
         if (!skipRedirect) {
           window.open(sandboxUrl);
         }

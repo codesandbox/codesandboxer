@@ -5,11 +5,11 @@ import replaceImports from '../replaceImports';
 import absolutesToRelative from '../utils/absolutesToRelative';
 import parseFile from '../parseFile';
 
-import type { Import, Package, GitInfo, Config } from '../types';
+import type { Package, GitInfo, Config, ImportReplacement } from '../types';
 
 export default async function ensureExample(
   example?: string | Promise<string>,
-  importReplacements: Array<Import>,
+  importReplacements: Array<ImportReplacement>,
   pkg: Package,
   examplePath: string,
   gitInfo: GitInfo,

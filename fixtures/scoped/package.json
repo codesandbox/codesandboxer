@@ -1,0 +1,6 @@
+{
+  "description": "This file exists so we can test whether we get the correct package.json scope",
+  "dependencies": {
+    "foo": "0.3.1"
+  }
+}

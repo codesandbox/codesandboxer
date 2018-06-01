@@ -49,7 +49,7 @@ let fetchedInfo = await fetchFiles({
   }
 })
 
-// This also returns a finalised files and finalised dependencies property, in case you want to inrospect those before sending.
+// This also returns a finalised files and finalised dependencies property, in case you want to introspect those before sending.
 let finalisedInformation = finaliseCSB(fetchedInfo)
 let csbInfo = await sendFilesToCSB(finalisedInformation.parameters)
 console.log('Our sandbox\'s ID:', csbInfo.sandboxId)

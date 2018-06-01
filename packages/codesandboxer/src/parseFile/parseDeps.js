@@ -1,6 +1,5 @@
 // @flow
 import type { Package, Import } from '../types';
-import parsePkgName from './parsePkgName';
 
 const getDeps = (pkgJSON, name) => {
   let deps = {};
@@ -13,6 +12,9 @@ const getDeps = (pkgJSON, name) => {
   };
 
   for (let dependency in dependencies) {
+    // This exists because we need to resolve dependencies when files within
+    // the dependency are being accessed directly. This may cause sandboxes
+    // to depend on things they are not using very occasionally.
     if (name.includes(dependency)) {
       deps[dependency] = dependencies[dependency];
     }
@@ -33,14 +35,12 @@ const parseDeps = (
   for (let mpt of imports) {
     /* We are naming complete for readability, however the variable is not used. */
     /* eslint-disable-next-line no-unused-vars */
-    let [complete, name] = mpt;
-    if (/^\./.test(name)) {
+    if (/^\./.test(mpt)) {
       internalImports.push(mpt);
     } else {
-      let parsedName = parsePkgName(name);
-      let foundDeps = getDeps(pkgJSON, parsedName);
-      if (Object.keys(foundDeps).length < 1 && parsedName !== pkgJSON.name) {
-        console.warn(`Could not find dependency version for ${parsedName}`);
+      let foundDeps = getDeps(pkgJSON, mpt);
+      if (Object.keys(foundDeps).length < 1 && mpt !== pkgJSON.name) {
+        console.warn(`Could not find dependency version for ${mpt}`);
       } else {
         dependencies = { ...dependencies, ...foundDeps };
       }

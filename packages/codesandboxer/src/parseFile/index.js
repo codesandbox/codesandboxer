@@ -9,15 +9,13 @@ const parseFile = async (
 ): Promise<parsedFileFirst> => {
   let fileCode = await Promise.resolve(file);
   let pkgJSONContent = await Promise.resolve(pkgJSON);
-
-  const imports = getAllImports(fileCode);
-
+  let imports = getAllImports(fileCode);
   let { deps, internalImports } = parseDeps(pkgJSONContent, imports);
 
   return {
     file: fileCode,
     deps,
-    internalImports: internalImports.map(m => m[1]),
+    internalImports,
   };
 };
 
