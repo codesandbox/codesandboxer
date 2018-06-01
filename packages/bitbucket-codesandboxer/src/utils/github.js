@@ -29,7 +29,7 @@ async function gitPkgUp(gitInfo, filePath) {
 
 async function getFile(gitInfo, filePath) {
   const { account, repository, branch } = gitInfo;
-  const apiUrl = `https://api.github.com/repos/${account}/${repository}/contents/${filePath}?ref=${branch}&access_token=9f21e76018d76e9ced93f181e9f37953a7f37251`;
+  const apiUrl = `https://api.github.com/repos/${account}/${repository}/contents/${filePath}?ref=${branch}`;
   const resp = await fetch(apiUrl).then(res => res.json());
   const fileStr = atob(resp.content); // content is base64 encoded
   if (path.extname(filePath) === '.json') {
