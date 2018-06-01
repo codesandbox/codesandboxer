@@ -81,8 +81,11 @@ export default class GitFileExplorer extends Component<*, State> {
     return filterOptions(options, inputValue);
   }
   render() {
+    const { repoOwner, repoName, branch } = this.props;
+    const linkUrl = `https://bitbucket.org/${repoOwner}/${repoName}/src/${branch}`;
     return (
       <div>
+        <div style={{ marginBottom: '10px', textAlign: 'center' }}>Fetching files from: <a href={linkUrl}>{linkUrl}</a></div>
         <AsyncSelect
           loadOptions={this.getOptions}
           defaultOptions
