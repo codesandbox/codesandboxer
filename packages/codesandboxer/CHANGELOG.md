@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.4.0
+
+- Rewrote logic that handles parsing imports. As well as just being a bit more secure, it now correctly support:
+  - require statements as well as imports
+  - `export a from 'b'` syntax
+
 ## 0.3.0
 
 BREAKING - fetchFiles now returns just the { files, deps } object, which was previously returned as files. It no longer return parameters or name.

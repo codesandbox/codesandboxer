@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.3.0
+
+Using 0.4 of codesandboxer, leading to better analysis of imports/exports and support for parsing requires
+Add a `name` flag that allows you to set the sandbox's name
+Add an `allowedExtensions` flag that allows extensions to be provided (for example '.jsx')
+If the entry file is of a different file type, automatically add that file type to the allowed extensions.
+
 ## 0.2.1
 
 Actually fix bug with path resolution.

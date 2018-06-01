@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.1.3
+
+Update codesandboxer version
+
 ## 2.1.2
 
 Update codesandboxer version so the changes in 2.1.1 do not break your app

@@ -1,12 +1,12 @@
 {
   "name": "react-codesandboxer",
-  "version": "2.1.2",
+  "version": "2.1.3",
   "description": "A simple react component to help easily deploy an example to codesandbox",
   "main": "dist/index.js",
   "author": "Ben Conolly",
   "license": "MIT",
   "dependencies": {
-    "codesandboxer": "^0.3.0",
+    "codesandboxer": "^0.4.0",
     "react-node-resolver": "^1.0.1"
   },
   "scripts": {

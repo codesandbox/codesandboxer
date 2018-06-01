@@ -469,16 +469,17 @@ codesandbox@^1.1.14:
     shortid "^2.2.8"
     update-notifier "^2.2.0"
 
-codesandboxer-fs@^0.2.1:
-  version "0.2.1"
-  resolved "https://registry.yarnpkg.com/codesandboxer-fs/-/codesandboxer-fs-0.2.1.tgz#ce5f1d5a00781ab9472e78e86de1182bfcd745fe"
-  dependencies:
-    codesandboxer "^0.3.0"
-    pkg-dir "^2.0.0"
-
-codesandboxer@^0.3.0:
+codesandboxer-fs@^0.3.0:
   version "0.3.0"
-  resolved "https://registry.yarnpkg.com/codesandboxer/-/codesandboxer-0.3.0.tgz#27db0a95276804777ae71dc216e7222c38c46e1c"
+  resolved "https://registry.yarnpkg.com/codesandboxer-fs/-/codesandboxer-fs-0.3.0.tgz#ac7ae79e8e37a65632a86775d01e99a7639d3ea4"
+  dependencies:
+    codesandboxer "^0.4.0"
+    pkg-dir "^2.0.0"
+    resolve "^1.7.1"
+
+codesandboxer@^0.4.0:
+  version "0.4.0"
+  resolved "https://registry.yarnpkg.com/codesandboxer/-/codesandboxer-0.4.0.tgz#a373e56e9d8f16c5f15b5c3c2e5c662885d35804"
   dependencies:
     babel-runtime "^6.26.0"
     codesandbox "^1.1.14"
@@ -2148,6 +2149,10 @@ path-key@^2.0.0:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/path-key/-/path-key-2.0.1.tgz#411cadb574c5a140d3a4b1910d40d80cc9f40b40"
 
+path-parse@^1.0.5:
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/path-parse/-/path-parse-1.0.5.tgz#3c1adf871ea9cd6c9431b6ea2bd74a0ff055c4c1"
+
 pause-stream@0.0.11:
   version "0.0.11"
   resolved "https://registry.yarnpkg.com/pause-stream/-/pause-stream-0.0.11.tgz#fe5a34b0cbce12b5aa6a2b403ee2e73b602f1445"
@@ -2436,6 +2441,12 @@ resolve-dir@^0.1.0:
 resolve-from@^1.0.0:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/resolve-from/-/resolve-from-1.0.1.tgz#26cbfe935d1aeeeabb29bc3fe5aeb01e93d44226"
+
+resolve@^1.7.1:
+  version "1.7.1"
+  resolved "https://registry.yarnpkg.com/resolve/-/resolve-1.7.1.tgz#aadd656374fd298aee895bc026b8297418677fd3"
+  dependencies:
+    path-parse "^1.0.5"
 
 restore-cursor@^2.0.0:
   version "2.0.0"
