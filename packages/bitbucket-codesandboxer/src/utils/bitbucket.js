@@ -26,7 +26,6 @@ async function paginateRequest(url) {
 }
 
 function getBitbucketDir(gitInfo, dirPath) {
-  console.log('Requesting dir: ', dirPath, gitInfo, apiBase(gitInfo));
   if (dirPath === '/') dirPath = '';
   const apiUrl = `${apiBase(gitInfo)}/${dirPath}`;
 
@@ -41,7 +40,6 @@ function getBitbucketDir(gitInfo, dirPath) {
 }
 
 async function gitPkgUp(gitInfo, filePath) {
-  console.log('gitpkgup', gitInfo, filePath);
   // Return true if a list of file paths contains a package.json file
   const filesContainPkgJson = files =>
     files.some(file => path.basename(file.path) === 'package.json');
