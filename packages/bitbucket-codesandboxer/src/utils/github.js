@@ -1,8 +1,18 @@
 import * as path from 'path';
+/*
+  Note: This file is never checked into the repo, but **must** exist when building
+  To create this file locally, go to https://github.com/settings/tokens, click "generate a new token"
+  only give it public_repo access. Now copy that token into a file called `github-auth.json` in this directory
+  in this format:
+  {
+    "access_token": "yourTokenHere"
+  }
+*/
+import { access_token } from './github-auth';
 
 async function getAllFilesInDir(gitInfo, filePath) {
   const { account, repository, branch } = gitInfo;
-  const apiUrl = `https://api.github.com/repos/${account}/${repository}/contents/${filePath}?ref=${branch}&access_token=9f21e76018d76e9ced93f181e9f37953a7f37251`;
+  const apiUrl = `https://api.github.com/repos/${account}/${repository}/contents/${filePath}?ref=${branch}&access_token=${access_token}`;
   const resp = await fetch(apiUrl).then(res => res.json());
   const files = resp.map(({ path: file, type }) => ({
     path: file,
@@ -29,7 +39,7 @@ async function gitPkgUp(gitInfo, filePath) {
 
 async function getFile(gitInfo, filePath) {
   const { account, repository, branch } = gitInfo;
-  const apiUrl = `https://api.github.com/repos/${account}/${repository}/contents/${filePath}?ref=${branch}`;
+  const apiUrl = `https://api.github.com/repos/${account}/${repository}/contents/${filePath}?ref=${branch}&access_token=${access_token}`;
   const resp = await fetch(apiUrl).then(res => res.json());
   const fileStr = atob(resp.content); // content is base64 encoded
   if (path.extname(filePath) === '.json') {
