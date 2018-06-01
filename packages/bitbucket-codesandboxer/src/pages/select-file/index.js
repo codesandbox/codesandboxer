@@ -1,10 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import GitFileSelector from './components/GitFileExplorer';
+import GitFileSelector from '../../components/GitFileExplorer';
 import queryString from 'query-string';
 
 import * as codesandboxer from 'codesandboxer';
-import * as bitbucket from './utils/bitbucket';
+import * as bitbucket from '../../utils/bitbucket';
+
+// TODO: Add support for github here
 
 const qs = queryString.parse(location.search);
 let repoOwner = 'atlassian';

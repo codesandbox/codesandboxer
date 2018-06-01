@@ -1,0 +1,22 @@
+<html>
+  <head>
+    <link rel="stylesheet" href="https://unpkg.com/@atlaskit/css-reset@1.1.6"/>
+    <link rel="stylesheet" href="https://unpkg.com/@atlaskit/reduced-ui-pack@8.9.2/dist/bundle.css"/>
+  </head>
+  <body>
+    <div class="page">
+      <div class="title">
+        <h1>Bitbucket Codesandboxer</h1>
+      </div>
+      <div class="wrapper">
+          <a href="https://bitbucket.org/site/addons/authorize?descriptor_uri=https%3A%2F%2Fbitbucket-codesandboxer.netlify.com%2Fatlassian-connect.json&redirect_uri=https%3A%2F%2Fbitbucket-codesandboxer.netlify.com%2Fatlassian-connect.json">
+            <button class="ak-button ak-button__appearance-primary">Install now!</button>
+          </a>
+
+          <a href="javascript:(function()%7B(()%20%3D%3E%20%7Blet%20parseUrl%20%3D%20(url)%20%3D%3E%20%7Blet%20matcher%3Bif%20(url.match(%2F%5Ehttps%3F%3A%5C%2F%5C%2Fbitbucket.org%2F))%20%7Bmatcher%20%3D%20%2F%5Ehttps%3F%3A%5C%2F%5C%2F(bitbucket).org%5C%2F(.%2B%3F)%5C%2F(.%2B%3F)%5C%2Fsrc%5C%2F(.%2B%3F)%5C%2F(%5B%5E%3F%23%5D%2B)%2F%3B%7D%20else%20if%20(!!url.match(%2F%5Ehttps%3F%3A%5C%2F%5C%2Fgithub.com%2F))%20%7Bmatcher%20%3D%20%2F%5Ehttps%3F%3A%5C%2F%5C%2F(github).com%5C%2F(.%2B%3F)%5C%2F(.%2B%3F)%5C%2Fblob%5C%2F(.%2B%3F)%5C%2F(%5B%5E%3F%23%5D%2B)%2F%3B%7D%20else%20%7Breturn%3B%7Dconst%20%5B%2C%20host%2C%20repoOwner%2C%20repoSlug%2C%20commit%2C%20file%5D%20%3D%20url.match(matcher)%3Breturn%20%7Bhost%2CrepoOwner%2CrepoSlug%2Ccommit%2Cfile%7D%3B%7D%3Blet%20location%20%3D%20window.location.href%3Blet%20parsed%20%3D%20parseUrl(location)%3Bif%20(!parsed)%20%7Balert('Something%20went%20wrong!%20We%20couldnt%20parse%20your%20url!')%3B%7Dlet%20encodedFile%20%3D%20encodeURIComponent(parsed.file)%3Blet%20url%20%3D%20%60https%3A%2F%2Fbitbucket-codesandboxer.netlify.com%2Fdeploy-file%2Findex.html%3Fhost%3D%24%7Bparsed.host%7D%26repoOwner%3D%24%7Bparsed.repoOwner%7D%26repoSlug%3D%24%7Bparsed.repoSlug%7D%26commit%3D%24%7Bparsed.commit%7D%26file%3D%24%7BencodedFile%7D%60%3Bwindow.open(url%2C%20'_blank'%2C%20'')%3B%7D)()%7D)()">
+            <button class="bookmarklet ak-button ak-button__appearance-primary">Bookmarklet!</button>
+          </a>
+      </div>
+    </div>
+  </body>
+</html>
