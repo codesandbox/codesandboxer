@@ -11,7 +11,10 @@
     "resolve": "^1.7.1"
   },
   "bin": {
-    "codesandboxer": "cli.js"
+    "codesandboxer": "./src/cli.js"
+  },
+  "scripts": {
+    "build": "echo done"
   },
   "devDependencies": {
     "react-node-resolver": "^1.0.1"

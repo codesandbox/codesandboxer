@@ -29,7 +29,8 @@
         }
     },
     "scripts": {
-        "test": "node ./node_modules/vscode/bin/test"
+        "test": "node ./node_modules/vscode/bin/test",
+        "build": "echo done"
     },
     "dependencies": {
         "codesandboxer-fs": "^0.2.1",

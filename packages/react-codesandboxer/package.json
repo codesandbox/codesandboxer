@@ -9,6 +9,9 @@
     "codesandboxer": "^0.3.0",
     "react-node-resolver": "^1.0.1"
   },
+  "scripts": {
+    "build": "babel src -d dist --ignore  **/*.test.js"
+  },
   "repository": "https://github.com/Noviny/codesandboxer.git",
   "files": [
     "dist"
