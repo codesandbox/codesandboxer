@@ -20,10 +20,10 @@ The core packages, [codesandboxer](/packages/codesandboxer) allows you to fetch 
 
 ## Other packages
 
-- [react-codesandboxer](/packages/react-codesandboxer) is a react wrapper around `codesandboxer` allowing you to easily render a button to open an example in codesandbox.
-- [vs-codesandboxer](/packages/vs-codesandboxer) is a visual studio code extension to allow you to take an open file in vs-code and deploy it to codesandboxer.
-- [atom-codesandboxer](/packages/atom-codesandboxer) is an atom extension to allow you to take an open file in atom and deploy it to codesandboxer.
-- Deploy from bitbucket or github http://bitbucket-codesandboxer.netlify.com/ (TEMPORARY HOME)
+* [react-codesandboxer](/packages/react-codesandboxer) is a react wrapper around `codesandboxer` allowing you to easily render a button to open an example in codesandbox.
+* [vs-codesandboxer](/packages/vs-codesandboxer) is a visual studio code extension to allow you to take an open file in vs-code and deploy it to codesandboxer.
+* [atom-codesandboxer](https://github.com/noviny/atom-codesandboxer) is an atom extension to allow you to take an open file in atom and deploy it to codesandboxer (IN DEVELOPMENT).
+* [bitbucket-codesandboxer](/packages/bitbucket-codesandboxer)
 
 ## Desired future packages
 
