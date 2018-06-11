@@ -1,6 +1,7 @@
 language: node_js
 script:
   - touch packages/bitbucket-codesandboxer/src/utils/github-auth.js
+  - bolt
   - yarn build
   - yarn test
   - yarn flow
