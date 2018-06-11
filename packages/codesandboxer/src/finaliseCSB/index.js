@@ -1,5 +1,5 @@
 // @flow
-import { getParameters } from 'codesandbox/lib/api/define';
+import getParameters from './getParameters';
 import type { Files, Dependencies } from '../types';
 import { newpkgJSON } from '../constants';
 
@@ -20,10 +20,11 @@ export default function(
     extraFiles?: Files,
     extraDependencies?: Dependencies,
     name?: string,
+    template?: string
   },
 ) {
   if (!config) config = {};
-  let { extraFiles, extraDependencies, name } = config;
+  let { extraFiles, extraDependencies, name, template = 'create-react-app' } = config;
   let dependencies = {
     ...deps,
     ...extraDependencies,
@@ -36,11 +37,15 @@ export default function(
     'package.json': {
       content: newpkgJSON(dependencies, name),
     },
+    "sandbox.config.json": {
+      content: JSON.stringify({
+        template: template
+      })
+    },
     ...extraFiles,
   };
   const parameters = getParameters({
     files: finalFiles,
-    template: 'create-react-app',
   });
   return {
     files: finalFiles,

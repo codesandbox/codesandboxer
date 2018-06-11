@@ -6,7 +6,7 @@
   "author": "Ben Conolly",
   "license": "MIT",
   "dependencies": {
-    "codesandbox": "^1.1.14",
+    "lz-string": "^1.4.4",
     "isomorphic-unfetch": "^2.0.0",
     "form-data": "^2.3.2",
     "babel-runtime": "^6.26.0"
