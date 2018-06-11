@@ -16,4 +16,4 @@ dist
 scratchings.js
 
 # This file must never be checked in
-github-auth.json
+github-auth.js
