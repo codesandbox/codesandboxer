@@ -5,5 +5,6 @@ export type Config = {
   name?: string,
   extraFiles?: Files,
   extraDependencies?: Dependencies,
+  contents?: string,
 };
 */
