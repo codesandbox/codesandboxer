@@ -1,5 +1,10 @@
 # Changelog
 
+## 2.1.4
+- [patch] When there is an error in assembling a sandbox, do not try and deploy the sandbox anyway [e20b3c0](e20b3c0)
+- [patch] Updated dependencies [becc64e](becc64e)
+  - codesandboxer@0.5.0
+
 ## 2.1.3
 
 Update codesandboxer version

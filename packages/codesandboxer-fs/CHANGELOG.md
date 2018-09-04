@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.3.1
+- [patch] Allow the loading of css files; convert the json loader to a generic raw loader [becc64e](becc64e)
+- [patch] Properly spread in user-provided extensions [a59ac96](a59ac96)
+- [patch] Add new option to pass in 'contents' instead of requiring file path [6041b10](6041b10)
+
 ## 0.3.0
 
 Using 0.4 of codesandboxer, leading to better analysis of imports/exports and support for parsing requires

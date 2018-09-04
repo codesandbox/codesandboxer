@@ -1,5 +1,8 @@
 # Changelog
 
+## 0.5.0
+- [minor] Allow the loading of css files; convert the json loader to a generic raw loader [becc64e](becc64e)
+
 ## 0.4.0
 
 - Rewrote logic that handles parsing imports. As well as just being a bit more secure, it now correctly support:
