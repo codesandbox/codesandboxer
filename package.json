@@ -6,16 +6,19 @@
     "test": "yarn jest",
     "build": "bolt ws run build",
     "lint": "yarn eslint .",
-    "prepublishOnly": "yarn build && yarn test && yarn flow && yarn lint",
+    "check": "yarn build && yarn test && yarn flow && yarn lint",
     "dev:csb": "bolt w codesandboxer run build --watch",
-    "version:csb": "bolt w codesandboxer exec -- npm version",
     "dev:rcsb": "bolt w react-codesandboxer run build --watch",
-    "version:rcsb": "bolt w react-codesandboxer exec -- npm version"
+    "changeset": "yarn build-releases changeset",
+    "prep-release": "yarn build-releases version",
+    "release": "yarn check && yarn build-releases publish"
   },
   "keywords": [
     "codesandbox",
     "react",
-    "react-component"
+    "react-component",
+    "documentation",
+    "examples"
   ],
   "author": "Ben Conolly",
   "license": "MIT",
@@ -49,8 +52,7 @@
     "react-dom": "^0.14.9 || ^15.3.0 || ^16.0.0-rc || ^16.0"
   },
   "dependencies": {
-    "@atlaskit/reduced-ui-pack": "^8.9.2",
-    "axios": "^0.18.0",
+    "@atlaskit/build-releases": "^2.1.1",
     "babel-jest": "^23.0.1",
     "babel-polyfill": "^6.26.0",
     "babel-runtime": "^6.26.0",
