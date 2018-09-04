@@ -63,6 +63,29 @@ import c from 'd'`,
     code: "export { urd as something } from './abc' } from 'esk'",
     imports: ['./abc'],
   },
+  {
+    name: 'import without variable',
+    code: "import './abc'",
+    imports: ['./abc'],
+  },
+  {
+    name: 'require without variable',
+    code: "require('./abc')",
+    imports: ['./abc'],
+  },
+  // the two tests below demonstrate cases we will handle incorrectly
+  {
+    skip: true,
+    name: 'call to not intended require',
+    code: "breakingrequire('./abc')",
+    imports: [],
+  },
+  {
+    skip: true,
+    name: 'not intended import match',
+    code: "simport './abc'",
+    imports: [],
+  },
 ];
 
 cases(
