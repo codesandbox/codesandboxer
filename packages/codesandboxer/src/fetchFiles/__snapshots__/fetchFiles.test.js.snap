@@ -1,5 +1,37 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`should fetch a css example from our fixtures 1`] = `
+Object {
+  "example.js": Object {
+    "content": "import React from 'react';
+
+export default () => <div>This file exports a very simple component</div>;
+",
+  },
+  "index.html": Object {
+    "content": "<div id=\\"root\\"></div>",
+  },
+  "index.js": Object {
+    "content": "/**
+  This CodeSandbox has been automatically generated using
+  \`codesandboxer\`. If you're curious how that happened, you can
+  check out our docs here: https://github.com/noviny/codesandboxer
+
+  If you experience any struggles with this sandbox, please raise an issue
+  on github. :)
+*/
+import React from 'react';
+import ReactDOM from 'react-dom';
+import App from './example';
+
+ReactDOM.render(
+<App />,
+document.getElementById('root')
+);",
+  },
+}
+`;
+
 exports[`should fetch an example from atlaskit 1`] = `
 Object {
   "example.js": Object {
@@ -270,6 +302,38 @@ export const Block = ({
   </Wrapper>
 );
 ",
+  },
+}
+`;
+
+exports[`should fetch our basic fixture example 1`] = `
+Object {
+  "example.js": Object {
+    "content": "import React from 'react';
+
+export default () => <div>This file exports a very simple component</div>;
+",
+  },
+  "index.html": Object {
+    "content": "<div id=\\"root\\"></div>",
+  },
+  "index.js": Object {
+    "content": "/**
+  This CodeSandbox has been automatically generated using
+  \`codesandboxer\`. If you're curious how that happened, you can
+  check out our docs here: https://github.com/noviny/codesandboxer
+
+  If you experience any struggles with this sandbox, please raise an issue
+  on github. :)
+*/
+import React from 'react';
+import ReactDOM from 'react-dom';
+import App from './example';
+
+ReactDOM.render(
+<App />,
+document.getElementById('root')
+);",
   },
 }
 `;
