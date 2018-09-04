@@ -56,7 +56,7 @@ const fetchJS = (url, path, pkg, importReplacements): Promise<ParsedFile> => {
   );
 };
 
-const fetchJSON = (url, path): Promise<ParsedFile> => {
+const fetchRaw = (url, path): Promise<ParsedFile> => {
   return fetch(url)
     .then(res => {
       if (res.status === 404) {
@@ -82,7 +82,7 @@ const catchBlock = (e, url, path, pkg, importReplacements, extension) => {
     let newPath = `${path}${extension}`;
     let newUrl = url.replace(/.js$/, extension);
     if (extension === '.json') {
-      return fetchJSON(newUrl, newPath);
+      return fetchRaw(newUrl, newPath);
     }
     return fetchJS(newUrl, newPath, pkg, importReplacements);
   } else {
@@ -131,7 +131,8 @@ let fetchFileContents = (
     case '.jsx':
       return fetchJS(url, path, pkg, importReplacements);
     case '.json':
-      return fetchJSON(url, path);
+    case '.css':
+      return fetchRaw(url, path);
     default:
       throw new Error(`unparseable filetype: ${fileType} for file ${path}`);
   }
