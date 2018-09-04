@@ -91,11 +91,6 @@ cases(
     { basePath: 'a/b/c', relativePath: './z', returnedPath: 'a/b/z' },
     {
       basePath: 'a/b/c',
-      relativePath: '../../../z/x',
-      returnedPath: 'a/b/c',
-    },
-    {
-      basePath: 'a/b/c',
       relativePath: 'zxy',
       returnedPath: 'a/b/c/zxy',
     },
@@ -104,7 +99,6 @@ cases(
       relativePath: './zxy',
       returnedPath: 'a/b/zxy',
     },
-    { basePath: '..', relativePath: '../z', returnedPath: 'z' },
     {
       basePath: '../..',
       relativePath: './a',
@@ -112,6 +106,18 @@ cases(
     },
   ],
 );
+
+test('resolve path throws when path is too long', () => {
+  let basePath = 'a/b/c';
+  let relativePath = '../../../z/x';
+  expect(() => resolvePath(basePath, relativePath)).toThrow();
+});
+
+test('resolve path throws when path is too long mk2', () => {
+  let basePath = '..';
+  let relativePath = '../z';
+  expect(() => resolvePath(basePath, relativePath)).toThrow();
+});
 
 cases(
   'absolutesToRelative different dirs',
