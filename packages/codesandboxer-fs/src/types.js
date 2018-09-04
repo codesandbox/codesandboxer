@@ -6,5 +6,6 @@ export type Config = {
   extensions?: Array<string>,
   extraFiles?: Files,
   extraDependencies?: Dependencies,
+  contents?: string,
 };
 */

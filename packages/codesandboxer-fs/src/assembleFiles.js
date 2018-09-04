@@ -56,13 +56,13 @@ async function assembleFiles(filePath /*: string */, config /*: ?Config */) {
   }
 
   let rootDir = await pkgDir(filePath);
-  let absFilePath = getAbsFilePath(filePath, extensions);
+  let absFilePath = config.contents ? filePath : getAbsFilePath(filePath, extensions);
   let pkgJSONPath = getPkgJSONPath(rootDir);
   let relFilePath = path.relative(rootDir, filePath);
 
   // $FlowFixMe - we genuinely want dynamic requires here
   let pkgJSON = require(pkgJSONPath);
-  let exampleContent = fs.readFileSync(absFilePath, 'utf-8');
+  let exampleContent = config.contents || fs.readFileSync(absFilePath, 'utf-8');
 
   let { file, deps, internalImports } = await parseFile(
     exampleContent,
