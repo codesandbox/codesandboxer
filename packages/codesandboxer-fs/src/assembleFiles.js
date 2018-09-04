@@ -45,7 +45,7 @@ const getPkgJSONPath = rootDir => {
 async function assembleFiles(filePath /*: string */, config /*: ?Config */) {
   if (!config) config = {};
   let extension = path.extname(filePath);
-  let extensions = ['.js'];
+  let extensions = ['.js', '.json'];
   if (config.extensions) extensions = [...extensions, ...config.extensions];
   if (
     extension &&
@@ -56,7 +56,9 @@ async function assembleFiles(filePath /*: string */, config /*: ?Config */) {
   }
 
   let rootDir = await pkgDir(filePath);
-  let absFilePath = config.contents ? filePath : getAbsFilePath(filePath, extensions);
+  let absFilePath = config.contents
+    ? filePath
+    : getAbsFilePath(filePath, extensions);
   let pkgJSONPath = getPkgJSONPath(rootDir);
   let relFilePath = path.relative(rootDir, filePath);
 
