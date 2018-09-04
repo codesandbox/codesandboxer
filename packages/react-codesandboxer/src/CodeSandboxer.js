@@ -128,7 +128,8 @@ export default class CodeSandboxDeployer extends Component<Props, State> {
 
   deploy = () => {
     let { afterDeploy, skipRedirect, afterDeployError } = this.props;
-    let { parameters } = this.state;
+    let { parameters, error } = this.state;
+    if (error) return;
 
     sendFilesToCSB(parameters)
       .then(({ sandboxId, sandboxUrl }) => {
