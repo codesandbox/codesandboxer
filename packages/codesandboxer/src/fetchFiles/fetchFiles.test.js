@@ -19,13 +19,34 @@ const getMainObj = (userOpts = {}) => ({
   ...userOpts,
 });
 
+const getSandboxerObj = (userOpts = {}) => ({
+  examplePath: 'fixtures/simple.js',
+  pkgJSON: 'package.json',
+  gitInfo: {
+    account: 'Noviny',
+    repository: 'codesandboxer',
+    branch: 'master',
+    host: 'github',
+  },
+  dependencies: { '@atlaskit/avatar': 'latest' },
+  providedFiles: {},
+  ...userOpts,
+});
+
 it('should fetch an example from atlaskit', () => {
   return fetchFiles(getMainObj()).then(res => {
     expect(res.files).toMatchSnapshot();
   });
 });
-it('should fetch an example from react-select', () => {
-  return fetchFiles(getMainObj()).then(res => {
+it('should fetch our basic fixture example', () => {
+  return fetchFiles(getSandboxerObj()).then(res => {
+    expect(res.files).toMatchSnapshot();
+  });
+});
+it('should fetch a css example from our fixtures', () => {
+  return fetchFiles(
+    getSandboxerObj({ examplePath: 'fixtures/withCssImport.js' }),
+  ).then(res => {
     expect(res.files).toMatchSnapshot();
   });
 });

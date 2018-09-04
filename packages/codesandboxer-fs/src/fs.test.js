@@ -64,5 +64,15 @@ cases(
     {
       name: 'fixtures/withJSONImport',
     },
+    {
+      expectedFiles: ['fixtures/importResolution/css/A.css'],
+      name: 'fixtures/withCssImport',
+    },
+    {
+      // This test tests for the resolution of https://github.com/Noviny/codesandboxer/issues/21
+      skip: true,
+      expectedFiles: ['fixtures/importResolution/css/A.css'],
+      name: 'fixtures/withCssImportNoDeclaration',
+    },
   ],
 );
