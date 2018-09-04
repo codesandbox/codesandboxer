@@ -16,7 +16,7 @@ async function loadJS(resolvedPath, pkgJSON, rootDir) {
   });
 }
 
-async function loadJSON(resolvedPath, rootDir) {
+async function loadRaw(resolvedPath, rootDir) {
   let file = fs.readFileSync(resolvedPath, 'utf-8');
   return {
     file,
@@ -70,7 +70,8 @@ async function loadRelativeFile(
     case '.tiff':
       return loadImages(resolvedPath, rootDir);
     case '.json':
-      return loadJSON(resolvedPath, rootDir);
+    case '.css':
+      return loadRaw(resolvedPath, rootDir);
     case '.js':
       return loadJS(resolvedPath, pkgJSON, rootDir);
     default:
