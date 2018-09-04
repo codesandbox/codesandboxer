@@ -46,7 +46,7 @@ async function assembleFiles(filePath /*: string */, config /*: ?Config */) {
   if (!config) config = {};
   let extension = path.extname(filePath);
   let extensions = ['.js'];
-  if (config.extensions) extensions = [...extensions, config.extensions];
+  if (config.extensions) extensions = [...extensions, ...config.extensions];
   if (
     extension &&
     !baseExtensions.includes(extension) &&
