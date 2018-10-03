@@ -45,6 +45,9 @@ const getPkgJSONPath = rootDir => {
 async function assembleFiles(filePath /*: string */, config /*: ?Config */) {
   if (!config) config = {};
   let extension = path.extname(filePath);
+  if (['.ts', '.tsx'].includes(extension) && !config.template) {
+    config.template = 'create-react-app-typescript';
+  }
   let extensions = ['.js', '.json'];
   if (config.extensions) extensions = [...extensions, ...config.extensions];
   if (

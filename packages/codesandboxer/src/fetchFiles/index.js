@@ -21,7 +21,7 @@ export default async function({
   gitInfo,
   importReplacements = [],
   example,
-  allowJSX,
+  extensions = [],
 }: {
   examplePath: string,
   pkgJSON?: Package | string | Promise<Package | string>,
@@ -31,9 +31,17 @@ export default async function({
   providedFiles?: Files,
   example?: string | Promise<string>,
   name?: string,
-  allowJSX?: boolean,
+  extensions: string[],
 }) {
-  let config = { allowJSX: !!allowJSX };
+  let extension = examplePath.match(/.+(\..+)$/);
+  if (extension && !['.js', '.json'].includes(extension[1])) {
+    if (['.ts', '.tsx'].includes(extension[1])) {
+      extensions.concat(['.ts', '.tsx']);
+    } else {
+      extensions.push(extension[1]);
+    }
+  }
+  let config = { extensions };
   let pkg = await ensurePKGJSON(pkgJSON, importReplacements, gitInfo, config);
 
   let { file, deps, internalImports } = await ensureExample(
