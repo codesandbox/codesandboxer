@@ -106,6 +106,7 @@ cases(
   },
   [
     { basePath: 'a/b/c', relativePath: '../z', returnedPath: 'a/z' },
+    { basePath: 'a/b/c', relativePath: './../z', returnedPath: 'a/z' },
     {
       basePath: 'a/b/c',
       relativePath: '../../z/x',
