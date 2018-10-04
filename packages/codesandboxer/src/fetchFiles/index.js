@@ -13,7 +13,7 @@ import type {
   Files,
   ImportReplacement,
 } from '../types';
-import { baseFiles } from '../constants';
+import { baseFiles, baseFilesTS } from '../constants';
 
 export default async function({
   examplePath,
@@ -34,11 +34,15 @@ export default async function({
   extensions: string[],
 }) {
   let extension = examplePath.match(/.+(\..+)$/);
-  if (extension && !['.js', '.json'].includes(extension[1])) {
-    if (['.ts', '.tsx'].includes(extension[1])) {
+  extension = extension ? extension[1] : '.js';
+  let baseFilesToUse = baseFiles;
+
+  if (extension && !['.js', '.json'].includes(extension)) {
+    if (['.ts', '.tsx'].includes(extension)) {
       extensions.concat(['.ts', '.tsx']);
+      baseFilesToUse = baseFilesTS;
     } else {
-      extensions.push(extension[1]);
+      extensions.push(extension);
     }
   }
   let config = { extensions };
@@ -54,8 +58,8 @@ export default async function({
   );
 
   let files = {
-    ...baseFiles,
-    'example.js': {
+    ...baseFilesToUse,
+    [`example${extension}`]: {
       content: replaceImports(
         file,
         internalImports.map(m => [m, `./${resolvePath(examplePath, m)}`]),

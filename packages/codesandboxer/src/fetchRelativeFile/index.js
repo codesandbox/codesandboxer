@@ -71,13 +71,13 @@ const fetchRaw = (url, path): Promise<ParsedFile> => {
 resolution order:
 A.js
 A.json
-A.jsx (if allowed)
+A.extension (in order provided)
 A/index.js
 A/index.json
-A/index.jsx (if allowed)
+A/index.extension (in order provided)
 */
 
-const catchBlock = (url, path, pkg, importReplacements, extension) => {
+const attemptToFetch = (url, path, pkg, importReplacements, extension) => {
   let newPath = `${path}${extension}`;
   let newUrl = url.replace(/.js$/, extension);
   if (extension === '.json') {
@@ -106,7 +106,7 @@ async function fetchProbablyJS(url, path, pkg, importReplacements, config) {
 
   while (extensions.length) {
     let extension = extensions.shift();
-    const data = await catchBlock(
+    const data = await attemptToFetch(
       url,
       path,
       pkg,

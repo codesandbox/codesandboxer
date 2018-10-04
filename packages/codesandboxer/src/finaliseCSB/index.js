@@ -20,27 +20,34 @@ export default function(
     extraFiles?: Files,
     extraDependencies?: Dependencies,
     name?: string,
-    template?: string
+    template?: string,
   },
 ) {
   if (!config) config = {};
-  let { extraFiles, extraDependencies, name, template = 'create-react-app' } = config;
+  let {
+    extraFiles,
+    extraDependencies,
+    name,
+    template = 'create-react-app',
+  } = config;
   let dependencies = {
     ...deps,
     ...extraDependencies,
   };
+
+  let extension = template === 'create-react-app-typescript' ? '.tsx' : '.js';
 
   ensureReact(dependencies);
 
   const finalFiles = {
     ...files,
     'package.json': {
-      content: newpkgJSON(dependencies, name),
+      content: newpkgJSON(dependencies, name, extension),
     },
-    "sandbox.config.json": {
+    'sandbox.config.json': {
       content: JSON.stringify({
-        template: template
-      })
+        template: template,
+      }),
     },
     ...extraFiles,
   };
