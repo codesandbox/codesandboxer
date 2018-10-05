@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.6.0
+
+- [minor] 🎉 ADD TYPESCRIPT SUPPORT 🎉 (comes with auto-detection of typescript examples)
+- [patch] Use `path-browserify` for most path actions, making the code more reliable
+- [patch] Import statements now no longer need a variable declaration to be parsed
+- [BREAKING] Remove the `allowJSX` config option - this is replaced by `extensions`, an array of allowed additional extensions
+  - the file type of the example file is automatically added, so if your example is a `.jsx` file you no longer need to pass anything in. If it is a `.ts` or `.tsx` file, it will add both extensions as allowed extensions. Overall, you probably don't need it.
+
 ## 0.5.0
 - [minor] Allow the loading of css files; convert the json loader to a generic raw loader [becc64e](becc64e)
 

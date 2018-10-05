@@ -1,5 +1,11 @@
 # Changelog
 
+## 3.0.0
+
+- [minor] 🎉 ADD TYPESCRIPT SUPPORT 🎉 (comes with auto-detection of typescript examples)
+- [BREAKING] remove the `allowJSX` prop, replacing it with the `extensions` prop.
+- [minor] Add `template` prop, so you can directly set the codesandbox template to use in uploading.
+
 ## 2.1.4
 - [patch] When there is an error in assembling a sandbox, do not try and deploy the sandbox anyway [e20b3c0](e20b3c0)
 - [patch] Updated dependencies [becc64e](becc64e)

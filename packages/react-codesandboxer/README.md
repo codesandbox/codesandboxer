@@ -136,9 +136,23 @@ If a fileName exists in your provided files, it will not be fetched when it is r
 
 Do not open the sandbox once the data has been sent. Using this along with the `afterDeploy` prop can allow you to handle what is done with the sandbox, including loading an embed using the ID.
 
-### `allowJSX?: boolean`
+#### `extensions?: Array<string>`
 
-Allow codesandboxer to accept jsx files. If this is not set to true, codesandboxer will not check if a jsx file exists when resolving imports.
+An array of extensions that will be treated as javascript files. For example, if you pass in [`.jsx`], when loading files, we will attempt to fetch `.jsx` files as well as `.js` and `.json` files. The extension type of your example is automatically added, so if you pass in the `examplePath` `my/cool/example.jsx`, you will not need to pass in the jsx extension.
+
+If your example file is fo type `.ts` or `.tsx` both are added.
+
+
+### `template?: string`
+
+This template prop sets what codesandbox template to use. Currently we support:
+
+- `create-react-app`
+- `create-react-app-typescript`
+
+We auto-detect which one we think we should use, so you should only need to provide this if you want to override our selected template.
+
+Unsupported templates will still cause the bundled files to be sent to codesandbox under that template, but the bundling may fail.
 
 ## A slightly more complicated example:
 

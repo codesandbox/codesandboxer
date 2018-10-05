@@ -1,6 +1,6 @@
 {
   "name": "bitbucket-releases-addon",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "private": true,
   "description": "Bitbucket addon for displaying releases section in PRs",
   "scripts": {
@@ -13,7 +13,7 @@
   "dependencies": {
     "babel-polyfill": "^6.26.0",
     "babel-preset-react": "^6.24.1",
-    "codesandboxer": "^0.5.0",
+    "codesandboxer": "^0.6.0",
     "copy-webpack-plugin": "^4.5.1",
     "css-loader": "^0.28.11",
     "mini-css-extract-plugin": "^0.4.0",

@@ -2,7 +2,7 @@
     "name": "vs-codesandboxer",
     "displayName": "vs-codesandboxer",
     "description": "upload to codesandbox from a single entry file",
-    "version": "0.2.5",
+    "version": "0.3.0",
     "publisher": "noviny",
     "engines": {
         "vscode": "^1.23.0"
@@ -33,7 +33,7 @@
         "build": "echo done"
     },
     "dependencies": {
-        "codesandboxer-fs": "^0.3.0",
+        "codesandboxer-fs": "^0.4.0",
         "pkg-up": "^2.0.0",
         "pkg-dir": "^2.0.0"
     },

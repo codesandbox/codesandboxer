@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.3.0
+
+Now supports typescript sandboxes
+
 ## 0.2.5
 
 Upgrade dependencies

@@ -105,9 +105,11 @@ We also expose the logic that replaces imports as `replaceImports()`, in case yo
 
 If you do not want the example content to be fetched (for example, you have access to the raw code, or want to transform it yourself before analysis), you can pass in the example file as raw here (just a string). You can also pass a promise that resolves to an example's file's contents.
 
-#### allowJSX
+#### extensions
 
-A boolean that will check for `.jsx` files when trying to resolve a file, in addition to `.js` and `.json`. This is false by default.
+An array of extensions that will be treated as javascript files. For example, if you pass in [`.jsx`], when loading files, we will attempt to fetch `.jsx` files as well as `.js` and `.json` files. The extension type of your example is automatically added, so if you pass in the `examplePath` `my/cool/example.jsx`, you will not need to pass in the jsx extension.
+
+If your example file is fo type `.ts` or `.tsx` both are added.
 
 ### finaliseCSB(compiledInfo, config)
 
@@ -140,6 +142,17 @@ If a fileName exists in your provided files, it will not be fetched when it is r
 #### extraDependencies
 
 An object with packages formatted in the same way as the dependencies in a `package.json` which will always be included in a sandbox, even if it is not found within the example's tree.
+
+### template
+
+This template string sets what codesandbox template to use. Currently we support:
+
+- `create-react-app`
+- `create-react-app-typescript`
+
+We auto-detect which one we think we should use, so you should only need to provide this if you want to override our selected template.
+
+Unsupported templates will still cause the bundled files to be sent to codesandbox under that template, but the bundling may fail.
 
 ### sendFilesToCSB()
 

@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.4.0
+
+- [patch] We relied on `meow`, but did not have a dependency on it. We now directly depend on `meow`
+- [minor] 🎉 ADD TYPESCRIPT SUPPORT 🎉 (comes with auto-detection of typescript examples)
+
 ## 0.3.1
 - [patch] Allow the loading of css files; convert the json loader to a generic raw loader [becc64e](becc64e)
 - [patch] Properly spread in user-provided extensions [a59ac96](a59ac96)
