@@ -1,49 +1,30 @@
 // @flow
-const rp2 = (base, rel) => {
-  // this logic is designed to prevent us leaving our current scope
-  switch (rel[0]) {
-    case '..': {
-      if (base.length < 1) {
-        throw new Error(
-          `invalid relative path from ${base.join('/')} to ${rel.join('/')}`,
-        );
-      }
-      return rp2(base.slice(0, -1), rel.slice(1));
+export default function resolvePath(
+  basePath: string,
+  relativePath: string,
+): string {
+  let newSegments = basePath.split('/').filter(a => a);
+  let relativeSegments = relativePath.split('/').filter(a => a);
+  let segment = relativeSegments.shift();
+
+  // For our use-case, the basePath is always a file, not a directory.
+  // This means we can do this safely.
+  if (segment === '..' || segment === '.') newSegments.pop();
+
+  while (segment) {
+    switch (segment) {
+      case '.':
+        break;
+      case '..':
+        if (newSegments.length < 1) {
+          throw new Error('Trying to access a filepath outside our scope');
+        }
+        newSegments.pop();
+        break;
+      default:
+        newSegments.push(segment);
     }
-    default: {
-      return `${base.concat(rel).join('/')}`;
-    }
+    segment = relativeSegments.shift();
   }
-};
-
-const resolvePath = (basePath: string, relativePath: string): string => {
-  let base = basePath.split('/').filter(a => a);
-  let rel = relativePath.split('/').filter(a => a);
-
-  let val = '';
-  switch (rel[0]) {
-    case '.':
-      // We are assuming that the base is always a file path
-      val = base
-        .slice(0, -1)
-        .concat(rel.slice(1))
-        .join('/');
-      break;
-    case '..':
-      // this logic is designed to prevent us leaving our current scope
-      if (base.length < 1) {
-        throw new Error(
-          `invalid relative path from ${basePath} to ${relativePath}`,
-        );
-      }
-      val = rp2(base.slice(0, -1), rel);
-      break;
-    default:
-      // TODO: Decide if this is correct or terribly wrong
-      val = base.concat(rel).join('/');
-  }
-
-  return val;
-};
-
-export default resolvePath;
+  return newSegments.join('/');
+}

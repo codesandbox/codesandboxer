@@ -5,6 +5,7 @@ import replaceImports from '../replaceImports';
 import ensureExample from './ensureExample';
 import ensurePKGJSON from './ensurePkgJSON';
 import fetchInternalDependencies from './fetchInternalDependencies';
+import path from 'path-browserify';
 
 import type {
   Package,
@@ -13,7 +14,7 @@ import type {
   Files,
   ImportReplacement,
 } from '../types';
-import { baseFiles } from '../constants';
+import { baseFiles, baseFilesTS } from '../constants';
 
 export default async function({
   examplePath,
@@ -21,7 +22,7 @@ export default async function({
   gitInfo,
   importReplacements = [],
   example,
-  allowJSX,
+  extensions = [],
 }: {
   examplePath: string,
   pkgJSON?: Package | string | Promise<Package | string>,
@@ -31,9 +32,20 @@ export default async function({
   providedFiles?: Files,
   example?: string | Promise<string>,
   name?: string,
-  allowJSX?: boolean,
+  extensions: string[],
 }) {
-  let config = { allowJSX: !!allowJSX };
+  let extension = path.extname(examplePath) || '.js';
+  let baseFilesToUse = baseFiles;
+
+  if (extension && !['.js', '.json'].includes(extension)) {
+    if (['.ts', '.tsx'].includes(extension)) {
+      extensions.push('.ts', '.tsx');
+      baseFilesToUse = baseFilesTS;
+    } else {
+      extensions.push(extension);
+    }
+  }
+  let config = { extensions };
   let pkg = await ensurePKGJSON(pkgJSON, importReplacements, gitInfo, config);
 
   let { file, deps, internalImports } = await ensureExample(
@@ -46,8 +58,8 @@ export default async function({
   );
 
   let files = {
-    ...baseFiles,
-    'example.js': {
+    ...baseFilesToUse,
+    [`example${extension}`]: {
       content: replaceImports(
         file,
         internalImports.map(m => [m, `./${resolvePath(examplePath, m)}`]),
@@ -63,6 +75,7 @@ export default async function({
     gitInfo,
     importReplacements,
     config,
+    [examplePath],
   );
   return final;
 }

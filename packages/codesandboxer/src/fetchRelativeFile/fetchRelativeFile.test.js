@@ -7,7 +7,7 @@ import pkgJSON from '../../../../package.json';
 const GHConfig = {
   account: 'noviny',
   repository: 'react-codesandboxer',
-  branch: 'db34f2a24ae80b103ba19abb3d38fcde21df7038',
+  branch: '8935bc99739eff1df5961a22782e7cacbb145c5a',
   host: 'github',
 };
 
@@ -47,7 +47,7 @@ cases(
     },
     {
       name: 'fixtures/withRelativeImport',
-      expectedInternal: ['./Simple'],
+      expectedInternal: ['./simple'],
     },
     {
       name: 'fixtures/importResolution/js/A',
@@ -58,7 +58,15 @@ cases(
     },
     {
       name: 'fixtures/importResolution/jsx/A',
-      config: { allowJSX: true },
+      config: { extensions: ['.jsx'] },
+    },
+    {
+      name: 'fixtures/importResolution/ts/A',
+      config: { extensions: ['.ts'] },
+    },
+    {
+      name: 'fixtures/importResolution/tsx/A',
+      config: { extensions: ['.tsx'] },
     },
     {
       name: 'fixtures/importResolution/fromIndex/js',
@@ -72,7 +80,7 @@ cases(
     },
     {
       name: 'fixtures/importResolution/fromIndex/jsx',
-      config: { allowJSX: true },
+      config: { extensions: ['.jsx'] },
     },
   ],
 );
