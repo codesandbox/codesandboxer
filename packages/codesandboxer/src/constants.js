@@ -52,12 +52,12 @@ document.getElementById('root')
 export const newpkgJSON = (
   dependencies: Dependencies,
   name?: string = 'codesandboxer-example',
-  type: string = '.js',
+  main: string = 'index.js',
 ) => `{
   "name": "${name}",
   "version": "0.0.0",
   "description": "A simple example deployed using react-codesandboxer",
-  "main": "index${type}",
+  "main": "${main}",
   "dependencies": {
     ${Object.keys(dependencies)
       .map(k => `"${k}": "${dependencies[k]}"`)

@@ -5,6 +5,7 @@ import replaceImports from '../replaceImports';
 import ensureExample from './ensureExample';
 import ensurePKGJSON from './ensurePkgJSON';
 import fetchInternalDependencies from './fetchInternalDependencies';
+import path from 'path-browserify';
 
 import type {
   Package,
@@ -33,8 +34,7 @@ export default async function({
   name?: string,
   extensions: string[],
 }) {
-  let extension = examplePath.match(/.+(\..+)$/);
-  extension = extension ? extension[1] : '.js';
+  let extension = path.extname(examplePath) || '.js';
   let baseFilesToUse = baseFiles;
 
   if (extension && !['.js', '.json'].includes(extension)) {

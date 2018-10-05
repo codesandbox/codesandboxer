@@ -66,7 +66,7 @@
     "meow": "^5.0.0",
     "mini-css-extract-plugin": "^0.4.0",
     "p-memoize": "^2.0.0",
-    "path-browserify": "^0.0.0",
+    "path-browserify": "^1.0.0",
     "pkg-dir": "^2.0.0",
     "pkg-up": "^2.0.0",
     "prop-types": "^15.6.1",

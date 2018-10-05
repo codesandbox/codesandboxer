@@ -6,6 +6,7 @@
   "author": "Ben Conolly",
   "license": "MIT",
   "dependencies": {
+    "path-browserify": "^1.0.0",
     "lz-string": "^1.4.4",
     "isomorphic-unfetch": "^2.0.0",
     "form-data": "^2.3.2",
