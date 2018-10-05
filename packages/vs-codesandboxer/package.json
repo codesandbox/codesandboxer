@@ -2,7 +2,7 @@
     "name": "vs-codesandboxer",
     "displayName": "vs-codesandboxer",
     "description": "upload to codesandbox from a single entry file",
-    "version": "0.3.0",
+    "version": "0.2.5",
     "publisher": "noviny",
     "engines": {
         "vscode": "^1.23.0"
