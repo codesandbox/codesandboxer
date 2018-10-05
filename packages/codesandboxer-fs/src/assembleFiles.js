@@ -9,7 +9,7 @@ const {
 /*::
 import type { Config } from './types';
 */
-const { getBaseFiles, baseExtensions } = require('./constants');
+const { getBaseFiles, getBaseFilesTS, baseExtensions } = require('./constants');
 const loadFiles = require('./loadFiles');
 const resolve = require('resolve');
 
@@ -76,14 +76,21 @@ async function assembleFiles(filePath /*: string */, config /*: ?Config */) {
 
   let newFileLocation = `example${extension || '.js'}`;
 
-  let files = Object.assign({}, getBaseFiles(newFileLocation), {
-    [newFileLocation]: {
-      content: replaceImports(
-        file,
-        internalImports.map(m => [m, `./${resolvePath(relFilePath, m)}`]),
-      ),
+  let baseFiles = ['.ts', '.tsx'].includes(extension)
+    ? getBaseFilesTS(newFileLocation)
+    : getBaseFiles(newFileLocation);
+
+  let files = {
+    ...baseFiles,
+    ...{
+      [newFileLocation]: {
+        content: replaceImports(
+          file,
+          internalImports.map(m => [m, `./${resolvePath(relFilePath, m)}`]),
+        ),
+      },
     },
-  });
+  };
 
   let final = await loadFiles({
     files,

@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.4.1
+
+- [patch] The previous version had misnamed main files for typescript. Fixing that
+
 ## 0.4.0
 
 - [patch] We relied on `meow`, but did not have a dependency on it. We now directly depend on `meow`
