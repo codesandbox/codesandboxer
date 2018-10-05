@@ -18,7 +18,7 @@
     "css-loader": "^0.28.11",
     "mini-css-extract-plugin": "^0.4.0",
     "p-memoize": "^2.0.0",
-    "path-browserify": "^0.0.0",
+    "path-browserify": "^1.0.0",
     "prop-types": "^15.6.1",
     "query-string": "^6.1.0",
     "react": "^16.2.0",

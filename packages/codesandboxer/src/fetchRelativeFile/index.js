@@ -71,46 +71,55 @@ const fetchRaw = (url, path): Promise<ParsedFile> => {
 resolution order:
 A.js
 A.json
-A.jsx (if allowed)
+A.extension (in order provided)
 A/index.js
 A/index.json
-A/index.jsx (if allowed)
+A/index.extension (in order provided)
 */
 
-const catchBlock = (e, url, path, pkg, importReplacements, extension) => {
-  if (e.message.includes('file not found at:')) {
-    let newPath = `${path}${extension}`;
-    let newUrl = url.replace(/.js$/, extension);
-    if (extension === '.json') {
-      return fetchRaw(newUrl, newPath);
-    }
-    return fetchJS(newUrl, newPath, pkg, importReplacements);
-  } else {
-    throw e;
+const attemptToFetch = (url, path, pkg, importReplacements, extension) => {
+  let newPath = `${path}${extension}`;
+  let newUrl = url.replace(/.js$/, extension);
+  if (extension === '.json') {
+    return fetchRaw(newUrl, newPath).catch(error => {
+      if (error.message.includes('file not found at:')) return;
+      else throw error;
+    });
   }
+  return fetchJS(newUrl, newPath, pkg, importReplacements).catch(error => {
+    if (error.message.includes('file not found at:')) return;
+    else throw error;
+  });
 };
 
 // Imports that are not named may be .js, .json, or /index.js. Node resolves them
 // in that order.
-let fetchProbablyJS = (url, path, pkg, importReplacements, config) => {
-  // This first fetch handles .js
-  return fetchJS(url, path, pkg, importReplacements)
-    .catch(e => catchBlock(e, url, path, pkg, importReplacements, '.json'))
-    .catch(e => {
-      if (config.allowJSX) {
-        return catchBlock(e, url, path, pkg, importReplacements, '.jsx');
-      } else throw e;
-    })
-    .catch(e => catchBlock(e, url, path, pkg, importReplacements, '/index.js'))
-    .catch(e =>
-      catchBlock(e, url, path, pkg, importReplacements, '/index.json'),
-    )
-    .catch(e => {
-      if (config.allowJSX) {
-        return catchBlock(e, url, path, pkg, importReplacements, '/index.jsx');
-      } else throw e;
-    });
-};
+async function fetchProbablyJS(url, path, pkg, importReplacements, config) {
+  let extensions: string[] = config.extensions || [];
+  // We add in the .js and .json extensions as the default accepted extensions
+  extensions = ['.js', '.json', ...extensions];
+  extensions = [
+    ...extensions,
+    // This account for when the path references an index file
+    ...extensions.map(extension => `/index${extension}`),
+  ];
+
+  while (extensions.length) {
+    let extension = extensions.shift();
+    const data = await attemptToFetch(
+      url,
+      path,
+      pkg,
+      importReplacements,
+      extension,
+    );
+    if (data) return data;
+  }
+
+  throw new Error(
+    `file not found at: ${url}; tried extensions: ${extensions.join(', ')}`,
+  );
+}
 
 let fetchFileContents = (
   url,
@@ -118,6 +127,10 @@ let fetchFileContents = (
   { fileType, pkg, importReplacements },
   config,
 ): Promise<ParsedFile> => {
+  if (config.extensions.includes(fileType) || fileType === '.js') {
+    return fetchProbablyJS(url, path, pkg, importReplacements, config);
+  }
+
   switch (fileType) {
     case '.png':
     case '.jpeg':
@@ -126,10 +139,6 @@ let fetchFileContents = (
     case '.bmp':
     case '.tiff':
       return fetchImage(url, path);
-    case '.js':
-      return fetchProbablyJS(url, path, pkg, importReplacements, config);
-    case '.jsx':
-      return fetchJS(url, path, pkg, importReplacements);
     case '.json':
     case '.css':
       return fetchRaw(url, path);
@@ -147,7 +156,7 @@ export default async function fetchRelativeFile(
   gitInfo: GitInfo,
   config?: Config,
 ): HandleFileFetch {
-  config = config || {};
+  config = config || { extensions: [] };
   // The new path is the file name we will provide to codesandbox
   // Get the url from the gitInfo. For JS files, we will need to add the filetype
   // This method needs to determine the filetype, so we return it.
