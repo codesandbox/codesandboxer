@@ -74,7 +74,7 @@ async function assembleFiles(filePath /*: string */, config /*: ?Config */) {
     pkgJSON,
   );
 
-  let newFileLocation = `example${extension || '.js'}`;
+  let newFileLocation = `example`;
 
   let baseFiles = ['.ts', '.tsx'].includes(extension)
     ? getBaseFilesTS(newFileLocation)
