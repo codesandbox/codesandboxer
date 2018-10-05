@@ -19,6 +19,7 @@ export default async function fetchInternalDependencies(
   gitInfo: GitInfo,
   importReplacements: Array<ImportReplacement>,
   config: Config,
+  accumulatedInternalDependencies: string[] = [],
 ) {
   let newFiles = await Promise.all(
     internalImports.map(path =>
@@ -34,9 +35,15 @@ export default async function fetchInternalDependencies(
       moreInternalImports.push(resolvePath(f.path, m)),
     );
   }
-  moreInternalImports = moreInternalImports.filter(
-    mpt => !files[ensureExtension(mpt)],
+
+  accumulatedInternalDependencies = accumulatedInternalDependencies.concat(
+    internalImports,
   );
+
+  moreInternalImports = moreInternalImports.filter(
+    mpt => !accumulatedInternalDependencies.includes(mpt),
+  );
+
   if (moreInternalImports.length > 0) {
     let moreFiles = await fetchInternalDependencies(
       moreInternalImports,
@@ -46,6 +53,7 @@ export default async function fetchInternalDependencies(
       gitInfo,
       importReplacements,
       config,
+      accumulatedInternalDependencies,
     );
     return {
       files: { ...files, ...moreFiles.files },

@@ -39,7 +39,7 @@ export default async function({
 
   if (extension && !['.js', '.json'].includes(extension)) {
     if (['.ts', '.tsx'].includes(extension)) {
-      extensions.concat(['.ts', '.tsx']);
+      extensions.push('.ts', '.tsx');
       baseFilesToUse = baseFilesTS;
     } else {
       extensions.push(extension);
@@ -75,6 +75,7 @@ export default async function({
     gitInfo,
     importReplacements,
     config,
+    [examplePath],
   );
   return final;
 }
