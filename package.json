@@ -6,12 +6,12 @@
     "test": "yarn jest",
     "build": "bolt ws run build",
     "lint": "yarn eslint .",
-    "check": "yarn build && yarn test && yarn flow && yarn lint",
+    "all-tests": "yarn build && yarn test && yarn flow && yarn lint",
     "dev:csb": "bolt w codesandboxer run build --watch",
     "dev:rcsb": "bolt w react-codesandboxer run build --watch",
     "changeset": "yarn build-releases changeset",
     "prep-release": "yarn build-releases version",
-    "release": "yarn check && yarn build-releases publish"
+    "release": "yarn all-tests && yarn build-releases publish"
   },
   "keywords": [
     "codesandbox",
