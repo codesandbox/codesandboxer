@@ -1,3 +1,3 @@
-import React from 'react';
+import * as React from 'react';
 
 export default () => <div>This file exports a very simple component</div>;
