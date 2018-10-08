@@ -1,5 +1,9 @@
 # Codesandboxer
 
+Export a component to codesandboxer:
+
+![react-codesandboxer-example](./docs/react-codesandboxer-example.gif)
+
 Codesandboxer is a tool to allow you to deploy to go from an 'entry' file, and deploy that file and all related files to codesandbox. Its goal is to allow you to do this from any component written anywhere, from code you are viewing on github through to code running locally on your machine, as well as build making this easy into your own websites.
 
 To allow its use in multiple contexts, it has been split into a monorepo.
@@ -24,6 +28,8 @@ The core packages, [codesandboxer](/packages/codesandboxer) allows you to fetch 
 * [vs-codesandboxer](/packages/vs-codesandboxer) is a visual studio code extension to allow you to take an open file in vs-code and deploy it to codesandboxer.
 * [atom-codesandboxer](https://github.com/noviny/atom-codesandboxer) is an atom extension to allow you to take an open file in atom and deploy it to codesandboxer (IN DEVELOPMENT).
 * [bitbucket-codesandboxer](/packages/bitbucket-codesandboxer)
+
+![vs-codesandboxer-example](./docs/vs-codesandboxer-example.gif)
 
 ## Desired future packages
 
