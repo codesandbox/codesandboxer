@@ -80,10 +80,12 @@ async function assembleFiles(filePath /*: string */, config /*: ?Config */) {
     ? getBaseFilesTS(newFileLocation)
     : getBaseFiles(newFileLocation);
 
+  let newFileExtension = extension || '.js';
+
   let files = {
     ...baseFiles,
     ...{
-      [newFileLocation]: {
+      [newFileLocation + newFileExtension]: {
         content: replaceImports(
           file,
           internalImports.map(m => [m, `./${resolvePath(relFilePath, m)}`]),
