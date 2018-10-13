@@ -71,6 +71,8 @@ async function loadRelativeFile(
       return loadImages(resolvedPath, rootDir);
     case '.json':
     case '.css':
+    case '.scss':
+    case '.sass':
       return loadRaw(resolvedPath, rootDir);
     case '.js':
       return loadJS(resolvedPath, pkgJSON, rootDir);
