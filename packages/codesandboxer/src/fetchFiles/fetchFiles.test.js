@@ -1,6 +1,6 @@
 import fetchFiles from './index';
 /* eslint-disable-next-line no-unused-vars */
-import isomorphic from 'isomorphic-fetch';
+import isomorphic from 'isomorphic-unfetch';
 
 const BBInfo = {
   account: 'atlassian',

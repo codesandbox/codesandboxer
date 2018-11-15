@@ -1,6 +1,6 @@
 import cases from 'jest-in-case';
 import parseDeps from './parseDeps';
-import parseFile from './';
+import { parseFile } from './';
 import getAllImports from '../utils/getAllImports';
 
 const fakePKGJSON = {

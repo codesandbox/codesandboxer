@@ -38,6 +38,20 @@ cases(
   [
     { name: 'fixtures/simple' },
     {
+      name: 'fixtures/withSass',
+      expectedFiles: [
+        'fixtures/importResolution/sass/A.sass',
+        'fixtures/importResolution/sass/B.sass',
+      ],
+    },
+    {
+      name: 'fixtures/withScss',
+      expectedFiles: [
+        'fixtures/importResolution/scss/A.scss',
+        'fixtures/importResolution/scss/B.scss',
+      ],
+    },
+    {
       name: 'fixtures/withAbsoluteImport',
       extraDeps: { 'react-node-resolver': '^1.0.1', resolve: '^1.7.1' },
     },
@@ -69,8 +83,6 @@ cases(
       name: 'fixtures/withCssImport',
     },
     {
-      // This test tests for the resolution of https://github.com/Noviny/codesandboxer/issues/21
-      skip: true,
       expectedFiles: ['fixtures/importResolution/css/A.css'],
       name: 'fixtures/withCssImportNoDeclaration',
     },
