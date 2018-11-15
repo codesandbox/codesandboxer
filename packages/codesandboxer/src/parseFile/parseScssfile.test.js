@@ -1,5 +1,5 @@
 import cases from 'jest-in-case';
-import { parseScssFile, parseSassFile } from './parseScssFile';
+import { parseScssFile, parseSassFile } from './parseScssfile';
 
 const scssImportTests = [
   {
