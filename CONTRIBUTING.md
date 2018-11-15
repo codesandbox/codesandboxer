@@ -23,13 +23,18 @@ We are using [bolt](https://github.com/boltpkg/bolt) to manage this monorepo. If
 ```sh
 yarn global add bolt
 bolt
+yarn build
 ```
 
 The `bolt` command will install npm packages and link them.
 
 ### Observing changes
 
-Unfortunately, while packages are linked, their built versions are not necessarily kept up-to-date. Most importantly, if you make changes to `codesandboxer` which you want to test in other packages, you will need to build `codesandboxer`.
+If you are trying to observe changes across linked packages, you will need to make sure they are built.
+
+`yarn build` builds all packages.
+`yarn dev:csb` runs the build script for `codesandboxer` and watches it for changes.
+`yarn dev:rcsb` runs the build script for `react-codesandboxer` and watches it for changes.
 
 ### Validating changes
 

@@ -41,7 +41,6 @@ let cli = meow(
       allowedExtensions: {
         type: 'string',
         description: 'Pass in extensions that can be used in addition to .js',
-        help: 'allowedExtensions is not yet implemented',
       },
       files: {
         alias: 'f',
@@ -49,6 +48,13 @@ let cli = meow(
         description:
           'Provide a list of files that will be included even if they do not get imported',
         help: 'files is not yet implemented',
+      },
+      template: {
+        alias: 't',
+        type: 'string',
+        description:
+          'Set the codesandbox template to be used with the entry file',
+        help: 'template is not get implemented',
       },
       dependencies: {
         alias: 'd',
@@ -66,6 +72,7 @@ async function CLIStuff(cliData) {
   let config = {};
 
   if (cliData.flags.name) config.name = cliData.flags.name;
+  if (cliData.flags.template) config.template = cliData.flags.template;
   if (cliData.flags.allowedExtensions) {
     config.extensions = cliData.flags.allowedExtensions.split(',');
   }

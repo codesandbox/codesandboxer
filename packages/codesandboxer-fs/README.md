@@ -26,8 +26,8 @@ The response will look something like
 
 ```json
 {
-  sandboxId: "481nzy3v84",
-  sandboxUrl: "https://codesandbox.io/s/481nzy3v84?module=/example"
+  "sandboxId": "481nzy3v84",
+  "sandboxUrl": "https://codesandbox.io/s/481nzy3v84?module=/example"
 }
 ```
 
@@ -44,6 +44,8 @@ If you point at a file with an extension that is not '.js', that file type will 
 * `--name -n` - this flag names the created sandbox, making the base link more informative when shared.
 
 * allowedExtensions - this flag provides additional extensions that will be accepted. Note that the extension type of your target file is automatically added. The format is `.jsx,.ts`, a comma separated list of file types.
+
+* `--template -t` - a string of what template to use in sending files to codesandbox. Current officially supported templates are `react` and `react-typescript`.
 
 ## Why use this instead of the codesandbox cli?
 

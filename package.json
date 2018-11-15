@@ -7,8 +7,8 @@
     "build": "bolt ws run build",
     "lint": "yarn eslint .",
     "all-tests": "yarn build && yarn test && yarn flow && yarn lint",
-    "dev:csb": "bolt w codesandboxer run build --watch",
-    "dev:rcsb": "bolt w react-codesandboxer run build --watch",
+    "dev:csb": "bolt w codesandboxer exec -- yarn build --watch",
+    "dev:rcsb": "bolt w react-codesandboxer exec -- yarn build --watch",
     "changeset": "yarn build-releases changeset",
     "prep-release": "yarn build-releases version",
     "release": "yarn all-tests && yarn build-releases publish"

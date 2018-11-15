@@ -1,5 +1,5 @@
 {
-  "releases": [{ "name": "codesandboxer", "type": "minor" }],
+  "releases": [{ "name": "codesandboxer", "type": "patch" }],
   "dependents": [
     {
       "name": "bitbucket-releases-addon",
