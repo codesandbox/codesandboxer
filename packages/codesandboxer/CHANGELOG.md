@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.6.1
+- [patch] d0c0cef:
+
+  - Add basic support for sass and scss being uploaded
+
 ## 0.6.0
 
 - [minor] 🎉 ADD TYPESCRIPT SUPPORT 🎉 (comes with auto-detection of typescript examples)

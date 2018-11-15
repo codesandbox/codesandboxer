@@ -1,5 +1,9 @@
 # Changelog
 
+## 3.0.1
+- Updated dependencies [d0c0cef]:
+  - codesandboxer@0.6.1
+
 ## 3.0.0
 
 - [minor] 🎉 ADD TYPESCRIPT SUPPORT 🎉 (comes with auto-detection of typescript examples)

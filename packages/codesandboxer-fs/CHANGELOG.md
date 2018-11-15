@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.4.2
+- [patch] 7a8ec34:
+
+  - Fix path resolution for example path. Thanks [Gilles De Mey](https://github.com/gillesdemey) for the fix!
+- Updated dependencies [d0c0cef]:
+  - codesandboxer@0.6.1
+
 ## 0.4.1
 
 - [patch] The previous version had misnamed main files for typescript. Fixing that
