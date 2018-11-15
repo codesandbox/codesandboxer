@@ -16,6 +16,22 @@ async function loadJS(resolvedPath, pkgJSON, rootDir) {
   });
 }
 
+async function loadSass(resolvedPath, pkgJSON, rootDir) {
+  let content = fs.readFileSync(resolvedPath, 'utf-8');
+  let file = await csb.parseSassFile(content);
+  return Object.assign({}, file, {
+    filePath: relToRelPkgRoot(resolvedPath, rootDir),
+  });
+}
+
+async function loadScss(resolvedPath, pkgJSON, rootDir) {
+  let content = fs.readFileSync(resolvedPath, 'utf-8');
+  let file = await csb.parseScssFile(content);
+  return Object.assign({}, file, {
+    filePath: relToRelPkgRoot(resolvedPath, rootDir),
+  });
+}
+
 async function loadRaw(resolvedPath, rootDir) {
   let file = fs.readFileSync(resolvedPath, 'utf-8');
   return {
@@ -72,6 +88,11 @@ async function loadRelativeFile(
     case '.json':
     case '.css':
       return loadRaw(resolvedPath, rootDir);
+    // Our scss and sass loaders currently don't resolve imports - we need to come back and update these.
+    case '.scss':
+      return loadScss(resolvedPath, pkgJSON, rootDir);
+    case '.sass':
+      return loadSass(resolvedPath, pkgJSON, rootDir);
     case '.js':
       return loadJS(resolvedPath, pkgJSON, rootDir);
     default:

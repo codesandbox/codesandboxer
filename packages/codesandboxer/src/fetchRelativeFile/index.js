@@ -1,5 +1,5 @@
 // @flow
-import parseFile from '../parseFile';
+import { parseFile, parseSassFile, parseScssFile } from '../parseFile';
 import replaceImports from '../replaceImports';
 import absolutesToRelative from '../utils/absolutesToRelative';
 import getUrl from './getUrl';
@@ -11,6 +11,14 @@ import type {
   Config,
   ImportReplacement,
 } from '../types';
+
+const fetchRequest = url =>
+  fetch(url).then(res => {
+    if (res.status === 404) {
+      throw new Error(`file not found at: ${url}`);
+    }
+    return res.text();
+  });
 
 /*
 This is modified from the canvas answer here:
@@ -35,26 +43,27 @@ function fetchImage(url, path): Promise<ParsedFile> {
   }).then(file => ({ file, deps: {}, internalImports: [], path }));
 }
 
-const fetchJS = (url, path, pkg, importReplacements): Promise<ParsedFile> => {
-  return (
-    fetch(url)
-      .then(res => {
-        if (res.status === 404) {
-          throw new Error(`file not found at: ${url}`);
-        }
-        return res.text();
-      })
-      .then(content =>
-        replaceImports(
-          content,
-          importReplacements.map(m => [absolutesToRelative(path, m[0]), m[1]]),
-        ),
-      )
-      // this is not correct
-      .then(content => parseFile(content, pkg))
-      .then(file => ({ ...file, path }))
-  );
-};
+const fetchJS = (url, path, pkg, importReplacements): Promise<ParsedFile> =>
+  fetchRequest(url)
+    .then(content =>
+      replaceImports(
+        content,
+        importReplacements.map(m => [absolutesToRelative(path, m[0]), m[1]]),
+      ),
+    )
+    // this is not correct
+    .then(content => parseFile(content, pkg))
+    .then(file => ({ ...file, path }));
+
+const fetchSass = (url, path) =>
+  fetchRequest(url)
+    .then(parseSassFile)
+    .then(file => ({ ...file, path }));
+
+const fetchScss = (url, path) =>
+  fetchRequest(url)
+    .then(parseScssFile)
+    .then(file => ({ ...file, path }));
 
 const fetchRaw = (url, path): Promise<ParsedFile> => {
   return fetch(url)
@@ -71,10 +80,10 @@ const fetchRaw = (url, path): Promise<ParsedFile> => {
 resolution order:
 A.js
 A.json
-A.extension (in order provided)
+A.userExtension (in order provided)
 A/index.js
 A/index.json
-A/index.extension (in order provided)
+A/index.userExtension (in order provided)
 */
 
 const attemptToFetch = (url, path, pkg, importReplacements, extension) => {
@@ -142,6 +151,10 @@ let fetchFileContents = (
     case '.json':
     case '.css':
       return fetchRaw(url, path);
+    case '.scss':
+      return fetchScss(url, path);
+    case '.sass':
+      return fetchSass(url, path);
     default:
       throw new Error(`unparseable filetype: ${fileType} for file ${path}`);
   }

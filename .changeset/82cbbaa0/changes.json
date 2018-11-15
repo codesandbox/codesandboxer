@@ -1,0 +1,4 @@
+{
+  "releases": [{ "name": "codesandboxer-fs", "type": "patch" }],
+  "dependents": []
+}

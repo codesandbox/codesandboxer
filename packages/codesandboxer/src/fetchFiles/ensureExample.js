@@ -3,7 +3,7 @@
 import fetchRelativeFile from '../fetchRelativeFile';
 import replaceImports from '../replaceImports';
 import absolutesToRelative from '../utils/absolutesToRelative';
-import parseFile from '../parseFile';
+import { parseFile } from '../parseFile';
 
 import type { Package, GitInfo, Config, ImportReplacement } from '../types';
 

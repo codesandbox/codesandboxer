@@ -1,6 +1,6 @@
 // @flow
 // exposed mostly for codesandboxer-fs to use
-export { default as parseFile } from './parseFile';
+export { parseFile, parseScssFile, parseSassFile } from './parseFile';
 export { default as replaceImports } from './replaceImports';
 export { default as resolvePath } from './utils/resolvePath';
 

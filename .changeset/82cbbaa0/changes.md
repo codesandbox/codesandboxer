@@ -1,0 +1,1 @@
+- Fix path resolution for example path. Thanks [Gilles De Mey](https://github.com/gillesdemey) for the fix!
