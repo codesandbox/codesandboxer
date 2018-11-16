@@ -1,38 +1,21 @@
 <template>
-  <input
-    type="text"
-    class="input"
-    :value="value"
-    v-on="listeners"
-  >
+  <p>{{ template }} Now works in Codesandboxer!</p>
 </template>
 
 <script>
-export default {
-  props: {
-    value: {
-      type: String,
-      default: '',
-    }
-  },
-  computed: {
-    listeners () {
-      return {
-        // Pass all component listeners directly to input
-        ...this.$listeners,
-        // Override input listener to work with v-model
-        input: event => this.$emit('input', event.target.value)
-      }
+module.exports = {
+  data: function () {
+    return {
+      template: 'Vue'
     }
   }
 }
 </script>
 
-<style lang="scss" scoped>
-
-.input {
-  width: 100%;
-  padding: 8px 10px;
-  border: 1px solid hotpink;
+<style scoped>
+p {
+  font-size: 2em;
+  color: hotpink;
+  text-align: center;
 }
 </style>
