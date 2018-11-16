@@ -1,7 +1,7 @@
 // @flow
 import getParameters from './getParameters';
 import type { Files, Dependencies } from '../types';
-import { newpkgJSON } from '../templates/packagejson';
+import newpkgJSON from '../templates/packagejson';
 
 const ensureReact = deps => {
   if (!deps.react && !deps['react-dom']) {

@@ -1,4 +1,4 @@
-export const baseFiles = {
+export default {
   'index.html': {
     content: '<div id="root"></div>',
   },

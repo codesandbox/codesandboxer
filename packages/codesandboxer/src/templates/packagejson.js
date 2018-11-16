@@ -1,6 +1,6 @@
 // @flow
 import type { Dependencies } from '../types';
-export const newpkgJSON = (
+export default (
   dependencies: Dependencies,
   name?: string = 'codesandboxer-example',
   main: string = 'index.js',
