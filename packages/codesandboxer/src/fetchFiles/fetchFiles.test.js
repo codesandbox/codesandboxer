@@ -33,7 +33,7 @@ const getSandboxerObj = (userOpts = {}) => ({
   ...userOpts,
 });
 
-it('should fetch an example from atlaskit', () => {
+it.only('should fetch an example from atlaskit', () => {
   return fetchFiles(getMainObj()).then(res => {
     expect(res.files).toMatchSnapshot();
   });

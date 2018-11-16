@@ -21,23 +21,20 @@ const ensureVue = deps => {
 };
 
 export default function(
-  { files, deps }: { files: Files, deps: Dependencies },
+  {
+    files,
+    deps,
+    template = 'create-react-app',
+  }: { files: Files, deps: Dependencies, template?: string },
   config: ?{
     extraFiles?: Files,
     extraDependencies?: Dependencies,
     name?: string,
-    template?: string,
     main?: string,
   },
 ) {
   if (!config) config = {};
-  let {
-    extraFiles,
-    extraDependencies,
-    name,
-    template = 'create-react-app',
-    main,
-  } = config;
+  let { extraFiles, extraDependencies, name, main } = config;
   let dependencies = {
     ...deps,
     ...extraDependencies,

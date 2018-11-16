@@ -71,7 +71,7 @@ type Props = {
   style: Object,
   /* allow codesandboxer to accept jsx properties */
   extensions: string[],
-  template?: 'create-react-app' | 'create-react-app-typescript',
+  template?: 'create-react-app' | 'create-react-app-typescript' | 'vue-cli',
 };
 
 export default class CodeSandboxDeployer extends Component<Props, State> {
