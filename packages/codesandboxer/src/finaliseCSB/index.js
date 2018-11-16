@@ -1,7 +1,7 @@
 // @flow
 import getParameters from './getParameters';
 import type { Files, Dependencies } from '../types';
-import { newpkgJSON } from '../constants';
+import { newpkgJSON } from '../templates/packagejson';
 
 const ensureReact = deps => {
   if (!deps.react && !deps['react-dom']) {
@@ -11,6 +11,12 @@ const ensureReact = deps => {
     deps.react = deps['react-dom'];
   } else if (!deps['react-dom']) {
     deps['react-dom'] = deps.react;
+  }
+};
+
+const ensureVue = deps => {
+  if (!deps.vue) {
+    deps.vue = 'latest';
   }
 };
 
@@ -42,7 +48,16 @@ export default function(
       ? 'index.tsx'
       : 'index.js';
 
-  ensureReact(dependencies);
+  if (
+    template === 'create-react-app' ||
+    template === 'create-react-app-typesctipt'
+  ) {
+    ensureReact(dependencies);
+  }
+
+  if (template === 'vue-cli') {
+    ensureVue(dependencies);
+  }
 
   const finalFiles = {
     ...files,

@@ -14,7 +14,8 @@ import type {
   Files,
   ImportReplacement,
 } from '../types';
-import { baseFiles, baseFilesTS } from '../constants';
+import baseFilesReact from '../templates/react';
+import baseFilesTS from '../templates/react-typescript';
 
 export default async function({
   examplePath,
@@ -35,7 +36,7 @@ export default async function({
   extensions: string[],
 }) {
   let extension = path.extname(examplePath) || '.js';
-  let baseFilesToUse = baseFiles;
+  let baseFilesToUse = baseFilesReact;
 
   if (extension && !['.js', '.json'].includes(extension)) {
     if (['.ts', '.tsx'].includes(extension)) {
