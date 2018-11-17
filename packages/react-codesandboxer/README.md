@@ -72,11 +72,11 @@ Children also receives the `sandboxId` and the `sandboxUrl` once those exist.
 
 The contents of the `package.json`. This is used to find the correct versions for imported npm packages used in your example and other files pulled in. If no package.json is provided, each package will use `latest` from npm. It has effectively 4 ways to pass in the package.JSON
 
-* Pass in the package itself as an object.
-* Pass in a string which is the git path to the package
-* Pass in a promise that resolves to:
-  * An object that represents the package.json
-  * A stringified version of the package.json object.
+- Pass in the package itself as an object.
+- Pass in a string which is the git path to the package
+- Pass in a promise that resolves to:
+  - An object that represents the package.json
+  - A stringified version of the package.json object.
 
 ### `importReplacements?: Array<[string, string]>`
 
@@ -104,7 +104,11 @@ Function that is called when an error occurs in the deploy process, with details
 
 ### `preload?: boolean`
 
-Load the files when component mounts, instead of waiting for the button to be clicked.
+Deploy the sandbox when component mounts, instead of waiting for the button to be clicked.
+
+### `preload?: boolean`
+
+Load the files when component mounts, instead of waiting for the button to be clicked. This doesn't deploy the sandbox on mount yet, it only preloads all the data it needs to deploy.
 
 ### onLoadComplete?: ({ parameters: string, files: Files } | { error: any }) => mixed,
 
@@ -141,7 +145,6 @@ Do not open the sandbox once the data has been sent. Using this along with the `
 An array of extensions that will be treated as javascript files. For example, if you pass in [`.jsx`], when loading files, we will attempt to fetch `.jsx` files as well as `.js` and `.json` files. The extension type of your example is automatically added, so if you pass in the `examplePath` `my/cool/example.jsx`, you will not need to pass in the jsx extension.
 
 If your example file is fo type `.ts` or `.tsx` both are added.
-
 
 ### `template?: string`
 
@@ -182,7 +185,7 @@ import pkgJSON from '../package.json';
       : (
         <button type="submit"  disabled={!!error}>
           Upload to CodeSandbox
-        </button>  
+        </button>
       )
   }
 </CodeSandboxer>
@@ -190,10 +193,10 @@ import pkgJSON from '../package.json';
 
 This shows off some more advanced usage:
 
-* We are providing the pkgJSON as an object, so it does not need to be fetched (this also accepts a promise that resolves to a pkgJSON)
-* We are specifying a branch to pull files from (also accepts git hashes)
-* We are replacing src files with a reference to the package, so the package's own internals are pulled from npm (this is a nice optimisation in component docs)
-* We have a collection of dependencies we always include
-* We are providing our own index, allowing us to add the `css-reset` to it. We can also pass in extra files
-* We are logging after a deploy
-* We have provided a custom button component
+- We are providing the pkgJSON as an object, so it does not need to be fetched (this also accepts a promise that resolves to a pkgJSON)
+- We are specifying a branch to pull files from (also accepts git hashes)
+- We are replacing src files with a reference to the package, so the package's own internals are pulled from npm (this is a nice optimisation in component docs)
+- We have a collection of dependencies we always include
+- We are providing our own index, allowing us to add the `css-reset` to it. We can also pass in extra files
+- We are logging after a deploy
+- We have provided a custom button component

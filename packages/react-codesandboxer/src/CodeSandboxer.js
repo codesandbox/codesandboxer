@@ -50,6 +50,8 @@ type Props = {
   ignoreInternalImports?: boolean,
   /* Load the files when component mounts, instead of waiting for the button to be clicked */
   preload?: boolean,
+  /* Deploy the sandbox when component mounts, instead of waiting for the button to be clicked */
+  autoDeploy?: boolean,
   /* Called once loading has finished, whether it preloaded or not */
   onLoadComplete?: (
     { parameters: string, files: Files } | { error: any },
@@ -172,9 +174,11 @@ export default class CodeSandboxDeployer extends Component<Props, State> {
       });
   };
 
-  deployToCSB = (e: MouseEvent) => {
+  deployToCSB = (e?: MouseEvent) => {
     const { deployPromise, isDeploying } = this.state;
-    e.preventDefault();
+    if (e) {
+      e.preventDefault();
+    }
     if (isDeploying) return null;
     this.setState({ isDeploying: true });
 
@@ -186,6 +190,11 @@ export default class CodeSandboxDeployer extends Component<Props, State> {
   };
 
   componentDidMount() {
+    if (this.props.autoDeploy) {
+      this.deployToCSB();
+      return;
+    }
+
     if (this.button) this.button.addEventListener('click', this.deployToCSB);
     if (this.props.preload) this.loadFiles();
   }
