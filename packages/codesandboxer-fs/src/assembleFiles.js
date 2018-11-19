@@ -117,7 +117,7 @@ async function assembleFiles(filePath /*: string */, config /*: ?Config */) {
   });
 
   if (Object.keys(final.files).length > 120) throw { key: 'tooManyModules' };
-  return finaliseCSB(final, config);
+  return finaliseCSB({ ...final, template: config.template }, config);
 }
 
 module.exports = assembleFiles;
