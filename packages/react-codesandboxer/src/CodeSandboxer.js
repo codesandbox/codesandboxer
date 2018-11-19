@@ -103,18 +103,10 @@ export default class CodeSandboxDeployer extends Component<Props, State> {
     // resolved
     let deployPromise = fetchFiles(this.props)
       .then(fetchedInfo => {
-        let template = 'create-react-app';
-        if (this.props.template) {
-          template = this.props.template;
-        } else if (this.props.examplePath.match(/\.tsx?$/)) {
-          template = 'create-react-app-typescript';
-        }
-
         let { parameters } = finaliseCSB(fetchedInfo, {
           extraFiles: providedFiles,
           extraDependencies: dependencies,
           name,
-          template,
         });
         this.setState(
           { parameters, isLoading: false, files: fetchedInfo.files },

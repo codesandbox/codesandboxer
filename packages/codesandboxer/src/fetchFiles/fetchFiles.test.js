@@ -33,20 +33,26 @@ const getSandboxerObj = (userOpts = {}) => ({
   ...userOpts,
 });
 
-it('should fetch an example from atlaskit', () => {
-  return fetchFiles(getMainObj()).then(res => {
-    expect(res.files).toMatchSnapshot();
+describe('bad snapshot tests', () => {
+  it('should fetch an example from atlaskit', () => {
+    return fetchFiles(getMainObj()).then(res => {
+      expect(res.template).toEqual('create-react-app');
+      expect(Object.keys(res.deps)).toContain('@atlaskit/theme');
+      expect(Object.keys(res.files)).toContain(
+        'packages/elements/avatar/examples-util/helpers.js',
+      );
+    });
   });
-});
-it('should fetch our basic fixture example', () => {
-  return fetchFiles(getSandboxerObj()).then(res => {
-    expect(res.files).toMatchSnapshot();
+  it('should fetch our basic fixture example', () => {
+    return fetchFiles(getSandboxerObj()).then(res => {
+      expect(res.files).toMatchSnapshot();
+    });
   });
-});
-it('should fetch a css example from our fixtures', () => {
-  return fetchFiles(
-    getSandboxerObj({ examplePath: 'fixtures/withCssImport.js' }),
-  ).then(res => {
-    expect(res.files).toMatchSnapshot();
+  it('should fetch a css example from our fixtures', () => {
+    return fetchFiles(
+      getSandboxerObj({ examplePath: 'fixtures/withCssImport.js' }),
+    ).then(res => {
+      expect(res.files).toMatchSnapshot();
+    });
   });
 });

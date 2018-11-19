@@ -41,9 +41,6 @@ export default async function({
 
   extensionsSet.add(extension);
 
-  let baseFilesToUse = templates[extension];
-  if (!baseFilesToUse) baseFilesToUse = templates['create-react-app'];
-
   if (
     ['.ts', '.tsx'].includes(extension) ||
     template === 'create-react-app-typescript'
@@ -57,6 +54,10 @@ export default async function({
     if (!template) template = 'vue-cli';
     extensionsSet.add('.vue');
   }
+
+  let baseFilesToUse = templates[template];
+  if (!baseFilesToUse) baseFilesToUse = templates['create-react-app'];
+  if (!template) template = 'create-react-app';
 
   let config = { extensions, template };
   let pkg = await ensurePKGJSON(pkgJSON, importReplacements, gitInfo, config);

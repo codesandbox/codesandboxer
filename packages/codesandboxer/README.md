@@ -113,7 +113,7 @@ If your example file is fo type `.ts` or `.tsx` both are added.
 
 ### finaliseCSB(compiledInfo, config)
 
-The FinaliseCSB function is used to generate a parameter hash of the file contents that can be sent to codesandbox using `sendFilesToCSB`
+The FinaliseCSB function is used to generate a parameter hash of the file contents that can be sent to codesandbox using `sendFilesToCSB`. It takes in the result of `fetchFiles`, however is separate so you can intercept files and either examine or modify them before it is sent to codesandbox.
 
 The config object is optional, and can have any of the following properties:
 
@@ -142,17 +142,6 @@ If a fileName exists in your provided files, it will not be fetched when it is r
 #### extraDependencies
 
 An object with packages formatted in the same way as the dependencies in a `package.json` which will always be included in a sandbox, even if it is not found within the example's tree.
-
-### template
-
-This template string sets what codesandbox template to use. Currently we support:
-
-- `create-react-app`
-- `create-react-app-typescript`
-
-We auto-detect which one we think we should use, so you should only need to provide this if you want to override our selected template.
-
-Unsupported templates will still cause the bundled files to be sent to codesandbox under that template, but the bundling may fail.
 
 ### sendFilesToCSB()
 
