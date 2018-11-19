@@ -9,6 +9,7 @@ export { default as fetchFiles } from './fetchFiles';
 export { default as sendFilesToCSB } from './sendFilesToCSB';
 export { default as finaliseCSB } from './finaliseCSB';
 export { getSandboxUrl } from './constants';
+export { templates } from './templates';
 
 // I don't know why this is exposed
 export { default as fetchRelativeFile } from './fetchRelativeFile';

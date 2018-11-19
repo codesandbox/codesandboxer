@@ -14,7 +14,7 @@ import type {
   Files,
   ImportReplacement,
 } from '../types';
-import { baseFiles, baseFilesTS } from '../constants';
+import templates from '../templates';
 
 export default async function({
   examplePath,
@@ -23,6 +23,7 @@ export default async function({
   importReplacements = [],
   example,
   extensions = [],
+  template,
 }: {
   examplePath: string,
   pkgJSON?: Package | string | Promise<Package | string>,
@@ -33,19 +34,31 @@ export default async function({
   example?: string | Promise<string>,
   name?: string,
   extensions: string[],
+  template?: 'create-react-app' | 'create-react-app-typescript' | 'vue-cli',
 }) {
+  let extensionsSet = new Set(extensions);
   let extension = path.extname(examplePath) || '.js';
-  let baseFilesToUse = baseFiles;
 
-  if (extension && !['.js', '.json'].includes(extension)) {
-    if (['.ts', '.tsx'].includes(extension)) {
-      extensions.push('.ts', '.tsx');
-      baseFilesToUse = baseFilesTS;
-    } else {
-      extensions.push(extension);
-    }
+  extensionsSet.add(extension);
+
+  let baseFilesToUse = templates[extension];
+  if (!baseFilesToUse) baseFilesToUse = templates['create-react-app'];
+
+  if (
+    ['.ts', '.tsx'].includes(extension) ||
+    template === 'create-react-app-typescript'
+  ) {
+    if (!template) template = 'create-react-app-typescript';
+    extensionsSet.add('.ts');
+    extensionsSet.add('.tsx');
   }
-  let config = { extensions };
+
+  if (extension === '.vue' || template === 'vue-cli') {
+    if (!template) template = 'vue-cli';
+    extensionsSet.add('.vue');
+  }
+
+  let config = { extensions, template };
   let pkg = await ensurePKGJSON(pkgJSON, importReplacements, gitInfo, config);
 
   let { file, deps, internalImports } = await ensureExample(
@@ -77,5 +90,5 @@ export default async function({
     config,
     [examplePath],
   );
-  return final;
+  return { ...final, template };
 }

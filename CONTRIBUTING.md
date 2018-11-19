@@ -36,9 +36,26 @@ If you are trying to observe changes across linked packages, you will need to ma
 `yarn dev:csb` runs the build script for `codesandboxer` and watches it for changes.
 `yarn dev:rcsb` runs the build script for `react-codesandboxer` and watches it for changes.
 
+The other packages do not need to be built.
+
 ### Validating changes
 
 Currently validation that things work is mostly being done through tests. The most important tests being the ones in `codesandboxer` and `codesandboxer-fs` which use the `/fixtures` directory to validate how they parse and load files.
+
+## Adding Templates
+
+Codesandboxer currently supports:
+
+- create-react-app
+- create-react-app-typescript
+- vue-cli
+
+It should be easy to add new templates. Here are the places you would need to modify:
+
+1. Add a template file to `packages/codesandboxer/templates/`.
+    A template should include a main file that imports from `example.js` (or the relevant filetype), as well as any other necessary files to run the sandbox.
+    1a. Once you have your template file, export it from `packages/codesandboxer/templates/index.js` added to the object with the name of the sandbox it is for.
+2. If you want a different template to be used for `codesandboxer-fs` add a template to `packages/codesandboxer-fs/templates` in the same way. (we tend to make templates for codesandboxer-fs call out the use of the sandboxer more explicitly, as it may be less clear how to debug it)
 
 ## For Pull Requests
 

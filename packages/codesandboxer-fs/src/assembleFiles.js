@@ -9,7 +9,9 @@ const {
 /*::
 import type { Config } from './types';
 */
-const { getBaseFiles, getBaseFilesTS, baseExtensions } = require('./constants');
+const templates = require('./templates');
+
+const { baseExtensions } = require('./constants');
 const loadFiles = require('./loadFiles');
 const resolve = require('resolve');
 
@@ -46,9 +48,16 @@ async function assembleFiles(filePath /*: string */, config /*: ?Config */) {
   if (!config) config = {};
 
   let extension = path.extname(filePath);
-  if (['.ts', '.tsx'].includes(extension) && !config.template) {
-    config.template = 'create-react-app-typescript';
+  if (!config.template) {
+    if (['.ts', '.tsx'].includes(extension)) {
+      config.template = 'create-react-app-typescript';
+    } else if (extension === '.vue' && !config.template) {
+      config.template = 'vue-cli';
+    } else {
+      config.template = 'create-react-app';
+    }
   }
+
   let extensions = ['.js', '.json'];
   if (config.extensions) extensions = [...extensions, ...config.extensions];
   if (
@@ -77,10 +86,10 @@ async function assembleFiles(filePath /*: string */, config /*: ?Config */) {
 
   let newFileLocation = `example`;
 
-  let baseFiles = ['.ts', '.tsx'].includes(extension)
-    ? getBaseFilesTS(newFileLocation)
-    : getBaseFiles(newFileLocation);
+  let template = templates[config.template];
+  if (!template) template = templates['create-react-app'];
 
+  let baseFiles = template(newFileLocation);
   let newFileExtension = extension || '.js';
 
   let files = {
@@ -94,6 +103,8 @@ async function assembleFiles(filePath /*: string */, config /*: ?Config */) {
       },
     },
   };
+
+  console.log(files['index.js']);
 
   let final = await loadFiles({
     files,

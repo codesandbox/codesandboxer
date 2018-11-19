@@ -42,6 +42,27 @@ document.getElementById('root')
 }
 `;
 
+exports[`should fetch a css example from our fixtures 2`] = `
+Object {
+  "example.js": Object {
+    "content": "import React from 'react';
+import css from './fixtures/importResolution/css/A.css';
+
+export default () => (
+  <div>
+    <p>Simple file requiring a css file</p>
+  </div>
+);
+",
+  },
+  "fixtures/importResolution/css/A.css": Object {
+    "content": "div {
+    color: red;
+  }",
+  },
+}
+`;
+
 exports[`should fetch an example from atlaskit 1`] = `
 Object {
   "example.js": Object {
