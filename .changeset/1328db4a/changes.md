@@ -1,0 +1,1 @@
+- Add autoload option to react-codesandboxer - should only be used to automatically open iframes

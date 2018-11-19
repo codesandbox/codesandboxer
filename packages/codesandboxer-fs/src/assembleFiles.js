@@ -104,8 +104,6 @@ async function assembleFiles(filePath /*: string */, config /*: ?Config */) {
     },
   };
 
-  console.log(files['index.js']);
-
   let final = await loadFiles({
     files,
     deps,

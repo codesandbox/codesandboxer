@@ -102,9 +102,9 @@ Name for the codesandbox instance. This sets the package name in the uploaded `p
 
 Function that is called when an error occurs in the deploy process, with details of the error.
 
-### `preload?: boolean`
+### `autoDeploy?: boolean`
 
-Deploy the sandbox when component mounts, instead of waiting for the button to be clicked.
+Deploy the sandbox when component mounts, instead of waiting for the button to be clicked. You should only need to autodeploy if you plan on opening the sandbox immediately, such as in an iframe.
 
 ### `preload?: boolean`
 

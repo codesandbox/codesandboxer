@@ -1,0 +1,4 @@
+{
+  "releases": [{ "name": "react-codesandboxer", "type": "minor" }],
+  "dependents": []
+}

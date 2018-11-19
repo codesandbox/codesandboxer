@@ -1,12 +1,13 @@
 <template>
-  <p>{{ template }} Now works in Codesandboxer!</p>
+  <p>{{ emoji }}{{ template }} Now works in Codesandboxer{{ emoji }}</p>
 </template>
 
 <script>
 module.exports = {
   data: function () {
     return {
-      template: 'Vue'
+      template: 'Vue',
+      emoji: '🎶'
     }
   }
 }
