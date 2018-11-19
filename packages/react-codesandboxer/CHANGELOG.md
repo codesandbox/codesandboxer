@@ -1,5 +1,12 @@
 # Changelog
 
+## 3.1.0
+- [minor] 4b2b662:
+
+  - Add autoload option to react-codesandboxer - should only be used to automatically open iframes
+- Updated dependencies [9db3c25]:
+  - codesandboxer@0.7.0
+
 ## 3.0.1
 - Updated dependencies [d0c0cef]:
   - codesandboxer@0.6.1

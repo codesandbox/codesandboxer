@@ -1,7 +1,0 @@
-{
-  "releases": [
-    { "name": "codesandboxer-fs", "type": "patch" },
-    { "name": "codesandboxer", "type": "patch" }
-  ],
-  "dependents": []
-}
