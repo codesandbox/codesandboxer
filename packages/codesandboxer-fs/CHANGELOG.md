@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.4.5
+- [patch] 0f3b87a:
+
+  - Pass through template in correct spot
+
 ## 0.4.3
 - [patch] 4b2b662:
 

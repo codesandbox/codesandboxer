@@ -1,6 +1,6 @@
 # vs-codesandboxer
 
-Open a react component from your editor into codesandboxer, using `codesandboxer-fs` under-the-hood.
+Open a component from your editor into codesandboxer, using `codesandboxer-fs` under-the-hood.
 
 Can be used with the command `Deploy to codesandbox` or right click in your active file to select to deploy it. Once your needed files/dependencies have been sorted out, an 'open in codesandbox' link will open as a notification. Click it and you'll be able to see your component in codesandbox, and share it with others.
 
@@ -12,8 +12,10 @@ This can help teams that are working asynchronously/remotely share proposed chan
 
 ## Provisos
 
-Currently this package has some limitations that codesandbox does not. We want to expand it later, but you should just be aware that:
+We use auto-detection for the kind of sandbox we should create. You should use `codesandboxer-fs` through the command line if you need to pass in more options.
 
-1. We assume the target file exports a react component (we will definitely try and render it into a react tree). If you point it at a file that doesn't export a react component, it's going to fail.
+The only sandboxes we currently support are:
 
-2. We only support react, unlike codesandbox itself. Hopefully we will be expanding this to other templates soonish.
+- create-react-app
+- create-react-app-typescript
+- vue-cli

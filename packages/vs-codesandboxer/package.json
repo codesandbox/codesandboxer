@@ -2,7 +2,7 @@
     "name": "vs-codesandboxer",
     "displayName": "vs-codesandboxer",
     "description": "upload to codesandbox from a single entry file",
-    "version": "0.3.1",
+    "version": "0.4.1",
     "publisher": "noviny",
     "engines": {
         "vscode": "^1.23.0"
@@ -24,6 +24,18 @@
                 {
                     "when": "resourceLangId == javascript",
                     "command": "extension.vs-codesandboxer"
+                },
+                {
+                    "when": "resourceLangId == vue",
+                    "command": "extension.vs-codesandboxer"
+                },
+                {
+                    "when": "resourceLangId == typescriptreact",
+                    "command": "extension.vs-codesandboxer"
+                },
+                {
+                    "when": "resourceLangId == javascriptreact",
+                    "command": "extension.vs-codesandboxer"
                 }
             ]
         }
@@ -33,7 +45,7 @@
         "build": "echo done"
     },
     "dependencies": {
-        "codesandboxer-fs": "^0.4.1",
+        "codesandboxer-fs": "^0.4.5",
         "pkg-up": "^2.0.0",
         "pkg-dir": "^2.0.0"
     },

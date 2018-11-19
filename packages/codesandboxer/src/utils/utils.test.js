@@ -105,7 +105,7 @@ cases(
     expect(res).toBe(name);
   },
   [
-    { only: true, basePath: 'a/b/c', relativePath: '../z', name: 'a/z' },
+    { basePath: 'a/b/c', relativePath: '../z', name: 'a/z' },
     { basePath: 'a/b/c', relativePath: './../z', name: 'a/z' },
     {
       basePath: 'a/b/c',
