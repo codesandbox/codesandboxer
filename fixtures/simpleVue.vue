@@ -1,22 +1,32 @@
 <template>
-  <p>{{ emoji }}{{ template }} Now works in Codesandboxer{{ emoji }}</p>
+  <div>
+    <div>{{ emoji }}</div>
+    <p>Codesandboxer now works with {{ template }}</p>
+    <div>{{ emoji }}</div>
+  </div>
 </template>
 
 <script>
+
 module.exports = {
-  data: function () {
+  data: function() {
     return {
       template: 'Vue',
-      emoji: '🎶'
-    }
-  }
-}
+      emoji: '🎶',
+    };
+  },
+};
 </script>
 
 <style scoped>
-p {
-  font-size: 2em;
+div, p {
   color: hotpink;
   text-align: center;
+}
+div {
+  font-size: 1.2em;
+}
+p {
+  font-size: 2em;
 }
 </style>

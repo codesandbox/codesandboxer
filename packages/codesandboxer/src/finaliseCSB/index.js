@@ -27,6 +27,7 @@ export default function(
     template = 'create-react-app',
   }: { files: Files, deps: Dependencies, template?: string },
   config: ?{
+    fileName?: string,
     extraFiles?: Files,
     extraDependencies?: Dependencies,
     name?: string,
@@ -34,7 +35,13 @@ export default function(
   },
 ) {
   if (!config) config = {};
-  let { extraFiles, extraDependencies, name, main } = config;
+  let {
+    extraFiles,
+    extraDependencies,
+    name,
+    main,
+    fileName = 'example',
+  } = config;
   let dependencies = {
     ...deps,
     ...extraDependencies,
@@ -75,5 +82,6 @@ export default function(
     files: finalFiles,
     dependencies,
     parameters,
+    fileName,
   };
 }

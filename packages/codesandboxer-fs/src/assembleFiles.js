@@ -91,11 +91,12 @@ async function assembleFiles(filePath /*: string */, config /*: ?Config */) {
 
   let baseFiles = template(newFileLocation);
   let newFileExtension = extension || '.js';
+  config.fileName = newFileLocation + newFileExtension;
 
   let files = {
     ...baseFiles,
     ...{
-      [newFileLocation + newFileExtension]: {
+      [config.fileName]: {
         content: replaceImports(
           file,
           internalImports.map(m => [m, `./${resolvePath(relFilePath, m)}`]),

@@ -5,7 +5,11 @@ import FormData from 'form-data';
 
 async function sendFilesToCSB(
   parameters: string,
+  config?: { fileName?: string, type?: string },
 ): Promise<{ sandboxId: string, sandboxUrl: string }> {
+  if (!config) config = {};
+  let fileName = config.fileName ? config.fileName : 'example';
+  let type = config.type ? config.type : 's';
   let formData = new FormData();
   formData.append('parameters', parameters);
 
@@ -19,7 +23,7 @@ async function sendFilesToCSB(
       if (errors) throw errors;
       return {
         sandboxId: sandbox_id,
-        sandboxUrl: getSandboxUrl(sandbox_id),
+        sandboxUrl: getSandboxUrl(sandbox_id, type, fileName),
       };
     });
 }
