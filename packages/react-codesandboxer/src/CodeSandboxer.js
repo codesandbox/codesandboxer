@@ -28,6 +28,7 @@ type State = {
   deployPromise?: Promise<any>,
   files?: Files,
   error?: Error,
+  fileName: string,
 };
 
 type Props = {
@@ -83,6 +84,7 @@ export default class CodeSandboxDeployer extends Component<Props, State> {
     parameters: '',
     isLoading: false,
     isDeploying: false,
+    fileName: 'example',
   };
   static defaultProps = {
     children: () => <button type="submit">Deploy to CodeSandbox</button>,
@@ -109,7 +111,12 @@ export default class CodeSandboxDeployer extends Component<Props, State> {
           name,
         });
         this.setState(
-          { parameters, isLoading: false, files: fetchedInfo.files },
+          {
+            parameters,
+            isLoading: false,
+            files: fetchedInfo.files,
+            fileName: fetchedInfo.fileName,
+          },
           () => {
             if (onLoadComplete) {
               onLoadComplete({ parameters, files: fetchedInfo.files });
@@ -132,10 +139,10 @@ export default class CodeSandboxDeployer extends Component<Props, State> {
 
   deploy = () => {
     let { afterDeploy, skipRedirect, afterDeployError } = this.props;
-    let { parameters, error } = this.state;
+    let { parameters, error, fileName } = this.state;
     if (error) return;
 
-    sendFilesToCSB(parameters)
+    sendFilesToCSB(parameters, { fileName })
       .then(({ sandboxId, sandboxUrl }) => {
         this.setState({
           sandboxId,

@@ -8,8 +8,8 @@ async function assembleFilesAndPost(
   filePath /*: string */,
   config /*: Config */,
 ) {
-  let { parameters } = await assembleFiles(filePath, config);
-  let csbInfo = await sendFilesToCSB(parameters);
+  let { parameters, fileName } = await assembleFiles(filePath, config);
+  let csbInfo = await sendFilesToCSB(parameters, { fileName });
   return csbInfo;
 }
 

@@ -71,9 +71,11 @@ export default async function({
     config,
   );
 
+  let fileName = `example${extension}`;
+
   let files = {
     ...baseFilesToUse,
-    [`example${extension}`]: {
+    [fileName]: {
       content: replaceImports(
         file,
         internalImports.map(m => [m, `./${resolvePath(examplePath, m)}`]),
@@ -91,5 +93,5 @@ export default async function({
     config,
     [examplePath],
   );
-  return { ...final, template };
+  return { ...final, template, fileName };
 }
