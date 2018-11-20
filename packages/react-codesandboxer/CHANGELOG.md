@@ -1,5 +1,10 @@
 # Changelog
 
+## 3.1.1
+- [patch] af01387:
+
+  - Handle passing through the fileName path
+
 ## 3.1.0
 - [minor] 4b2b662:
 

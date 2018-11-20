@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.4.6
+- [patch] af01387:
+
+  - Share information on the main example's filename and use this in the url
+
 ## 0.4.5
 - [patch] 0f3b87a:
 

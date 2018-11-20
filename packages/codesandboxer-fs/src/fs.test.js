@@ -9,20 +9,21 @@ cases(
   async (
     {
       name,
-      extraDeps = {},
+      deps,
       expectedFiles = baseFiles,
-    } /*: { name: string , extraDeps?: { [string]: string }, expectedFiles?: Array<mixed> }*/,
+      fileName = 'example.js',
+    } /*: { name: string , deps?: { [string]: string }, expectedFiles?: Array<mixed>, fileName?: string }*/,
   ) => {
     try {
       const { files, dependencies } = await assembleFiles(name);
-      const expectedDeps = {
+      const expectedDeps = deps || {
         react: '^16.2.0',
         'react-dom': '^16.2.0',
-        ...extraDeps,
       };
 
       expect(expectedDeps).toMatchObject(dependencies);
       expect(dependencies).toMatchObject(expectedDeps);
+      expect(Object.keys(files)).toContain(fileName);
       expect(Object.keys(files)).toEqual(expect.arrayContaining(expectedFiles));
     } catch (e) {
       if (e.key) {
@@ -53,7 +54,12 @@ cases(
     },
     {
       name: 'fixtures/withAbsoluteImport',
-      extraDeps: { 'react-node-resolver': '^1.0.1', resolve: '^1.7.1' },
+      deps: {
+        'react-node-resolver': '^1.0.1',
+        resolve: '^1.7.1',
+        'react-dom': '^16.2.0',
+        react: '^16.2.0',
+      },
     },
     {
       name: 'fixtures/withRelativeImport',
@@ -65,14 +71,16 @@ cases(
     },
     {
       name: 'fixtures/scoped/index.js',
-      extraDeps: { foo: '0.3.1', react: 'latest', 'react-dom': 'latest' },
+      deps: { foo: '0.3.1', react: 'latest', 'react-dom': 'latest' },
     },
     {
       name: 'fixtures/importResolution/jsx/A.jsx',
       expectedFiles: ['example.jsx'],
+      fileName: 'example.jsx',
     },
     {
       name: 'fixtures/importResolution/jsx/B.jsx',
+      fileName: 'example.jsx',
       expectedFiles: ['example.jsx', 'fixtures/importResolution/jsx/A.jsx'],
     },
     {
@@ -85,6 +93,18 @@ cases(
     {
       expectedFiles: ['fixtures/importResolution/css/A.css'],
       name: 'fixtures/withCssImportNoDeclaration',
+    },
+    {
+      expectedFiles: ['example.vue'],
+      deps: { vue: 'latest' },
+      name: 'fixtures/simpleVue.vue',
+      fileName: 'example.vue',
+    },
+    {
+      expectedFiles: ['example.tsx'],
+      name: 'fixtures/importResolution/tsx/A.tsx',
+      fileName: 'example.tsx',
+      deps: { react: '^16.2.0' },
     },
   ],
 );

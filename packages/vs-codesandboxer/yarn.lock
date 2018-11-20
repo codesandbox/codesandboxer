@@ -312,18 +312,18 @@ co@^4.6.0:
   version "4.6.0"
   resolved "https://registry.yarnpkg.com/co/-/co-4.6.0.tgz#6ea6bdf3d853ae54ccb8e47bfa0bf3f9031fb184"
 
-codesandboxer-fs@^0.4.5:
-  version "0.4.5"
-  resolved "https://registry.npmjs.org/codesandboxer-fs/-/codesandboxer-fs-0.4.5.tgz#80f4fe1c6873337e241a775e56d895a69bee6aaa"
+codesandboxer-fs@^0.4.6:
+  version "0.4.6"
+  resolved "https://registry.npmjs.org/codesandboxer-fs/-/codesandboxer-fs-0.4.6.tgz#8bb1d3d6a8e75dd651c542480bd70c1e8c357e0a"
   dependencies:
-    codesandboxer "^0.7.0"
+    codesandboxer "^0.7.1"
     meow "^5.0.0"
     pkg-dir "^2.0.0"
     resolve "^1.7.1"
 
-codesandboxer@^0.7.0:
-  version "0.7.0"
-  resolved "https://registry.npmjs.org/codesandboxer/-/codesandboxer-0.7.0.tgz#dd1c5413de1834d9a6244759b54c9092795041a7"
+codesandboxer@^0.7.1:
+  version "0.7.1"
+  resolved "https://registry.npmjs.org/codesandboxer/-/codesandboxer-0.7.1.tgz#84a478a763364ae67bff65a2f3793bcc4c82c7f5"
   dependencies:
     babel-runtime "^6.26.0"
     form-data "^2.3.2"
