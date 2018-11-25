@@ -104,7 +104,7 @@ cases(
       expectedFiles: ['example.tsx'],
       name: 'fixtures/importResolution/tsx/A.tsx',
       fileName: 'example.tsx',
-      deps: { react: '^16.2.0' },
+      deps: { react: '^16.2.0', 'react-dom': '^16.2.0' },
     },
   ],
 );

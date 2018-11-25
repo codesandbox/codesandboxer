@@ -46,7 +46,6 @@ export default function(
     ...deps,
     ...extraDependencies,
   };
-
   main =
     !main && template === 'create-react-app-typescript'
       ? 'index.tsx'
@@ -54,7 +53,7 @@ export default function(
 
   if (
     template === 'create-react-app' ||
-    template === 'create-react-app-typesctipt'
+    template === 'create-react-app-typescript'
   ) {
     ensureReact(dependencies);
   }
