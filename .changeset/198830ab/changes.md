@@ -1,0 +1,1 @@
+- Fix typo that was stopping react and react-dom being ensured by the finalisation.
