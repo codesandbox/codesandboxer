@@ -25,13 +25,18 @@ const changesetOptions = {
   A summary message you wrote, indented
 */
 
+const getLink = commit =>
+  `https://github.com/Noviny/codesandboxer/commit/${commit}`;
+
 const getReleaseLine = async (changeset, versionType) => {
   const indentedSummary = changeset.summary
     .split('\n')
     .map(l => `  ${l}`.trimRight())
     .join('\n');
 
-  return `- [${versionType}] ${changeset.commit}:\n\n${indentedSummary}`;
+  return `- [${versionType}] [${changeset.commit}](${getLink(
+    changeset.commit,
+  )}):\n\n${indentedSummary}`;
 };
 
 // This function takes information about what dependencies we are updating in the package.
@@ -47,7 +52,10 @@ const getDependencyReleaseLine = async (changesets, dependenciesUpdated) => {
   if (dependenciesUpdated.length === 0) return '';
 
   const changesetLinks = changesets.map(
-    changeset => `- Updated dependencies [${changeset.commit}]:`,
+    changeset =>
+      `- Updated dependencies [${changeset.commit}](${getLink(
+        changeset.commit,
+      )}):`,
   );
 
   const updatedDepenenciesList = dependenciesUpdated.map(
