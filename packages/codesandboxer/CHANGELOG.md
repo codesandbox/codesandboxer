@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.7.2
+- [patch] [82a4f5f](https://github.com/Noviny/codesandboxer/commit/82a4f5f):
+
+  - Fix typo that was stopping react and react-dom being ensured by the finalisation.
+
 ## 0.7.1
 - [patch] af01387:
 
