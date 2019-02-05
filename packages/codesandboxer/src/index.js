@@ -6,6 +6,9 @@ export { default as resolvePath } from './utils/resolvePath';
 
 // intended effective API
 export { default as fetchFiles } from './fetchFiles';
+export {
+  default as ensureExtensionAndTemplate,
+} from './fetchFiles/ensureExtensionAndTemplate';
 export { default as sendFilesToCSB } from './sendFilesToCSB';
 export { default as finaliseCSB } from './finaliseCSB';
 export { getSandboxUrl } from './constants';

@@ -4,6 +4,7 @@ const {
   replaceImports,
   resolvePath,
   finaliseCSB,
+  ensureExtensionAndTemplate,
 } = require('codesandboxer');
 
 /*::
@@ -47,31 +48,19 @@ const getPkgJSONPath = rootDir => {
 async function assembleFiles(filePath /*: string */, config /*: ?Config */) {
   if (!config) config = {};
 
-  let extension = path.extname(filePath);
-  if (!config.template) {
-    if (['.ts', '.tsx'].includes(extension)) {
-      config.template = 'create-react-app-typescript';
-    } else if (extension === '.vue' && !config.template) {
-      config.template = 'vue-cli';
-    } else {
-      config.template = 'create-react-app';
-    }
-  }
+  let extension = path.extname(filePath) || '.js';
+  const extensionAndTemplate = ensureExtensionAndTemplate(
+    extension,
+    config.extensions,
+    config.template,
+  );
 
-  let extensions = ['.js', '.json'];
-  if (config.extensions) extensions = [...extensions, ...config.extensions];
-  if (
-    extension &&
-    !baseExtensions.includes(extension) &&
-    !extensions.includes(extension)
-  ) {
-    extensions.push(extension);
-  }
+  config = { ...config, ...extensionAndTemplate };
 
   let rootDir = await pkgDir(filePath);
   let absFilePath = config.contents
     ? filePath
-    : getAbsFilePath(filePath, extensions);
+    : getAbsFilePath(filePath, config.extensions);
   let pkgJSONPath = getPkgJSONPath(rootDir);
   let relFilePath = path.relative(rootDir, filePath);
 
@@ -110,7 +99,7 @@ async function assembleFiles(filePath /*: string */, config /*: ?Config */) {
     deps,
     rootDir,
     pkgJSON,
-    extensions,
+    extensions: config.extensions,
     internalImports: internalImports.map(m =>
       resolvePath(path.relative(rootDir, filePath), m),
     ),
