@@ -12,7 +12,6 @@ import type { Config } from './types';
 */
 const templates = require('./templates');
 
-const { baseExtensions } = require('./constants');
 const loadFiles = require('./loadFiles');
 const resolve = require('resolve');
 
