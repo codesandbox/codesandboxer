@@ -188,6 +188,25 @@ export default class CodeSandboxDeployer extends Component<Props, State> {
     }
   };
 
+  componentDidUpdate(prevProps) {
+    if (
+      this.props.examplePath !== prevProps.examplePath ||
+      this.props.name !== prevProps.name ||
+      this.props.gitInfo !== prevProps.gitInfo ||
+      this.props.example !== prevProps.example ||
+      this.props.pkgJSON !== prevProps.pkgJSON ||
+      this.props.importReplacements !== prevProps.importReplacements ||
+      this.props.dependencies !== prevProps.dependencies ||
+      this.props.providedFiles !== prevProps.providedFiles ||
+      this.props.extensions !== prevProps.extensions ||
+      this.props.template !== prevProps.template
+    ) {
+      let newState = this.state;
+      delete newState.deployPromise;
+      this.setState(newState);
+    }
+  }
+
   componentDidMount() {
     if (this.props.autoDeploy) {
       this.deployToCSB();
