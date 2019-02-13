@@ -96,6 +96,8 @@ export default class CodeSandboxDeployer extends Component<Props, State> {
     style: { display: 'inline-block' },
   };
 
+  shouldReload = false
+
   loadFiles = () => {
     let { onLoadComplete, providedFiles, dependencies, name } = this.props;
 
@@ -181,9 +183,10 @@ export default class CodeSandboxDeployer extends Component<Props, State> {
     if (isDeploying) return null;
     this.setState({ isDeploying: true });
 
-    if (deployPromise) {
+    if (!this.shouldReload && deployPromise) {
       deployPromise.then(this.deploy);
     } else {
+      this.shouldReload = false;
       this.loadFiles().then(this.deploy);
     }
   };
@@ -201,9 +204,7 @@ export default class CodeSandboxDeployer extends Component<Props, State> {
       this.props.extensions !== prevProps.extensions ||
       this.props.template !== prevProps.template
     ) {
-      let newState = this.state;
-      delete newState.deployPromise;
-      this.setState(newState);
+      this.shouldReload = true;
     }
   }
 
