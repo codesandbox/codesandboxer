@@ -188,7 +188,7 @@ export default class CodeSandboxDeployer extends Component<Props, State> {
     }
   };
 
-  componentDidUpdate(prevProps) {
+  componentDidUpdate(prevProps: Props) {
     if (
       this.props.examplePath !== prevProps.examplePath ||
       this.props.name !== prevProps.name ||
