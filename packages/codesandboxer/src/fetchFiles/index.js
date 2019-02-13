@@ -4,6 +4,7 @@ import replaceImports from '../replaceImports';
 
 import ensureExample from './ensureExample';
 import ensurePKGJSON from './ensurePkgJSON';
+import ensureExtensionAndTemplate from './ensureExtensionAndTemplate';
 import fetchInternalDependencies from './fetchInternalDependencies';
 import path from 'path-browserify';
 
@@ -36,30 +37,8 @@ export default async function({
   extensions: string[],
   template?: 'create-react-app' | 'create-react-app-typescript' | 'vue-cli',
 }) {
-  let extensionsSet = new Set(extensions);
   let extension = path.extname(examplePath) || '.js';
-
-  extensionsSet.add(extension);
-
-  if (
-    ['.ts', '.tsx'].includes(extension) ||
-    template === 'create-react-app-typescript'
-  ) {
-    if (!template) template = 'create-react-app-typescript';
-    extensionsSet.add('.ts');
-    extensionsSet.add('.tsx');
-  }
-
-  if (extension === '.vue' || template === 'vue-cli') {
-    if (!template) template = 'vue-cli';
-    extensionsSet.add('.vue');
-  }
-
-  let baseFilesToUse = templates[template];
-  if (!baseFilesToUse) baseFilesToUse = templates['create-react-app'];
-  if (!template) template = 'create-react-app';
-
-  let config = { extensions, template };
+  let config = ensureExtensionAndTemplate(extension, extensions, template);
   let pkg = await ensurePKGJSON(pkgJSON, importReplacements, gitInfo, config);
 
   let { file, deps, internalImports } = await ensureExample(
@@ -74,7 +53,7 @@ export default async function({
   let fileName = `example${extension}`;
 
   let files = {
-    ...baseFilesToUse,
+    ...templates[config.template],
     [fileName]: {
       content: replaceImports(
         file,
@@ -93,5 +72,5 @@ export default async function({
     config,
     [examplePath],
   );
-  return { ...final, template, fileName };
+  return { ...final, template: config.template, fileName };
 }
