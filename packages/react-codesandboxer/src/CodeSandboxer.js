@@ -1,6 +1,8 @@
 // @flow
 import React, { Component, type Node } from 'react';
 import NodeResolver from 'react-node-resolver';
+import isEqual from 'lodash.isequal';
+import pick from 'lodash.pick';
 
 import {
   fetchFiles,
@@ -192,20 +194,28 @@ export default class CodeSandboxDeployer extends Component<Props, State> {
   };
 
   componentDidUpdate(prevProps: Props) {
-    if (
-      this.props.examplePath !== prevProps.examplePath ||
-      this.props.name !== prevProps.name ||
-      this.props.gitInfo !== prevProps.gitInfo ||
-      this.props.example !== prevProps.example ||
-      this.props.pkgJSON !== prevProps.pkgJSON ||
-      this.props.importReplacements !== prevProps.importReplacements ||
-      this.props.dependencies !== prevProps.dependencies ||
-      this.props.providedFiles !== prevProps.providedFiles ||
-      this.props.extensions !== prevProps.extensions ||
-      this.props.template !== prevProps.template
-    ) {
+    /* If props related to loading files have been changed, next deploy should reload files */
+    /* The props that are compared should be the same as the arguments of fetchFiles */
+    const compareKeys = ['examplePath', 'gitInfo', 'importReplacements',
+      'dependencies', 'providedFiles', 'name', 'extensions', 'template']
+    if (!isEqual(pick(this.props, compareKeys), pick(prevProps, compareKeys))) {
       this.shouldReload = true;
+      return;
     }
+
+    /* pkgJSON and example also need to be compared, but may be promises, which must be resolved before they can be compared */
+    Promise.all([this.props.example, prevProps.example]).then(([example, prevExample]) => {
+      if (example !== prevExample) {
+        this.shouldReload = true;
+        return;
+      }
+      Promise.all([this.props.pkgJSON, prevProps.pkgJSON]).then(([pkgJSON, prevPkgJSON]) => {
+        if (!isEqual(pkgJSON, prevPkgJSON)) {
+          this.shouldReload = true;
+          return;
+        }
+      });
+    });
   }
 
   componentDidMount() {
