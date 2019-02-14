@@ -197,7 +197,7 @@ export default class CodeSandboxDeployer extends Component<Props, State> {
     /* If props related to loading files have been changed, next deploy should reload files */
     /* The props that are compared should be the same as the arguments of fetchFiles */
     const compareKeys = ['examplePath', 'gitInfo', 'importReplacements',
-      'dependencies', 'providedFiles', 'name', 'extensions', 'template']
+      'dependencies', 'providedFiles', 'name', 'extensions', 'template'];
     if (!isEqual(pick(this.props, compareKeys), pick(prevProps, compareKeys))) {
       this.shouldReload = true;
       return;
