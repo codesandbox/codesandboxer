@@ -1,0 +1,20 @@
+{
+  "releases": [{ "name": "codesandboxer", "type": "minor" }],
+  "dependents": [
+    {
+      "name": "bitbucket-releases-addon",
+      "type": "patch",
+      "dependencies": ["codesandboxer"]
+    },
+    {
+      "name": "codesandboxer-fs",
+      "type": "patch",
+      "dependencies": ["codesandboxer"]
+    },
+    {
+      "name": "react-codesandboxer",
+      "type": "patch",
+      "dependencies": ["codesandboxer"]
+    }
+  ]
+}
