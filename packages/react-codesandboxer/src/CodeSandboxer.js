@@ -200,22 +200,20 @@ export default class CodeSandboxDeployer extends Component<Props, State> {
       'dependencies', 'providedFiles', 'name', 'extensions', 'template'];
     if (!isEqual(pick(this.props, compareKeys), pick(prevProps, compareKeys))) {
       this.shouldReload = true;
-      return;
-    }
-
-    /* pkgJSON and example also need to be compared, but may be promises, which must be resolved before they can be compared */
-    Promise.all([this.props.example, prevProps.example]).then(([example, prevExample]) => {
-      if (example !== prevExample) {
-        this.shouldReload = true;
-        return;
-      }
-      Promise.all([this.props.pkgJSON, prevProps.pkgJSON]).then(([pkgJSON, prevPkgJSON]) => {
-        if (!isEqual(pkgJSON, prevPkgJSON)) {
+    } else {
+      /* pkgJSON and example also need to be compared, but may be promises, which must be resolved before they can be compared */
+      Promise.all([this.props.example, prevProps.example]).then(([example, prevExample]) => {
+        if (example !== prevExample) {
           this.shouldReload = true;
-          return;
+        } else {
+          Promise.all([this.props.pkgJSON, prevProps.pkgJSON]).then(([pkgJSON, prevPkgJSON]) => {
+            if (!isEqual(pkgJSON, prevPkgJSON)) {
+              this.shouldReload = true;
+            }
+          });
         }
       });
-    });
+    }
   }
 
   componentDidMount() {
