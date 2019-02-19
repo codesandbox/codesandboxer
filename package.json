@@ -5,7 +5,10 @@
   "scripts": {
     "test": "yarn jest",
     "build": "bolt ws run build",
-    "lint": "yarn eslint .",
+    "lint": "yarn lint:eslint && yarn lint:prettier",
+    "lint:eslint": "yarn eslint .",
+    "lint:prettier": "prettier --list-different \"**/*.js\"",
+    "prettier": "prettier --write \"**/*.js\"",
     "all-tests": "yarn build && yarn test && yarn flow && yarn lint",
     "dev:csb": "bolt w codesandboxer exec -- yarn build --watch",
     "dev:rcsb": "bolt w react-codesandboxer exec -- yarn build --watch",
