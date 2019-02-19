@@ -20,5 +20,5 @@
   "devDependencies": {
     "react-node-resolver": "^1.0.1"
   },
-  "repository": "https://github.com/Noviny/codesandboxer.git"
+  "repository": "https://github.com/codesandbox/codesandboxer.git"
 }

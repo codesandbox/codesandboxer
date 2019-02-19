@@ -7,7 +7,7 @@
   - codesandboxer@1.0.0
 
 ## 0.4.7
-- [patch] [82a4f5f](https://github.com/Noviny/codesandboxer/commit/82a4f5f):
+- [patch] [82a4f5f](https://github.com/codesandbox/codesandboxer/commit/82a4f5f):
 
   - Fix typo that was stopping react and react-dom being ensured by the finalisation.
 

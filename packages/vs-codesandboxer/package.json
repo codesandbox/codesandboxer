@@ -11,7 +11,7 @@
     "onCommand:extension.vs-codesandboxer"
   ],
   "main": "./extension",
-  "repository": "https://github.com/Noviny/codesandboxer.git",
+  "repository": "https://github.com/codesandbox/codesandboxer.git",
   "contributes": {
     "commands": [
       {
