@@ -1,2 +1,1 @@
 import './home.css';
-
