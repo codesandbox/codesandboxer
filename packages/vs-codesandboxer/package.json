@@ -1,59 +1,59 @@
 {
-  "name": "vs-codesandboxer",
-  "displayName": "vs-codesandboxer",
-  "description": "upload to codesandbox from a single entry file",
-  "version": "0.4.3",
-  "publisher": "noviny",
-  "engines": {
-    "vscode": "^1.23.0"
-  },
-  "activationEvents": [
-    "onCommand:extension.vs-codesandboxer"
-  ],
-  "main": "./extension",
-  "repository": "https://github.com/codesandbox/codesandboxer.git",
-  "contributes": {
-    "commands": [
-      {
-        "command": "extension.vs-codesandboxer",
-        "title": "Deploy to codesandbox"
-      }
+    "name": "vs-codesandboxer",
+    "displayName": "vs-codesandboxer",
+    "description": "upload to codesandbox from a single entry file",
+    "version": "1.0.0",
+    "publisher": "noviny",
+    "engines": {
+        "vscode": "^1.23.0"
+    },
+    "activationEvents": [
+        "onCommand:extension.vs-codesandboxer"
     ],
-    "menus": {
-      "editor/context": [
-        {
-          "when": "resourceLangId == javascript",
-          "command": "extension.vs-codesandboxer"
-        },
-        {
-          "when": "resourceLangId == vue",
-          "command": "extension.vs-codesandboxer"
-        },
-        {
-          "when": "resourceLangId == typescriptreact",
-          "command": "extension.vs-codesandboxer"
-        },
-        {
-          "when": "resourceLangId == javascriptreact",
-          "command": "extension.vs-codesandboxer"
+    "main": "./extension",
+    "repository": "https://github.com/codesandbox/codesandboxer.git",
+    "contributes": {
+        "commands": [
+            {
+                "command": "extension.vs-codesandboxer",
+                "title": "Deploy to codesandbox"
+            }
+        ],
+        "menus": {
+            "editor/context": [
+                {
+                    "when": "resourceLangId == javascript",
+                    "command": "extension.vs-codesandboxer"
+                },
+                {
+                    "when": "resourceLangId == vue",
+                    "command": "extension.vs-codesandboxer"
+                },
+                {
+                    "when": "resourceLangId == typescriptreact",
+                    "command": "extension.vs-codesandboxer"
+                },
+                {
+                    "when": "resourceLangId == javascriptreact",
+                    "command": "extension.vs-codesandboxer"
+                }
+            ]
         }
-      ]
+    },
+    "scripts": {
+        "test": "node ./node_modules/vscode/bin/test",
+        "build": "echo done"
+    },
+    "dependencies": {
+        "codesandboxer-fs": "^1.0.0",
+        "pkg-dir": "^2.0.0",
+        "pkg-up": "^2.0.0"
+    },
+    "devDependencies": {
+        "typescript": "^2.6.1",
+        "vscode": "^1.1.6",
+        "eslint": "^4.19.1",
+        "@types/node": "^7.0.43",
+        "@types/mocha": "^2.2.42"
     }
-  },
-  "scripts": {
-    "test": "node ./node_modules/vscode/bin/test",
-    "build": "echo done"
-  },
-  "dependencies": {
-    "codesandboxer-fs": "^1.0.0",
-    "pkg-dir": "^2.0.0",
-    "pkg-up": "^2.0.0"
-  },
-  "devDependencies": {
-    "typescript": "^2.6.1",
-    "vscode": "^1.1.6",
-    "eslint": "^4.19.1",
-    "@types/node": "^7.0.43",
-    "@types/mocha": "^2.2.42"
-  }
 }
