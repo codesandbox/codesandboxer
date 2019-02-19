@@ -5,7 +5,7 @@ import AsyncSelect from 'react-select/lib/Async';
 import * as bitbucket from '../utils/bitbucket';
 
 type State = {
-  inputValue: string
+  inputValue: string,
 };
 const propTypes = {
   onFileSelect: PropTypes.func,
@@ -13,7 +13,6 @@ const propTypes = {
   repoOwner: PropTypes.string,
   repoRef: PropTypes.string,
 };
-
 
 const memoizedBBCall = pMemoize(bitbucket.getBitbucketDir);
 
@@ -25,7 +24,7 @@ function bbDirListToOptions(dirList) {
     return {
       value,
       label,
-      isDir
+      isDir,
     };
   });
 }
@@ -46,7 +45,7 @@ export default class GitFileExplorer extends Component<*, State> {
   state = {
     inputValue: '',
     menuIsOpen: true,
-    message: 'Uploading packages/core/avatar/examples/BasicAvatar.jsx'
+    message: 'Uploading packages/core/avatar/examples/BasicAvatar.jsx',
   };
   handleInputChange = (newValue: string, actionMeta) => {
     const { action } = actionMeta;
@@ -60,7 +59,7 @@ export default class GitFileExplorer extends Component<*, State> {
     this.setState({
       inputValue: selected.value,
       menuIsOpen: selected.isDir,
-      message: !selected.isDir ? 'Uploading ' + selected.value : ''
+      message: !selected.isDir ? 'Uploading ' + selected.value : '',
     });
     // THIS IS NAUGHTY
     this.selectRef.handleInputChange(selected.value, { custom: true });
@@ -68,24 +67,26 @@ export default class GitFileExplorer extends Component<*, State> {
       this.props.onFileSelect(selected.value);
     }
   };
-  getOptions = async (inputValue) => {
+  getOptions = async inputValue => {
     const { repoOwner, repoName, branch } = this.props;
     const gitInfo = {
       account: repoOwner,
       repository: repoName,
-      branch
+      branch,
     };
     const dirPath = inputValueToDirPath(inputValue);
     const dir = await memoizedBBCall(gitInfo, dirPath);
     const options = bbDirListToOptions(dir);
     return filterOptions(options, inputValue);
-  }
+  };
   render() {
     const { repoOwner, repoName, branch } = this.props;
     const linkUrl = `https://bitbucket.org/${repoOwner}/${repoName}/src/${branch}`;
     return (
       <div>
-        <div style={{ marginBottom: '10px', textAlign: 'center' }}>Fetching files from: <a href={linkUrl}>{linkUrl}</a></div>
+        <div style={{ marginBottom: '10px', textAlign: 'center' }}>
+          Fetching files from: <a href={linkUrl}>{linkUrl}</a>
+        </div>
         <AsyncSelect
           loadOptions={this.getOptions}
           defaultOptions
@@ -104,4 +105,3 @@ export default class GitFileExplorer extends Component<*, State> {
   }
 }
 GitFileExplorer.propTypes = propTypes;
-

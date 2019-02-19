@@ -98,7 +98,7 @@ export default class CodeSandboxDeployer extends Component<Props, State> {
     style: { display: 'inline-block' },
   };
 
-  shouldReload = false
+  shouldReload = false;
 
   loadFiles = () => {
     let { onLoadComplete, providedFiles, dependencies, name } = this.props;
@@ -196,23 +196,35 @@ export default class CodeSandboxDeployer extends Component<Props, State> {
   componentDidUpdate(prevProps: Props) {
     /* If props related to loading files have been changed, next deploy should reload files */
     /* The props that are compared should be the same as the arguments of fetchFiles */
-    const compareKeys = ['examplePath', 'gitInfo', 'importReplacements',
-      'dependencies', 'providedFiles', 'name', 'extensions', 'template'];
+    const compareKeys = [
+      'examplePath',
+      'gitInfo',
+      'importReplacements',
+      'dependencies',
+      'providedFiles',
+      'name',
+      'extensions',
+      'template',
+    ];
     if (!isEqual(pick(this.props, compareKeys), pick(prevProps, compareKeys))) {
       this.shouldReload = true;
     } else {
       /* pkgJSON and example also need to be compared, but may be promises, which must be resolved before they can be compared */
-      Promise.all([this.props.example, prevProps.example]).then(([example, prevExample]) => {
-        if (example !== prevExample) {
-          this.shouldReload = true;
-        } else {
-          Promise.all([this.props.pkgJSON, prevProps.pkgJSON]).then(([pkgJSON, prevPkgJSON]) => {
-            if (!isEqual(pkgJSON, prevPkgJSON)) {
-              this.shouldReload = true;
-            }
-          });
-        }
-      });
+      Promise.all([this.props.example, prevProps.example]).then(
+        ([example, prevExample]) => {
+          if (example !== prevExample) {
+            this.shouldReload = true;
+          } else {
+            Promise.all([this.props.pkgJSON, prevProps.pkgJSON]).then(
+              ([pkgJSON, prevPkgJSON]) => {
+                if (!isEqual(pkgJSON, prevPkgJSON)) {
+                  this.shouldReload = true;
+                }
+              },
+            );
+          }
+        },
+      );
     }
   }
 

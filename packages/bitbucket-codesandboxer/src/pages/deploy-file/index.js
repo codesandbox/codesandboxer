@@ -18,9 +18,13 @@ function updateStatus(status = '', subStatus = '') {
 function getFileUrl(csbOptions) {
   const { account, repository, branch } = csbOptions.gitInfo;
   if (csbOptions.gitInfo.host === 'bitbucket') {
-    return `https://bitbucket.org/${account}/${repository}/src/${branch}/${csbOptions.examplePath}`;
+    return `https://bitbucket.org/${account}/${repository}/src/${branch}/${
+      csbOptions.examplePath
+    }`;
   } else {
-    return `https://github.com/${account}/${repository}/tree/${branch}/${csbOptions.examplePath}`;
+    return `https://github.com/${account}/${repository}/tree/${branch}/${
+      csbOptions.examplePath
+    }`;
   }
 }
 
@@ -33,7 +37,9 @@ function onSuccess(sandboxUrl) {
 }
 
 if (!qs.file || !qs.repoOwner || !qs.repoSlug || !qs.host || !qs.commit) {
-  console.error('Error: expected queryString parameters for file, repoOwner, repoSlug, host and commit');
+  console.error(
+    'Error: expected queryString parameters for file, repoOwner, repoSlug, host and commit',
+  );
   console.error('queryString: ', qs);
   updateStatus('Error: Invalid queryString (see console)');
   throw new Error('Invalid queryString');
@@ -45,14 +51,15 @@ const options = {
     account: qs.repoOwner,
     repository: qs.repoSlug,
     host: qs.host,
-    branch: qs.commit
-  }
+    branch: qs.commit,
+  },
 };
 
 updateStatus('Uploading example', getFileUrl(options));
 const provider = qs.host === 'bitbucket' ? bitbucket : github;
 
-provider.gitPkgUp(options.gitInfo, qs.file)
+provider
+  .gitPkgUp(options.gitInfo, qs.file)
   .then(packageJsonPath => provider.getFile(options.gitInfo, packageJsonPath))
   .then(pkgJSON => {
     updateStatus('Uploading example', 'Fetching files...');

@@ -1,6 +1,6 @@
 import * as path from 'path-browserify';
 
-function apiBase(gitInfo){
+function apiBase(gitInfo) {
   const { account, repository, branch } = gitInfo;
   return `https://api.bitbucket.org/2.0/repositories/${account}/${repository}/src/${branch}`;
 }
@@ -15,7 +15,7 @@ async function paginateRequest(url) {
     throw new Error(
       'Paginating would require more than ' +
         MAX_PAGES +
-        ' pages of requests, aborting'
+        ' pages of requests, aborting',
     );
   }
   while (respJson.next) {
@@ -34,7 +34,7 @@ function getBitbucketDir(gitInfo, dirPath) {
     return values.map(({ path: filePath, size, type }) => ({
       path: filePath,
       size,
-      type: type === 'commit_file' ? 'file' : 'directory'
+      type: type === 'commit_file' ? 'file' : 'directory',
     }));
   });
 }
@@ -67,5 +67,5 @@ async function getFile(gitInfo, filePath) {
 module.exports = {
   getBitbucketDir,
   gitPkgUp,
-  getFile
+  getFile,
 };

@@ -16,7 +16,7 @@ async function getAllFilesInDir(gitInfo, filePath) {
   const resp = await fetch(apiUrl).then(res => res.json());
   const files = resp.map(({ path: file, type }) => ({
     path: file,
-    type
+    type,
   }));
   return files;
 }
@@ -50,5 +50,5 @@ async function getFile(gitInfo, filePath) {
 
 module.exports = {
   getFile,
-  gitPkgUp
+  gitPkgUp,
 };
