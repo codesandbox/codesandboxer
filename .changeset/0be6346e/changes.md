@@ -1,1 +1,0 @@
-- Centralise decision around what template to use into one location, and allow it to be exported for downstream packages.

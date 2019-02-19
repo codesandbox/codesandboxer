@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.4.3
+- Updated dependencies [b46e059](https://github.com/codesandbox/codesandboxer/commit/b46e059):
+  - codesandboxer-fs@1.0.0
+
 ## 0.3.0
 
 Now supports typescript sandboxes

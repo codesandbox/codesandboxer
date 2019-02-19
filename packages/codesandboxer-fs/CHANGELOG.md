@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.0.0
+- [major] [b46e059](https://github.com/codesandbox/codesandboxer/commit/b46e059):
+  - Move codesandboxer and codesandboxer-fs to first major version, as they exist in a fairly stable and used state.
+- Updated dependencies [0b60604](https://github.com/codesandbox/codesandboxer/commit/0b60604):
+  - codesandboxer@1.0.0
+
 ## 0.4.7
 - [patch] [82a4f5f](https://github.com/Noviny/codesandboxer/commit/82a4f5f):
 

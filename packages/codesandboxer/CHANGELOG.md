@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.0.0
+- [minor] [0b60604](https://github.com/codesandbox/codesandboxer/commit/0b60604):
+  - Centralise decision around what template to use into one location, and allow it to be exported for downstream packages.
+- [major] [b46e059](https://github.com/codesandbox/codesandboxer/commit/b46e059):
+  - Move codesandboxer and codesandboxer-fs to first major version, as they exist in a fairly stable and used state.
+
 ## 0.7.2
 - [patch] [82a4f5f](https://github.com/Noviny/codesandboxer/commit/82a4f5f):
 

@@ -1,5 +1,12 @@
 # Changelog
 
+## 3.1.2
+- [patch] [7c16efb](https://github.com/codesandbox/codesandboxer/commit/7c16efb):
+  - Load files again upon deploy if specific props have been changed
+- Updated dependencies [0b60604](https://github.com/codesandbox/codesandboxer/commit/0b60604):
+- Updated dependencies [b46e059](https://github.com/codesandbox/codesandboxer/commit/b46e059):
+  - codesandboxer@1.0.0
+
 ## 3.1.1
 - [patch] af01387:
 
