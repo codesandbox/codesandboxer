@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.0.1
+- [patch] [cedfb74](https://github.com/codesandbox/codesandboxer/commit/cedfb74):
+  - Update repository references to point to new home.
+
 ## 1.0.0
 - [minor] [0b60604](https://github.com/codesandbox/codesandboxer/commit/0b60604):
   - Centralise decision around what template to use into one location, and allow it to be exported for downstream packages.

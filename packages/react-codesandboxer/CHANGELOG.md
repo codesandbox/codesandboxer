@@ -1,5 +1,9 @@
 # Changelog
 
+## 3.1.3
+- [patch] [cedfb74](https://github.com/codesandbox/codesandboxer/commit/cedfb74):
+  - Update repository references to point to new home.
+
 ## 3.1.2
 - [patch] [7c16efb](https://github.com/codesandbox/codesandboxer/commit/7c16efb):
   - Load files again upon deploy if specific props have been changed

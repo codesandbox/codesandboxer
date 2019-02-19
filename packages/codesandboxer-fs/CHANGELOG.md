@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.0.1
+- [patch] [cedfb74](https://github.com/codesandbox/codesandboxer/commit/cedfb74):
+  - Update repository references to point to new home.
+
 ## 1.0.0
 - [major] [b46e059](https://github.com/codesandbox/codesandboxer/commit/b46e059):
   - Move codesandboxer and codesandboxer-fs to first major version, as they exist in a fairly stable and used state.
