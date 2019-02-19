@@ -26,7 +26,7 @@ const changesetOptions = {
 */
 
 const getLink = commit =>
-  `https://github.com/Noviny/codesandboxer/commit/${commit}`;
+  `https://github.com/codesandbox/codesandboxer/commit/${commit}`;
 
 const getReleaseLine = async (changeset, versionType) => {
   const indentedSummary = changeset.summary
@@ -36,7 +36,7 @@ const getReleaseLine = async (changeset, versionType) => {
 
   return `- [${versionType}] [${changeset.commit}](${getLink(
     changeset.commit,
-  )}):\n\n${indentedSummary}`;
+  )}):\n${indentedSummary}`;
 };
 
 // This function takes information about what dependencies we are updating in the package.
