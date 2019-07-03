@@ -6,7 +6,7 @@ const raw = {
   github: (filePath, { account, repository, branch = 'master' }) =>
     `https://raw.githubusercontent.com/${account}/${repository}/${branch}/${filePath}`,
   bitbucket: (filePath, { account, repository, branch = 'master' }) =>
-    `https://api.bitbucket.org/2.0/repositories/${account}/${repository}/src/${branch}/${filePath}`,
+    `https://api.bitbucket.org/1.0/repositories/${account}/${repository}/raw/${branch}/${filePath}`,
 };
 
 export default function getUrl(
