@@ -1,0 +1,7 @@
+{
+  "releases": [
+    { "name": "codesandboxer-fs", "type": "patch" },
+    { "name": "react-codesandboxer", "type": "patch" }
+  ],
+  "dependents": []
+}
