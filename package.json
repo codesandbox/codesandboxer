@@ -2,6 +2,10 @@
   "name": "codesandboxer-repo",
   "version": "1.0.0",
   "description": "A simple react component to help easily deploy an example to codesandbox",
+  "repository": {
+    "type" : "git",
+    "url" : "https://github.com/codesandbox/codesandboxer"
+  },
   "scripts": {
     "test": "yarn jest",
     "build": "bolt ws run build",
@@ -85,7 +89,6 @@
     "webpack-cli": "^3.1.1",
     "webpack-dev-server": "^3.1.4"
   },
-  "repository": "https://github.com/codesandbox/codesandboxer.git",
   "bolt": {
     "workspaces": [
       "packages/*"
