@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.0.3
+
+### Patch Changes
+
+- [patch][2c210fa](https://github.com/codesandbox/codesandboxer/commit/2c210fa):
+  Last publish did not have correct dists - republishing
+
 ## 1.0.2
 
 ### Patch Changes
