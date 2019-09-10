@@ -3,6 +3,11 @@
     "displayName": "vs-codesandboxer",
     "description": "upload to codesandbox from a single entry file",
     "version": "1.0.0",
+    "repository": {
+        "type" : "git",
+        "url" : "https://github.com/codesandbox/codesandboxer",
+        "directory": "packages/vs-codesandboxer"
+    },
     "publisher": "noviny",
     "engines": {
         "vscode": "^1.23.0"
@@ -11,7 +16,6 @@
         "onCommand:extension.vs-codesandboxer"
     ],
     "main": "./extension",
-    "repository": "https://github.com/codesandbox/codesandboxer.git",
     "contributes": {
         "commands": [
             {

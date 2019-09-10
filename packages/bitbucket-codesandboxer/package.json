@@ -3,6 +3,11 @@
   "version": "1.0.5",
   "private": true,
   "description": "Bitbucket addon for displaying releases section in PRs",
+  "repository": {
+    "type" : "git",
+    "url" : "https://github.com/codesandbox/codesandboxer",
+    "directory": "packages/bitbucket-codesandboxer"
+  },
   "scripts": {
     "dev": "webpack-dev-server --mode development",
     "build": "webpack -p",

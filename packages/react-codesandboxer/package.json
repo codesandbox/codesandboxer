@@ -5,6 +5,11 @@
   "main": "dist/index.js",
   "author": "Ben Conolly",
   "license": "MIT",
+  "repository": {
+    "type" : "git",
+    "url" : "https://github.com/codesandbox/codesandboxer",
+    "directory": "packages/react-codesandboxer"
+  },
   "dependencies": {
     "codesandboxer": "^1.0.3",
     "lodash.isequal": "^4.5.0",
@@ -14,7 +19,6 @@
   "scripts": {
     "build": "babel src -d dist --ignore  **/*.test.js"
   },
-  "repository": "https://github.com/codesandbox/codesandboxer.git",
   "files": [
     "dist"
   ]

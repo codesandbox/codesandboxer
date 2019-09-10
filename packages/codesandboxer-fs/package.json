@@ -5,6 +5,11 @@
   "main": "index.js",
   "author": "Ben Conolly",
   "license": "MIT",
+  "repository": {
+    "type" : "git",
+    "url" : "https://github.com/codesandbox/codesandboxer",
+    "directory": "packages/codesandboxer-fs"
+  },
   "dependencies": {
     "codesandboxer": "^1.0.3",
     "meow": "^5.0.0",
@@ -19,6 +24,5 @@
   },
   "devDependencies": {
     "react-node-resolver": "^1.0.1"
-  },
-  "repository": "https://github.com/codesandbox/codesandboxer.git"
+  }
 }
