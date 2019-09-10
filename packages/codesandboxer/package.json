@@ -1,26 +1,26 @@
 {
   "name": "codesandboxer",
   "version": "1.0.3",
-  "description": "Fetch files from a git repository and upload them to codesandbox",
-  "main": "dist/index.js",
-  "author": "Ben Conolly",
-  "license": "MIT",
+  "description": "Fetch files from a git repository and upload them to CodeSandbox",
   "repository": {
-    "type" : "git",
-    "url" : "https://github.com/codesandbox/codesandboxer",
+    "type": "git",
+    "url": "https://github.com/codesandbox/codesandboxer",
     "directory": "packages/codesandboxer"
   },
-  "dependencies": {
-    "path-browserify": "^1.0.0",
-    "lz-string": "^1.4.4",
-    "isomorphic-unfetch": "^2.0.0",
-    "form-data": "^2.3.2",
-    "babel-runtime": "^6.26.0"
-  },
+  "license": "MIT",
+  "author": "Ben Conolly",
+  "files": [
+    "dist"
+  ],
+  "main": "dist/index.js",
   "scripts": {
     "build": "babel src -d dist --ignore  **/*.test.js"
   },
-  "files": [
-    "dist"
-  ]
+  "dependencies": {
+    "babel-runtime": "^6.26.0",
+    "form-data": "^2.3.2",
+    "isomorphic-unfetch": "^2.0.0",
+    "lz-string": "^1.4.4",
+    "path-browserify": "^1.0.0"
+  }
 }

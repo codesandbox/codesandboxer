@@ -1,25 +1,25 @@
 {
   "name": "react-codesandboxer",
   "version": "3.1.5",
-  "description": "A simple react component to help easily deploy an example to codesandbox",
-  "main": "dist/index.js",
-  "author": "Ben Conolly",
-  "license": "MIT",
+  "description": "A simple React component to help easily deploy an example to CodeSandbox",
   "repository": {
-    "type" : "git",
-    "url" : "https://github.com/codesandbox/codesandboxer",
+    "type": "git",
+    "url": "https://github.com/codesandbox/codesandboxer",
     "directory": "packages/react-codesandboxer"
+  },
+  "license": "MIT",
+  "author": "Ben Conolly",
+  "files": [
+    "dist"
+  ],
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "babel src -d dist --ignore  **/*.test.js"
   },
   "dependencies": {
     "codesandboxer": "^1.0.3",
     "lodash.isequal": "^4.5.0",
     "lodash.pick": "^4.4.0",
     "react-node-resolver": "^1.0.1"
-  },
-  "scripts": {
-    "build": "babel src -d dist --ignore  **/*.test.js"
-  },
-  "files": [
-    "dist"
-  ]
+  }
 }

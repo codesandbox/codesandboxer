@@ -1,21 +1,35 @@
 {
     "name": "vs-codesandboxer",
-    "displayName": "vs-codesandboxer",
-    "description": "upload to codesandbox from a single entry file",
     "version": "1.0.0",
+    "description": "Upload to CodeSandbox from a single entry file",
     "repository": {
-        "type" : "git",
-        "url" : "https://github.com/codesandbox/codesandboxer",
+        "type": "git",
+        "url": "https://github.com/codesandbox/codesandboxer",
         "directory": "packages/vs-codesandboxer"
     },
-    "publisher": "noviny",
+    "main": "./extension",
+    "scripts": {
+        "build": "echo done",
+        "test": "node ./node_modules/vscode/bin/test"
+    },
+    "dependencies": {
+        "codesandboxer-fs": "^1.0.0",
+        "pkg-dir": "^2.0.0",
+        "pkg-up": "^2.0.0"
+    },
+    "devDependencies": {
+        "@types/mocha": "^2.2.42",
+        "@types/node": "^7.0.43",
+        "eslint": "^4.19.1",
+        "typescript": "^2.6.1",
+        "vscode": "^1.1.6"
+    },
     "engines": {
         "vscode": "^1.23.0"
     },
     "activationEvents": [
         "onCommand:extension.vs-codesandboxer"
     ],
-    "main": "./extension",
     "contributes": {
         "commands": [
             {
@@ -44,20 +58,6 @@
             ]
         }
     },
-    "scripts": {
-        "test": "node ./node_modules/vscode/bin/test",
-        "build": "echo done"
-    },
-    "dependencies": {
-        "codesandboxer-fs": "^1.0.0",
-        "pkg-dir": "^2.0.0",
-        "pkg-up": "^2.0.0"
-    },
-    "devDependencies": {
-        "typescript": "^2.6.1",
-        "vscode": "^1.1.6",
-        "eslint": "^4.19.1",
-        "@types/node": "^7.0.43",
-        "@types/mocha": "^2.2.42"
-    }
+    "displayName": "vs-codesandboxer",
+    "publisher": "noviny"
 }

@@ -1,26 +1,26 @@
 {
   "name": "codesandboxer-fs",
   "version": "1.0.3",
-  "description": "Deploy local files to codesandbox, using an example file as an entry point",
-  "main": "index.js",
-  "author": "Ben Conolly",
-  "license": "MIT",
+  "description": "Deploy local files to CodeSandbox, using an example file as an entry point",
   "repository": {
-    "type" : "git",
-    "url" : "https://github.com/codesandbox/codesandboxer",
+    "type": "git",
+    "url": "https://github.com/codesandbox/codesandboxer",
     "directory": "packages/codesandboxer-fs"
+  },
+  "license": "MIT",
+  "author": "Ben Conolly",
+  "main": "index.js",
+  "bin": {
+    "codesandboxer": "./src/cli.js"
+  },
+  "scripts": {
+    "build": "echo done"
   },
   "dependencies": {
     "codesandboxer": "^1.0.3",
     "meow": "^5.0.0",
     "pkg-dir": "^2.0.0",
     "resolve": "^1.7.1"
-  },
-  "bin": {
-    "codesandboxer": "./src/cli.js"
-  },
-  "scripts": {
-    "build": "echo done"
   },
   "devDependencies": {
     "react-node-resolver": "^1.0.1"

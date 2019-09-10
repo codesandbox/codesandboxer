@@ -1,20 +1,19 @@
 {
   "name": "bitbucket-releases-addon",
   "version": "1.0.5",
-  "private": true,
   "description": "Bitbucket addon for displaying releases section in PRs",
   "repository": {
-    "type" : "git",
-    "url" : "https://github.com/codesandbox/codesandboxer",
+    "type": "git",
+    "url": "https://github.com/codesandbox/codesandboxer",
     "directory": "packages/bitbucket-codesandboxer"
   },
-  "scripts": {
-    "dev": "webpack-dev-server --mode development",
-    "build": "webpack -p",
-    "deploy": "yarn build && netlify deploy"
-  },
-  "author": "Luke Batchelor",
   "license": "Apache-2.0",
+  "author": "Luke Batchelor",
+  "scripts": {
+    "build": "webpack -p",
+    "deploy": "yarn build && netlify deploy",
+    "dev": "webpack-dev-server --mode development"
+  },
   "dependencies": {
     "babel-polyfill": "^6.26.0",
     "babel-preset-react": "^6.24.1",
