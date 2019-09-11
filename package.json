@@ -8,6 +8,9 @@
   },
   "license": "MIT",
   "author": "Ben Conolly",
+  "workspaces": [
+    "packages/*"
+  ],
   "scripts": {
     "all-tests": "yarn build && yarn test && yarn flow && yarn lint",
     "build": "bolt ws run build",
@@ -30,7 +33,7 @@
     "babel-jest": "^23.6.0",
     "babel-polyfill": "^6.26.0",
     "babel-runtime": "^6.26.0",
-    "bolt": "^0.20.5",
+    "bolt": "^0.23.6",
     "copy-webpack-plugin": "^4.5.1",
     "css-loader": "^0.28.11",
     "form-data": "^2.3.2",
