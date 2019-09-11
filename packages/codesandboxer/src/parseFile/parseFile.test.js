@@ -125,7 +125,7 @@ export { default as Skeleton } from './components/Skeleton';
 "`,
       pkgJSON: fakePKGJSON,
     },
-  ],
+  ]
 );
 
 cases(
@@ -137,5 +137,5 @@ cases(
     expect(Array.from(parsedImports.internalImports)).toMatchObject(internal);
     expect(parsedImports.deps).toMatchObject(deps);
   },
-  codeImportTests,
+  codeImportTests
 );

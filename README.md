@@ -6,29 +6,47 @@ Export a component to codesandboxer:
 
 ![react-codesandboxer-example](./docs/react-codesandboxer-example.gif)
 
-Codesandboxer is a tool to allow you to deploy to go from an 'entry' file, and deploy that file and all related files to codesandbox. Its goal is to allow you to do this from any component written anywhere, from code you are viewing on github through to code running locally on your machine, as well as build making this easy into your own websites.
+Codesandboxer is a tool to allow you to deploy to go from an 'entry' file, and
+deploy that file and all related files to CodeSandbox. Its goal is to allow you
+to do this from any component written anywhere, from code you are viewing on
+github through to code running locally on your machine, as well as build making
+this easy into your own websites.
 
 To allow its use in multiple contexts, it has been split into a monorepo.
 
-The major use-case for codesandboxer is to allow you to easily share examples with others, or to link to editable versions of examples from a documentation website.
+The major use-case for codesandboxer is to allow you to easily share examples
+with others, or to link to editable versions of examples from a documentation
+website.
 
 ## Cool Stuff
 
-With an entry file, we work to only upload the files you need, and the dependencies you use from your project, making lighter sandbox uploads.
+With an entry file, we work to only upload the files you need, and the
+dependencies you use from your project, making lighter sandbox uploads.
 
-Since we wrap the file we are given, codesandboxer can allow you to quickly open any react component in codesandbox, even if you are not set up to start editing it immediately.
+Since we wrap the file we are given, codesandboxer can allow you to quickly open
+any react component in CodeSandbox, even if you are not set up to start editing
+it immediately.
 
 ## Core Bits
 
-The core packages, [codesandboxer](/packages/codesandboxer) allows you to fetch files from github or bitbucket, given a git entry file.
+The core packages, [codesandboxer](/packages/codesandboxer) allows you to fetch
+files from github or bitbucket, given a git entry file.
 
-[codesandboxer-fs](/packages/codesandboxer-fs) allows you to do the same kinds of actions from your terminal, and can be installed as a CLI. See its documentation for how to use it.
+[codesandboxer-fs](/packages/codesandboxer-fs) allows you to do the same kinds
+of actions from your terminal, and can be installed as a CLI. See its
+documentation for how to use it.
 
 ## Other packages
 
-- [react-codesandboxer](/packages/react-codesandboxer) is a react wrapper around `codesandboxer` allowing you to easily render a button to open an example in codesandbox.
-- [vs-codesandboxer](/packages/vs-codesandboxer) is a visual studio code extension to allow you to take an open file in vs-code and deploy it to codesandboxer.
-- [atom-codesandboxer](https://github.com/noviny/atom-codesandboxer) is an atom extension to allow you to take an open file in atom and deploy it to codesandboxer (IN DEVELOPMENT).
+- [react-codesandboxer](/packages/react-codesandboxer) is a react wrapper around
+  `codesandboxer` allowing you to easily render a button to open an example in
+  codesandbox.
+- [vs-codesandboxer](/packages/vs-codesandboxer) is a visual studio code
+  extension to allow you to take an open file in vs-code and deploy it to
+  codesandboxer.
+- [atom-codesandboxer](https://github.com/noviny/atom-codesandboxer) is an atom
+  extension to allow you to take an open file in atom and deploy it to
+  codesandboxer (IN DEVELOPMENT).
 - [bitbucket-codesandboxer](/packages/bitbucket-codesandboxer)
 
 ![vs-codesandboxer-example](./docs/vs-codesandboxer-example.gif)
@@ -55,7 +73,7 @@ Thanks goes to these people ([emoji key][emojis]):
     <td align="center"><a href="https://github.com/kangweichan"><img src="https://avatars1.githubusercontent.com/u/47547953?v=4" width="100px;" alt="kangweichan"/><br /><sub><b>kangweichan</b></sub></a><br /><a href="https://github.com/codesandbox/codesandboxer/commits?author=kangweichan" title="Code">💻</a></td>
   </tr>
   <tr>
-    <td align="center"><a href="https://michaeldeboey.be"><img src="https://avatars3.githubusercontent.com/u/6643991?v=4" width="100px;" alt="Michaël De Boey"/><br /><sub><b>Michaël De Boey</b></sub></a><br /><a href="#maintenance-MichaelDeBoey" title="Maintenance">🚧</a></td>
+    <td align="center"><a href="https://michaeldeboey.be"><img src="https://avatars3.githubusercontent.com/u/6643991?v=4" width="100px;" alt="Michaël De Boey"/><br /><sub><b>Michaël De Boey</b></sub></a><br /><a href="#maintenance-MichaelDeBoey" title="Maintenance">🚧</a> <a href="#tool-MichaelDeBoey" title="Tools">🔧</a></td>
   </tr>
 </table>
 
@@ -64,7 +82,8 @@ Thanks goes to these people ([emoji key][emojis]):
 
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
-This project follows the [all-contributors][all-contributors] specification. Contributions of any kind welcome!
+This project follows the [all-contributors][all-contributors] specification.
+Contributions of any kind welcome!
 
 ## LICENSE
 

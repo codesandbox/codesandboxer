@@ -6,7 +6,7 @@ export default async function ensurePKGJSON(
   maybePkg?: Package | string | Promise<Package | string>,
   importReplacements: Array<ImportReplacement>,
   gitInfo: GitInfo,
-  config: Config,
+  config: Config
 ): Promise<Package> {
   let pkg = await Promise.resolve(maybePkg);
   if (typeof pkg === 'object') {
@@ -17,7 +17,7 @@ export default async function ensurePKGJSON(
       // $FlowFixMe - we know here that this will not be a js file, the only time we NEED a pkg
       {},
       importReplacements,
-      gitInfo,
+      gitInfo
     ).then(({ file }) => JSON.parse(file));
   } else if (!pkg) {
     return fetchRelativeFile(
@@ -26,7 +26,7 @@ export default async function ensurePKGJSON(
       {},
       importReplacements,
       gitInfo,
-      config,
+      config
     ).then(({ file }) => JSON.parse(file));
   } else throw new Error('could not understand passed in package.json');
 }

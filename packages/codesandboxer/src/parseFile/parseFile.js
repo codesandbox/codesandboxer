@@ -5,7 +5,7 @@ import type { Package, parsedFileFirst } from '../types';
 
 const parseFile = async (
   file: Promise<string> | string,
-  pkgJSON: Promise<Package> | Package,
+  pkgJSON: Promise<Package> | Package
 ): Promise<parsedFileFirst> => {
   let fileCode = await Promise.resolve(file);
   let pkgJSONContent = await Promise.resolve(pkgJSON);

@@ -1,7 +1,7 @@
 // @flow
 export default function resolvePath(
   basePath: string,
-  relativePath: string,
+  relativePath: string
 ): string {
   let newSegments = basePath.split('/').filter(a => a);
   let relativeSegments = relativePath.split('/').filter(a => a);

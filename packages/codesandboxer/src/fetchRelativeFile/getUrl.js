@@ -11,7 +11,7 @@ const raw = {
 
 export default function getUrl(
   filePath: string,
-  { host, ...urlConfig }: GitInfo,
+  { host, ...urlConfig }: GitInfo
 ) {
   let getRaw = raw[host];
   if (typeof getRaw !== 'function') {

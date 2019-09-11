@@ -48,8 +48,8 @@ const fetchJS = (url, path, pkg, importReplacements): Promise<ParsedFile> =>
     .then(content =>
       replaceImports(
         content,
-        importReplacements.map(m => [absolutesToRelative(path, m[0]), m[1]]),
-      ),
+        importReplacements.map(m => [absolutesToRelative(path, m[0]), m[1]])
+      )
     )
     // this is not correct
     .then(content => parseFile(content, pkg))
@@ -120,13 +120,13 @@ async function fetchProbablyJS(url, path, pkg, importReplacements, config) {
       path,
       pkg,
       importReplacements,
-      extension,
+      extension
     );
     if (data) return data;
   }
 
   throw new Error(
-    `file not found at: ${url}; tried extensions: ${extensions.join(', ')}`,
+    `file not found at: ${url}; tried extensions: ${extensions.join(', ')}`
   );
 }
 
@@ -134,7 +134,7 @@ let fetchFileContents = (
   url,
   path,
   { fileType, pkg, importReplacements },
-  config,
+  config
 ): Promise<ParsedFile> => {
   if (config.extensions.includes(fileType) || fileType === '.js') {
     return fetchProbablyJS(url, path, pkg, importReplacements, config);
@@ -167,7 +167,7 @@ export default async function fetchRelativeFile(
   pkg: Package,
   importReplacements: Array<ImportReplacement>,
   gitInfo: GitInfo,
-  config?: Config,
+  config?: Config
 ): HandleFileFetch {
   config = config || { extensions: [] };
   // The new path is the file name we will provide to CodeSandbox
@@ -183,7 +183,7 @@ export default async function fetchRelativeFile(
       pkg,
       importReplacements,
     },
-    config,
+    config
   );
   return file;
 }

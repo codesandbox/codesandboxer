@@ -25,7 +25,7 @@ async function loadFiles(
     pkgJSON,
     extensions,
     priorPaths,
-  } /*: LoadFileObj */,
+  } /*: LoadFileObj */
 ) {
   let newFiles = await Promise.all(
     internalImports.map(filePath => {
@@ -35,7 +35,7 @@ async function loadFiles(
         rootDir,
         extensions,
       });
-    }),
+    })
   );
 
   let moreInternalImports = [];
@@ -44,7 +44,7 @@ async function loadFiles(
     deps = Object.assign({}, deps, f.deps);
     f.internalImports.forEach(m =>
       // I think this is wrong
-      moreInternalImports.push(csb.resolvePath(f.filePath, m)),
+      moreInternalImports.push(csb.resolvePath(f.filePath, m))
     );
   }
 
@@ -53,7 +53,7 @@ async function loadFiles(
   } else count++;
 
   moreInternalImports = moreInternalImports.filter(
-    mpt => !priorPaths.includes(mpt),
+    mpt => !priorPaths.includes(mpt)
   );
   if (moreInternalImports.length > 0) {
     let moreFiles = await loadFiles({

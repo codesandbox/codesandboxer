@@ -34,7 +34,7 @@ cases(
           let contents = JSON.parse(file);
           expect(contents).toEqual(json);
         }
-      },
+      }
     );
   },
   [
@@ -82,7 +82,7 @@ cases(
       name: 'fixtures/importResolution/fromIndex/jsx',
       config: { extensions: ['.jsx'] },
     },
-  ],
+  ]
 );
 
 cases(
@@ -109,5 +109,5 @@ cases(
       path: 'package.json',
       expectedType: '.json',
     },
-  ],
+  ]
 );

@@ -3,7 +3,7 @@ import type { Dependencies } from '../types';
 export default (
   dependencies: Dependencies,
   name?: string = 'codesandboxer-example',
-  main: string = 'index.js',
+  main: string = 'index.js'
 ) => `{
   "name": "${name}",
   "version": "0.0.0",

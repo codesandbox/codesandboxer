@@ -8,5 +8,5 @@ export const codesandboxURLJSON =
 export const getSandboxUrl = (
   id: string,
   type?: string = 's',
-  fileName?: string = 'example',
+  fileName?: string = 'example'
 ) => `https://codesandbox.io/${type}/${id}?module=/${fileName}`;

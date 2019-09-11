@@ -24,11 +24,11 @@ const getAllImports = (code, matchString) => {
 };
 
 const parseScssFile = async (
-  file: Promise<string> | string,
+  file: Promise<string> | string
 ): Promise<parsedFileFirst> => {
   let fileCode = await Promise.resolve(file);
   let internalImports = getAllImports(fileCode, matchScssString).map(
-    a => `${a}.scss`,
+    a => `${a}.scss`
   );
 
   return {
@@ -39,7 +39,7 @@ const parseScssFile = async (
 };
 
 const parseSassFile = async (
-  file: Promise<string> | string,
+  file: Promise<string> | string
 ): Promise<parsedFileFirst> => {
   let fileCode = await Promise.resolve(file);
   let internalImports = getAllImports(fileCode, matchSassString)

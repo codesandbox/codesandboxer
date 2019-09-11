@@ -32,7 +32,7 @@ export default function(
     extraDependencies?: Dependencies,
     name?: string,
     main?: string,
-  },
+  }
 ) {
   if (!config) config = {};
   let {

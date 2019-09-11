@@ -24,7 +24,7 @@ const getDeps = (pkgJSON, name) => {
 
 const parseDeps = (
   pkgJSON: Package,
-  imports: Array<Import>,
+  imports: Array<Import>
 ): {
   deps: { [string]: string },
   internalImports: Array<Import>,
