@@ -2,9 +2,9 @@
   "name": "codesandboxer-repo",
   "version": "1.0.0",
   "private": true,
-  "description": "A simple react component to help easily deploy an example to codesandbox",
+  "description": "A simple react component to help easily deploy an example to CodeSandbox",
   "keywords": [
-    "codesandbox",
+    "CodeSandbox",
     "documentation",
     "examples",
     "react",

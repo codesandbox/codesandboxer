@@ -51,7 +51,7 @@
 
 - [minor] 🎉 ADD TYPESCRIPT SUPPORT 🎉 (comes with auto-detection of typescript examples)
 - [BREAKING] remove the `allowJSX` prop, replacing it with the `extensions` prop.
-- [minor] Add `template` prop, so you can directly set the codesandbox template to use in uploading.
+- [minor] Add `template` prop, so you can directly set the CodeSandbox template to use in uploading.
 
 ## 2.1.4
 
@@ -94,7 +94,7 @@ Update codesandboxer dependency to resolve bug
 
 Big change here is that, with the release of `codesandboxer`, `react-codesandboxer` is no longer personally carrying the file-fetching and deploying logic. This has been done to make codesandboxer more useful in more contexts, and so it can eventually support non-react sandboxes.
 
-This also means we are using fetch instead of form submission, which means that we can return you a sandbox ID and url to your rendered child. This means you can choose how to open your sandbox, and makes it easy to open an example in an embed instead of on codesandbox itself.
+This also means we are using fetch instead of form submission, which means that we can return you a sandbox ID and url to your rendered child. This means you can choose how to open your sandbox, and makes it easy to open an example in an embed instead of on CodeSandbox itself.
 
 There's also a small breaking change to handle a bug.
 
@@ -118,7 +118,7 @@ This is not hugely different from 0.4.2, with most changes being to documentatio
 
 ## 0.4.1
 
-- Imports of `place` resolving to `place/index.js` were being added to codesandbox as `place.js`. They now get their correct path.
+- Imports of `place` resolving to `place/index.js` were being added to CodeSandbox as `place.js`. They now get their correct path.
 
 ## v0.4.0
 

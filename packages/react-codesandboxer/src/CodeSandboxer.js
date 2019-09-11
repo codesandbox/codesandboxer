@@ -36,7 +36,7 @@ type State = {
 type Props = {
   /* The absolute path to the example within the git file structure */
   examplePath: string,
-  /* Name for the codesandbox instance */
+  /* Name for the CodeSandbox instance */
   name?: string,
   /* This is all the information we need to fetch information from github or bitbucket */
   gitInfo: GitInfo,
@@ -164,13 +164,13 @@ export default class CodeSandboxDeployer extends Component<Props, State> {
       .catch(errors => {
         if (afterDeployError) {
           afterDeployError({
-            name: 'error deploying to codesandbox',
+            name: 'error deploying to CodeSandbox',
             content: errors,
           });
         }
         this.setState({
           error: {
-            name: 'error deploying to codesandbox',
+            name: 'error deploying to CodeSandbox',
             content: errors,
           },
         });

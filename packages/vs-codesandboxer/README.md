@@ -2,7 +2,7 @@
 
 Open a component from your editor into codesandboxer, using `codesandboxer-fs` under-the-hood.
 
-Can be used with the command `Deploy to codesandbox` or right click in your active file to select to deploy it. Once your needed files/dependencies have been sorted out, an 'open in codesandbox' link will open as a notification. Click it and you'll be able to see your component in codesandbox, and share it with others.
+Can be used with the command `Deploy to CodeSandbox` or right click in your active file to select to deploy it. Once your needed files/dependencies have been sorted out, an 'open in CodeSandbox' link will open as a notification. Click it and you'll be able to see your component in codesandbox, and share it with others.
 
 ## Main use-cases
 

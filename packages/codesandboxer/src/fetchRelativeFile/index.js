@@ -170,7 +170,7 @@ export default async function fetchRelativeFile(
   config?: Config,
 ): HandleFileFetch {
   config = config || { extensions: [] };
-  // The new path is the file name we will provide to codesandbox
+  // The new path is the file name we will provide to CodeSandbox
   // Get the url from the gitInfo. For JS files, we will need to add the filetype
   // This method needs to determine the filetype, so we return it.
   let { url, fileType } = getUrl(path, gitInfo);
