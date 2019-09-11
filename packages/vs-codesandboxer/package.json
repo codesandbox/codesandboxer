@@ -1,63 +1,63 @@
 {
-    "name": "vs-codesandboxer",
-    "version": "1.0.0",
-    "description": "Upload to CodeSandbox from a single entry file",
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/codesandbox/codesandboxer",
-        "directory": "packages/vs-codesandboxer"
-    },
-    "main": "./extension",
-    "scripts": {
-        "build": "echo done",
-        "test": "node ./node_modules/vscode/bin/test"
-    },
-    "dependencies": {
-        "codesandboxer-fs": "^1.0.0",
-        "pkg-dir": "^2.0.0",
-        "pkg-up": "^2.0.0"
-    },
-    "devDependencies": {
-        "@types/mocha": "^2.2.42",
-        "@types/node": "^7.0.43",
-        "eslint": "^4.19.1",
-        "typescript": "^2.6.1",
-        "vscode": "^1.1.6"
-    },
-    "engines": {
-        "vscode": "^1.23.0"
-    },
-    "activationEvents": [
-        "onCommand:extension.vs-codesandboxer"
+  "name": "vs-codesandboxer",
+  "version": "1.0.0",
+  "description": "Upload to CodeSandbox from a single entry file",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/codesandbox/codesandboxer",
+    "directory": "packages/vs-codesandboxer"
+  },
+  "main": "./extension",
+  "scripts": {
+    "build": "echo done",
+    "test": "node ./node_modules/vscode/bin/test"
+  },
+  "dependencies": {
+    "codesandboxer-fs": "^1.0.3",
+      "pkg-dir": "^2.0.0",
+      "pkg-up": "^2.0.0"
+  },
+  "devDependencies": {
+    "@types/mocha": "^2.2.48",
+    "@types/node": "^12.7.5",
+    "eslint": "^4.19.1",
+    "typescript": "^2.9.2",
+    "vscode": "^1.1.36"
+  },
+  "engines": {
+    "vscode": "^1.23.0"
+  },
+  "activationEvents": [
+    "onCommand:extension.vs-codesandboxer"
+  ],
+  "contributes": {
+    "commands": [
+      {
+        "command": "extension.vs-codesandboxer",
+        "title": "Deploy to CodeSandbox"
+      }
     ],
-    "contributes": {
-        "commands": [
-            {
-                "command": "extension.vs-codesandboxer",
-                "title": "Deploy to CodeSandbox"
-            }
-        ],
-        "menus": {
-            "editor/context": [
-                {
-                    "when": "resourceLangId == javascript",
-                    "command": "extension.vs-codesandboxer"
-                },
-                {
-                    "when": "resourceLangId == vue",
-                    "command": "extension.vs-codesandboxer"
-                },
-                {
-                    "when": "resourceLangId == typescriptreact",
-                    "command": "extension.vs-codesandboxer"
-                },
-                {
-                    "when": "resourceLangId == javascriptreact",
-                    "command": "extension.vs-codesandboxer"
-                }
-            ]
+    "menus": {
+      "editor/context": [
+        {
+          "when": "resourceLangId == javascript",
+          "command": "extension.vs-codesandboxer"
+        },
+        {
+          "when": "resourceLangId == vue",
+          "command": "extension.vs-codesandboxer"
+        },
+        {
+          "when": "resourceLangId == typescriptreact",
+          "command": "extension.vs-codesandboxer"
+        },
+        {
+          "when": "resourceLangId == javascriptreact",
+          "command": "extension.vs-codesandboxer"
         }
-    },
-    "displayName": "vs-codesandboxer",
-    "publisher": "noviny"
+      ]
+    }
+  },
+  "displayName": "vs-codesandboxer",
+  "publisher": "noviny"
 }
