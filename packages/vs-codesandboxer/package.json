@@ -34,7 +34,7 @@
         "commands": [
             {
                 "command": "extension.vs-codesandboxer",
-                "title": "Deploy to codesandbox"
+                "title": "Deploy to CodeSandbox"
             }
         ],
         "menus": {

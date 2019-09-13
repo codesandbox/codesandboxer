@@ -1,6 +1,6 @@
 # codesandboxer-fs
 
-Deploy a single javascript file to codesandbox as a react entry point, bundling up other files you need, as well as the relevant dependencies, using `codesandboxer`'s default package under the hood to bundle files.
+Deploy a single javascript file to CodeSandbox as a react entry point, bundling up other files you need, as well as the relevant dependencies, using `codesandboxer`'s default package under the hood to bundle files.
 
 ## Installation
 
@@ -47,6 +47,6 @@ If you point at a file with an extension that is not '.js', that file type will 
 
 * `--template -t` - a string of what template to use in sending files to codesandbox. Current officially supported templates are `react` and `react-typescript`.
 
-## Why use this instead of the codesandbox cli?
+## Why use this instead of the CodeSandbox CLI?
 
-The codesandbox CLI is intended to upload an entire create-react-app project, and as such is not designed to cherry-pick a file. Codesandboxer's goal is fundamentally different, in that it wants to focus on a single component, such as an example. Codesandboxer is going to be more useful if you want to share proposed changes to a component within an existing project with someone, while codesandbox will be better for uploading and looking at an entire website.
+The CodeSandbox CLI is intended to upload an entire create-react-app project, and as such is not designed to cherry-pick a file. Codesandboxer's goal is fundamentally different, in that it wants to focus on a single component, such as an example. Codesandboxer is going to be more useful if you want to share proposed changes to a component within an existing project with someone, while CodeSandbox will be better for uploading and looking at an entire website.

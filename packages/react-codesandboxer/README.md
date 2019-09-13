@@ -60,7 +60,7 @@ If no branch is provided, you will have your code deployed from master. Host is 
 
 ## Props You Definitely Probably Want To Provide
 
-While these props aren't necessary to have codesandboxer work, you will almost always want to configure these, to make sure the example you get on codesandbox is the same as the example when run in its local context.
+While these props aren't necessary to have codesandboxer work, you will almost always want to configure these, to make sure the example you get on CodeSandbox is the same as the example when run in its local context.
 
 ### `children: ({ error, isLoading, isDeploying, sandboxId, sandboxUrl }) => Node`
 
@@ -96,7 +96,7 @@ Pass in the example as code to prevent it being fetched. This can be used when y
 
 ### `name: string`
 
-Name for the codesandbox instance. This sets the package name in the uploaded `package.json`, which in turn sets the sandbox name.
+Name for the CodeSandbox instance. This sets the package name in the uploaded `package.json`, which in turn sets the sandbox name.
 
 ### `afterDeployError?: ({ name: string, description?: string, content?: string, }) => mixed`
 
@@ -148,14 +148,14 @@ If your example file is fo type `.ts` or `.tsx` both are added.
 
 ### `template?: string`
 
-This template prop sets what codesandbox template to use. Currently we support:
+This template prop sets what CodeSandbox template to use. Currently we support:
 
 - `create-react-app`
 - `create-react-app-typescript`
 
 We auto-detect which one we think we should use, so you should only need to provide this if you want to override our selected template.
 
-Unsupported templates will still cause the bundled files to be sent to codesandbox under that template, but the bundling may fail.
+Unsupported templates will still cause the bundled files to be sent to CodeSandbox under that template, but the bundling may fail.
 
 ## A slightly more complicated example:
 

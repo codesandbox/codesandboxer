@@ -16,7 +16,7 @@ Using the example file and the `package.json`, dependencies that the example use
 
 ### Dynamic Import Following
 
-When codesandbox is pointed at a file, it can resolve relative imports into that file, meaning that examples relying on utils or images will resolve correctly.
+When CodeSandbox is pointed at a file, it can resolve relative imports into that file, meaning that examples relying on utils or images will resolve correctly.
 
 ### Customisable Usages
 
@@ -89,7 +89,7 @@ This information is needed to fetch any additional files needed.
 
 This is an optional property, that can include a package.JSON's contents as an object or a string which is the path relative to the git source directory to fetch the `package.json` from your git repository. pkgJSON finally accepts a promise that can be resolve to either of these two other types.
 
-The contents of the eventual resolved `package.json` will be used to get the correct version ranges of packages your example is relying upon, and assemble a package.json for codesandbox to use in pulling them in.
+The contents of the eventual resolved `package.json` will be used to get the correct version ranges of packages your example is relying upon, and assemble a package.json for CodeSandbox to use in pulling them in.
 
 #### importReplacements: Array
 
@@ -113,7 +113,7 @@ If your example file is fo type `.ts` or `.tsx` both are added.
 
 ### finaliseCSB(compiledInfo, config)
 
-The FinaliseCSB function is used to generate a parameter hash of the file contents that can be sent to codesandbox using `sendFilesToCSB`. It takes in the result of `fetchFiles`, however is separate so you can intercept files and either examine or modify them before it is sent to codesandbox.
+The FinaliseCSB function is used to generate a parameter hash of the file contents that can be sent to CodeSandbox using `sendFilesToCSB`. It takes in the result of `fetchFiles`, however is separate so you can intercept files and either examine or modify them before it is sent to codesandbox.
 
 The config object is optional, and can have any of the following properties:
 
@@ -145,7 +145,7 @@ An object with packages formatted in the same way as the dependencies in a `pack
 
 ### sendFilesToCSB()
 
-Accepts the generated `parameters` from the codesandbox API, and posts them for you, returning a promise that resolves to an object that has both the sandbox ID, as well as the base URL to open the sandbox on the example page.
+Accepts the generated `parameters` from the CodeSandbox API, and posts them for you, returning a promise that resolves to an object that has both the sandbox ID, as well as the base URL to open the sandbox on the example page.
 
 ### parseFile(file, pkgJSON)
 
@@ -198,7 +198,7 @@ Currently we are scanning for import statements, and commonJS requires are not s
 
 ### Support beyond react
 
-The principal developer of this works in a react context, however the core good features (file fetching from relative imports, and packages, parsing all those files into a bundle codesandbox understands, posting to codesandbox) are valuable to any codesandbox project.
+The principal developer of this works in a react context, however the core good features (file fetching from relative imports, and packages, parsing all those files into a bundle CodeSandbox understands, posting to CodeSandbox) are valuable to any CodeSandbox project.
 
 If you want to use codesandboxer to upload something other than react, please get in contact with us so we can help out.
 

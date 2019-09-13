@@ -1,0 +1,96 @@
+{
+  "projectName": "codesandboxer",
+  "projectOwner": "codesandbox",
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": false,
+  "commitConvention": "none",
+  "contributors": [
+    {
+      "login": "Noviny",
+      "name": "Ben Conolly",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/15622106?v=4",
+      "profile": "https://github.com/Noviny",
+      "contributions": [
+        "bug",
+        "code",
+        "doc",
+        "ideas",
+        "infra",
+        "maintenance",
+        "test",
+        "tool"
+      ]
+    },
+    {
+      "login": "jossmac",
+      "name": "Joss Mackison",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/2730833?v=4",
+      "profile": "https://twitter.com/JossMackison",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "dominikwilkowski",
+      "name": "Dominik Wilkowski",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/1266923?v=4",
+      "profile": "https://dominik-wilkowski.com",
+      "contributions": [
+        "content"
+      ]
+    },
+    {
+      "login": "lukebatchelor",
+      "name": "lukebatchelor",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/18694878?v=4",
+      "profile": "https://github.com/lukebatchelor",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "CompuIves",
+      "name": "Ives van Hoorne",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/587016?v=4",
+      "profile": "https://twitter.com/CompuIves",
+      "contributions": [
+        "code",
+        "test",
+        "doc"
+      ]
+    },
+    {
+      "login": "gillesdemey",
+      "name": "Gilles De Mey",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/868844?v=4",
+      "profile": "https://gilles.demey.io",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "kangweichan",
+      "name": "kangweichan",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/47547953?v=4",
+      "profile": "https://github.com/kangweichan",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "MichaelDeBoey",
+      "name": "Michaël De Boey",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/6643991?v=4",
+      "profile": "https://michaeldeboey.be",
+      "contributions": [
+        "maintenance"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7
+}

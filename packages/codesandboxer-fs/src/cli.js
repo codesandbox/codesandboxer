@@ -53,7 +53,7 @@ let cli = meow(
         alias: 't',
         type: 'string',
         description:
-          'Set the codesandbox template to be used with the entry file',
+          'Set the CodeSandbox template to be used with the entry file',
         help: 'template is not get implemented',
       },
       dependencies: {
@@ -121,7 +121,7 @@ async function CLIStuff(cliData) {
         );
       case 'tooManyModules':
         return console.error(
-          "The number of files this will upload to codesandbox is Too Damn High, and we can't do it, sorry.",
+          "The number of files this will upload to CodeSandbox is Too Damn High, and we can't do it, sorry.",
         );
       default:
         return console.error(e);

@@ -2,24 +2,21 @@
   "name": "codesandboxer-repo",
   "version": "1.0.0",
   "private": true,
-  "description": "A simple react component to help easily deploy an example to codesandbox",
-  "keywords": [
-    "codesandbox",
-    "documentation",
-    "examples",
-    "react",
-    "react-component"
-  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/codesandbox/codesandboxer"
   },
   "license": "MIT",
   "author": "Ben Conolly",
+  "workspaces": [
+    "packages/*"
+  ],
   "scripts": {
     "all-tests": "yarn build && yarn test && yarn flow && yarn lint",
     "build": "bolt ws run build",
     "changeset": "changeset",
+    "contributors:add": "all-contributors add",
+    "contributors:generate": "all-contributors generate",
     "dev:csb": "bolt w codesandboxer exec -- yarn build --watch",
     "dev:rcsb": "bolt w react-codesandboxer exec -- yarn build --watch",
     "lint": "yarn lint:eslint && yarn lint:prettier",
@@ -36,7 +33,7 @@
     "babel-jest": "^23.6.0",
     "babel-polyfill": "^6.26.0",
     "babel-runtime": "^6.26.0",
-    "bolt": "^0.20.5",
+    "bolt": "^0.23.6",
     "copy-webpack-plugin": "^4.5.1",
     "css-loader": "^0.28.11",
     "form-data": "^2.3.2",
@@ -63,6 +60,7 @@
   "devDependencies": {
     "@types/mocha": "^2.2.42",
     "@types/node": "^7.0.43",
+    "all-contributors-cli": "^6.9.0",
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.3",
     "babel-eslint": "^8.2.3",
