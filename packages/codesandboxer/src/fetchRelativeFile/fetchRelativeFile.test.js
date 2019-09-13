@@ -21,7 +21,7 @@ cases(
     config,
     json,
   }) => {
-    expectedDeps = { react: '^16.2.0', ...expectedDeps };
+    expectedDeps = { react: '^16.9.0', ...expectedDeps };
     return fetchRelativeFile(name, pkg, [], GHConfig, config).then(
       // We are not currently testing the file's contents. Maybe we should do this
       ({ file, deps, internalImports }) => {
@@ -34,7 +34,7 @@ cases(
           let contents = JSON.parse(file);
           expect(contents).toEqual(json);
         }
-      },
+      }
     );
   },
   [
@@ -43,7 +43,7 @@ cases(
     },
     {
       name: 'fixtures/withAbsoluteImport',
-      expectedDeps: { 'react-node-resolver': '^1.0.1', resolve: '^1.7.1' },
+      expectedDeps: { 'react-node-resolver': '^1.0.1', resolve: '^1.12.0' },
     },
     {
       name: 'fixtures/withRelativeImport',
@@ -82,7 +82,7 @@ cases(
       name: 'fixtures/importResolution/fromIndex/jsx',
       config: { extensions: ['.jsx'] },
     },
-  ],
+  ]
 );
 
 cases(
@@ -109,5 +109,5 @@ cases(
       path: 'package.json',
       expectedType: '.json',
     },
-  ],
+  ]
 );

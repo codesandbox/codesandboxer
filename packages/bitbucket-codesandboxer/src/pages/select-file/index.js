@@ -15,7 +15,7 @@ let commit = 'master';
 
 if (!qs.commit || !qs.repoOwner || !qs.repoSlug) {
   console.error(
-    'Error: expected queryString parameters for commit, repoOwner and repoSlug',
+    'Error: expected queryString parameters for commit, repoOwner and repoSlug'
   );
   console.error('queryString: ', qs);
   console.error('Using defaults');
@@ -38,7 +38,7 @@ function deployExample(filePath) {
   bitbucket
     .gitPkgUp(options.gitInfo, options.examplePath)
     .then(packageJsonPath =>
-      bitbucket.getFile(options.gitInfo, packageJsonPath),
+      bitbucket.getFile(options.gitInfo, packageJsonPath)
     )
     .then(pkgJSON => codesandboxer.fetchFiles({ ...options, pkgJSON }))
     .then(files => codesandboxer.finaliseCSB(files))

@@ -64,7 +64,7 @@ let cli = meow(
         help: 'dependencies is not yet implemented',
       },
     },
-  },
+  }
 );
 
 async function CLIStuff(cliData) {
@@ -79,7 +79,7 @@ async function CLIStuff(cliData) {
 
   if (cliData.flags.files) {
     return console.error(
-      'We have not implemented the files flag yet to allow you to pass in custom files',
+      'We have not implemented the files flag yet to allow you to pass in custom files'
     );
   }
   if (cliData.flags.dependencies) {
@@ -88,7 +88,7 @@ async function CLIStuff(cliData) {
 
   if (!filePath) {
     return console.error(
-      'No filePath was passed in. Please pass in the path to the file you want to sandbox',
+      'No filePath was passed in. Please pass in the path to the file you want to sandbox'
     );
   }
 
@@ -97,7 +97,7 @@ async function CLIStuff(cliData) {
       let results = await assembleFiles(filePath, config);
       console.log(
         'dry done, here is a list of the files to be uploaded:\n',
-        Object.keys(results.files).join('\n'),
+        Object.keys(results.files).join('\n')
       );
     } else {
       let results = await assembleFilesAndPost(filePath, {
@@ -110,18 +110,18 @@ async function CLIStuff(cliData) {
     switch (e.key) {
       case 'noPKGJSON':
         return console.error(
-          `we could not resolve a package.json at ${e.fixedPath}`,
+          `we could not resolve a package.json at ${e.fixedPath}`
         );
       case 'noExampleFile':
         return console.error(
           `we could not resolve the example file ${filePath}\nWe tried to resolve this at: ${path.resolve(
             process.cwd(),
-            e.relFilePath,
-          )}`,
+            e.relFilePath
+          )}`
         );
       case 'tooManyModules':
         return console.error(
-          "The number of files this will upload to CodeSandbox is Too Damn High, and we can't do it, sorry.",
+          "The number of files this will upload to CodeSandbox is Too Damn High, and we can't do it, sorry."
         );
       default:
         return console.error(e);

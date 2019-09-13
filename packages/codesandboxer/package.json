@@ -18,8 +18,8 @@
   },
   "dependencies": {
     "babel-runtime": "^6.26.0",
-    "form-data": "^2.3.2",
-    "isomorphic-unfetch": "^2.0.0",
+    "form-data": "^2.5.1",
+    "isomorphic-unfetch": "^2.1.1",
     "lz-string": "^1.4.4",
     "path-browserify": "^1.0.0"
   }

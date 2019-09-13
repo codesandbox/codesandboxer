@@ -12,7 +12,7 @@ cases(
       deps,
       expectedFiles = baseFiles,
       fileName = 'example.js',
-    } /*: { name: string , deps?: { [string]: string }, expectedFiles?: Array<mixed>, fileName?: string }*/,
+    } /*: { name: string , deps?: { [string]: string }, expectedFiles?: Array<mixed>, fileName?: string }*/
   ) => {
     try {
       const { files, dependencies } = await assembleFiles(name);
@@ -106,5 +106,5 @@ cases(
       fileName: 'example.tsx',
       deps: { react: '^16.2.0', 'react-dom': '^16.2.0' },
     },
-  ],
+  ]
 );

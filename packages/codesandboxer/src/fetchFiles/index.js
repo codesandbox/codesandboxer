@@ -47,7 +47,7 @@ export default async function({
     pkg,
     examplePath,
     gitInfo,
-    config,
+    config
   );
 
   let fileName = `example${extension}`;
@@ -57,7 +57,7 @@ export default async function({
     [fileName]: {
       content: replaceImports(
         file,
-        internalImports.map(m => [m, `./${resolvePath(examplePath, m)}`]),
+        internalImports.map(m => [m, `./${resolvePath(examplePath, m)}`])
       ),
     },
   };
@@ -70,7 +70,7 @@ export default async function({
     gitInfo,
     importReplacements,
     config,
-    [examplePath],
+    [examplePath]
   );
   return { ...final, template: config.template, fileName };
 }

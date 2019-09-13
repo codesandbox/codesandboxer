@@ -7,7 +7,6 @@
 </template>
 
 <script>
-
 module.exports = {
   data: function() {
     return {
@@ -19,7 +18,8 @@ module.exports = {
 </script>
 
 <style scoped>
-div, p {
+div,
+p {
   color: hotpink;
   text-align: center;
 }

@@ -20,11 +20,11 @@ const getRegexStr = deps => {
   return (
     // the first half of this regex matches require statements
     `((?:(?:var|const|let)${matchingName}=\\s*)?require\\(${matchingDeps(
-      deps,
+      deps
     )}\\);?)` +
     // the second half of this regex matches most imports
     `|((?:import|export)(?:(?:${matchingName}from\\s*)|\\s*)${matchingDeps(
-      deps,
+      deps
     )};?)`
   );
 };

@@ -57,7 +57,7 @@ type Props = {
   autoDeploy?: boolean,
   /* Called once loading has finished, whether it preloaded or not */
   onLoadComplete?: (
-    { parameters: string, files: Files } | { error: any },
+    { parameters: string, files: Files } | { error: any }
   ) => mixed,
   /* Called once a deploy has occurred. This will still be called if skipRedirect is chosen */
   afterDeploy?: (sandboxUrl: string, sandboxId: string) => mixed,
@@ -125,7 +125,7 @@ export default class CodeSandboxDeployer extends Component<Props, State> {
             if (onLoadComplete) {
               onLoadComplete({ parameters, files: fetchedInfo.files });
             }
-          },
+          }
         );
       })
       .catch(error => {
@@ -220,10 +220,10 @@ export default class CodeSandboxDeployer extends Component<Props, State> {
                 if (!isEqual(pkgJSON, prevPkgJSON)) {
                   this.shouldReload = true;
                 }
-              },
+              }
             );
           }
-        },
+        }
       );
     }
   }

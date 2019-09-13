@@ -15,7 +15,7 @@ async function paginateRequest(url) {
     throw new Error(
       'Paginating would require more than ' +
         MAX_PAGES +
-        ' pages of requests, aborting',
+        ' pages of requests, aborting'
     );
   }
   while (respJson.next) {

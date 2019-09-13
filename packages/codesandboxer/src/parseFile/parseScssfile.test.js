@@ -70,7 +70,7 @@ cases(
     let parsedImports = await parseScssFile(code);
     expect(Array.from(parsedImports.internalImports)).toMatchObject(internal);
   },
-  scssImportTests,
+  scssImportTests
 );
 cases(
   'parseSassFile()',
@@ -78,5 +78,5 @@ cases(
     let parsedImports = await parseSassFile(code);
     expect(Array.from(parsedImports.internalImports)).toMatchObject(internal);
   },
-  sassImportTests,
+  sassImportTests
 );
