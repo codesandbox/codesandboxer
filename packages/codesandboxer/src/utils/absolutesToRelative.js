@@ -2,7 +2,7 @@
 
 export default function absolutesToAbsolute(
   currentLocation: string,
-  targetLocation: string,
+  targetLocation: string
 ) {
   let cr = currentLocation.split('/');
   let tr = targetLocation.split('/');

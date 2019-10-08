@@ -5,7 +5,7 @@ import FormData from 'form-data';
 
 async function sendFilesToCSB(
   parameters: string,
-  config?: { fileName?: string, type?: string },
+  config?: { fileName?: string, type?: string }
 ): Promise<{ sandboxId: string, sandboxUrl: string }> {
   if (!config) config = {};
   let fileName = config.fileName ? config.fileName : 'example';

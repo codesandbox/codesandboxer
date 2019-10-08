@@ -32,5 +32,5 @@ cases(
       outputFile: "const b = require('z');",
       replaces: [['b', 'z']],
     },
-  ],
+  ]
 );

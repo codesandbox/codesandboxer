@@ -2,7 +2,7 @@
 const ensureExtensionAndTemplate = (
   extension: string,
   extensions: string[] = [],
-  template?: 'create-react-app' | 'create-react-app-typescript' | 'vue-cli',
+  template?: 'create-react-app' | 'create-react-app-typescript' | 'vue-cli'
 ): {
   extensions: string[],
   template: 'create-react-app' | 'create-react-app-typescript' | 'vue-cli',

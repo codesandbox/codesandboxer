@@ -65,7 +65,7 @@ extensions: Array<string>,
 */
 
 async function loadRelativeFile(
-  { filePath, pkgJSON, rootDir, extensions } /*: LoadRelativeObj */,
+  { filePath, pkgJSON, rootDir, extensions } /*: LoadRelativeObj */
 ) {
   let absPath = path.resolve(rootDir, filePath);
   let resolvedPath = resolve.sync(absPath, { extensions });
@@ -97,7 +97,7 @@ async function loadRelativeFile(
       return loadJS(resolvedPath, pkgJSON, rootDir);
     default:
       throw new Error(
-        `unparseable filetype: ${extension} for file ${resolvedPath}`,
+        `unparseable filetype: ${extension} for file ${resolvedPath}`
       );
   }
 }

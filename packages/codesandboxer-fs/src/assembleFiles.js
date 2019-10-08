@@ -51,7 +51,7 @@ async function assembleFiles(filePath /*: string */, config /*: ?Config */) {
   const extensionAndTemplate = ensureExtensionAndTemplate(
     extension,
     config.extensions,
-    config.template,
+    config.template
   );
 
   config = { ...config, ...extensionAndTemplate };
@@ -69,7 +69,7 @@ async function assembleFiles(filePath /*: string */, config /*: ?Config */) {
 
   let { file, deps, internalImports } = await parseFile(
     exampleContent,
-    pkgJSON,
+    pkgJSON
   );
 
   let newFileLocation = `example`;
@@ -87,7 +87,7 @@ async function assembleFiles(filePath /*: string */, config /*: ?Config */) {
       [config.fileName]: {
         content: replaceImports(
           file,
-          internalImports.map(m => [m, `./${resolvePath(relFilePath, m)}`]),
+          internalImports.map(m => [m, `./${resolvePath(relFilePath, m)}`])
         ),
       },
     },
@@ -100,7 +100,7 @@ async function assembleFiles(filePath /*: string */, config /*: ?Config */) {
     pkgJSON,
     extensions: config.extensions,
     internalImports: internalImports.map(m =>
-      resolvePath(path.relative(rootDir, filePath), m),
+      resolvePath(path.relative(rootDir, filePath), m)
     ),
     priorPaths: [],
   });

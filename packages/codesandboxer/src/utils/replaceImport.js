@@ -4,7 +4,7 @@ import getRegexMatchStr from './getRegexMatchStr';
 export default function replaceImport(
   code: string,
   oldSource: string,
-  newSource: string,
+  newSource: string
 ): string {
   let matchString = '';
 

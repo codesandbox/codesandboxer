@@ -35,7 +35,7 @@ const getReleaseLine = async (changeset, versionType) => {
     .join('\n');
 
   return `- [${versionType}] [${changeset.commit}](${getLink(
-    changeset.commit,
+    changeset.commit
   )}):\n${indentedSummary}`;
 };
 
@@ -54,12 +54,12 @@ const getDependencyReleaseLine = async (changesets, dependenciesUpdated) => {
   const changesetLinks = changesets.map(
     changeset =>
       `- Updated dependencies [${changeset.commit}](${getLink(
-        changeset.commit,
-      )}):`,
+        changeset.commit
+      )}):`
   );
 
   const updatedDepenenciesList = dependenciesUpdated.map(
-    dependency => `  - ${dependency.name}@${dependency.version}`,
+    dependency => `  - ${dependency.name}@${dependency.version}`
   );
 
   return [...changesetLinks, ...updatedDepenenciesList].join('\n');

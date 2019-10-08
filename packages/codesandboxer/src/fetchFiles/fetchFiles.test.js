@@ -39,7 +39,7 @@ describe('bad snapshot tests', () => {
       expect(res.template).toEqual('create-react-app');
       expect(Object.keys(res.deps)).toContain('@atlaskit/theme');
       expect(Object.keys(res.files)).toContain(
-        'packages/elements/avatar/examples-util/helpers.js',
+        'packages/elements/avatar/examples-util/helpers.js'
       );
     });
   });
@@ -50,7 +50,7 @@ describe('bad snapshot tests', () => {
   });
   it('should fetch a css example from our fixtures', () => {
     return fetchFiles(
-      getSandboxerObj({ examplePath: 'fixtures/withCssImport.js' }),
+      getSandboxerObj({ examplePath: 'fixtures/withCssImport.js' })
     ).then(res => {
       expect(res.files).toMatchSnapshot();
     });

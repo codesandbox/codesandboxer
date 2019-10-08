@@ -13,7 +13,7 @@ export default async function ensureExample(
   pkg: Package,
   examplePath: string,
   gitInfo: GitInfo,
-  config: Config,
+  config: Config
 ) {
   if (example) {
     let exampleContent = await Promise.resolve(example);
@@ -22,7 +22,7 @@ export default async function ensureExample(
       importReplacements.map(m => [
         absolutesToRelative(examplePath, m[0]),
         m[1],
-      ]),
+      ])
     );
     return parseFile(content, pkg);
   } else {
@@ -31,7 +31,7 @@ export default async function ensureExample(
       pkg,
       importReplacements,
       gitInfo,
-      config,
+      config
     );
   }
 }

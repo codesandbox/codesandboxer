@@ -22,16 +22,16 @@ function activate(context) {
         .assembleFilesAndPost(filePath)
         .then(sandboxInfo => {
           vscode.window.showInformationMessage(
-            `[Open file in codesandbox](${sandboxInfo.sandboxUrl})`,
+            `[Open file in codesandbox](${sandboxInfo.sandboxUrl})`
           );
         })
         .catch(e => {
           vscode.window.showErrorMessage(
-            `Error deploying to codesandbox: ${e}`,
+            `Error deploying to codesandbox: ${e}`
           );
           console.log('an error was thrown', e);
         });
-    },
+    }
   );
 
   context.subscriptions.push(disposable);

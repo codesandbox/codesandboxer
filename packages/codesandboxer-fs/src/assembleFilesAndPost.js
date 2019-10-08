@@ -6,7 +6,7 @@ import type { Config } from './flow-types'
 
 async function assembleFilesAndPost(
   filePath /*: string */,
-  config /*: Config */,
+  config /*: Config */
 ) {
   let { parameters, fileName } = await assembleFiles(filePath, config);
   let csbInfo = await sendFilesToCSB(parameters, { fileName });

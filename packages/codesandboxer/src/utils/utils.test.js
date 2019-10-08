@@ -95,7 +95,7 @@ cases(
     // $FlowFixMe matchObject is a fine way to compare arrays
     expect(mpts).toMatchObject(imports);
   },
-  codeImportTests,
+  codeImportTests
 );
 
 cases(
@@ -128,7 +128,7 @@ cases(
       relativePath: './a',
       name: '../a',
     },
-  ],
+  ]
 );
 
 test.skip('resolve path throws when path is too long', () => {
@@ -148,10 +148,10 @@ cases(
   ({ currentLocation, targetLocation }) => {
     let actualPath = path.relative(
       path.dirname(currentLocation),
-      targetLocation,
+      targetLocation
     );
     expect(absolutesToRelative(currentLocation, targetLocation)).toBe(
-      actualPath,
+      actualPath
     );
   },
   [
@@ -170,7 +170,7 @@ cases(
       currentLocation: 'examples/deeper/somewhere.js',
       targetLocation: 'examples/fork/elsewhere',
     },
-  ],
+  ]
 );
 
 cases(
@@ -178,10 +178,10 @@ cases(
   ({ currentLocation, targetLocation }) => {
     let actualPath = path.relative(
       path.dirname(currentLocation),
-      targetLocation,
+      targetLocation
     );
     expect(absolutesToRelative(currentLocation, targetLocation)).toBe(
-      `./${actualPath}`,
+      `./${actualPath}`
     );
   },
   [
@@ -195,5 +195,5 @@ cases(
       currentLocation: 'examples/somewhere.js',
       targetLocation: 'examples/deeper/elsewhere',
     },
-  ],
+  ]
 );
