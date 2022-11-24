@@ -14,7 +14,7 @@ export default () => (
   <div className={box}>
     <h1>Thanks for Reading!</h1>
     <p>
-      This is just a super simple example buil to show you how codesandboxer
+      This is just a super simple example build to show you how codesandboxer
       works.
     </p>
     {showHiddenBonus ? <HiddenBonus /> : null}
