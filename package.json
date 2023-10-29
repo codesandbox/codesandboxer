@@ -12,20 +12,20 @@
     "packages/*"
   ],
   "scripts": {
-    "all-tests": "yarn build && yarn test && yarn flow && yarn lint",
+    "all-tests": "pnpm run build && pnpm run test && pnpm run flow && pnpm run lint",
     "build": "bolt ws run build",
     "changeset": "changeset",
     "contributors:add": "all-contributors add",
     "contributors:generate": "all-contributors generate",
-    "dev:csb": "bolt w codesandboxer exec -- yarn build --watch",
-    "dev:rcsb": "bolt w react-codesandboxer exec -- yarn build --watch",
-    "lint": "yarn lint:eslint && yarn lint:prettier",
-    "lint:eslint": "yarn eslint .",
+    "dev:csb": "bolt w codesandboxer exec -- pnpm run build --watch",
+    "dev:rcsb": "bolt w react-codesandboxer exec -- pnpm run build --watch",
+    "lint": "pnpm run lint:eslint && pnpm run lint:prettier",
+    "lint:eslint": "pnpm run eslint .",
     "lint:prettier": "prettier --list-different '**/*.js'",
     "prep-release": "changeset bump",
     "prettier": "prettier --write '**/*.js'",
-    "release": "yarn all-tests && changeset release",
-    "test": "yarn jest"
+    "release": "pnpm run all-tests && changeset release",
+    "test": "pnpm run jest"
   },
   "dependencies": {
     "@changesets/cli": "^1.3.0",
@@ -94,6 +94,5 @@
     "workspaces": [
       "packages/*"
     ]
-  },
-  "packageManager": "yarn@4.0.1"
+  }
 }

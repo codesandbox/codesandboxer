@@ -2,10 +2,10 @@ language: node_js
 script:
   - touch packages/bitbucket-codesandboxer/src/utils/github-auth.js
   - bolt
-  - yarn build
-  - yarn test
-  - yarn flow
-  - yarn lint
-cache: yarn
+  - pnpm run build
+  - pnpm run test
+  - pnpm run flow
+  - pnpm run lint
+cache: pnpm
 node_js:
   - 'node'

@@ -30,9 +30,9 @@ We are using [bolt](https://github.com/boltpkg/bolt) to manage this monorepo. If
 you haven't worked on a bolt project, the quick get-up-and-running steps are:
 
 ```sh
-yarn global add bolt
+pnpm global add bolt
 bolt
-yarn build
+pnpm run build
 ```
 
 The `bolt` command will install npm packages and link them.
@@ -42,9 +42,9 @@ The `bolt` command will install npm packages and link them.
 If you are trying to observe changes across linked packages, you will need to
 make sure they are built.
 
-`yarn build` builds all packages. `yarn dev:csb` runs the build script for
-`codesandboxer` and watches it for changes. `yarn dev:rcsb` runs the build
-script for `react-codesandboxer` and watches it for changes.
+`pnpm run build` builds all packages. `pnpm run dev:csb` runs the build script
+for `codesandboxer` and watches it for changes. `pnpm run dev:rcsb` runs the
+build script for `react-codesandboxer` and watches it for changes.
 
 The other packages do not need to be built.
 
@@ -93,7 +93,7 @@ also accept docs PRs if you see a way to improve our documentation)
 We are using
 [build-releases](https://www.npmjs.com/package/@atlaskit/build-releases) to add
 intents to change, so we can make sure our packages are released at the right
-semantic version. The simple answer is run `yarn changeset` and answer the
+semantic version. The simple answer is run `pnpm run changeset` and answer the
 questions. If you're not certain about semantic versioning, I would recommend
 checking out
 [this documentation](https://docs.npmjs.com/about-semantic-versioning).

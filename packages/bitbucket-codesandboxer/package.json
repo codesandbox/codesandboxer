@@ -11,7 +11,7 @@
   "author": "Luke Batchelor",
   "scripts": {
     "build": "webpack -p",
-    "deploy": "yarn build && netlify deploy",
+    "deploy": "pnpm run build && netlify deploy",
     "dev": "webpack-dev-server --mode development"
   },
   "dependencies": {

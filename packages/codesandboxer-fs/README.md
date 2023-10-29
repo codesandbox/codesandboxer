@@ -7,7 +7,7 @@ up other files you need, as well as the relevant dependencies, using
 ## Installation
 
 ```
-$ yarn global add codesandboxer-fs
+$ pnpm global add codesandboxer-fs
 ```
 
 or
