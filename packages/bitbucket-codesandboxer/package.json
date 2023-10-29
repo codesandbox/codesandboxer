@@ -16,25 +16,25 @@
   },
   "dependencies": {
     "babel-polyfill": "^6.26.0",
-    "babel-preset-react": "^6.24.1",
     "codesandboxer": "^1.0.0",
-    "copy-webpack-plugin": "^4.5.1",
-    "css-loader": "^0.28.11",
-    "mini-css-extract-plugin": "^0.4.0",
     "p-memoize": "^2.0.0",
     "path-browserify": "^1.0.0",
     "prop-types": "^15.6.1",
     "query-string": "^6.1.0",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
-    "react-select": "2.0.0-beta.6",
-    "webpack": "^4.9.1",
-    "webpack-cli": "^3.1.1",
-    "webpack-dev-server": "^3.1.4"
+    "react-select": "2.0.0-beta.6"
   },
   "devDependencies": {
     "babel-core": "^6.26.3",
     "babel-loader": "^7.1.4",
-    "babel-preset-env": "^1.6.1"
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-react": "^6.24.1",
+    "copy-webpack-plugin": "^4.5.1",
+    "css-loader": "^0.28.11",
+    "mini-css-extract-plugin": "^0.4.0",
+    "webpack": "^4.9.1",
+    "webpack-cli": "^3.1.1",
+    "webpack-dev-server": "^3.1.4"
   }
 }
