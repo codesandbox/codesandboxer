@@ -17,3 +17,6 @@ scratchings.js
 
 # This file must never be checked in
 github-auth.js
+
+# Yarn files
+.yarn
